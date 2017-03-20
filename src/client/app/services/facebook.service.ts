@@ -37,17 +37,7 @@ export class FacebookService {
 
   private statusChangeCallback = function(resolve: Function, reject: Function, response: any) {
     if (response && response.status && response.status === 'connected') {
-      var uid = response.authResponse.userID;
-      var accessToken = response.authResponse.accessToken;
       this._facebookDetails(resolve);
-    } else if (response && response.status && response.status === 'not_authorized') {
-      FB.login(
-        this.statusChangeCallback.bind(this, resolve, reject),
-        {
-          scope: 'email',
-          return_scopes: true
-        }
-      );
     } else {
       // the user isn't logged in to Facebook.
       FB.login(
