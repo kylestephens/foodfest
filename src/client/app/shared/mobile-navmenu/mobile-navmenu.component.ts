@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }    from '@angular/core';
 
-import { ModalService } from '../../services/modal.service';
+import { AccountService }       from '../../services/account.service';
+import { ModalService }         from '../../services/modal.service';
+import { SettingsService }      from '../../services/settings.service';
 
 /**
  * This class represents the navigation bar component.
@@ -14,23 +16,26 @@ import { ModalService } from '../../services/modal.service';
 
 export class MobileNavmenuComponent implements OnInit {
 
-  constructor(private modalService: ModalService) {}
-
   private menuButton: HTMLElement = null;
   private menuContent: HTMLElement = null;
 
-  // TODO : implement AccountService
-  // public loggedIn: boolean = AccountService.isLoggedIn();
+  constructor(
+    private accountService: AccountService,
+    private modalService: ModalService,
+    private settingsService: SettingsService
+  ) {}
+
   public loggedIn: boolean = false;
 
   /**
    * Resize the menu to fit screen OnInit
    */
   ngOnInit() {
-    window.onresize = () => { this.resizeMenu() };
-    this.resizeMenu();
+    this.loggedIn = this.accountService.isLoggedIn();
     this.menuButton = document.getElementById('menu-button');
     this.menuContent = document.getElementById('menu-content');
+    this._resizeMenu();
+    window.onresize = () => { this._resizeMenu(); };
   }
 
   // TODO
@@ -41,26 +46,25 @@ export class MobileNavmenuComponent implements OnInit {
   public signUp = function() {
     this.toggleMenu();
     this.modalService.show('SignUp');
-  }
+  };
 
   public signIn = function() {
     this.toggleMenu();
     this.modalService.show('SignIn');
-  }
+  };
 
   public toggleMenu = function() {
     this.menuButton.classList.toggle('menu-open');
     this.menuContent.classList.toggle('active');
-  }
+  };
 
-  private resizeMenu() {
-    // TODO - Implement SettingsService
-    //SettingsService.syncBrowserDetails();
-    //var screen = SettingsService.getBrowserDetails().screen;
+  private _resizeMenu() {
+    this.settingsService.syncBrowserDetails();
+    var screen = this.settingsService.getBrowserDetails().screen;
 
-    // this.menuContent.style.width = parseInt(screen.width * 0.75) + 'px';
-    // this.menuContent.style.height = screen.height + 'px';
-    // this.menuContent.style.marginLeft = '-' + (screen.width * 0.75) + 'px';
-  }
+    this.menuContent.style.width = parseInt(screen.width * 0.75) + 'px';
+    this.menuContent.style.height = screen.height + 'px';
+    this.menuContent.style.marginLeft = '-' + (screen.width * 0.75) + 'px';
+  };
 
 };

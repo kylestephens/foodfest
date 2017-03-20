@@ -2,14 +2,14 @@
   ng-class="{'account-meta--logged-in': loggedIn}"> -->
 
 <div class="account-meta">
-  <a  class="account-meta__action [ hidden-xs ]"[routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">
+  <a class="account-meta__action [ hidden-xs ]" [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">
     Commercial events
   </a>
   <a class="account-meta__action [ hidden-xs ]" [routerLink]="['/about']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">
     List with us
   </a>
 
-  <!-- TODO: Logged IN handler -->
+  <!-- TODO : Develop Logged IN handler to show/hide links based on login status -->
   <!-- /TODO -->
 
   <!-- Logged OUT -->
@@ -20,4 +20,5 @@
     Login
   </a>
   <!-- / Logged OUT -->
+
 </div>
