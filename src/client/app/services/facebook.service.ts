@@ -23,9 +23,44 @@ export class FacebookService {
       });
       this.ready.next(true);
     });
-  }
+  };
 
-  loadSdkAsync(callback: () => void) {
+  public login = function() {
+    var me = this;
+    this.defer = new Promise((resolve, reject) => {
+      FB.getLoginStatus(response => {
+        me.statusChangeCallback(resolve, reject, response);
+      });
+    });
+    return this.defer;
+  };
+
+  private statusChangeCallback = function(resolve: Function, reject: Function, response: any) {
+    if (response && response.status && response.status === 'connected') {
+      var uid = response.authResponse.userID;
+      var accessToken = response.authResponse.accessToken;
+      this._facebookDetails(resolve);
+    } else if (response && response.status && response.status === 'not_authorized') {
+      FB.login(
+        this.statusChangeCallback.bind(this, resolve, reject),
+        {
+          scope: 'email',
+          return_scopes: true
+        }
+      );
+    } else {
+      // the user isn't logged in to Facebook.
+      FB.login(
+        this.statusChangeCallback.bind(this, resolve, reject),
+        {
+          scope: 'email',
+          return_scopes: true
+        }
+      );
+    }
+  };
+
+  private loadSdkAsync(callback: () => void) {
     window.fbAsyncInit = () => this.zone.run(callback);
     // Load the Facebook SDK asynchronously
     const s = "script";
@@ -35,36 +70,6 @@ export class FacebookService {
     js = document.createElement(s); js.id = id;
     js.src = "//connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
-  }
-
-  login = function() {
-    var me = this;
-    this.defer = new Promise((resolve, reject) => {
-        FB.getLoginStatus(response => {
-        me.statusChangeCallback(resolve, reject, response);
-      });
-    });
-    return this.defer;
-  };
-
-  statusChangeCallback = function(resolve: Function, reject: Function, response: any) {
-    if (response.status === 'connected') {
-      // the user is logged in and has authenticated your
-      // app, and response.authResponse supplies
-      // the user's ID, a valid access token, a signed
-      // request, and the time the access token
-      // and signed request each expire
-      var uid = response.authResponse.userID;
-      var accessToken = response.authResponse.accessToken;
-      this._facebookDetails(resolve: Function);
-    } else if (response.status === 'not_authorized') {
-      // the user is logged in to Facebook,
-      // but has not authenticated your app
-      FB.login(this.statusChangeCallback);
-    } else {
-      // the user isn't logged in to Facebook.
-      reject('error FacebookService::statusChangeCallback');
-    }
   };
 
   private _facebookDetails(resolve: Function) {

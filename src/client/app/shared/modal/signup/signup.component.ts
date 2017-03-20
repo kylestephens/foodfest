@@ -79,7 +79,6 @@ export class SignupComponent {
     var me = this;
     event.stopPropagation();
     this.googleService.login().then(response => {
-      debugger;
       me.accountService.setGoogleDetails(response);
       me._createAccount();
     }, function(reason: any) {
