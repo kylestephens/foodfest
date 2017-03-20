@@ -17,7 +17,7 @@ export class RestService {
 
   public get = function (url: string, headers: any, options: any) {
     return this.http
-      .get(url, headers)
+      .get(urlEncode(url), headers)
       .toPromise()
       .then(response => response.json().data)
       .catch(handleFailure);
@@ -28,7 +28,7 @@ export class RestService {
     headers['Content-Type'] = 'application/x-www-form-urlencoded';
 
     return this.http
-      .post(url, urlEncode(data), headers)
+      .post(url, data, headers)
       .toPromise();
   };
 

@@ -14,7 +14,7 @@ export class AccountService {
   private email = '';
   private name = '';
   private password = '';
-  private listrAccessToken = '';
+  private akAccessToken = '';
   private fbAccessToken = '';
   private fb_userid = '';
   private google_userid = '';
@@ -27,13 +27,14 @@ export class AccountService {
 
   createAccount = function() {
     return this.restService.post(
-      this.settingsService.getServerBaseUrl() + '/users/create', {
+      this.settingsService.getServerBaseUrl() + '/users/register', {
         email: this.email,
+        user_type: 1,
         password: this.password,
-        name: this.name,
-        fbUserId: this.fb_userid,
-        googleUserId: this.google_userid,
-        imagePath: this.profilePictureUrl
+        firstname: this.name,
+        facebook_user_id: this.fb_userid,
+        google_user_id: this.google_userid
+        //imagePath: this.profilePictureUrl
       }
     );
   };
@@ -131,12 +132,12 @@ export class AccountService {
     this.name = fullName;
   };
 
-  setListrAccessToken = function(accessToken: string) {
-    this.listrAccessToken = accessToken;
+  setAkAccessToken = function(accessToken: string) {
+    this.akAccessToken = accessToken;
   };
 
-  getListrAccessToken = function() {
-    return this.listrAccessToken;
+  getAkAccessToken = function() {
+    return this.akAccessToken;
   };
 
   getFacebookAccessToken = function() {

@@ -17,7 +17,7 @@ export class ModalService {
     });
   };
 
-  hide(modalType: string, data?: any) {
+  hide() {
     console.debug('ModalService::show');
     this.subject.next({
       event: CONSTANT.EVENT.MODAL.HIDE_MODAL

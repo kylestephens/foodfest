@@ -3,6 +3,8 @@ import { Subscription }     from 'rxjs/Subscription';
 
 import { LoginDetails }     from '../../model/login-details';
 
+import { AccountService }   from '../../../services/account.service';
+import { GoogleService }    from '../../../services/google.service';
 import { MessagingService } from '../../../services/messaging.service';
 import { ModalService }     from '../../../services/modal.service';
 
@@ -29,6 +31,8 @@ export class SignupComponent {
   model = new LoginDetails();
 
   constructor(
+    private accountService: AccountService,
+    private googleService: GoogleService,
     private messagingService: MessagingService,
     private modalService: ModalService
   ) {
@@ -64,6 +68,7 @@ export class SignupComponent {
     var me = this;
     event.stopPropagation();
     this.googleService.login().then(response => {
+      debugger;
       me.accountService.setGoogleDetails(response);
       me._createAccount();
     }, function(reason) {
@@ -87,17 +92,18 @@ export class SignupComponent {
 
   // ------   Component Logic / Private   ------ //
   private _createAccount() {
-    // AccountService.createAccount().then(function(response) {
-    //   AccountService.setpvAccessToken(response.token);
-    //   AccountService.setLoggedIn(true);
-    // }, function(reason) {
-    //   AccountService.setLoggedIn(false);
-    //   MessagingService.show(
-    //     'modal',
-    //     constants.messaging.ERROR,
-    //     reason.statusText ? reason.statusText : 'An unexpected error has occurred'
-    //   );
-    // });
+    var me = this;
+    this.accountService.createAccount().then(function(response) {
+      me.accountService.setAkAccessToken(response.token);
+      me.accountService.setLoggedIn(true);
+    }, function(reason) {
+      me.accountService.setLoggedIn(false);
+      me.messagingService.show(
+        'modal',
+        CONSTANT.MESSAGING.ERROR,
+        reason.statusText ? reason.statusText : 'An unexpected error has occurred'
+      );
+    });
   }
 
 };
