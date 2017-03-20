@@ -1,23 +1,6 @@
 export class CONSTANT {
 
   /**
-   * Endpoint / API configurations
-   */
-  static readonly url = {
-
-    wordpress: {
-      BASE_URL:            'http://localhost:8888/wordpress/wp-json/wp/v2/',
-      ALL_POSTS:           'posts',
-      POST_SEARCH:         'posts?search=',
-      POST_ID:             'posts/',
-      MEDIA_ID:            'media/',
-      ALL_CATEGORIES:      'categories',
-      CATEGORY_SEARCH:     'category/'
-    }
-
-  };
-
-  /**
    * Event message definitions
    * Publish messages based on these enums
    * instead of passing around strings
