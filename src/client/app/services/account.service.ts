@@ -17,7 +17,8 @@ export class AccountService {
   private facebookLogin = false;
   private googleLogin = false;
   private email = '';
-  private name = '';
+  private firstname = '';
+  private lastname = '';
   private password = '';
   private akAccessToken = '';
   private fbAccessToken = '';
@@ -36,7 +37,8 @@ export class AccountService {
         email: this.email,
         user_type: 1,
         password: this.password,
-        firstname: this.name,
+        firstname: this.name.split(' ')[0],
+        lastname: this.name.split(' ').slice(-1).pop(),
         facebook_user_id: this.fb_userid,
         google_user_id: this.google_userid
         //imagePath: this.profilePictureUrl
@@ -48,7 +50,8 @@ export class AccountService {
     return this.restService.post(
       this.settingsService.getServerBaseUrl() + '/users/login', {
         email: this.email,
-        firstname: this.name,
+        firstname: this.firstname,
+        lastname: this.lastname,
         password: this.password,
         facebook_user_id: this.fb_userid,
         google_user_id: this.google_userid,
@@ -123,11 +126,11 @@ export class AccountService {
   };
 
   getFirstName = function () {
-    return this.name.split(' ')[0];
+    return this.firstname;
   };
 
   getLastName = function () {
-    return this.name.split(' ').slice(-1).pop();
+    return this.lastname;
   };
 
   getName = function () {

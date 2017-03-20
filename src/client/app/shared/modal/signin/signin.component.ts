@@ -24,23 +24,28 @@ import { CONSTANT }         from '../../../core/constant';
 
 export class SigninComponent {
 
+  modalSubscription: Subscription;
+  accountSubscription: Subscription;
+
   model = new LoginDetails();
 
   constructor(
     private accountService: AccountService,
     private facebookService: FacebookService,
     private googleService: GoogleService,
-    private messagingService: MessagingService
-  ) {};
-
-  // TODO
-  // $rootScope.$on(constants.event.session.LOGGED_IN,
-  //   function(event, loggedIn) {
-  //     if(loggedIn) {
-  //       ModalService.hide();
-  //     }
-  //   }
-  // );
+    private messagingService: MessagingService,
+    private modalService: ModalService
+  ) {
+    var me = this;
+    // subscribe to account service messages
+    this.accountSubscription = this.accountService.getMessage().subscribe(subMessage => {
+      console.debug('SignupComponent::accountSubscription');
+      if(subMessage.event && subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN &&
+        subMessage.sessionStatus) {
+        me.modalService.hide();
+      }
+    });
+  };
 
   public facebookSignIn = function () {
     var me = this;
@@ -77,8 +82,8 @@ export class SigninComponent {
     var me = this;
     this.accountService.login().then(function(response: any) {
       debugger;
-      me.accountService.setName(response.data.firstname);
-      me.accountService.setAkAccessToken(response.token);
+      me.accountService.setName(response._body.firstname);
+      me.accountService.setAkAccessToken(response._body.token);
       me.accountService.setLoggedIn(true);
     }, function(reason: any) {
       me.accountService.setLoggedIn(false);
