@@ -1,0 +1,96 @@
+@import '../../../scss/core/variables';
+
+//
+// Account meta section - contained in header
+// --------------------------------------------------
+
+.account-meta {
+  float: left;
+  margin-top: 30px;
+
+  &--logged-in {
+    margin-top: 15px;
+  }
+
+  &__action {
+    color: #fff;
+    font-size: 16px;
+    margin: 0 $padding-xlarge-horizontal 0 0;
+
+    @media (max-width: $screen-sm-max) {
+      margin: 0 $padding-large-horizontal 0 0;
+    }
+  }
+
+  &__name {
+    margin: 0 20px 0 10px;
+    position: relative;
+    top: 4px;
+  }
+
+  &__avatar {
+    width: 50px;
+    border-radius: 100%;
+    border: 2px solid #fff;
+  }
+
+  &__icon {
+    font-size: 30px;
+    position: relative;
+    top: 10px;
+    left: 8px;
+  }
+
+  &__dropdown-icon {
+    font-size: 20px;
+    position: relative;
+    top: 7px;
+    right: 18px;
+  }
+
+  &__dropdown-link {
+    color: #ccc;
+    &:focus, &:hover, &:active {
+      text-decoration: none;
+      color: #ccc;
+    }
+  }
+}
+
+.admin-dropdown {
+  color: #333;
+  position: absolute;
+  top: 80px;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+
+  &--active {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  ul {
+    text-align: left;
+    width: 155px;
+    margin: 6px 0;
+    li {
+      &:hover {
+        background: $brand-links;
+        color: #fff;
+      }
+      a {
+        padding: 6px 12px;
+        color: #333;
+        display: inline-block;
+        width: 100%;
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+    hr {
+      margin: 0;
+    }
+  }
+}

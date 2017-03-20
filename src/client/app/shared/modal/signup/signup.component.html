@@ -1,0 +1,101 @@
+<div>
+
+  <div [hidden]="isEmailSignUp">
+
+    <div class="sign-up-button sign-up-button--facebook"
+      (click)="facebookSignUp()">
+      <span class="sign-up-icon ak-icon-facebook"></span>
+      Sign up with Facebook
+    </div>
+
+    <div class="sign-up-button sign-up-button--google"
+      (click)="googleSignUp()">
+      <span class="sign-up-icon ak-icon-google-plus"></span>
+      Sign up with Google
+    </div>
+
+    <div class="divider">
+      <div class="divider__text">or</div>
+      <hr />
+    </div>
+
+    <div class="sign-up-button"
+      (click)="emailSignUp()">
+      <span class="sign-up-icon ak-icon-mail"></span>
+      Sign up with Email
+    </div>
+
+  </div>
+
+  <div [hidden]="!isEmailSignUp">
+
+    <form name="emailForm">
+
+      <!-- Form Fields -->
+
+      <!-- Full Name -->
+      <div class="[ text-left ]"
+        [hidden]="fullName.valid || fullName.pristine" style="color:maroon" role="alert">
+        <div ng-message="required">Full name is required</div>
+      </div>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-user"></div>
+        <input type="text"
+          [(ngModel)]="model.fullName" name="fullName"
+          placeholder="Full Name"
+          required
+          #fullName="ngModel">
+      </div>
+
+      <!-- Email -->
+      <div class="[ text-left ]" ng-messages="emailForm.email.$error"
+        [hidden]="email.valid || email.pristine" style="color:maroon" role="alert">
+        <div ng-message="required">Email is required</div>
+        <!-- <div ng-message="email">Email must be valid</div> -->
+      </div>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-mail"></div>
+        <input type="email"
+          [(ngModel)]="model.email" name="email"
+          placeholder="Full Name"
+          ng-model-options="{ 'updateOn': 'blur' }"
+          placeholder="Email"
+          required
+          #email="ngModel" />
+      </div>
+
+      <!-- Password -->
+      <!-- <div class="[ text-left ]" ng-messages="emailForm.password.$error"
+        ng-if="emailForm.password.$dirty" style="color:maroon" role="alert">
+        <div ng-message="required">{{'form.password.validation.required' | translate}}</div>
+      </div> -->
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-lock"></div>
+        <input type="password"
+          [(ngModel)]="model.password" name="password"
+          placeholder="Full Name"
+          placeholder="Password"
+          ng-minlength="6"
+          required />
+      </div>
+
+      <!-- /Form Fields -->
+
+      <!-- reCaptcha -->
+      <div vc-recaptcha
+        ng-model="recaptchaResponse"
+        key="'6Lfg2SUTAAAAAPZS5zQZoycRhMmaXNmZ4rceTam_'">
+      </div>
+      <!-- /reCaptcha -->
+
+      <div class="sign-up-button sign-up-button--email"
+        ng-class="{ 'sign-up-button--disabled' : emailForm.$invalid || !recaptchaResponse }"
+        ng-click="submitEmailDetails(!emailForm.$invalid && recaptchaResponse !== null)">
+        Sign up
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

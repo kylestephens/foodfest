@@ -1,0 +1,42 @@
+<div id="modal-container"
+  [ngClass]="{'active': modalActive}"
+  (click)="dismissModal()">
+
+  <!-- Modal Background -->
+  <div class="modal-background">
+
+    <div class="modal" (click)="stopPropagation()">
+
+      <div *ngIf="modalActive">
+
+        <div (click)="dismissModal()" class="close-button">
+          <span class="ak-icon-cross"></span>
+        </div>
+
+        <ak-messaging ref="modal">
+        </ak-messaging>
+
+        <signup class="modal-content"
+          *ngIf="selectedModal === modalTypes.SIGN_UP"
+          [ngClass]="{'hidden': selectedModal !== modalTypes.SIGN_UP} ">
+        </signup>
+
+        <signin class="modal-content"
+          *ngIf="selectedModal === modalTypes.SIGN_IN"
+          [ngClass]="{'hidden': selectedModal !== modalTypes.SIGN_IN}">
+        </signin>
+
+      </div>
+
+      <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg"
+        width="100%" height="100%" preserveAspectRatio="none">
+        <rect id="bounding-box" x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
+      </svg>
+
+    </div>
+    <!-- / modal -->
+
+  </div>
+  <!-- / Modal Background -->
+
+</div>

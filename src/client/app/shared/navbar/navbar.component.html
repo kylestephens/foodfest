@@ -1,4 +1,24 @@
-<nav>
-  <a [routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">HOME</a>
-  <a [routerLink]="['/about']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">ABOUT</a>
-</nav>
+<!-- Header -->
+<div class="header">
+  <div class="[ container ]">
+    <div class="[ row ]">
+      <div class="[ hidden visible-xs col-xs-4 ]">
+        <mobile-navmenu>
+        </mobile-navmenu>
+      </div>
+      <div class="header__logo [ col-xs-4 col-sm-4 ]">
+        <a class="svg" href="/#/">
+          <img src="./assets/img/logo.png" />
+        </a>
+      </div>
+      <div class="[ col-xs-4 col-sm-8 text-right ]">
+        <div class="header__actions-section">
+          <account-meta>
+          </account-meta>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- / Header -->
+

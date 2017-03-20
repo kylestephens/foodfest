@@ -1,10 +1,56 @@
-<p>Howdy! Here's a list of awesome computer scientists. Do you know any others? Add to the list yourself.</p>
+<article>
 
-<form (submit)="addName()">
-  <input [(ngModel)]="newName" name="newName" placeholder="Awesome Computer Scientist">
-  <button type="submit">Add</button>
-</form>
+  <header class="hero">
+    <div class="hero__title">
+      <h1>The better way to find food &amp; catering</h1>
+      <h2>FoodFest makes it easy to find quality food vendors and catering for your corporate event, concert, party or wedding</h2>
+      <button class="hero__browse-button">
+        Browse now
+    </button>
+    </div>
+  </header>
 
-<ul>
-  <li *ngFor="let name of names">{{name}}</li>
-</ul>
+  <section class="how-it-works [ container ]">
+    <div class="how-it-works__steps [ row ]">
+
+      <div class="[ col-sm-4 col-xs-12 ]">
+        <h2 class="heading heading--medium">
+          <span title="Post a job so our tradesmen can quote!" class="jslink header-link" data-jslink="/postajob">
+            <span class="heading__badge">1</span>Browse vendors
+          </span>
+        </h2>
+          <p>It’s simple and free. Our selection of vendors covers a wide range of cuisines and specialities
+          and cater for many different types of events.</p>
+      </div>
+
+      <div class="[ col-sm-4 col-xs-12 ]">
+        <h2 class="heading heading--medium">
+            <span title="Search our list of tradesmen and builders" class="jslink header-link" data-jslink="/builders/in/uk">
+            <span class="heading__badge">2</span>Arrange a booking
+            </span>
+        </h2>
+        <p>Use our messaging system to make enquiries and make arrangements. Contact details are shared only when you say so.</p>
+      </div>
+
+      <div class="[ col-sm-4 col-xs-12 ]">
+        <h2 class="heading heading--medium">
+          <span title="Read customer reviews about tradesmen" class="jslink header-link" data-jslink="/recent-feedback">
+          <span class="heading__badge">3</span>Leave feedback
+          </span>
+        </h2>
+        <p>Feedback rewards our traders for quality work and helps inform others of the type of service provided
+        by the vendor.</p>
+      </div>
+
+    </div>
+
+    <div class="[ row ]">
+
+      <a class="how-it-works__learn-more" href="/how-it-works">
+        Learn about the benefits of listing as a trader on FoodFest
+      </a>
+
+    </div>
+  </section>
+
+</article>

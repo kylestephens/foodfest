@@ -1,0 +1,21 @@
+<div class="ak-msg"
+  *ngIf="showMessage"
+  [ngClass]="{
+    'ak-msg--info':         (selectedType === messageTypes.INFO),
+    'ak-msg--success':      (selectedType === messageTypes.SUCCESS),
+    'ak-msg--warning':      (selectedType === messageTypes.WARNING),
+    'ak-msg--error':        (selectedType === messageTypes.ERROR),
+    'ak-msg--temporary':    (temporary)
+  }">
+
+  <span
+    [ngClass]="{
+      'ak-icon-bullhorn':   (selectedType === messageTypes.INFO),
+      'ak-icon-checkmark':  (selectedType === messageTypes.SUCCESS),
+      'ak-icon-warning':    (selectedType === messageTypes.WARNING),
+      'ak-icon-cross':      (selectedType === messageTypes.ERROR)
+    }"></span>
+
+  {{messageText}}
+
+</div>

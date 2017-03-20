@@ -1,0 +1,82 @@
+@import '../../../../scss/core/variables';
+
+//
+// Signup form | Located on the Modal Container
+// --------------------------------------------------
+
+$modal-width: 450px;
+$modal-padding: 50px;
+
+.sign-up-button {
+  min-width: $modal-width - ($modal-padding * 2);
+  width: 48%;
+  display: inline-block;
+  text-align: center;
+  border-radius: $brand-border-radius;
+  border: 1px solid $brand-border-color;
+  padding: ($padding-large-vertical * 2) 0;
+  margin: ($padding-large-vertical * 2) 0;
+  transition: all .2s ease-out;
+
+  @media (max-width: $screen-xs-max) {
+    width: 96%;
+    margin: ($padding-large-vertical * 2) 2%;
+  }
+
+  &--facebook {
+    background: $color-facebook;
+    border-color: $color-facebook;
+    color: #fff;
+
+    .sign-up-icon {
+      color: #fff;
+    }
+  }
+
+  &--google {
+    float: right;
+    border-color: $color-google;
+
+    .sign-up-icon {
+      color: $color-google;
+    }
+  }
+
+  &--email {
+    width: 100%;
+    color: #fff;
+    background: $brand-secondary-cta;
+    border: 0;
+  }
+
+  &--disabled {
+    opacity: 0.3;
+  }
+}
+
+.sign-up-icon {
+  left: -40px;
+  position: relative;
+  color: $brand-border-color;
+}
+
+.sign-up-field {
+  margin: $padding-xlarge-vertical 0;
+  .pv-form-input, .pv-form-radio-wrapper {
+    margin: $padding-base-vertical 0;
+  }
+}
+
+.divider {
+  text-align: center;
+  &__text {
+    background-color: #fff;
+    display: inline-block;
+    padding: 4px 8px;
+  }
+  hr {
+    margin: -14px auto 10px;
+    width: 100%;
+    border-color: $brand-border-color;
+  }
+}

@@ -1,0 +1,23 @@
+<!-- <div class="account-meta"
+  ng-class="{'account-meta--logged-in': loggedIn}"> -->
+
+<div class="account-meta">
+  <a  class="account-meta__action [ hidden-xs ]"[routerLink]="['/']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">
+    Commercial events
+  </a>
+  <a class="account-meta__action [ hidden-xs ]" [routerLink]="['/about']" [routerLinkActive]="['router-link-active']" [routerLinkActiveOptions]="{exact:true}">
+    List with us
+  </a>
+
+  <!-- TODO: Logged IN handler -->
+  <!-- /TODO -->
+
+  <!-- Logged OUT -->
+  <a class="account-meta__action [ hidden-xs ]" (click)=showSignUp()>
+    Sign up
+  </a>
+  <a class="account-meta__action [ hidden-xs ]" (click)=showSignIn()>
+    Login
+  </a>
+  <!-- / Logged OUT -->
+</div>

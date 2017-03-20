@@ -1,0 +1,70 @@
+<div>
+
+  <div class="sign-up-button sign-up-button--facebook"
+    (click)="facebookSignIn()">
+    <span class="sign-up-icon ak-icon-facebook"></span>
+    Continue with Facebook
+  </div>
+
+  <div class="sign-up-button sign-up-button--google"
+    (click)="googleSignIn()">
+    <span class="sign-up-icon ak-icon-google-plus"></span>
+    Continue with Google
+  </div>
+
+  <div class="divider">
+    <div class="divider__text">or</div>
+    <hr />
+  </div>
+
+  <!-- Email Login -->
+  <form name="emailForm">
+
+    <!--
+      TODO: Implement inline validation with error messages
+      See ng-messages $error dirty check on usage on other project
+    -->
+    <!-- <div class="[ text-left ]">
+      <div ng-message="required">Email is required</div>
+      <div ng-message="email">Invalid email format</div>
+    </div> -->
+
+    <div class="[ text-left ]"
+      [hidden]="email.valid || email.pristine" style="color:maroon" role="alert">
+      <div ng-message="required">Email is required</div>
+    </div>
+    <div class="form-input form-input--has-icon sign-up-field">
+      <div class="form-icon ak-icon-mail"></div>
+      <input type="email"
+        [(ngModel)]="model.email" name="email"
+        ng-model-options="{ 'updateOn': 'blur' }"
+        placeholder="Email"
+        required
+        #email="ngModel">
+    </div>
+
+    <div class="[ text-left ]"
+      [hidden]="password.valid || password.pristine" style="color:maroon" role="alert">
+      <div ng-message="required">Password is required</div>
+    </div>
+    <div class="form-input form-input--has-icon sign-up-field">
+      <div class="form-icon ak-icon-lock"></div>
+      <input type="password"
+        [(ngModel)]="model.password" name="password"
+        ng-model-options="{ 'updateOn': 'blur' }"
+        placeholder="Password"
+        minlength="6"
+        required
+        #password="ngModel">
+    </div>
+
+    <div class="sign-up-button sign-up-button--email"
+      (class)="{ 'sign-up-button--disabled' : emailForm.$invalid }"
+      (click)="submitEmailDetails(!emailForm.$invalid)">
+      Login
+    </div>
+
+  </form>
+  <!-- / Email Login -->
+
+</div>

@@ -1,0 +1,77 @@
+@import '../../../scss/core/variables';
+
+/*
+ * Site-wide Messaging
+ * Success, failure, warnings, notifications, etc.
+ */
+
+$info-bg:         $brand-secondary-cta;
+$info-text:       #fff;
+
+$success-bg:      #DFF2BF;
+$success-text:    #270;
+
+$warning-bg:      #FEEFB3;
+$warning-text:    #9F6000;
+
+$error-bg:        #FFBABA;
+$error-text:      #D8000C;
+
+.ak-msg {
+
+  width: 95%;
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: $brand-border-radius;
+  text-align: left;
+
+  &--info {
+    color: $info-text;
+    background-color: $info-bg;
+  }
+
+  &--success {
+    color: $success-text;
+    background-color: $success-bg;
+  }
+
+  &--warning {
+    color: $warning-text;
+    background-color: $warning-bg;
+  }
+
+  &--error {
+    color: $error-text;
+    background-color: $error-bg;
+  }
+
+  &--temporary {
+    margin-left: 2.5%;
+    position: absolute;
+    opacity: 0.8;
+    animation: fadein 1s;
+  }
+
+  // The icon inside the message block
+  span {
+    position: relative;
+    top: 2px;
+    margin: 0 $padding-base-horizontal;
+    font-size: $font-size-large;
+  }
+
+  &.ng-hide {
+    animation: fadeout 1s;
+  }
+
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 0.8; }
+}
+
+@keyframes fadeout {
+  from { opacity: 0.8; }
+  to   { opacity: 0; }
+}

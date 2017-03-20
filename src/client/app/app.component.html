@@ -1,3 +1,67 @@
-<sd-toolbar></sd-toolbar>
+<!-- Header -->
 <sd-navbar></sd-navbar>
-<router-outlet></router-outlet>
+<!-- / Header -->
+
+<modal></modal>
+
+<!-- Main Page Content -->
+<div class="page-body">
+  <router-outlet></router-outlet>
+</div>
+<!-- / Main Page Content -->
+
+<!-- Footer -->
+<div class="footer">
+  <div class="[ container ]">
+
+    <div class="[ row ]">
+      <div class="footer__links [ col-xs-12 text-center ]">
+        <span class="footer__link">
+          Privacy &amp; Cookies
+        </span>|
+        <span class="footer__link">
+          Terms of Use
+        </span>|
+        <a ng-href="#/about" class="footer__link">
+          About foodfest
+        </a>|
+        <span class="footer__link">
+          Help &amp; Contact
+        </span>
+      </div>
+    </div>
+
+    <div class="[ row ]">
+      <div class="footer__logo [ col-xs-12 text-center ]">
+        <img src="assets/img/logo-mono.png" />
+      </div>
+    </div>
+
+    <div class="footer__social-links [ row ]">
+      <div class="footer__meta footer__social-links [ col-xs-12 col-sm-4 text-left is-table-row ]">
+        <a href="" class="footer__social-link">
+          <object data="assets/icons/svg/facebook-icon.svg" type="image/svg+xml">
+            <img src="assets/icons/img/facebook-icon.png" />
+          </object>
+        </a>
+        <a href="" class="footer__social-link">
+          <object data="assets/icons/svg/twitter-icon.svg" type="image/svg+xml">
+            <img src="assets/icons/img/twitter-icon.png" />
+          </object>
+        </a>
+        <a href="" class="footer__social-link">
+          <object data="assets/icons/svg/google-icon.svg" type="image/svg+xml">
+            <img src="assets/icons/img/google-icon.png" />
+          </object>
+        </a>
+      </div>
+      <div class="footer__meta footer__disclaimer [ col-xs-12 col-sm-4 text-center is-table-row ]">
+        &copy; Copyright 2016 All Rights Reserved
+      </div>
+      <div class="footer__meta [ col-xs-12 col-sm-4 text-right is-table-row ]">
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- / Footer -->

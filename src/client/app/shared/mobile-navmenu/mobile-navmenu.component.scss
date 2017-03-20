@@ -1,0 +1,163 @@
+@import '../../../scss/core/variables';
+@import '../../../scss/common/animations';
+
+#menu-button {
+  border: 2px solid rgba(41, 37, 47, .3);
+  border-color: $brand-primary;
+  padding: 14px 0;
+  position: absolute;
+  top: 16px;
+  transition: background 750ms ease-in-out;
+  user-select: none;
+}
+
+.menu-open #menu-button {
+}
+
+.hamburger {
+  position: relative;
+  width: 25px;
+  height: 20px;
+  transition: transform 750ms ease-in-out;
+}
+
+#menu-button:active .hamburger {
+  transition: transform 50ms;
+  transform: scale(.95);
+}
+
+.hamburger::before, .hamburger::after, .hamburger .inner {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 2px;
+  background: #fff;
+  transform-origin: 100% 50%;
+  transition: all 750ms ease-in-out;
+}
+.hamburger::before {
+  top: -1px;
+}
+.hamburger .inner {
+  top: 9px;
+  transform-origin: 50% 50%;
+}
+.hamburger::after {
+  top: 19px;
+}
+
+.menu-open .hamburger {
+  transform: rotateY(-180deg);
+}
+.menu-open #menu-button:active .hamburger {
+  transform: scale(.95) rotateY(-180deg);
+}
+
+.menu-open .hamburger::before,
+.menu-open .hamburger::after,
+.menu-open .hamburger .inner {
+
+}
+
+.menu-open .hamburger::before {
+  transform: translate3d(-4px, 1px, 0) rotateZ(-45deg);
+}
+.menu-open .hamburger .inner {
+  transform: rotateY(-90deg);
+  transition: transform 375ms, background-color 750ms ease-in-out;
+}
+.menu-open .hamburger::after {
+  transform: translate3d(-4px, -1px, 0) rotateZ(45deg);
+}
+
+nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100%;
+  bottom: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.menu-open nav {
+  animation-duration: 10s;
+  animation-name: wind;
+  animation-iteration-count: infinite;
+}
+
+nav::before {
+  content: '';
+  position: absolute;
+  border-right: 1px solid rgba(41, 37, 47, .05);
+  top: -10px;
+  bottom: -10px;
+  left: -10px;
+  right: 0;
+  background: rgba(162, 183, 190, .8);
+  transform: rotateY(90deg);
+  transition: transform 350ms;
+  transform-origin: 0 0;
+  transition-delay: 200ms;
+}
+.menu-open nav::before {
+  transform: none;
+  transition-delay: 0;
+}
+
+#menu-content {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  margin-left: -9999px;
+  z-index: 99;
+  width: 300px;
+
+  background: $brand-secondary;
+  color: white;
+
+  &.active {
+    -webkit-animation: slide 0.5s forwards;
+    animation: slide 0.5s forwards;
+  }
+
+  .menu-links {
+    padding-left: 30px;
+    li {
+      list-style: none;
+      font-size: $font-size-large;
+      margin: $padding-large-vertical 0;
+    }
+  }
+  hr {
+    width: 50%;
+    margin: 0;
+  }
+}
+
+@keyframes slide {
+  100% { margin-left: 0; }
+}
+
+@-webkit-keyframes slide {
+  100% { margin-left: 0; }
+}
+
+@keyframes wind {
+  0%, 100% {
+    transform: none;
+  }
+  20% {
+    transform: rotateX(5deg) rotateY(8deg);
+  }
+  40% {
+    transform: rotateX(-2deg);
+  }
+  60% {
+    transform: rotateY(-3deg) rotateX(7deg);
+  }
+  80% {
+    transform: rotateY(-4deg) rotateX(2deg);
+  }
+}
