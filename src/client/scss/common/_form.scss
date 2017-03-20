@@ -1,0 +1,219 @@
+/*
+ * Forms
+ */
+
+ $icon-color:       #999;
+
+.form-input {
+  border-radius: $brand-border-radius;
+  border: 1px solid $brand-border-color;
+  box-shadow: inset 0 1px 4px 2px rgba(0,0,0,0.1);
+  background: #fff;
+  position: relative;
+
+  input, textarea {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    padding: $padding-base-horizontal;
+    border: none;
+    font-weight: $font-weight-light;
+
+    &:focus{
+      outline: none;
+    }
+  }
+
+  textarea {
+    min-height: 150px;
+  }
+
+  &--has-icon {
+    padding-left: 40px;
+    @media (max-width: $screen-xs-max) {
+      padding-left: 10px;
+    }
+  }
+}
+
+.form-icon {
+  color: $icon-color;
+  width: 40px;
+  height: 40px;
+  left: 20px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-20%);
+  text-align: left;
+  @media (max-width: $screen-xs-max) {
+    left: 4px;
+  }
+}
+
+.form-select-wrapper {
+
+  position: relative;
+  float: left;
+
+  // the <select> element itself
+  .form-select {
+    min-width: 80px;
+    padding: $padding-base-horizontal 20px;
+
+    background: transparent;
+    border-radius: $brand-border-radius;
+    border: 1px solid $brand-border-color;
+    box-shadow: inset 0 1px 4px 2px rgba(0,0,0,0.1);
+    background: #fff;
+    font-weight: $font-weight-light;
+    appearance: none;
+
+    @media (max-width: $screen-xs-max) {
+      padding: $padding-base-horizontal 8px;
+      min-width: 0;
+    }
+  }
+
+  &::after {
+    position: absolute;
+    left: 50px;
+    top: 12px;
+    box-sizing: border-box;
+
+    color: #000;
+    font-family: 'pv-icons';
+    content: "\e908";
+    font-size: 18px;
+    pointer-events: none;
+    text-align: center;
+
+    @media (max-width: $screen-xs-max) {
+      right: 8px;
+    }
+  }
+
+}
+
+$button-bg: rgba(0, 0, 0, 0.05);
+
+// Taken from http://codepen.io/artlantis/pen/djzLb
+.form-radio-wrapper {
+
+  input[type='radio'],
+  input[type='checkbox']{
+    display:none;
+    cursor:pointer; //make the cursor a pointer when over the items
+    & + label {
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      padding-left: 25px;
+      margin-right: 10px;
+      &:before,
+      &:after {
+        content: '';
+        font-family: helvetica;
+        display: inline-block;
+        width: 21px;
+        height: 20px;
+        left: 0;
+        bottom: 0;
+        text-align: center;
+        position: absolute;
+      }
+      &:before{
+        background-color: $button-bg;
+        border: 1px solid darken($button-bg, 40%);
+        @include transition(all .3s ease-in-out);
+      }
+      &:after{
+        color: #fff;
+      }
+    }
+    &:checked + label:before{
+      border: 1px solid $brand-secondary-cta;
+      @include box-shadow(inset 0 0 0 10px #fff);
+    }
+  }
+
+  /*Radio Specific styles*/
+  input[type='radio']{
+    & + label:before{
+      border-radius: 50%;
+    }
+    & + label:hover:after,
+    &:checked + label:after{
+      content: '\2022';
+      position: absolute;
+      top: 3px;
+      font-size: 28px;
+      line-height: 14px;
+    }
+     & + label:hover:after{
+      color: darken($button-bg, 20%);
+    }
+     &:checked + label:after,
+     &:checked + label:hover:after{
+      color: $brand-secondary-cta;
+    }
+  }
+
+  /*Checkbox Specific styles*/
+  input[type='checkbox']{
+     & + label:before{
+      border-radius: 3px;
+    }
+
+    & + label:hover:after,
+    &:checked + label:after{
+      content: "\2713";
+      line-height: 20px;
+      font-size: 14px;
+    }
+    & + label:hover:after{
+      color:darken($button-bg, 20%);
+    }
+    &:checked + label:after,
+    &:checked + label:hover:after{
+      color: $brand-secondary-cta;
+    }
+  }
+
+  /*Toggle Specific styles*/
+  input[type='checkbox']{
+   &.toggle{
+      display: inline-block;
+      appearance: none;
+      width: 55px;
+      height: 28px;
+      background-color: $button-bg;
+      position: relative;
+      border-radius: 30px;
+      box-shadow: none;
+      transition: all .2s ease-in-out;
+      &:hover:after{
+       background-color: darken($button-bg, 20%);
+      }
+      &:after{
+        content: '';
+        display: inline-block;
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        background-color: darken($button-bg, 30%);
+        top: 2px;
+        left: 2px;
+        border-radius: 50%;
+        transition: all .2s ease-in-out;
+      }
+    }
+    &:checked.toggle{
+      @include box-shadow(inset 0 0 0 15px $brand-secondary-cta);
+      &:after{
+        left: 29px;
+        background-color:#fff;
+      }
+    }
+  }
+
+}

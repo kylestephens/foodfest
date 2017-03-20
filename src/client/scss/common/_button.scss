@@ -1,0 +1,21 @@
+/*
+ * Buttons
+ */
+
+.btn-primary-cta {
+  @include button(#fff, $brand-primary-cta);
+
+  @media (max-width: $screen-xs-max) {
+    font-size: $font-size-base;
+    padding: $padding-small-vertical $padding-small-horizontal;
+  }
+}
+
+.btn-negative {
+  @include button(#777, #D7D3D0);
+
+  @media (max-width: $screen-xs-max) {
+    font-size: $font-size-base;
+    padding: $padding-small-vertical $padding-small-horizontal;
+  }
+}

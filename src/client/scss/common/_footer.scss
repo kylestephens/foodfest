@@ -1,0 +1,80 @@
+/*
+ * Footer
+ */
+
+$icon-width:       32px;
+
+.footer {
+  float: left;
+  width: 100%;
+  background: $brand-secondary url('../assets/img/patterns/food-20.png');
+  background-repeat: repeat-x repeat-y;
+  color: #fff;
+
+  // Offset the fixed header height
+  position: relative;
+  top: 80px;
+
+  &__links {
+    margin: 12px 0;
+    font-size: 18px;
+    font-weight: $font-weight-light;
+  }
+
+  &__link {
+    margin: 0 20px;
+    font-size: $font-size-base;
+
+    &:visited, &:hover, &:active {
+      color: #fff;
+    }
+  }
+
+  &__logo {
+    margin: 12px 0 6px;
+
+    object, img {
+      max-width: 180px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      margin: 4px 0 6px;
+    }
+  }
+
+  &__meta {
+    min-height: 40px;
+  }
+
+  &__social-links {
+    @media (max-width: $screen-xs-max) {
+      text-align: center;
+    }
+  }
+
+  &__social-link {
+    margin: 0 $padding-small-horizontal;
+    display: inline-block;
+    min-width: $icon-width;
+
+    // pseudo element is necessary to get pointer cursor
+    // over SVG elements
+    &::after {
+      content: ' ';
+      position: absolute;
+      top: 0;
+      width: $icon-width;
+      height: $icon-width;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__disclaimer {
+    padding-top: 10px;
+    text-align: center;
+    font-size: 12px;
+  }
+
+}

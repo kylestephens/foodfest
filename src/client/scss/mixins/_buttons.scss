@@ -1,0 +1,52 @@
+// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+
+@mixin button($color, $background) {
+  color: $color;
+  font-weight: $font-weight-light;
+  background-color: $background;
+  border-radius: $brand-border-radius;
+  transition: all .2s ease-out;
+  box-shadow: 0 2px 0 0 darken($background, 20%);
+
+  padding: $padding-large-vertical $padding-large-horizontal;
+  display: inline-block;
+
+  &:hover {
+    color: $color;
+    background-color: darken($background, 10%);
+  }
+
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    color: $color;
+    background-color: darken($background, 10%);
+
+    &:hover,
+    &:focus,
+    &.focus {
+      color: $color;
+      background-color: darken($background, 17%);
+
+    }
+  }
+
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    background-image: none;
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &:hover,
+    &:focus,
+    &.focus {
+      background-color: $background;
+    }
+  }
+}
