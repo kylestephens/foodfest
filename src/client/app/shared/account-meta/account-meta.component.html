@@ -13,12 +13,29 @@
   <!-- /TODO -->
 
   <!-- Logged OUT -->
-  <a class="account-meta__action [ hidden-xs ]" (click)=showSignUp()>
+  <a class="account-meta__action [ hidden-xs ]"
+    (click)="showSignUp()"
+    *ngIf="!loggedIn">
     Sign up
   </a>
-  <a class="account-meta__action [ hidden-xs ]" (click)=showSignIn()>
+  <a class="account-meta__action [ hidden-xs ]"
+    (click)="showSignIn()"
+    *ngIf="!loggedIn">
     Login
   </a>
   <!-- / Logged OUT -->
+
+  <!-- Logged IN -->
+  <span class="account-meta__action [ hidden-xs ]"
+    *ngIf="loggedIn">
+    <span class="account-meta__icon ak-icon-user-circle"></span>
+    <a href="" ng-click="toggleDropdown()" class="account-meta__dropdown-link js-admin-link">
+      <span class="account-meta__name js-admin-link">
+        {{firstName}}
+      </span>
+      <span class="account-meta__dropdown-icon ak-icon-chevron-thin-down js-admin-link"></span>
+    </a>
+  </span>
+  <!-- Logged IN -->
 
 </div>

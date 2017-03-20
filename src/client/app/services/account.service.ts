@@ -46,12 +46,12 @@ export class AccountService {
 
   login = function() {
     return this.restService.post(
-      this.settingsService.getServerBaseUrl() + '/users/authenticate', {
+      this.settingsService.getServerBaseUrl() + '/users/login', {
         email: this.email,
-        name: this.name,
+        firstname: this.name,
         password: this.password,
-        fbUserId: this.fb_userid,
-        googleUserId: this.google_userid,
+        facebook_user_id: this.fb_userid,
+        google_user_id: this.google_userid,
         imagePath: this.profilePictureUrl
       }
     );

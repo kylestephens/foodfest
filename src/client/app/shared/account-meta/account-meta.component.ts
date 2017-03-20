@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component }        from '@angular/core';
+import { Subscription }     from 'rxjs/Subscription'
 
-import { ModalService } from '../../services/modal.service';
+import { AccountService }   from '../../services/account.service';
+import { ModalService }     from '../../services/modal.service';
 
-import { CONSTANT } from '../../core/constant';
+import { CONSTANT }         from '../../core/constant';
 
 /**
  * This class represents the navigation bar component.
@@ -16,7 +18,30 @@ import { CONSTANT } from '../../core/constant';
 
 export class AccountMetaComponent {
 
-  constructor(private modalService: ModalService) {}
+  private subscription: Subscription;
+  private subMessage: any;
+
+  public firstName: string = '';
+  public avatar: string = '';
+  public loggedIn: boolean = false;
+
+  constructor(
+    private accountService: AccountService,
+    private modalService: ModalService
+  ) {
+    var me = this;
+    // subscribe to messaging service messages
+    this.subscription = this.accountService.getMessage().subscribe(subMessage => {
+      console.debug('AccountMetaComponent::subscription');
+      if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN) {
+        me.loggedIn = subMessage.sessionStatus;
+        if(me.loggedIn) {
+          me.firstName = me.accountService.getFirstName();
+          me.avatar = me.accountService.getProfilePictureUrl();
+        }
+      }
+    });
+  };
 
   showSignUp(): void {
     console.debug('AccountMetaComponent::showSignUp');

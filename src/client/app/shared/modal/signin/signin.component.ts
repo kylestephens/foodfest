@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 import { LoginDetails }     from '../../model/login-details';
 
 import { AccountService }   from '../../../services/account.service';
+import { FacebookService }  from '../../../services/facebook.service';
 import { GoogleService }    from '../../../services/google.service';
 import { MessagingService } from '../../../services/messaging.service';
 import { ModalService }     from '../../../services/modal.service';
@@ -27,6 +28,7 @@ export class SigninComponent {
 
   constructor(
     private accountService: AccountService,
+    private facebookService: FacebookService,
     private googleService: GoogleService,
     private messagingService: MessagingService
   ) {};
@@ -41,22 +43,24 @@ export class SigninComponent {
   // );
 
   public facebookSignIn = function () {
-    //event.stopPropagation();
-    // FacebookService.login().then(function(response) {
-    //   AccountService.setFacebookDetails(response);
-    //   _setupSession();
-    // }, function(reason) {
-    //   ModalService.hide();
-    // });
+    var me = this;
+    event.stopPropagation();
+    this.facebookService.login().then((response: any) => {
+      me.accountService.setFacebookDetails(response);
+      me._setupSession();
+    }, function(reason: any) {
+      me.modalService.hide();
+    });
   }
 
   public googleSignIn = function () {
+    var me = this;
     event.stopPropagation();
     this.googleService.login().then((response: any) => {
-      this.accountService.setGoogleDetails(response);
-      this._setupSession();
+      me.accountService.setGoogleDetails(response);
+      me._setupSession();
     }).catch((reason: string) => {
-      this.modalService.hide();
+      me.modalService.hide();
     });
   }
 
@@ -72,8 +76,9 @@ export class SigninComponent {
   private _setupSession = function() {
     var me = this;
     this.accountService.login().then(function(response: any) {
-      me.accountService.setName(response.data.name);
-      me.accountService.setListrAccessToken(response.token);
+      debugger;
+      me.accountService.setName(response.data.firstname);
+      me.accountService.setAkAccessToken(response.token);
       me.accountService.setLoggedIn(true);
     }, function(reason: any) {
       me.accountService.setLoggedIn(false);
