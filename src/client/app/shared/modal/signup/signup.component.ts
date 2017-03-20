@@ -4,6 +4,7 @@ import { Subscription }     from 'rxjs/Subscription';
 import { LoginDetails }     from '../../model/login-details';
 
 import { AccountService }   from '../../../services/account.service';
+import { FacebookService }  from '../../../services/facebook.service';
 import { GoogleService }    from '../../../services/google.service';
 import { MessagingService } from '../../../services/messaging.service';
 import { ModalService }     from '../../../services/modal.service';
@@ -22,9 +23,8 @@ import { CONSTANT }         from '../../../core/constant';
 
 export class SignupComponent {
 
-  data: any;
-  subscription: Subscription;
-  subMessage: any;
+  modalSubscription: Subscription;
+  accountSubscription: Subscription;
 
   isEmailSignUp: boolean = false;
   recaptchaResponse: string = null;
@@ -32,47 +32,62 @@ export class SignupComponent {
 
   constructor(
     private accountService: AccountService,
+    private facebookService: FacebookService,
     private googleService: GoogleService,
     private messagingService: MessagingService,
     private modalService: ModalService
   ) {
     var me = this;
+
     // subscribe to modal service messages
-    this.subscription = this.modalService.getMessage().subscribe(subMessage => {
-      console.debug('SignupComponent::subscription');
+    this.modalSubscription = this.modalService.getMessage().subscribe(subMessage => {
+      console.debug('SignupComponent::modalSubscription');
       if(subMessage.event && subMessage.event === CONSTANT.EVENT.MODAL.HIDE_MODAL) {
         me.isEmailSignUp = false;
       }
     });
-  };
 
-  // TODO
-  // $rootScope.$on(constants.event.session.LOGGED_IN, function(event, loggedIn) {
-  //   if(loggedIn) {
-  //     ModalService.hide();
-  //   }
-  // });
+    // subscribe to account service messages
+    this.accountSubscription = this.accountService.getMessage().subscribe(subMessage => {
+      console.debug('SignupComponent::accountSubscription');
+      if(subMessage.event && subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN &&
+        subMessage.sessionStatus) {
+        me.modalService.hide();
+      }
+    });
+
+  };
 
   // ------   Component Logic / Public   ------ //
   public facebookSignUp = function() {
-    // event.stopPropagation();
-    // FacebookService.login().then(function(response) {
-    //   AccountService.setFacebookDetails(response);
-    //   _createAccount();
-    // }, function(reason) {
-    //   ModalService.hide();
-    // });
+    var me = this;
+    event.stopPropagation();
+    this.facebookService.login().then((response: any) => {
+      me.accountService.setFacebookDetails(response);
+      me._createAccount();
+    }, function(reason: any) {
+      me.messagingService.show(
+        'modal',
+        CONSTANT.MESSAGING.ERROR,
+        reason.statusText ? reason.statusText : 'An unexpected error has occurred'
+      );
+    });
   }
 
   public googleSignUp = function() {
+    console.debug('SignupComponent::googleSignUp');
     var me = this;
     event.stopPropagation();
     this.googleService.login().then(response => {
       debugger;
       me.accountService.setGoogleDetails(response);
       me._createAccount();
-    }, function(reason) {
-      me.modalService.hide();
+    }, function(reason: any) {
+      me.messagingService.show(
+        'modal',
+        CONSTANT.MESSAGING.ERROR,
+        reason.statusText ? reason.statusText : 'An unexpected error has occurred'
+      );
     });
   }
 
@@ -90,8 +105,8 @@ export class SignupComponent {
     }
   }
 
-  // ------   Component Logic / Private   ------ //
   private _createAccount() {
+    console.debug('SignupComponent::_createAccount');
     var me = this;
     this.accountService.createAccount().then(function(response) {
       me.accountService.setAkAccessToken(response.token);

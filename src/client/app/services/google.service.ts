@@ -1,9 +1,8 @@
 import { Injectable }     from '@angular/core';
-import { Observable }     from 'rxjs';
 
-// 3rd party (non-typescript library) - https://apis.google.com/js/client.js
+// NOTE: 3rd party (non-typescript) library - https://apis.google.com/js/client.js
 // Declaration is necessary to trick IDE so it will not throw IDE errors.
-declare var gapi:any;
+declare var gapi: any;
 
 @Injectable()
 export class GoogleService {
@@ -11,7 +10,7 @@ export class GoogleService {
   private clientId: string = '1021678981609-gjuqj2klp4f3ri69a4nqbjknm0079n6c.apps.googleusercontent.com';
   private apiKey = '{API_KEY}';
   private scopes = 'email';
-  private domain = 'http://localhost:9000';
+  private domain = 'http://localhost:5555';
   private GP_SHARE_LINK = 'https://plus.google.com/share?url=';
   private defer: Promise<any> = null;
 

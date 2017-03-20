@@ -1,8 +1,9 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpModule }        from '@angular/http';
 
-import { AccountService }   from './account.service';
+import { AccountService }    from './account.service';
 import { BrowserService }    from './browser.service';
+import { FacebookService }   from './facebook.service';
 import { GoogleService }     from './google.service';
 import { MessagingService }  from './messaging.service';
 import { ModalService }      from './modal.service';
@@ -19,6 +20,7 @@ import { WindowRefService }  from './window-ref.service';
     AccountService,
     BrowserService,
     GoogleService,
+    FacebookService,
     MessagingService,
     ModalService,
     RestService,
@@ -34,6 +36,7 @@ export class ServicesModule {
         AccountService,
         BrowserService,
         GoogleService,
+        FacebookService,
         MessagingService,
         ModalService,
         RestService,

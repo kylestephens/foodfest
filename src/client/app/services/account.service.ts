@@ -1,12 +1,17 @@
 import { Injectable }        from '@angular/core';
-import { CONSTANT }          from '../core/constant';
-import { RestService }       from './rest.service';
-import { SettingsService }   from './settings.service';
-import { Http, Response }    from '@angular/http';
+import { Observable }        from 'rxjs';
+import { Subject }           from 'rxjs/Subject';
 import 'rxjs/add/operator/toPromise';
+import { RestService }       from './rest.service';
+import { Http, Response }    from '@angular/http';
+
+import { CONSTANT }          from '../core/constant';
+import { SettingsService }   from './settings.service';
 
 @Injectable()
 export class AccountService {
+
+  private subject = new Subject<any>();
 
   private loggedIn = false;
   private facebookLogin = false;
@@ -58,13 +63,14 @@ export class AccountService {
 
   setLoggedIn = function (newSessionStatus: boolean) {
 
-    // if(this.loggedIn !== newSessionStatus) {
-    //   $rootScope.$broadcast(
-    //     CONSTANT.EVENT.SESSION.LOGGED_IN,
-    //     newSessionStatus
-    //   );
-    //   this.loggedIn = newSessionStatus;
-    // }
+    console.debug('AccountService::setLoggedIn');
+    if(this.loggedIn !== newSessionStatus) {
+      this.subject.next({
+        event: CONSTANT.EVENT.SESSION.LOGGED_IN,
+        sessionStatus: newSessionStatus
+      });
+      this.loggedIn = newSessionStatus;
+    }
 
     // if(this.loggedIn) {
     //   localStorageService.set(
@@ -231,5 +237,12 @@ export class AccountService {
     json['profilePictureUrl'] = this.profilePictureUrl;
     return json;
   };
+
+  /**
+  * Send message as observable
+  */
+  getMessage(): Observable<any> {
+    return this.subject.asObservable();
+  }
 
 };

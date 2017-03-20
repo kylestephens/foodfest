@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Subject } from 'rxjs/Subject';
-import { CONSTANT } from '../core/constant';
+import { Injectable }  from '@angular/core';
+import { Observable }  from 'rxjs';
+import { Subject }     from 'rxjs/Subject';
+import { CONSTANT }    from '../core/constant';
 
 @Injectable()
 export class MessagingService {
@@ -55,6 +55,6 @@ export class MessagingService {
   */
   getMessage(): Observable<any> {
     return this.subject.asObservable();
-  }
+  };
 
 };

@@ -2,7 +2,7 @@ import { Component }        from '@angular/core';
 import { Http, Response }   from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-import { LoginDetails } from '../../model/login-details';
+import { LoginDetails }     from '../../model/login-details';
 
 import { AccountService }   from '../../../services/account.service';
 import { GoogleService }    from '../../../services/google.service';
