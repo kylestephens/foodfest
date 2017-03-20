@@ -5,8 +5,8 @@ import { Component } from '@angular/core';
  */
 @Component({
   moduleId: module.id,
-  selector: 'ak-about',
-  templateUrl: 'about.component.html',
-  styleUrls: ['about.component.css']
+  selector: 'ak-listing',
+  templateUrl: 'listing.component.html',
+  styleUrls: ['listing.component.css']
 })
-export class AboutComponent { }
+export class ListingComponent { }
