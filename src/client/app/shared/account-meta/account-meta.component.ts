@@ -21,7 +21,7 @@ export class AccountMetaComponent {
   private subscription: Subscription;
   private subMessage: any;
 
-  public firstName: string = '';
+  public firstName: string = this.accountService.getFirstName();;
   public avatar: string = '';
   public loggedIn: boolean = false;
 
@@ -30,6 +30,7 @@ export class AccountMetaComponent {
     private modalService: ModalService
   ) {
     var me = this;
+    debugger;
     this.loggedIn = this.accountService.isLoggedIn();
 
     // subscribe to messaging service messages

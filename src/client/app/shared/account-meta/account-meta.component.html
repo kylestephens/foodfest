@@ -1,5 +1,5 @@
 <div class="account-meta"
-  (class)="{'account-meta--logged-in': loggedIn}">
+  [ngClass]="{'account-meta--logged-in': loggedIn}">
 
   <a class="account-meta__action [ hidden-xs ]" [routerLink]="['/commercial']">
     Commercial events

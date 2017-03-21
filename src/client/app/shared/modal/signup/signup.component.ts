@@ -23,8 +23,8 @@ import { CONSTANT }         from '../../../core/constant';
 
 export class SignupComponent {
 
-  modalSubscription: Subscription;
-  accountSubscription: Subscription;
+  private modalSubscription: Subscription;
+  private accountSubscription: Subscription;
 
   isEmailSignUp: boolean = false;
   recaptchaResponse: string = null;

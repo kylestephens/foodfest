@@ -141,6 +141,8 @@ export class AccountService {
 
   setName = function (fullName: string) {
     this.name = fullName;
+    this.firstname = this.name.split(' ')[0];
+    this.lastname = this.name.split(' ').slice(-1).pop();
   };
 
   setAkAccessToken = function(accessToken: string) {
@@ -209,6 +211,8 @@ export class AccountService {
     this.googleLogin = sessionDetails['googleLogin'];
     this.email = sessionDetails['email'];
     this.name = sessionDetails['name'];
+    this.firstname = sessionDetails['firstname'];
+    this.lastname = sessionDetails['lastname'];
     this.listrAccessToken = sessionToken;
     this.fbAccessToken = sessionDetails['fbAccessToken'];
     this.fb_userid = sessionDetails['fb_userid'];
@@ -222,6 +226,8 @@ export class AccountService {
     this.googleLogin = false;
     this.email = '';
     this.name = '';
+    this.firstname = '';
+    this.lastname = '';
     this.listrAccessToken = '';
     this.fbAccessToken = '';
     this.fb_userid = '';
@@ -235,7 +241,8 @@ export class AccountService {
     json['facebookLogin'] = this.facebookLogin;
     json['googleLogin'] = this.googleLogin;
     json['email'] = this.email;
-    json['name'] = this.name;
+    json['firstname'] = this.firstname;
+    json['lastname'] = this.lastname;
     json['fbAccessToken'] = this.fbAccessToken;
     json['fb_userid'] = this.fb_userid;
     json['google_userid'] = this.google_userid;
