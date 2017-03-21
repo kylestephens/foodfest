@@ -71,6 +71,12 @@ export class AccountMetaComponent {
     }
   };
 
+  public logout = function() {
+    console.debug('AccountMetaComponent::logout');
+    this.accountService.reset();
+    window.location.pathname = '/';
+  }
+
   private bodyClick = function(event) {
     if(!event.target.classList.contains('js-admin-link')) {
       var adminDropdown = document.getElementsByClassName('admin-dropdown')[0];
