@@ -1,11 +1,10 @@
-<!-- <div class="account-meta"
-  ng-class="{'account-meta--logged-in': loggedIn}"> -->
+<div class="account-meta"
+  (class)="{'account-meta--logged-in': loggedIn}">
 
-<div class="account-meta">
   <a class="account-meta__action [ hidden-xs ]" [routerLink]="['/commercial']">
     Commercial events
   </a>
-  <a class="account-meta__action [ hidden-xs ]" [routerLink]="['/list']">
+  <a class="account-meta__action [ hidden-xs ]" [routerLink]="['/list-with-us']">
     List with us
   </a>
 

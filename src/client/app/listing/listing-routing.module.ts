@@ -5,7 +5,7 @@ import { ListingComponent }   from './listing.component';
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'list', component: ListingComponent }
+      { path: 'list-with-us', component: ListingComponent }
     ])
   ],
   exports: [RouterModule]

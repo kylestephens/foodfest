@@ -30,6 +30,8 @@ export class AccountMetaComponent {
     private modalService: ModalService
   ) {
     var me = this;
+    this.loggedIn = this.accountService.isLoggedIn();
+
     // subscribe to messaging service messages
     this.subscription = this.accountService.getMessage().subscribe(subMessage => {
       console.debug('AccountMetaComponent::subscription');

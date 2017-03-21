@@ -1,6 +1,9 @@
 import { Component, OnInit }       from '@angular/core';
 import { Router, NavigationEnd }   from '@angular/router'
 import { Config }                  from './shared/config/env.config';
+import { AccountService }          from './services/account.service';
+import { CONSTANT }                from './core/constant';
+import { LocalStorageService, SessionStorageService } from 'ng2-webstorage';
 import './operators';
 
 /**
@@ -14,8 +17,20 @@ import './operators';
 })
 export class AppComponent {
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private accountService: AccountService,
+    private localStorageService: LocalStorageService
+  ) {
     console.log('Environment config', Config);
+
+    // Check local storage for login details - keep signed in
+    if(this.localStorageService.retrieve('session')) {
+      this.accountService.reloadSession(
+        this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.SESSION),
+        this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.TOKEN)
+      );
+    }
   };
 
   ngOnInit() {
@@ -25,7 +40,7 @@ export class AppComponent {
       if (!(evt instanceof NavigationEnd)) {
         return;
       }
-      window.scrollTo(0, 0)
+      window.scrollTo(0, 0);
     });
   };
 

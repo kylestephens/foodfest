@@ -5,6 +5,8 @@ import { HttpModule }         from '@angular/http';
 import { AppComponent }       from './app.component';
 import { AppRoutingModule }   from './app-routing.module';
 
+import { Ng2Webstorage }       from 'ng2-webstorage';
+
 import { AboutModule }        from './about/about.module';
 import { CommercialModule }   from './commercial/commercial.module';
 import { HomeModule }         from './home/home.module';
@@ -18,6 +20,7 @@ import { ServicesModule }     from './services/services.module';
     BrowserModule,
     HttpModule,
     AppRoutingModule,
+    Ng2Webstorage.forRoot({ prefix: 'foodfest', separator: '.' }),
     AboutModule,
     CommercialModule,
     HomeModule,

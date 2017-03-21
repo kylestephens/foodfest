@@ -107,10 +107,11 @@ export class SignupComponent {
   private _createAccount() {
     console.debug('SignupComponent::_createAccount');
     var me = this;
-    this.accountService.createAccount().then(function(response) {
-      me.accountService.setAkAccessToken(response.token);
+    this.accountService.createAccount().then(function(response: string) {
+      let responseBody = JSON.parse(response._body);
+      me.accountService.setAkAccessToken(responseBody.token);
       me.accountService.setLoggedIn(true);
-    }, function(reason) {
+    }, function(reason: any) {
       me.accountService.setLoggedIn(false);
       me.messagingService.show(
         'modal',
