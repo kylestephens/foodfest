@@ -24,13 +24,14 @@ export class AccountMetaComponent {
   public firstName: string = this.accountService.getFirstName();;
   public avatar: string = '';
   public loggedIn: boolean = false;
+  public adminDropdownActive: boolean = false;
+  public firstClick: boolean = false;
 
   constructor(
     private accountService: AccountService,
     private modalService: ModalService
   ) {
     var me = this;
-    debugger;
     this.loggedIn = this.accountService.isLoggedIn();
 
     // subscribe to messaging service messages
@@ -46,14 +47,39 @@ export class AccountMetaComponent {
     });
   };
 
-  showSignUp(): void {
+  public showSignUp = function() {
     console.debug('AccountMetaComponent::showSignUp');
     this.modalService.show(CONSTANT.MODAL.SIGN_UP);
   };
 
-  showSignIn(): void {
+  public showSignIn = function() {
     console.debug('AccountMetaComponent::showSignIn');
     this.modalService.show(CONSTANT.MODAL.SIGN_IN);
+  };
+
+  public toggleDropdown = function() {
+    console.debug('AccountMetaComponent::toggleDropdown');
+    var adminDropdown = document.getElementsByClassName('admin-dropdown')[0];
+    if(!this.adminDropdownActive) {
+      this.adminDropdownActive = true;
+      adminDropdown.classList.add('admin-dropdown--active');
+      document.getElementsByTagName('body')[0].addEventListener('click', this.bodyClick);
+    } else {
+      this.adminDropdownActive = false;
+      adminDropdown.classList.remove('admin-dropdown--active');
+      document.getElementsByTagName('body')[0].removeEventListener('click', this.bodyClick);
+    }
+  };
+
+  private bodyClick = function(event) {
+    if(!event.target.classList.contains('js-admin-link')) {
+      var adminDropdown = document.getElementsByClassName('admin-dropdown')[0];
+      adminDropdown.classList.remove('admin-dropdown--active');
+      this.adminDropdownActive = false;
+      document.getElementsByTagName('body')[0].removeEventListener('click', $scope.bodyClick);
+    } else {
+      this.firstClick = false;
+    }
   };
 
 }

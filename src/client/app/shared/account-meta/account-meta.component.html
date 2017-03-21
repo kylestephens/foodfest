@@ -28,7 +28,7 @@
   <span class="account-meta__action [ hidden-xs ]"
     *ngIf="loggedIn">
     <span class="account-meta__icon ak-icon-user-circle"></span>
-    <a href="" ng-click="toggleDropdown()" class="account-meta__dropdown-link js-admin-link">
+    <a (click)="toggleDropdown()" class="account-meta__dropdown-link js-admin-link">
       <span class="account-meta__name js-admin-link">
         {{firstName}}
       </span>
@@ -36,5 +36,51 @@
     </a>
   </span>
   <!-- Logged IN -->
+
+  <div class="admin-dropdown dropdown-menu">
+    <ul>
+      <li class="js-admin-link">
+        <a ng-href="#/admin/dashboard">
+          Dashboard
+        </a>
+      </li>
+      <li class="js-admin-link">
+        <a ng-href="#/admin/profile">
+          Profile
+        </a>
+      </li>
+      <li class="js-admin-link">
+        <a ng-href="#/admin/my-ads">
+          My Ads
+        </a>
+      </li>
+      <li class="js-admin-link">
+        <a ng-href="#/admin/messages">
+          Messages
+        </a>
+      </li>
+      <li class="js-admin-link">
+        <a ng-href="#/admin/saved-ads">
+          Saved Ads
+        </a>
+      </li>
+      <li class="js-admin-link">
+        <a ng-href="#/admin/saved-searches">
+          Saved Searches
+        </a>
+      </li>
+      <li class="js-admin-link">
+        <a ng-href="" (click)="logout()">
+          Logout
+        </a>
+      </li>
+      <hr />
+      <li>
+        <a ng-href="">
+          Help
+        </a>
+      </li>
+    </ul>
+  </div>
 
 </div>
