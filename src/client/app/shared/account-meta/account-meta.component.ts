@@ -34,7 +34,7 @@ export class AccountMetaComponent {
     var me = this;
     this.loggedIn = this.accountService.isLoggedIn();
 
-    // subscribe to messaging service messages
+    // subscribe to account service messages
     this.subscription = this.accountService.getMessage().subscribe(subMessage => {
       console.debug('AccountMetaComponent::subscription');
       if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN) {

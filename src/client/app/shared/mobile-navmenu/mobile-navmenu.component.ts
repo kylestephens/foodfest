@@ -1,4 +1,5 @@
 import { Component, OnInit }    from '@angular/core';
+import { Subscription }         from 'rxjs/Subscription'
 
 import { AccountService }       from '../../services/account.service';
 import { ModalService }         from '../../services/modal.service';
@@ -16,6 +17,9 @@ import { SettingsService }      from '../../services/settings.service';
 
 export class MobileNavmenuComponent implements OnInit {
 
+  private subscription: Subscription;
+  private subMessage: any;
+
   private menuButton: HTMLElement = null;
   private menuContent: HTMLElement = null;
 
@@ -23,7 +27,16 @@ export class MobileNavmenuComponent implements OnInit {
     private accountService: AccountService,
     private modalService: ModalService,
     private settingsService: SettingsService
-  ) {}
+  ) {
+    var me = this;
+    this.loggedIn = this.accountService.isLoggedIn();
+
+    // subscribe to account service messages
+    this.subscription = this.accountService.getMessage().subscribe(subMessage => {
+      console.debug('MobileNavmenuComponent::subscription');
+      me.loggedIn = subMessage.sessionStatus;
+    });
+  };
 
   public loggedIn: boolean = false;
 
@@ -43,12 +56,12 @@ export class MobileNavmenuComponent implements OnInit {
   //   $scope.loggedIn = loggedIn;
   // });
 
-  public signUp = function() {
+  public showSignUp = function() {
     this.toggleMenu();
     this.modalService.show('SignUp');
   };
 
-  public signIn = function() {
+  public showSignIn = function() {
     this.toggleMenu();
     this.modalService.show('SignIn');
   };
