@@ -459,5 +459,6 @@ Forks of this project demonstrate how to extend and integrate with other librari
 
 
 # 3rd Party Libraries
-The list of 3rd party libraries added by Kyle and Ana (extra to those that came with the seed)
-* [ng2-webstorage](https://github.com/PillowPillow/ng2-webstorage) Localstorage and sessionstorage manager - angular2 service
+The list of 3rd party libraries added by Kyle and Ana (extra to those that came with the seed):
+
+* [ng2-webstorage](https://github.com/PillowPillow/ng2-webstorage): Localstorage and sessionstorage manager - angular2 service
