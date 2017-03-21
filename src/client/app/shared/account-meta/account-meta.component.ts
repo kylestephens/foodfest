@@ -82,7 +82,7 @@ export class AccountMetaComponent {
       var adminDropdown = document.getElementsByClassName('admin-dropdown')[0];
       adminDropdown.classList.remove('admin-dropdown--active');
       this.adminDropdownActive = false;
-      document.getElementsByTagName('body')[0].removeEventListener('click', $scope.bodyClick);
+      document.getElementsByTagName('body')[0].removeEventListener('click', this.bodyClick);
     } else {
       this.firstClick = false;
     }
