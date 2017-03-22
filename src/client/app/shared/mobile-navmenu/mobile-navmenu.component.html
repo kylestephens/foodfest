@@ -5,18 +5,45 @@
   </div>
   <div id="menu-content">
     <ul class="menu-links">
-      <li>Home</li>
-      <li>Sign up</li>
-      <li>Login</li>
-      <li>Dashboard</li>
-      <li>Profile</li>
-      <li>My Ads</li>
-      <li>Messages</li>
-      <li>Saved Ads</li>
-      <li>Saved Searches</li>
-      <li>Logout</li>
+      <li [routerLink]="['/']">
+        Home
+      </li>
+      <li (click)="showSignUp()"
+        *ngIf="!loggedIn">
+        Sign up
+      </li>
+      <li (click)="showSignIn()"
+        *ngIf="!loggedIn">
+        Login
+      </li>
+      <li [routerLink]="['/']"
+        *ngIf="loggedIn">
+        Dashboard
+      </li>
+      <li [routerLink]="['/']"
+        *ngIf="loggedIn">
+        Profile
+      </li>
+      <li [routerLink]="['/']"
+        *ngIf="loggedIn">
+        My Listing
+      </li>
+      <li [routerLink]="['/']"
+        *ngIf="loggedIn">
+        Messages
+      </li>
+      <li [routerLink]="['/']"
+        *ngIf="loggedIn">
+        Saved Ads
+      </li>
+      <li (click)="logout()"
+        *ngIf="loggedIn">
+        Logout
+      </li>
       <hr />
-      <li>Help</li>
+      <li [routerLink]="['/help']">
+        Help
+      </li>
     </ul>
   </div>
 </div>

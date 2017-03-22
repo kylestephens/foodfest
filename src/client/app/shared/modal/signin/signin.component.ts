@@ -24,8 +24,12 @@ import { CONSTANT }         from '../../../core/constant';
 
 export class SigninComponent {
 
-  modalSubscription: Subscription;
-  accountSubscription: Subscription;
+  private modalSubscription: Subscription;
+  private accountSubscription: Subscription;
+  private firstName: string = '';
+  private lastName: string = '';
+  private avatar: string = '';
+  private loggedIn: boolean = false;
 
   model = new LoginDetails();
 
@@ -37,6 +41,14 @@ export class SigninComponent {
     private modalService: ModalService
   ) {
     var me = this;
+
+    this.loggedIn = this.accountService.isLoggedIn();
+
+    if(this.loggedIn) {
+      me.firstName = me.accountService.getFirstName();
+      me.avatar = me.accountService.getProfilePictureUrl();
+    }
+
     // subscribe to account service messages
     this.accountSubscription = this.accountService.getMessage().subscribe(subMessage => {
       console.debug('SignupComponent::accountSubscription');
@@ -81,9 +93,9 @@ export class SigninComponent {
   private _setupSession = function() {
     var me = this;
     this.accountService.login().then(function(response: any) {
-      debugger;
-      me.accountService.setName(response._body.firstname);
-      me.accountService.setAkAccessToken(response._body.token);
+      let responseBody = JSON.parse(response._body);
+      me.accountService.setName(responseBody.firstname);
+      me.accountService.setAkAccessToken(responseBody.token);
       me.accountService.setLoggedIn(true);
     }, function(reason: any) {
       me.accountService.setLoggedIn(false);

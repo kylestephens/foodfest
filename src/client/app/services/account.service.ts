@@ -5,8 +5,9 @@ import 'rxjs/add/operator/toPromise';
 import { RestService }       from './rest.service';
 import { Http, Response }    from '@angular/http';
 
-import { CONSTANT }          from '../core/constant';
+import { LocalStorageService, SessionStorageService } from 'ng2-webstorage';
 import { SettingsService }   from './settings.service';
+import { CONSTANT }          from '../core/constant';
 
 @Injectable()
 export class AccountService {
@@ -28,7 +29,8 @@ export class AccountService {
 
   constructor(
     private restService: RestService,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private localStorageService: LocalStorageService
   ) {};
 
   createAccount = function() {
@@ -66,7 +68,7 @@ export class AccountService {
 
   setLoggedIn = function (newSessionStatus: boolean) {
 
-    console.debug('AccountService::setLoggedIn');
+    console.debug('AccountService::setLoggedIn: ' + newSessionStatus);
     if(this.loggedIn !== newSessionStatus) {
       this.subject.next({
         event: CONSTANT.EVENT.SESSION.LOGGED_IN,
@@ -75,21 +77,21 @@ export class AccountService {
       this.loggedIn = newSessionStatus;
     }
 
-    // if(this.loggedIn) {
-    //   localStorageService.set(
-    //     CONSTANT.LOCALSTORAGE.SESSION,
-    //     this.toJson()
-    //   );
-    //   localStorageService.set(
-    //     CONSTANT.LOCALSTORAGE.TOKEN,
-    //     this.getListrAccessToken()
-    //   );
-    // } else {
-    //   localStorageService.remove(
-    //     CONSTANT.LOCALSTORAGE.SESSION,
-    //     CONSTANT.LOCALSTORAGE.TOKEN
-    //   );
-    // }
+    if(this.loggedIn) {
+      this.localStorageService.store(
+        CONSTANT.LOCALSTORAGE.SESSION,
+        this.toJson()
+      );
+      this.localStorageService.store(
+        CONSTANT.LOCALSTORAGE.TOKEN,
+        this.getAkAccessToken()
+      );
+    } else {
+      this.localStorageService.clear(
+        CONSTANT.LOCALSTORAGE.SESSION,
+        CONSTANT.LOCALSTORAGE.TOKEN
+      );
+    }
 
   };
 
@@ -139,6 +141,8 @@ export class AccountService {
 
   setName = function (fullName: string) {
     this.name = fullName;
+    this.firstname = this.name.split(' ')[0];
+    this.lastname = this.name.split(' ').slice(-1).pop();
   };
 
   setAkAccessToken = function(accessToken: string) {
@@ -207,6 +211,8 @@ export class AccountService {
     this.googleLogin = sessionDetails['googleLogin'];
     this.email = sessionDetails['email'];
     this.name = sessionDetails['name'];
+    this.firstname = sessionDetails['firstname'];
+    this.lastname = sessionDetails['lastname'];
     this.listrAccessToken = sessionToken;
     this.fbAccessToken = sessionDetails['fbAccessToken'];
     this.fb_userid = sessionDetails['fb_userid'];
@@ -220,6 +226,8 @@ export class AccountService {
     this.googleLogin = false;
     this.email = '';
     this.name = '';
+    this.firstname = '';
+    this.lastname = '';
     this.listrAccessToken = '';
     this.fbAccessToken = '';
     this.fb_userid = '';
@@ -233,7 +241,8 @@ export class AccountService {
     json['facebookLogin'] = this.facebookLogin;
     json['googleLogin'] = this.googleLogin;
     json['email'] = this.email;
-    json['name'] = this.name;
+    json['firstname'] = this.firstname;
+    json['lastname'] = this.lastname;
     json['fbAccessToken'] = this.fbAccessToken;
     json['fb_userid'] = this.fb_userid;
     json['google_userid'] = this.google_userid;

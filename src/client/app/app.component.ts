@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-import { Config } from './shared/config/env.config';
+import { Component, OnInit }       from '@angular/core';
+import { Router, NavigationEnd }   from '@angular/router'
+import { Config }                  from './shared/config/env.config';
+import { AccountService }          from './services/account.service';
+import { CONSTANT }                from './core/constant';
+import { LocalStorageService, SessionStorageService } from 'ng2-webstorage';
 import './operators';
 
 /**
@@ -12,7 +16,32 @@ import './operators';
   styleUrls: ['app.component.css'],
 })
 export class AppComponent {
-  constructor() {
+
+  constructor(
+    private router: Router,
+    private accountService: AccountService,
+    private localStorageService: LocalStorageService
+  ) {
     console.log('Environment config', Config);
-  }
+
+    // Check local storage for login details - keep signed in
+    if(this.localStorageService.retrieve('session')) {
+      this.accountService.reloadSession(
+        this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.SESSION),
+        this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.TOKEN)
+      );
+    }
+  };
+
+  ngOnInit() {
+    // angular route changes don't return you to the top
+    // of the page for the new page - force this to occur
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
+  };
+
 }

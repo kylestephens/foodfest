@@ -23,8 +23,8 @@ import { CONSTANT }         from '../../../core/constant';
 
 export class SignupComponent {
 
-  modalSubscription: Subscription;
-  accountSubscription: Subscription;
+  private modalSubscription: Subscription;
+  private accountSubscription: Subscription;
 
   isEmailSignUp: boolean = false;
   recaptchaResponse: string = null;
@@ -107,8 +107,9 @@ export class SignupComponent {
   private _createAccount() {
     console.debug('SignupComponent::_createAccount');
     var me = this;
-    this.accountService.createAccount().then(function(response: any) {
-      me.accountService.setAkAccessToken(response.token);
+    this.accountService.createAccount().then(function(response: string) {
+      let responseBody = JSON.parse(response._body);
+      me.accountService.setAkAccessToken(responseBody.token);
       me.accountService.setLoggedIn(true);
     }, function(reason: any) {
       me.accountService.setLoggedIn(false);
