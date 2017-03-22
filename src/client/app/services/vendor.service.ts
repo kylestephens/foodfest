@@ -15,7 +15,7 @@ export class VendorService {
 
   getVendors(): Promise<Vendor[]> {
     return this.restService.get(
-       this.settingsService.getServerBaseUrl() + '/users/vendors'
+       this.settingsService.getServerBaseUrl() + '/vendors'
     ).then((response: Response) => response.json() as Vendor[]);
   }
 
