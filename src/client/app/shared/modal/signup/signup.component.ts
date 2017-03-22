@@ -78,7 +78,7 @@ export class SignupComponent {
     console.debug('SignupComponent::googleSignUp');
     var me = this;
     event.stopPropagation();
-    this.googleService.login().then(response => {
+    this.googleService.login().then((response: any) => {
       me.accountService.setGoogleDetails(response);
       me._createAccount();
     }, function(reason: any) {
@@ -107,10 +107,10 @@ export class SignupComponent {
   private _createAccount() {
     console.debug('SignupComponent::_createAccount');
     var me = this;
-    this.accountService.createAccount().then(function(response) {
+    this.accountService.createAccount().then(function(response: any) {
       me.accountService.setAkAccessToken(response.token);
       me.accountService.setLoggedIn(true);
-    }, function(reason) {
+    }, function(reason: any) {
       me.accountService.setLoggedIn(false);
       me.messagingService.show(
         'modal',
