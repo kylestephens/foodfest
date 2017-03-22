@@ -1,14 +1,15 @@
-import { NgModule }           from '@angular/core';
-import { BrowserModule }      from '@angular/platform-browser';
-import { APP_BASE_HREF }      from '@angular/common';
-import { HttpModule }         from '@angular/http';
-import { AppComponent }       from './app.component';
-import { AppRoutingModule }   from './app-routing.module';
+import { NgModule }             from '@angular/core';
+import { BrowserModule }        from '@angular/platform-browser';
+import { APP_BASE_HREF }        from '@angular/common';
+import { HttpModule }           from '@angular/http';
+import { AppComponent }         from './app.component';
+import { AppRoutingModule }     from './app-routing.module';
 
-import { AboutModule }        from './about/about.module';
-import { HomeModule }         from './home/home.module';
-import { SharedModule }       from './shared/shared.module';
-import { ServicesModule }     from './services/services.module';
+import { AboutModule }          from './about/about.module';
+import { HomeModule }           from './home/home.module';
+import { SharedModule }         from './shared/shared.module';
+import { SearchResultsModule }  from './searchResults/search-results.module';
+import { ServicesModule }       from './services/services.module';
 
 @NgModule({
 
@@ -18,6 +19,7 @@ import { ServicesModule }     from './services/services.module';
     AppRoutingModule,
     AboutModule,
     HomeModule,
+    SearchResultsModule,
     SharedModule.forRoot(),
     ServicesModule
   ],
