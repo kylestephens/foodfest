@@ -26,7 +26,7 @@ $gray-lightest:          lighten($gray-base, 93.5%) !default; // #eee
 //** Background color for `<body>`.
 $body-bg:                 #fff !default;
 //** Global text color on `<body>`.
-$text-color:              $gray-dark !default;
+$text-color:              $body-text-color !default;
 
 //** Global textual link color.
 $link-color:              $brand-links !default;
@@ -104,11 +104,11 @@ $padding-small-horizontal:    10px !default;
 $padding-base-vertical:       6px !default;
 $padding-base-horizontal:     12px !default;
 
-$padding-large-vertical:      10px !default;
-$padding-large-horizontal:    16px !default;
+$padding-large-vertical:      12px !default;
+$padding-large-horizontal:    24px !default;
 
-$padding-xlarge-vertical:     20px !default;
-$padding-xlarge-horizontal:   32px !default;
+$padding-xlarge-vertical:     24px !default;
+$padding-xlarge-horizontal:   48px !default;
 
 $line-height-large:           1.3333333 !default; // extra decimals for Win 8.1 Chrome
 $line-height-small:           1.5 !default;
