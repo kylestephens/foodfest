@@ -10,17 +10,13 @@ export class RestService {
   public delete = function (url: string, data: any, headers: any, options: any) {
     return this.http
       .delete(url, data, headers)
-      .toPromise()
-      .then(response => response.json().data)
-      .catch(handleFailure);
+      .toPromise();
   };
 
-  public get = function (url: string, headers: any, options: any) {
+  public get = function (url: string, headers?: any, options?: any) {
     return this.http
-      .get(urlEncode(url), headers)
-      .toPromise()
-      .then(response => response.json().data)
-      .catch(handleFailure);
+      .get(url, headers)
+      .toPromise();
   };
 
   public post = function (url: string, data: any, headers: any, options: any) {
