@@ -1,0 +1,42 @@
+<!-- Progress Bar -->
+<div class="progress-bar progress-bar--step-1"
+  [ngClass]="{
+    'progress-bar--step-1': currentStep == 1,
+    'progress-bar--step-2': currentStep == 2,
+    'progress-bar--step-3': currentStep == 3
+  }">
+  <div class="[ container ]">
+    <div class="[ row-xs-12 ]">
+      <div class="progress-bar__step">
+        Step {{ currentStep }}:
+      </div>
+      <div class="progress-bar__description">
+        The Basics
+      </div>
+    </div>
+  </div>
+</div>
+<!-- / Progress Bar -->
+
+<div class="form-card card [ container ]" *ngIf="currentStep == 1">
+
+  <div class="[ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <!-- Business Name -->
+      <!-- <div class="[ text-left ]"
+        [hidden]="fullName.valid || fullName.pristine" style="color:maroon" role="alert">
+        <div ng-message="required">Full name is required</div>
+      </div> -->
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-user"></div>
+        <input type="text"
+          placeholder="Company Name"
+          required />
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<a (click)="previousStep()">Previous Step</a>
+<a (click)="nextStep()">Next Step</a>
