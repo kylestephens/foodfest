@@ -68,7 +68,7 @@ export class SigninComponent {
     }, function(reason: any) {
       me.modalService.hide();
     });
-  }
+  };
 
   public googleSignIn = function () {
     var me = this;
@@ -79,7 +79,7 @@ export class SigninComponent {
     }).catch((reason: string) => {
       me.modalService.hide();
     });
-  }
+  };
 
   public submitEmailDetails = function(isValid: boolean) {
     event.stopPropagation();
@@ -88,7 +88,7 @@ export class SigninComponent {
       this.accountService.setPassword(this.model.password);
       this._setupSession();
     }
-  }
+  };
 
   private _setupSession = function() {
     var me = this;
@@ -105,6 +105,6 @@ export class SigninComponent {
         reason.statusText ? reason.statusText : 'An unexpected error has occurred'
       );
     });
-  }
+  };
 
 };
