@@ -1,5 +1,6 @@
 @import '../../scss/core/variables';
 @import '../../scss/core/settings';
+@import '../../scss/mixins/buttons';
 
 $progress-bar-height: 45px;
 
@@ -24,7 +25,7 @@ $progress-bar-height: 45px;
     content: '';
     height: 2px;
     position: relative;
-    top: 1px;
+    top: -3px;
     display: block;
     background: black;
 
@@ -54,4 +55,14 @@ $progress-bar-height: 45px;
 .form-card {
   margin-top: $padding-xlarge-vertical;
   padding: $padding-large-vertical $padding-large-horizontal;
+}
+
+.form-row {
+  margin: $padding-large-vertical 0;
+}
+
+.form-btn-cta {
+  margin-top: 16px;
+  @include button(#fff, $brand-primary-cta);
+  font-weight: 400;
 }

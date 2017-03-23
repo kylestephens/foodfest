@@ -11,70 +11,122 @@
         Step {{ currentStep }}:
       </div>
       <div class="progress-bar__description">
-        The Basics
+        <span *ngIf="currentStep == 1">The Basics</span>
+        <span *ngIf="currentStep == 2">Setting the Scene</span>
+        <span *ngIf="currentStep == 3">The Details</span>
       </div>
     </div>
   </div>
 </div>
 <!-- / Progress Bar -->
 
+<!-- Step 1 -->
 <div class="form-card card [ container ]" *ngIf="currentStep == 1">
-
-  <div class="[ row ]">
+  <!-- Business Name -->
+  <div class="form-row [ row ]">
     <div class="[ col-sm-6 col-xs-12 ]">
-      <!-- Business Name -->
       <!-- <div class="[ text-left ]"
         [hidden]="fullName.valid || fullName.pristine" style="color:maroon" role="alert">
         <div ng-message="required">Full name is required</div>
       </div> -->
+      <label class="form-label">Business Name *</label>
       <div class="form-input form-input--has-icon sign-up-field">
         <div class="form-icon ak-icon-user"></div>
         <input type="text"
-          placeholder="Business Name"
+          placeholder="e.g. Domhnaill's Donuts"
           required />
       </div>
     </div>
   </div>
+  <!-- / Business Name -->
 
-  <div class="[ row ]">
+  <!-- Business Website -->
+  <div class="form-row [ row ]">
     <div class="[ col-sm-6 col-xs-12 ]">
-      <!-- Business Name -->
+      <label class="form-label">Business Website</label>
       <div class="form-input form-input--has-icon sign-up-field">
         <div class="form-icon ak-icon-earth"></div>
         <input type="text"
-          placeholder="Business Website"
+          placeholder="e.g. www.DomhnaillsDonuts.com"
           required />
       </div>
     </div>
   </div>
+  <!-- / Business Website -->
 
-  <div class="[ row ]">
+  <!-- Facebook Address -->
+  <div class="form-row [ row ]">
     <div class="[ col-sm-6 col-xs-12 ]">
-      <!-- Business Name -->
+      <label class="form-label">Facebook Address</label>
       <div class="form-input form-input--has-icon sign-up-field">
         <div class="form-icon ak-icon-facebook"></div>
         <input type="text"
-          placeholder="Facebook Address"
+          placeholder="e.g. www.facebook.com/DomhnaillsDonuts"
           required />
       </div>
     </div>
   </div>
+  <!-- / Facebook Address -->
 
-  <div class="[ row ]">
+  <!-- Twitter Address -->
+  <div class="form-row [ row ]">
     <div class="[ col-sm-6 col-xs-12 ]">
-      <!-- Business Name -->
+      <label class="form-label">Twitter Address</label>
       <div class="form-input form-input--has-icon sign-up-field">
         <div class="form-icon ak-icon-twitter"></div>
         <input type="text"
-          placeholder="Twitter Address"
+          placeholder="e.g. www.twitter.com/DomhnaillsDonuts"
           required />
       </div>
     </div>
   </div>
+  <!-- / Twitter Address -->
 
-  <span class="form-icon ak-icon-twitter"></span>
+  <!-- Mandatory Fields -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 ]">
+      <span class="form-mandatory">* denotes mandatory field</span>
+    </div>
+  </div>
+  <!-- / Mandatory Fields -->
+
+  <!-- Form Buttons -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 text-right ]">
+      <button class="form-btn-cta" (click)="nextStep()">Next step</button>
+    </div>
+  </div>
+  <!-- / Form Buttons -->
 
 </div>
+<!-- / Step 1 -->
 
-<a (click)="previousStep()">Previous Step</a>
-<a (click)="nextStep()">Next Step</a>
+<!-- Step 2 -->
+<div class="form-card card [ container ]" *ngIf="currentStep == 2">
+  <!-- Business Address -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Business Address *</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-user"></div>
+        <input type="text"
+          placeholder="e.g. Domhnaill's Donuts"
+          required />
+      </div>
+    </div>
+  </div>
+  <!-- / Business Address -->
+
+  <!-- Form Buttons -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 text-right ]">
+      <button class="form-btn-cta" (click)="previousStep()">Previous step</button>
+      <button class="form-btn-cta" (click)="nextStep()">Next step</button>
+    </div>
+  </div>
+  <!-- / Form Buttons -->
+</div>
+<!-- / Step 2 -->
+
+<button class="form-btn-cta" (click)="previousStep()">Previous Step</button>
+<button class="form-btn-cta" (click)="nextStep()">Next step</button>
