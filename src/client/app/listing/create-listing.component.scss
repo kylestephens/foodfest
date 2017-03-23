@@ -1,0 +1,57 @@
+@import '../../scss/core/variables';
+@import '../../scss/core/settings';
+
+$progress-bar-height: 45px;
+
+.progress-bar {
+  width: 100%;
+  height: $progress-bar-height;
+  border-bottom: 2px solid #efefef;
+
+  &__step {
+    padding: $padding-large-vertical $padding-large-horizontal;
+    font-weight: 400;
+    float: left;
+  }
+
+  &__description {
+    padding: $padding-large-vertical $padding-large-horizontal;
+    font-weight: 200;
+    float: left;
+  }
+
+  &:after {
+    content: '';
+    height: 2px;
+    position: relative;
+    top: 1px;
+    display: block;
+    background: black;
+
+    -webkit-transition: width 0.5s;
+    transition: width 0.5s;
+  }
+
+  &--step-1 {
+    &:after {
+      width: 25%;
+    }
+  }
+
+  &--step-2 {
+    &:after {
+      width: 50%;
+    }
+  }
+
+  &--step-3 {
+    &:after {
+      width: 75%;
+    }
+  }
+}
+
+.form-card {
+  margin-top: $padding-xlarge-vertical;
+  padding: $padding-large-vertical $padding-large-horizontal;
+}
