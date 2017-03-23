@@ -24,17 +24,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.ak-icon-edit-pencil:before {
-  content: "\e918";
-}
-.ak-icon-polaroid-picture:before {
-  content: "\e919";
-}
 .ak-icon-user-circle:before {
   content: "\e900";
-}
-.ak-icon-mail:before {
-  content: "\e917";
 }
 .ak-icon-chevron-down:before {
   content: "\e901";
@@ -90,9 +81,6 @@
 .ak-icon-pencil:before {
   content: "\e912";
 }
-.ak-icon-pen:before {
-  content: "\e91b";
-}
 .ak-icon-image:before {
   content: "\e913";
 }
@@ -105,8 +93,20 @@
 .ak-icon-play:before {
   content: "\e916";
 }
+.ak-icon-mail:before {
+  content: "\e917";
+}
+.ak-icon-pencil2:before {
+  content: "\e918";
+}
+.ak-icon-polaroid-picture:before {
+  content: "\e919";
+}
 .ak-icon-bullhorn:before {
   content: "\e91a";
+}
+.ak-icon-pen:before {
+  content: "\e91b";
 }
 .ak-icon-pushpin:before {
   content: "\e946";
@@ -137,6 +137,12 @@
 }
 .ak-icon-bin:before {
   content: "\e9ac";
+}
+.ak-icon-clipboard:before {
+  content: "\e9b8";
+}
+.ak-icon-list:before {
+  content: "\e9ba";
 }
 .ak-icon-link:before {
   content: "\e9cb";
@@ -182,4 +188,16 @@
 }
 .ak-icon-facebook:before {
   content: "\ea90";
+}
+.ak-icon-chrome:before {
+  content: "\ead9";
+}
+.ak-icon-earth:before {
+  content: "\e9ca";
+}
+.ak-icon-star-half:before {
+  content: "\e9d8";
+}
+.ak-icon-twitter:before {
+  content: "\ea96";
 }
