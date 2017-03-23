@@ -1,0 +1,65 @@
+$pagination-padding-top: 8px;
+
+.pagination .ng2-pagination {
+
+   font-size: $font-size-large;
+   text-align: center;
+
+  .pagination-previous a::before, .pagination-previous.disabled::before,
+  .pagination-next a::after, .pagination-next.disabled::after {
+    content: none;
+  }
+
+  li {
+    height: 45px;
+    width: 45px;
+    text-align: center;
+    margin: 5px;
+    background: #fff;
+    box-shadow: 0 2px 8px 0 $gray-lighter;
+  }
+
+  .current {
+    color: $body-text-color;
+    background: $gray-lightest;
+    padding: 0;
+
+    div {
+      padding-top: $pagination-padding-top;
+    }
+  }
+
+
+  a, button {
+    color: $body-text-color;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+  }
+
+  a > span {
+    display: block;
+    padding-top: $pagination-padding-top;
+  }
+
+  .pagination-next, .pagination-previous {
+    a {
+     padding-top: $pagination-padding-top;
+    }
+
+    &.disabled {
+      padding: 0;
+
+      span {
+        display: block;
+        padding-top: $pagination-padding-top;
+      }
+    }
+  }
+
+  a:hover, button:hover, .disabled:hover {
+    background: none;
+  }
+
+}

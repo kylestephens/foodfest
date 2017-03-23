@@ -29,15 +29,16 @@
 
   &__cuisines{
     padding: 5px 0;
-    font-size: $font-size-medium;
+    font-size: $font-size-smallest;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: $brand-body-bg;
 
     .cuisine {
       margin-right: 5px;
-      padding: 2px;
-      background-color: $brand-secondary-cta;
+      padding: 2px 4px;
+      background-color: $brand-primary-cta;
     }
   }
 

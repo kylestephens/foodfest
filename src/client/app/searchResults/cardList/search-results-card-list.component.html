@@ -1,11 +1,19 @@
-<ul class="card-list" >
-	<li *ngFor="let vendor of vendors">
-		<div class="card-list__card [ col-sm-4 col-xs-12 ]">
-	 		<ak-search-results-card [vendor] = "vendor" ></ak-search-results-card>
-	 	</div>
-	</li>
-</ul>
+<div class="[ row ]">
+  <ul class="card-list" >
+  	<li *ngFor="let vendor of vendors | paginate: { itemsPerPage: 18, currentPage: p }">
+  		<div class="card-list__card [ col-sm-4 col-xs-12 ]">
+  	 		<ak-search-results-card [vendor] = "vendor" ></ak-search-results-card>
+  	 	</div>
+  	</li>
+  </ul>
+</div>
 
-
+<div class="pagination [ row ]">
+  <pagination-controls (pageChange)="p = $event"
+                        autoHide="true"
+                        previousLabel="<"
+                        nextLabel=">">
+  </pagination-controls>
+</div>
 
 

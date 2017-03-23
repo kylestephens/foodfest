@@ -5,12 +5,10 @@
   </div>
 
   <div class="search-card__content">
-    <div class="search-card__title"> {{vendor.business_name}} </div>
+    <div class="search-card__title">{{vendor.business_name}}</div>
 
     <div class="search-card__cuisines">
-      <span class="cuisine " *ngFor="let cuisine of vendor.cuisines">
-        {{cuisine.name | uppercase}}
-      </span>
+      <span class="cuisine " *ngFor="let cuisine of vendor.cuisines">{{cuisine.name | uppercase}}</span>
 
       <span *ngIf="vendor.cuisines?.length === 0">&nbsp;</span>
     </div>
