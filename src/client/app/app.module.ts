@@ -5,7 +5,9 @@ import { HttpModule }           from '@angular/http';
 import { AppComponent }         from './app.component';
 import { AppRoutingModule }     from './app-routing.module';
 
+// 3rd party
 import { Ng2Webstorage }        from 'ng2-webstorage';
+// 3rd party
 
 import { AboutModule }          from './about/about.module';
 import { CommercialModule }     from './commercial/commercial.module';

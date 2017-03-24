@@ -35,7 +35,7 @@
 
   &__browse-button {
     margin-top: 16px;
-    @include button(#fff, #ff8da1);
+    @include button(#fff, $brand-primary-cta);
     font-weight: 400;
   }
 

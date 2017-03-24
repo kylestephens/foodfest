@@ -50,6 +50,12 @@
   }
 }
 
+.form-mandatory {
+  font-weight: $font-weight-light;
+  font-size: $font-size-small;
+  font-style: italic;
+}
+
 .form-select-wrapper {
 
   position: relative;

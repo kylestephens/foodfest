@@ -11,4 +11,9 @@ import { Vendor } 			      from '../../../shared/model/vendor';
 export class SearchResultsCardComponent {
 	@Input()
 	vendor: Vendor;
+
+  //TODO: a placeholder for handling reacion on liked/unliked event:<EmitEvent>
+  vendorLiked(event) {
+    //event.elementId, event.isLiked
+  }
 }

@@ -7,6 +7,7 @@ import { AccountMetaComponent }           from './account-meta/account-meta.comp
 import { MessagingComponent }             from './messaging/messaging.component';
 import { MobileNavmenuComponent }         from './mobile-navmenu/mobile-navmenu.component';
 import { NavbarComponent }                from './navbar/navbar.component';
+import { HeartComponent }                 from './heart/heart.componet';
 
 // TODO : tidy these 3 into a single module
 import { ModalComponent }                 from './modal/modal.component';
@@ -22,6 +23,7 @@ import { NameListService }                from './name-list/name-list.service';
 @NgModule({
   imports: [CommonModule, RouterModule, FormsModule],
   declarations: [
+    HeartComponent,
     NavbarComponent,
     MobileNavmenuComponent,
     AccountMetaComponent,
@@ -31,6 +33,7 @@ import { NameListService }                from './name-list/name-list.service';
     SignupComponent
   ],
   exports: [
+    HeartComponent,
     NavbarComponent,
     MobileNavmenuComponent,
     AccountMetaComponent,

@@ -1,0 +1,23 @@
+.heart {
+  cursor: pointer;
+  height: 80px;
+  width: 80px;
+  background-image:url('../assets/img/heart_animation.png');
+  background-position: left;
+  background-repeat:no-repeat;
+  background-size:2900%;
+  float: right;
+  position: absolute;
+  right: -5px;
+  top: -15px;
+}
+
+.is_animating {
+  animation: heart-burst .8s steps(28) 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes heart-burst {
+  from {background-position:left;}
+  to { background-position:right;}
+}
