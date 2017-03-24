@@ -1,5 +1,5 @@
 import { Injectable }        from '@angular/core';
-import { Vendor }            from '../searchResults/vendor';
+import { Vendor }            from '../shared/model/vendor';
 import { RestService }       from './rest.service';
 import { SettingsService }   from './settings.service';
 import { Response }          from '@angular/http';
