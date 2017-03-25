@@ -1,5 +1,6 @@
 import { Component, ElementRef, NgZone, AfterViewInit, ViewChild } from '@angular/core';
 import { AgmCoreModule, MapsAPILoader }   from 'angular2-google-maps/core';
+import { SelectModule }                   from 'ng2-select';
 
 declare var google: any;
 
@@ -62,5 +63,36 @@ export class CreateListingComponent implements AfterViewInit {
     this.currentStep++;
     window.scrollTo(0, 0);
   };
+
+  // Dummy data for select / multiselect
+  public items:Array<string> = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
+    'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
+    'Budapest', 'Cologne', 'Copenhagen', 'Dortmund', 'Dresden', 'Dublin',
+    'Düsseldorf', 'Essen', 'Frankfurt', 'Genoa', 'Glasgow', 'Gothenburg',
+    'Hamburg', 'Hannover', 'Helsinki', 'Kraków', 'Leeds', 'Leipzig', 'Lisbon',
+    'London', 'Madrid', 'Manchester', 'Marseille', 'Milan', 'Munich', 'Málaga',
+    'Naples', 'Palermo', 'Paris', 'Poznań', 'Prague', 'Riga', 'Rome',
+    'Rotterdam', 'Seville', 'Sheffield', 'Sofia', 'Stockholm', 'Stuttgart',
+    'The Hague', 'Turin', 'Valencia', 'Vienna', 'Vilnius', 'Warsaw', 'Wrocław',
+    'Zagreb', 'Zaragoza', 'Łódź'];
+
+  private value:any = {};
+
+  // Handlers for select / multiselect
+  public selected(value:any):void {
+    console.log('Selected value is: ', value);
+  }
+
+  public removed(value:any):void {
+    console.log('Removed value is: ', value);
+  }
+
+  public typed(value:any):void {
+    console.log('New search input: ', value);
+  }
+
+  public refreshValue(value:any):void {
+    this.value = value;
+  }
 
 };

@@ -7,6 +7,7 @@ import { ListingMasterComponent } from './listing-master.component';
 import { ListingRoutingModule }   from './listing-routing.module';
 
 import { AgmCoreModule }        from 'angular2-google-maps/core';
+import { SelectModule }         from 'ng2-select';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { AgmCoreModule }        from 'angular2-google-maps/core';
     }),
     CommonModule,
     ListingRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SelectModule
   ],
   declarations: [
     CreateListingComponent,

@@ -101,6 +101,24 @@
   </div>
   <!-- / Twitter Address -->
 
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Twitter Address</label>
+      <div class="form-select-wrapper">
+        <div class="form-select">
+          <ng-select
+            [multiple]="true"
+            [items]="items"
+            [disabled]="disabled"
+            (data)="refreshValue($event)"
+            (selected)="selected($event)"
+            (removed)="removed($event)"
+            placeholder="No city selected"></ng-select>
+          </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Mandatory Fields -->
   <div class="form-row [ row ]">
     <div class="[ col-xs-12 ]">
