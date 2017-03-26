@@ -54,6 +54,25 @@
   </div>
   <!-- / Business Website -->
 
+  <!-- Business Address -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Business Address</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-pushpin"></div>
+        <input
+          placeholder="e.g. Domhnaills Donuts, Navan Road, Dublin 7"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="off"
+          type="text"
+          class="form-control"
+          #autocompleteSearch>
+      </div>
+    </div>
+  </div>
+  <!-- / Business Address -->
+
   <!-- Facebook Address -->
   <div class="form-row [ row ]">
     <div class="[ col-sm-6 col-xs-12 ]">
@@ -81,6 +100,24 @@
     </div>
   </div>
   <!-- / Twitter Address -->
+
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Twitter Address</label>
+      <div class="form-select-wrapper">
+        <div class="form-select">
+          <ng-select
+            [multiple]="true"
+            [items]="items"
+            [disabled]="disabled"
+            (data)="refreshValue($event)"
+            (selected)="selected($event)"
+            (removed)="removed($event)"
+            placeholder="No city selected"></ng-select>
+          </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Mandatory Fields -->
   <div class="form-row [ row ]">
@@ -127,6 +164,3 @@
   <!-- / Form Buttons -->
 </div>
 <!-- / Step 2 -->
-
-<button class="form-btn-cta" (click)="previousStep()">Previous Step</button>
-<button class="form-btn-cta" (click)="nextStep()">Next step</button>

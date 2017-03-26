@@ -60,11 +60,12 @@
 
   position: relative;
   float: left;
+  width: 100%;
 
   // the <select> element itself
   .form-select {
     min-width: 80px;
-    padding: $padding-base-horizontal 20px;
+    padding: $padding-small-horizontal 20px;
 
     background: transparent;
     border-radius: $brand-border-radius;
@@ -82,12 +83,12 @@
 
   &::after {
     position: absolute;
-    left: 50px;
-    top: 12px;
+    right: 20px;
+    bottom: 10px;
     box-sizing: border-box;
 
     color: #000;
-    font-family: 'pv-icons';
+    font-family: 'ak-icons';
     content: "\e908";
     font-size: 18px;
     pointer-events: none;

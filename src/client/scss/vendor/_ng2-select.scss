@@ -1,0 +1,47 @@
+// Outer class added to increase specificity and override 3rd party styles
+.form-select {
+
+  input {
+    width: 100%;
+    font-weight: $font-weight-light;
+  }
+
+  .ui-select-container {
+    min-height: 25px;
+  }
+
+  .ui-select-placeholder {
+    width: 100%;
+  }
+
+  .ui-select-multiple {
+    padding: 0 !important;
+  }
+
+  .ui-select-match, .ui-select-match > .btn {
+    width: 100%;
+    display: block;
+  }
+
+  .ui-select-multiple {
+    .ui-select-match {
+      width: 100%;
+      background: #efefef;
+      border-radius: 4px;
+
+      .close {
+        position: relative;
+        top: 2px;
+      }
+    }
+  }
+
+  .ui-select-multiple input.ui-select-search {
+    width: 100%;
+  }
+
+  .ui-select-multiple input.ui-select-search {
+    margin: 0 !important;
+  }
+
+}

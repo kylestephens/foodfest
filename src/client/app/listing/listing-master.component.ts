@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 /**
- * This class represents the lazy loaded CreateListingComponent.
+ * This class represents the lazy loaded ListingMasterComponent.
  */
 @Component({
   moduleId: module.id,

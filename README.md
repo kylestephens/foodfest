@@ -462,3 +462,6 @@ Forks of this project demonstrate how to extend and integrate with other librari
 The list of 3rd party libraries added by Kyle and Ana (extra to those that came with the seed):
 
 * [ng2-webstorage](https://github.com/PillowPillow/ng2-webstorage): Localstorage and sessionstorage manager - angular2 service
+* [angular2-google-maps](https://github.com/SebastianM/angular2-google-maps): Angular 2+ components for Google Maps.
+* [ng2-select](https://github.com/valor-software/ng2-select): Native UI Select Angular component
+* [ng2-pagination](https://github.com/michaelbromley/ng2-pagination): Pagination for Angular 2+

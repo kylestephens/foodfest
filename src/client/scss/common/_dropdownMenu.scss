@@ -3,6 +3,10 @@
   background: #ffffff;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: $brand-border-radius;
+  position: absolute;
+  left: 0;
+  top: 48px;
+  z-index: 99;
 }
 .dropdown-menu:after {
   bottom: 100%;

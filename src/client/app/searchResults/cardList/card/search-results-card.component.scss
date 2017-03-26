@@ -1,4 +1,5 @@
 @import '../../../../scss/core/variables';
+@import '../../../../scss/core/mixins';
 
 .search-card {
 	height: 310px;
@@ -38,10 +39,8 @@
   &__cuisines{
     padding: 5px 0;
     font-size: $font-size-smallest;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
     color: $brand-body-bg;
+    @include text-overflow();
 
     .cuisine {
       margin-right: 5px;
