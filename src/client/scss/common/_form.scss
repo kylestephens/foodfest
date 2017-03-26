@@ -105,7 +105,6 @@ $button-bg: rgba(0, 0, 0, 0.05);
 
 // Taken from http://codepen.io/artlantis/pen/djzLb
 .form-radio-wrapper {
-
   input[type='radio'],
   input[type='checkbox']{
     display:none;
@@ -222,5 +221,26 @@ $button-bg: rgba(0, 0, 0, 0.05);
       }
     }
   }
+}
 
+.form-field-description {
+  color: $gray-lighter;
+  display: block;
+  padding-left: $padding-large-horizontal;
+
+  &::before {
+    position: absolute;
+    left: $padding-base-horizontal;
+    box-sizing: border-box;
+
+    font-family: 'ak-icons';
+    content: "\ea0c";
+    font-size: 18px;
+    pointer-events: none;
+    text-align: center;
+  }
+
+  // @media all and (min-width: $screen-sm-min) {
+  //   padding-top: 35px;
+  // }
 }

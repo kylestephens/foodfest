@@ -12,8 +12,8 @@
       </div>
       <div class="progress-bar__description">
         <span *ngIf="currentStep == 1">The Basics</span>
-        <span *ngIf="currentStep == 2">Setting the Scene</span>
-        <span *ngIf="currentStep == 3">The Details</span>
+        <span *ngIf="currentStep == 2">Let's Get Social</span>
+        <span *ngIf="currentStep == 3">Setting The Scene</span>
       </div>
     </div>
   </div>
@@ -40,19 +40,24 @@
   </div>
   <!-- / Business Name -->
 
-  <!-- Business Website -->
+  <!-- Business Category -->
   <div class="form-row [ row ]">
     <div class="[ col-sm-6 col-xs-12 ]">
-      <label class="form-label">Business Website</label>
-      <div class="form-input form-input--has-icon sign-up-field">
-        <div class="form-icon ak-icon-earth"></div>
-        <input type="text"
-          placeholder="e.g. www.DomhnaillsDonuts.com"
-          required />
+      <label class="form-label">Business Category *</label>
+      <div class="form-select-wrapper">
+        <div class="form-select">
+          <ng-select
+            [multiple]="true"
+            [items]="items"
+            (data)="refreshValue($event)"
+            (selected)="selected($event)"
+            (removed)="removed($event)"
+            placeholder="No category selected"></ng-select>
+          </div>
       </div>
     </div>
   </div>
-  <!-- / Business Website -->
+  <!-- / Business Category -->
 
   <!-- Business Address -->
   <div class="form-row [ row ]">
@@ -73,51 +78,29 @@
   </div>
   <!-- / Business Address -->
 
-  <!-- Facebook Address -->
+  <!-- Cuisine Type -->
   <div class="form-row [ row ]">
     <div class="[ col-sm-6 col-xs-12 ]">
-      <label class="form-label">Facebook Address</label>
-      <div class="form-input form-input--has-icon sign-up-field">
-        <div class="form-icon ak-icon-facebook"></div>
-        <input type="text"
-          placeholder="e.g. www.facebook.com/DomhnaillsDonuts"
-          required />
-      </div>
-    </div>
-  </div>
-  <!-- / Facebook Address -->
-
-  <!-- Twitter Address -->
-  <div class="form-row [ row ]">
-    <div class="[ col-sm-6 col-xs-12 ]">
-      <label class="form-label">Twitter Address</label>
-      <div class="form-input form-input--has-icon sign-up-field">
-        <div class="form-icon ak-icon-twitter"></div>
-        <input type="text"
-          placeholder="e.g. www.twitter.com/DomhnaillsDonuts"
-          required />
-      </div>
-    </div>
-  </div>
-  <!-- / Twitter Address -->
-
-  <div class="form-row [ row ]">
-    <div class="[ col-sm-6 col-xs-12 ]">
-      <label class="form-label">Twitter Address</label>
+      <label class="form-label">Cuisine Type</label>
       <div class="form-select-wrapper">
         <div class="form-select">
           <ng-select
             [multiple]="true"
             [items]="items"
-            [disabled]="disabled"
             (data)="refreshValue($event)"
             (selected)="selected($event)"
             (removed)="removed($event)"
-            placeholder="No city selected"></ng-select>
+            placeholder="No cuisine selected"></ng-select>
           </div>
       </div>
     </div>
+    <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
+      <div class="form-field-description">
+        Adding a cuisine type will help customers find your business faster
+      </div>
+    </div>
   </div>
+  <!-- / Cuisine Type -->
 
   <!-- Mandatory Fields -->
   <div class="form-row [ row ]">
@@ -140,19 +123,75 @@
 
 <!-- Step 2 -->
 <div class="form-card card [ container ]" *ngIf="currentStep == 2">
-  <!-- Business Address -->
+
+  <!-- Business Website -->
   <div class="form-row [ row ]">
     <div class="[ col-sm-6 col-xs-12 ]">
-      <label class="form-label">Business Address *</label>
+      <label class="form-label">Business Website</label>
       <div class="form-input form-input--has-icon sign-up-field">
-        <div class="form-icon ak-icon-user"></div>
+        <div class="form-icon ak-icon-earth"></div>
         <input type="text"
-          placeholder="e.g. Domhnaill's Donuts"
+          placeholder="e.g. www.DomhnaillsDonuts.com"
           required />
       </div>
     </div>
   </div>
-  <!-- / Business Address -->
+  <!-- / Business Website -->
+
+  <!-- Facebook Address -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Facebook Address</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-facebook"></div>
+        <input type="text"
+          placeholder="e.g. www.facebook.com/DomhnaillsDonuts"
+          required />
+      </div>
+    </div>
+    <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
+      <div class="form-field-description">
+        Don't worry if you don't have this information to hand - you can always add it later
+      </div>
+    </div>
+  </div>
+  <!-- / Facebook Address -->
+
+  <!-- Twitter Address -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Twitter Address</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-twitter"></div>
+        <input type="text"
+          placeholder="e.g. www.twitter.com/DomhnaillsDonuts"
+          required />
+      </div>
+    </div>
+  </div>
+  <!-- / Twitter Address -->
+
+  <!-- Instagram Address -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Instagram Address</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-instagram"></div>
+        <input type="text"
+          placeholder="e.g. www.instagram.com/DomhnaillsDonuts"
+          required />
+      </div>
+    </div>
+  </div>
+  <!-- / Instagram Address -->
+
+  <!-- Mandatory Fields -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 ]">
+      <span class="form-mandatory">* denotes mandatory field</span>
+    </div>
+  </div>
+  <!-- / Mandatory Fields -->
 
   <!-- Form Buttons -->
   <div class="form-row [ row ]">
@@ -162,5 +201,95 @@
     </div>
   </div>
   <!-- / Form Buttons -->
+
 </div>
 <!-- / Step 2 -->
+
+<!-- Step 3 -->
+<div class="form-card card [ container ]" *ngIf="currentStep == 3">
+
+  <!-- Business Logo -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Business Logo *</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-camera"></div>
+        <input type="file"
+          required />
+      </div>
+    </div>
+    <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
+      <div class="form-field-description">
+        Square images work best. We recommend 250 x 250 pixels.
+      </div>
+    </div>
+  </div>
+  <!-- / Business Logo -->
+
+  <!-- Cover Image -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Cover Image</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-image"></div>
+        <input type="file"
+          placeholder="e.g. www.facebook.com/DomhnaillsDonuts" />
+      </div>
+    </div>
+    <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
+      <div class="form-field-description">
+        Don't worry if you don't have this information to hand - you can always add it later
+      </div>
+    </div>
+  </div>
+  <!-- / Cover Image -->
+
+  <!-- Additional Images -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Additional Images</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-images"></div>
+        <input type="file"
+          multiple />
+      </div>
+    </div>
+    <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
+      <div class="form-field-description">
+        Upload up to 12 additional images to showcase your business
+      </div>
+    </div>
+  </div>
+  <!-- / Additional Images -->
+
+  <!-- Description -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Description</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-pencil"></div>
+        <textarea rows="5"></textarea>
+      </div>
+    </div>
+  </div>
+  <!-- / Description -->
+
+  <!-- Mandatory Fields -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 ]">
+      <span class="form-mandatory">* denotes mandatory field</span>
+    </div>
+  </div>
+  <!-- / Mandatory Fields -->
+
+  <!-- Form Buttons -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 text-right ]">
+      <button class="form-btn-cta" (click)="previousStep()">Previous step</button>
+      <button class="form-btn-cta" (click)="nextStep()">Next step</button>
+    </div>
+  </div>
+  <!-- / Form Buttons -->
+
+</div>
+<!-- / Step 3 -->
