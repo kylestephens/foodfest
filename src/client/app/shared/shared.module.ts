@@ -4,10 +4,10 @@ import { FormsModule }                    from '@angular/forms';
 import { RouterModule }                   from '@angular/router';
 
 import { AccountMetaComponent }           from './account-meta/account-meta.component';
+import { HeartComponent }                 from './heart/heart.component';
 import { MessagingComponent }             from './messaging/messaging.component';
 import { MobileNavmenuComponent }         from './mobile-navmenu/mobile-navmenu.component';
 import { NavbarComponent }                from './navbar/navbar.component';
-import { HeartComponent }                 from './heart/heart.componet';
 
 // TODO : tidy these 3 into a single module
 import { ModalComponent }                 from './modal/modal.component';

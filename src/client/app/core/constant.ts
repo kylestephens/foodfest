@@ -77,4 +77,14 @@ export class CONSTANT {
 
   };
 
+  /*
+  * Search results order by options
+  */
+  static readonly SEARCH_RESULTS_ORDER_BY = [
+    { value: 1, label: 'Newest' },
+    { value: 2, label: 'Oldest' },
+    { value: 3, label: 'Name' },
+    { value: 4, label: 'Rating' }
+  ];
+
 };
