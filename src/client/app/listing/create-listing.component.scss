@@ -35,19 +35,25 @@ $progress-bar-height: 55px;
 
   &--step-1 {
     &:after {
-      width: 25%;
+      width: 20%;
     }
   }
 
   &--step-2 {
     &:after {
-      width: 50%;
+      width: 40%;
     }
   }
 
   &--step-3 {
     &:after {
-      width: 75%;
+      width: 60%;
+    }
+  }
+
+  &--step-4 {
+    &:after {
+      width: 80%;
     }
   }
 }
