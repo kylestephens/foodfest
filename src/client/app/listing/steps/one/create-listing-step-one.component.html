@@ -27,12 +27,8 @@
         <div class="form-select">
           <ng-select
             [items]="businessTypes"
-            (data)="refreshValue($event)"
-            (selected)="selected($event)"
-            (removed)="removed($event)"
             placeholder="No category selected"
-            formControlName="businessType"
-            #businessTypeSelect></ng-select>
+            formControlName="businessType"></ng-select>
           </div>
       </div>
       <ak-form-messages [control]="stepOneForm.controls.businessType">
@@ -50,12 +46,8 @@
           <ng-select
             [multiple]="true"
             [items]="businessSetups"
-            (data)="refreshValue($event)"
-            (selected)="selected($event)"
-            (removed)="removed($event)"
             placeholder="No category selected"
-            formControlName="businessSetup"
-            #businessSetupSelect></ng-select>
+            formControlName="businessSetup"></ng-select>
           </div>
       </div>
       <ak-form-messages [control]="stepOneForm.controls.businessSetup">
@@ -73,12 +65,8 @@
           <ng-select
             [multiple]="true"
             [items]="eventTypes"
-            (data)="refreshValue($event)"
-            (selected)="selected($event)"
-            (removed)="removed($event)"
             placeholder="No category selected"
-            formControlName="eventType"
-            #eventTypeSelect></ng-select>
+            formControlName="eventType"></ng-select>
           </div>
       </div>
       <ak-form-messages [control]="stepOneForm.controls.eventType">
@@ -101,12 +89,8 @@
           <ng-select
             [multiple]="true"
             [items]="dietRequirements"
-            (data)="refreshValue($event)"
-            (selected)="selected($event)"
-            (removed)="removed($event)"
             placeholder="No cuisine selected"
-            formControlName="dietRequirements"
-            #dietRequirementsSelect></ng-select>
+            formControlName="dietRequirements"></ng-select>
           </div>
       </div>
       <ak-form-messages [control]="stepOneForm.controls.dietRequirements">
@@ -127,7 +111,7 @@
   <div class="form-row [ row ]">
     <div class="[ col-xs-12 text-right ]">
       <!-- <button class="form-btn-cta" (click)="nextStep()">Next step</button> -->
-      <button type="submit" class="form-btn-cta" [disabled]="!stepOneForm.valid">Next step</button>
+      <button type="submit" class="form-btn-cta">Next step</button>
     </div>
   </div>
   <!-- / Form Buttons -->

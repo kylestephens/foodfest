@@ -1,6 +1,5 @@
 import {
   Component,
-  ElementRef,
   OnInit,
   ViewChild
 }                                    from '@angular/core';
@@ -28,18 +27,6 @@ import { CONSTANT }                  from '../../../core/constant';
 
 export class CreateListingStepOneComponent {
 
-  @ViewChild('businessTypeSelect')
-  public businessTypeElementRef: ElementRef;
-
-  @ViewChild('businessSetupSelect')
-  public businessSetupElementRef: ElementRef;
-
-  @ViewChild('eventTypeSelect')
-  public eventTypeElementRef: ElementRef;
-
-  @ViewChild('dietRequirementsSelect')
-  public dietRequirementsElementRef: ElementRef;
-
   // These objects consist of 'name' + 'id'
   private businessSetups: Array<any> = [];
   private businessTypes: Array<any> = [];
@@ -47,8 +34,6 @@ export class CreateListingStepOneComponent {
   private dietRequirements: Array<any> = [];
 
   public stepOneForm: FormGroup;
-
-  private value: any = {};
 
   constructor(
     private fb: FormBuilder,
@@ -76,23 +61,13 @@ export class CreateListingStepOneComponent {
 
   public submitForm(value: any) {
     console.log(value);
+    if(this.stepOneForm.valid) {
+      this._nextStep();
+    }
   };
 
-  public nextStep() {
+  private _nextStep() {
     this.createListingService.nextStep();
-  };
-
-  // Handlers for select / multiselect
-  public selected(value: any): void {
-    console.log('Selected value is: ', value);
-  };
-
-  public removed(value:any):void {
-    console.log('Removed value is: ', value);
-  };
-
-  public refreshValue(value:any):void {
-    this.value = value;
   };
 
 };
