@@ -1,15 +1,27 @@
 import { Injectable }       from '@angular/core';
 import { BrowserService }   from './browser.service';
+import { RestService }      from './rest.service';
 import { WindowRefService } from './window-ref.service';
+import { CONSTANT }         from '../core/constant';
+import {
+  LocalStorageService,
+  SessionStorageService
+} from 'ng2-webstorage';
 
 @Injectable()
 export class SettingsService {
 
   /**
-   * Site configured settings
+   * Site configured parameters
    * These are constants, contained in index.html
    */
-  private settings = this.winRef.nativeWindow.AK.Settings;
+  private siteParams = this.winRef.nativeWindow.AK.SiteParams;
+
+  /**
+   * Site settings & category options
+   * Defined in a number of DB Tables
+   */
+  private settings: any;
 
   /**
    * Device, screen and browser details
@@ -24,45 +36,43 @@ export class SettingsService {
    */
   private locations: any;
 
-  /**
-   * All site categories
-   */
-  private categories: any[];
-
-  /**
-   * Featured site categories
-   */
-  private featuredCategories: any[];
-
   constructor(
+    private browserService: BrowserService,
+    private localStorageService: LocalStorageService,
+    private restService: RestService,
     private winRef: WindowRefService,
-    private browserService: BrowserService
-   ) {
-    // getting the native window obj
-    console.log('Native window obj', winRef.nativeWindow);
-  }
+   ) {};
 
+  /**
+   * Call after app launch to discover device details
+   */
   public syncBrowserDetails(): void {
     this.browser = this.browserService.get();
   };
 
-  public setSiteSettings(settings: any): void {
-    this.categories = settings.categories;
-    this.featuredCategories = settings.categories_front_page;
+  /**
+   * Call after app launch to load site settings, categories, classifications, etc.
+   */
+  public syncSiteSettings(): void {
+    // Check local storage for login details - keep signed in
+    if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.SETTINGS)) {
+      this.settings = this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.SETTINGS);
+    } else {
+      this.restService.get(this.getServerBaseUrl() + '/settings/' + this.getSiteId())
+        .then((settings: any) => {
+          let _settings = settings.json();
+          this.settings = _settings;
+          this.localStorageService.store(
+            CONSTANT.LOCALSTORAGE.SETTINGS,
+            this.settings
+          )
+        });
+    }
   };
 
-  public setSiteLocations(siteLocations: any): void {
-    this.locations = siteLocations;
-  };
-
-  public getCategories(): any {
-    return this.categories;
-  };
-
-  public getFeaturedCategories(): any {
-    return this.featuredCategories;
-  };
-
+  /**
+   * Returns base url for the location of the front-end app
+   */
   public getBaseUrl(): any {
     var pathArray = location.href.split( '/' ),
       protocol = pathArray[0],
@@ -71,36 +81,75 @@ export class SettingsService {
     return protocol + '//' + host;
   };
 
+  /**
+   * Returns base url for the back-end of app
+   */
   public getServerBaseUrl(): string {
-    return this.settings.serverBaseUrl;
+    return this.siteParams.serverBaseUrl;
   };
 
+  /**
+   * Returns browser details
+   * (syncBrowserDetails must have been called first)
+   */
   public getBrowserDetails(): any {
     return this.browser;
   };
 
+  /**
+   * Returns device type - desktop, tablet, phone, etc.
+   */
   public getDeviceType(): string {
     return this.browser.deviceType;
   };
 
+  /**
+   * Returns site id
+   */
   public getSiteId(): string {
-    return this.settings.siteId;
+    return this.siteParams.siteId;
   };
 
-  public getClientName(): string {
-    return this.settings.clientName;
+  /**
+   * Returns business setups available
+   */
+  public getBusinessSetups(): Array<Object> {
+    return this.settings.businessSetups;
   };
 
-  public getClientLanguage(): string {
-    return this.settings.language;
+  /**
+   * Returns business types available
+   */
+  public getBusinessTypes(): Array<Object> {
+    return this.settings.businessTypes;
   };
 
-  public getClientCurrency(): string {
-    return this.settings.currency;
+  /**
+   * Returns diet requirements available
+   */
+  public getDietRequirements(): Array<Object> {
+    return this.settings.dietRequirements;
   };
 
-  public getClientCountryCode(): string {
-    return this.settings.countryCode;
+  /**
+   * Returns event types available
+   */
+  public getEventTypes(): Array<Object> {
+    return this.settings.eventTypes;
+  };
+
+  /**
+   * Returns site meta
+   */
+  public getSiteMeta(): Array<Object> {
+    return this.settings.siteMeta;
+  };
+
+  /**
+   * Returns food styles available
+   */
+  public getStyles(): Array<Object> {
+    return this.settings.styles;
   };
 
 };

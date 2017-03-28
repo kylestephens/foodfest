@@ -79,7 +79,8 @@ export class CONSTANT {
   static readonly LOCALSTORAGE = {
 
     SESSION:                'session',
-    TOKEN:                  'token'
+    TOKEN:                  'token',
+    SETTINGS:               'settings'
 
   };
 
