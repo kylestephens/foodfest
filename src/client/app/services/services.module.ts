@@ -9,6 +9,7 @@ import { MessagingService }  from './messaging.service';
 import { ModalService }      from './modal.service';
 import { RestService }       from './rest.service';
 import { SettingsService }   from './settings.service';
+import { ValidationService } from './validation.service';
 import { VendorService }     from './vendor.service';
 import { WindowRefService }  from './window-ref.service';
 
@@ -26,6 +27,7 @@ import { WindowRefService }  from './window-ref.service';
     ModalService,
     RestService,
     SettingsService,
+    ValidationService,
     VendorService,
     WindowRefService
   ]
@@ -43,6 +45,7 @@ export class ServicesModule {
         ModalService,
         RestService,
         SettingsService,
+        ValidationService,
         VendorService,
         WindowRefService
       ]

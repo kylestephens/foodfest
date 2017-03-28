@@ -11,8 +11,10 @@ import { ListingDetailComponent } from './detail/listing-detail.component';
 import { ListingMasterComponent } from './listing-master.component';
 import { ListingRoutingModule }   from './listing-routing.module';
 
-import { AgmCoreModule }        from 'angular2-google-maps/core';
-import { SelectModule }         from 'ng2-select';
+import { SharedModule }           from '../shared/shared.module';
+
+import { AgmCoreModule }          from 'angular2-google-maps/core';
+import { SelectModule }           from 'ng2-select';
 
 @NgModule({
   imports: [
@@ -23,7 +25,8 @@ import { SelectModule }         from 'ng2-select';
     CommonModule,
     ListingRoutingModule,
     ReactiveFormsModule,
-    SelectModule
+    SelectModule,
+    SharedModule
   ],
   declarations: [
     CreateListingComponent,

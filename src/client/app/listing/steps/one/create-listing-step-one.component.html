@@ -1,114 +1,135 @@
-<!-- Business Name -->
-<div class="form-row [ row ]">
-  <div class="[ col-sm-6 col-xs-12 ]">
-    <!-- <div class="[ text-left ]"
-      [hidden]="fullName.valid || fullName.pristine" style="color:maroon" role="alert">
-      <div ng-message="required">Full name is required</div>
-    </div> -->
-    <label class="form-label">Business Name *</label>
-    <div class="form-input form-input--has-icon sign-up-field">
-      <div class="form-icon ak-icon-user"></div>
-      <input type="text"
-        placeholder="e.g. Domhnaill's Donuts"
-        required />
+<form [formGroup]="stepOneForm" (ngSubmit)="submitForm(stepOneForm.value)">
+
+  <!-- Business Name -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Business Name *</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-user"></div>
+        <input
+          type="text"
+          placeholder="e.g. Domhnaill's Donuts"
+          required
+          formControlName="businessName"
+          id="businessName">
+      </div>
+      <ak-form-messages [control]="stepOneForm.controls.businessName">
+      </ak-form-messages>
     </div>
   </div>
-</div>
-<!-- / Business Name -->
+  <!-- / Business Name -->
 
-<!-- Business Type -->
-<div class="form-row [ row ]">
-  <div class="[ col-sm-6 col-xs-12 ]">
-    <label class="form-label">Business Type *</label>
-    <div class="form-select-wrapper">
-      <div class="form-select">
-        <ng-select
-          [multiple]="true"
-          [items]="items"
-          (data)="refreshValue($event)"
-          (selected)="selected($event)"
-          (removed)="removed($event)"
-          placeholder="No category selected"></ng-select>
-        </div>
+  <!-- Business Type -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Business Type *</label>
+      <div class="form-select-wrapper">
+        <div class="form-select">
+          <ng-select
+            [items]="businessTypes"
+            (data)="refreshValue($event)"
+            (selected)="selected($event)"
+            (removed)="removed($event)"
+            placeholder="No category selected"
+            formControlName="businessType"
+            #businessTypeSelect></ng-select>
+          </div>
+      </div>
+      <ak-form-messages [control]="stepOneForm.controls.businessType">
+      </ak-form-messages>
     </div>
   </div>
-</div>
-<!-- / Business Type -->
+  <!-- / Business Type -->
 
-<!-- Business Setup -->
-<div class="form-row [ row ]">
-  <div class="[ col-sm-6 col-xs-12 ]">
-    <label class="form-label">Business Setup *</label>
-    <div class="form-select-wrapper">
-      <div class="form-select">
-        <ng-select
-          [multiple]="true"
-          [items]="items"
-          (data)="refreshValue($event)"
-          (selected)="selected($event)"
-          (removed)="removed($event)"
-          placeholder="No category selected"></ng-select>
-        </div>
+  <!-- Business Setup -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Business Setup *</label>
+      <div class="form-select-wrapper">
+        <div class="form-select">
+          <ng-select
+            [multiple]="true"
+            [items]="businessSetups"
+            (data)="refreshValue($event)"
+            (selected)="selected($event)"
+            (removed)="removed($event)"
+            placeholder="No category selected"
+            formControlName="businessSetup"
+            #businessSetupSelect></ng-select>
+          </div>
+      </div>
+      <ak-form-messages [control]="stepOneForm.controls.businessSetup">
+      </ak-form-messages>
     </div>
   </div>
-</div>
-<!-- / Business Setup -->
+  <!-- / Business Setup -->
 
-<!-- Event Types -->
-<div class="form-row [ row ]">
-  <div class="[ col-sm-6 col-xs-12 ]">
-    <label class="form-label">Event Types Supported *</label>
-    <div class="form-select-wrapper">
-      <div class="form-select">
-        <ng-select
-          [multiple]="true"
-          [items]="items"
-          (data)="refreshValue($event)"
-          (selected)="selected($event)"
-          (removed)="removed($event)"
-          placeholder="No category selected"></ng-select>
-        </div>
+  <!-- Event Types -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Event Types Supported *</label>
+      <div class="form-select-wrapper">
+        <div class="form-select">
+          <ng-select
+            [multiple]="true"
+            [items]="eventTypes"
+            (data)="refreshValue($event)"
+            (selected)="selected($event)"
+            (removed)="removed($event)"
+            placeholder="No category selected"
+            formControlName="eventType"
+            #eventTypeSelect></ng-select>
+          </div>
+      </div>
+      <ak-form-messages [control]="stepOneForm.controls.eventType">
+      </ak-form-messages>
+    </div>
+    <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
+      <div class="form-field-description">
+        Adding event types supported will help customers find your business faster
+      </div>
     </div>
   </div>
-  <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
-    <div class="form-field-description">
-      Adding event types supported will help customers find your business faster
+  <!-- / Event Types -->
+
+  <!-- Dietary Requirements Supported -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Dietary Requirements Supported</label>
+      <div class="form-select-wrapper">
+        <div class="form-select">
+          <ng-select
+            [multiple]="true"
+            [items]="dietRequirements"
+            (data)="refreshValue($event)"
+            (selected)="selected($event)"
+            (removed)="removed($event)"
+            placeholder="No cuisine selected"
+            formControlName="dietRequirements"
+            #dietRequirementsSelect></ng-select>
+          </div>
+      </div>
+      <ak-form-messages [control]="stepOneForm.controls.dietRequirements">
+      </ak-form-messages>
     </div>
   </div>
-</div>
-<!-- / Event Types -->
+  <!-- / Dietary Requirements Supported -->
 
-<!-- Dietary Requirements Supported -->
-<div class="form-row [ row ]">
-  <div class="[ col-sm-6 col-xs-12 ]">
-    <label class="form-label">Dietary Requirements Supported</label>
-    <div class="form-select-wrapper">
-      <div class="form-select">
-        <ng-select
-          [multiple]="true"
-          [items]="items"
-          (data)="refreshValue($event)"
-          (selected)="selected($event)"
-          (removed)="removed($event)"
-          placeholder="No cuisine selected"></ng-select>
-        </div>
+  <!-- Mandatory Fields -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 ]">
+      <span class="form-mandatory">* denotes mandatory field</span>
     </div>
   </div>
-</div>
-<!-- / Dietary Requirements Supported -->
+  <!-- / Mandatory Fields -->
 
-<!-- Mandatory Fields -->
-<div class="form-row [ row ]">
-  <div class="[ col-xs-12 ]">
-    <span class="form-mandatory">* denotes mandatory field</span>
+  <!-- Form Buttons -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 text-right ]">
+      <!-- <button class="form-btn-cta" (click)="nextStep()">Next step</button> -->
+      <button type="submit" class="form-btn-cta" [disabled]="!stepOneForm.valid">Next step</button>
+    </div>
   </div>
-</div>
-<!-- / Mandatory Fields -->
+  <!-- / Form Buttons -->
 
-<!-- Form Buttons -->
-<div class="form-row [ row ]">
-  <div class="[ col-xs-12 text-right ]">
-    <button class="form-btn-cta" (click)="nextStep()">Next step</button>
-  </div>
-</div>
-<!-- / Form Buttons -->
+</form>

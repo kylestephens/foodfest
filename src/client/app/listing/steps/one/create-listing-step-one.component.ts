@@ -1,6 +1,20 @@
-import { Component }                 from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild
+}                                    from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  Validators
+}                                    from '@angular/forms';
 import { SelectModule }              from 'ng2-select';
+import { FormMessagesComponent }     from '../../../shared/form-messages/form-messages.component';
 import { CreateListingService }      from '../../create-listing.service';
+import { SettingsService }           from '../../../services/settings.service';
+import { ValidationService }         from '../../../services/validation.service';
 import { CONSTANT }                  from '../../../core/constant';
 
 /**
@@ -14,37 +28,67 @@ import { CONSTANT }                  from '../../../core/constant';
 
 export class CreateListingStepOneComponent {
 
-  constructor(private createListingService: CreateListingService) {}
+  @ViewChild('businessTypeSelect')
+  public businessTypeElementRef: ElementRef;
 
-  // Dummy data for select / multiselect
-  public items:Array<string> = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
-    'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
-    'Budapest', 'Cologne', 'Copenhagen', 'Dortmund', 'Dresden', 'Dublin',
-    'Düsseldorf', 'Essen', 'Frankfurt', 'Genoa', 'Glasgow', 'Gothenburg',
-    'Hamburg', 'Hannover', 'Helsinki', 'Kraków', 'Leeds', 'Leipzig', 'Lisbon',
-    'London', 'Madrid', 'Manchester', 'Marseille', 'Milan', 'Munich', 'Málaga',
-    'Naples', 'Palermo', 'Paris', 'Poznań', 'Prague', 'Riga', 'Rome',
-    'Rotterdam', 'Seville', 'Sheffield', 'Sofia', 'Stockholm', 'Stuttgart',
-    'The Hague', 'Turin', 'Valencia', 'Vienna', 'Vilnius', 'Warsaw', 'Wrocław',
-    'Zagreb', 'Zaragoza', 'Łódź'];
+  @ViewChild('businessSetupSelect')
+  public businessSetupElementRef: ElementRef;
 
-  private value:any = {};
+  @ViewChild('eventTypeSelect')
+  public eventTypeElementRef: ElementRef;
+
+  @ViewChild('dietRequirementsSelect')
+  public dietRequirementsElementRef: ElementRef;
+
+  // These objects consist of 'name' + 'id'
+  private businessSetups: Array<any> = [];
+  private businessTypes: Array<any> = [];
+  private eventTypes: Array<any> = [];
+  private dietRequirements: Array<any> = [];
+
+  public stepOneForm: FormGroup;
+
+  private value: any = {};
+
+  constructor(
+    private fb: FormBuilder,
+    private createListingService: CreateListingService,
+    private settingsService: SettingsService
+  ) {
+    this.stepOneForm = fb.group({
+      'businessName' : new FormControl('', [
+          Validators.required,
+          ValidationService.alphaNumericValidator
+        ]),
+      'businessType': [null, Validators.required],
+      'businessSetup': [null, Validators.required],
+      'eventType': [null, Validators.required],
+      'dietRequirements': [null]
+    });
+  };
+
+  ngOnInit() {
+    this.businessSetups = this.settingsService.getBusinessSetups();
+    this.businessTypes = this.settingsService.getBusinessTypes();
+    this.eventTypes = this.settingsService.getEventTypes();
+    this.dietRequirements = this.settingsService.getDietRequirements();
+  };
+
+  public submitForm(value: any) {
+    console.log(value);
+  };
 
   public nextStep() {
     this.createListingService.nextStep();
   };
 
   // Handlers for select / multiselect
-  public selected(value:any):void {
+  public selected(value: any): void {
     console.log('Selected value is: ', value);
   };
 
   public removed(value:any):void {
     console.log('Removed value is: ', value);
-  };
-
-  public typed(value:any):void {
-    console.log('New search input: ', value);
   };
 
   public refreshValue(value:any):void {
