@@ -50,7 +50,7 @@
   h2 {
     color: #5d5c5c;
     font-size: 22px;
-    padding-top: 16px;
+    padding-top: 26px;
   }
 }
 
@@ -67,10 +67,6 @@
 
   @media(max-width: $screen-sm) {
     margin-bottom:1em;
-  }
-
-  &__header {
-    padding-bottom: 34px;
   }
 
   &__steps {
