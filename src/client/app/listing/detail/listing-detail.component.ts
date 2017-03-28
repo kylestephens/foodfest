@@ -1,5 +1,5 @@
-import { Component }                from '@angular/core';
-import { Router, ActivatedRoute }   from '@angular/router';
+import { Component }      from '@angular/core';
+import { Router }         from '@angular/router';
 
 /**
  * This class represents the lazy loaded ListingComponent.
@@ -15,15 +15,12 @@ export class ListingDetailComponent {
   private planType: number;
 
   constructor(
-    private router: Router,
-    private route: ActivatedRoute
-  ) {
-
-  }
+    private router: Router
+  ) {}
 
   public choosePlan = function(planNumber: number) {
     this.planType = planNumber;
-    this.router.navigate(['../create-listing'], {relativeTo: this.route});
+    this.router.navigate(['/list-with-us/create-listing/step-1'], {relativeTo: this.route});
   }
 
 }
