@@ -1,11 +1,8 @@
 /*
 Class for vendors. It corresponds to vendorsModel in service.
 */
-
-class Cuisine {
-  id:    number;
-  name:  string;
-}
+import { SafeResourceUrl } from '@angular/platform-browser';
+import { Style }           from './style';
 
 
 export class Vendor {
@@ -19,5 +16,7 @@ export class Vendor {
   num_of_reviews: number;
 	date_registered: string;
 	last_updated: string;
-  cuisines: Cuisine[];
+  styles: Style[];
+
+  safe_cover_photo_path: SafeResourceUrl | string;
 }

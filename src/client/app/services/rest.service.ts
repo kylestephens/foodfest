@@ -1,5 +1,6 @@
-import { Injectable }                 from '@angular/core';
-import { Headers, Http, Response }    from '@angular/http';
+import { Injectable }                               from '@angular/core';
+import { Headers, Http, Response, URLSearchParams } from '@angular/http';
+
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -13,9 +14,17 @@ export class RestService {
       .toPromise();
   };
 
-  public get = function (url: string, headers?: any, options?: any) {
+  public get = function (url: string, params?: any, headers?: any, options?: any) {
+    let searchParams: URLSearchParams;
+    if(params) {
+      searchParams = new URLSearchParams();
+      for (let key in params) {
+        searchParams.set(key, params[key]);
+      }
+    }
+
     return this.http
-      .get(url, headers)
+      .get(url, { search: searchParams }, headers)
       .toPromise();
   };
 

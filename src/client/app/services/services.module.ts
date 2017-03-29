@@ -3,6 +3,7 @@ import { HttpModule }        from '@angular/http';
 
 import { AccountService }    from './account.service';
 import { BrowserService }    from './browser.service';
+import { StylesService }     from './styles.service';
 import { FacebookService }   from './facebook.service';
 import { GoogleService }     from './google.service';
 import { MessagingService }  from './messaging.service';
@@ -26,6 +27,7 @@ import { WindowRefService }  from './window-ref.service';
     ModalService,
     RestService,
     SettingsService,
+    StylesService,
     VendorService,
     WindowRefService
   ]
@@ -43,6 +45,7 @@ export class ServicesModule {
         ModalService,
         RestService,
         SettingsService,
+        StylesService,
         VendorService,
         WindowRefService
       ]

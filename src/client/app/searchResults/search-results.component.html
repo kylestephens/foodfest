@@ -1,15 +1,26 @@
-<section class = "search-filters">
+<div class= "search-results [ container ]">
 
-</section>
-
-<section class= "[ container row ]">
-  <div class="[ col-sm-2 col-xs-12 col-sm-offset-10 ]">
-  <!-- order by list -->
+  <div class="[ col-sm-3 col-xs-12 ]">
+    <section class="search-result__filters">
+      <ak-search-results-filters></ak-search-results-filters>
+    </section>
   </div>
-</section>
 
-<section class= "results-list [ container ] ">
-	<div class= "[ row ]">
-		<ak-search-results-card-list [vendors] = "vendors"></ak-search-results-card-list>
-	</div>
-</section>
+  <div class= "[ col-sm-9 col-xs-12 ]">
+    <div class=" [ row ]">
+      <section class = "active-filters [ col-sm-10 col-xs-12 ]">
+        active filters
+      </section>
+
+      <section class="[ col-sm-2 col-xs-12 ]">
+        order by
+      </section>
+    </div>
+
+    <div class=" [ row ]">
+      <section class= "search-results__list">
+      	 <ak-search-results-card-list></ak-search-results-card-list>
+      </section>
+    </div>
+  </div>
+</div>

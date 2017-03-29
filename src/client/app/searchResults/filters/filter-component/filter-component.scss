@@ -1,0 +1,22 @@
+@import '../../../../scss/core/settings';
+@import '../../../../scss/core/variables';
+
+.filter__button {
+  background-color: $brand-body-bg;
+  border: 1px solid $brand-secondary;
+  margin: 5px;
+  padding: 2px 7px;
+  border-radius: $brand-border-radius;
+  font-size: $font-size-small;
+  text-transform: uppercase;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $gray-lightest;
+  }
+
+  &.selected {
+    background-color: $brand-secondary;
+    color: $brand-body-bg;
+  }
+}

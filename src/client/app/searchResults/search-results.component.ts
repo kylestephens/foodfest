@@ -1,7 +1,5 @@
-import { Component, OnInit }   from '@angular/core';
-import { Vendor }              from '../shared/model/vendor';
-import { VendorService }       from '../services/vendor.service';
-import { CONSTANT }            from '../core/constant';
+import { Component } from '@angular/core';
+
 /**
  * This class represents the lazy loaded SearchResults.
  */
@@ -12,20 +10,6 @@ import { CONSTANT }            from '../core/constant';
   styleUrls: ['search-results.component.css']
 })
 
-export class SearchResultsComponent implements OnInit {
-	vendors: Vendor[];
+export class SearchResultsComponent {
   // orderByList = CONSTANT.SEARCH_RESULTS_ORDER_BY;
-
-	constructor(
-		private vendorService: VendorService
-	)
-	{}
-
-	ngOnInit(): void {
-		this.getVendors();
-  }
-
-	getVendors(): void {
-    	this.vendorService.getVendors().then(vendors => this.vendors = vendors);
-  }
 }

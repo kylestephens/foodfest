@@ -1,0 +1,15 @@
+<div>{{title}}</div>
+
+<div>
+  <span *ngFor="let record of records">
+    <button class= "filter__button"  [ngClass]="{'selected': record.isSelected}" (click)="onClick($event, record)">{{record.name}}</button>
+  </span>
+<div>
+
+
+
+
+
+
+
+
