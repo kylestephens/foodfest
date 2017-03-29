@@ -107,8 +107,8 @@ export class SignupComponent {
   private _createAccount() {
     console.debug('SignupComponent::_createAccount');
     var me = this;
-    this.accountService.createAccount().then(function(response: string) {
-      let responseBody = JSON.parse(response._body);
+    this.accountService.createAccount().then(function(response: any) {
+      let responseBody = response.json();
       me.accountService.setAkAccessToken(responseBody.token);
       me.accountService.setLoggedIn(true);
     }, function(reason: any) {

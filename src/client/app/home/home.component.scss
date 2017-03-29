@@ -50,64 +50,65 @@
   h2 {
     color: #5d5c5c;
     font-size: 22px;
-    padding-top: 16px;
+    padding-top: 26px;
   }
 }
 
 .how-it-works {
   text-align: center;
-  padding: 54px 0;
+  padding: 34px 0;
   // background-image: url('../assets/img/patterns/food.png');
   // background-repeat: repeat-x repeat-y;
-}
 
-@media(max-width: $screen-sm) {
-  .how-it-works {
+  @media(max-width: $screen-sm) {
     padding-top:2em;
-    margin-bottom: 2.5em
+    margin-bottom: 2.5em;
   }
-}
 
-.how-it-works__steps {
-  text-align: left;
-  margin-bottom: 3em;
-}
-
-@media(max-width: $screen-sm) {
-  .how-it-works__steps {
+  @media(max-width: $screen-sm) {
     margin-bottom:1em;
   }
-}
 
-.how-it-works__steps p {
-  margin-bottom: 0;
-}
+  &__steps {
+    text-align: left;
+    margin-bottom: 3em;
 
-@media(max-width: $screen-sm) {
-  .how-it-works__steps p {
-    margin-bottom: 1.1666666667em;
+    p {
+      margin-bottom: 0;
+
+      @media(max-width: $screen-sm) {
+        margin-bottom: 1.1666666667em;
+      }
+    }
+  }
+
+  &__description {
+    margin-top: 1em;
+  }
+
+  &__learn-more {
+    font-weight: $font-weight-normal;
+    font-size: 1.2857142857em;
+    margin-top: 54px;
   }
 }
 
-.how-it-works__learn-more {
-  font-weight: 400;
-  font-size: 1.2857142857em;
-  margin-top: 54px;
-}
+.heading {
 
-.heading__badge {
-  display: inline-block;
-  height: 1.875em;
-  width: 1.875em;
-  margin-right: .5833333333em;
-  margin-bottom: 1em;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  border-radius: 50px;
-  border: 3px solid $brand-secondary;
-  color:  $brand-secondary;
-  line-height: 1.675em;
-  text-align: center;
-  font-size: .8333333333em;
-  background: $body-bg;
+  &__badge {
+    display: inline-block;
+    height: 1.875em;
+    width: 1.875em;
+    margin-right: .5833333333em;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    border: 3px solid $brand-secondary;
+    color:  $brand-secondary;
+    line-height: 1.675em;
+    text-align: center;
+    font-size: .8333333333em;
+    background: $body-bg;
+  }
+
 }

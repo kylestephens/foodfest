@@ -2,8 +2,12 @@ import { Component, OnInit }       from '@angular/core';
 import { Router, NavigationEnd }   from '@angular/router'
 import { Config }                  from './shared/config/env.config';
 import { AccountService }          from './services/account.service';
+import { SettingsService }         from './services/settings.service';
 import { CONSTANT }                from './core/constant';
-import { LocalStorageService, SessionStorageService } from 'ng2-webstorage';
+import {
+  LocalStorageService,
+  SessionStorageService
+} from 'ng2-webstorage';
 import './operators';
 
 /**
@@ -20,12 +24,13 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private accountService: AccountService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private settingsService: SettingsService
   ) {
     console.log('Environment config', Config);
 
     // Check local storage for login details - keep signed in
-    if(this.localStorageService.retrieve('session')) {
+    if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.SESSION)) {
       this.accountService.reloadSession(
         this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.SESSION),
         this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.TOKEN)
@@ -42,6 +47,9 @@ export class AppComponent implements OnInit {
       }
       window.scrollTo(0, 0);
     });
+
+    // Check for site settings
+    this.settingsService.syncSiteSettings();
   };
 
 }

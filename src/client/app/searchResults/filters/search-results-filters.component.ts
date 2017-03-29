@@ -1,13 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { Style }            from '../../shared/model/style';
-import { StylesService }    from '../../services/styles.service';
+import { SettingsService }  from '../../services/settings.service';
 import { ActivatedRoute }   from '@angular/router';
 
 @Component({
   moduleId: module.id,
   selector: 'ak-search-results-filters',
-  templateUrl: 'search-results-filters.html',
-  styleUrls: ['search-results-filters.css']
+  templateUrl: 'search-results-filters.html'
 })
 
 export class SearchResultsFiltersComponent {
@@ -15,7 +14,7 @@ export class SearchResultsFiltersComponent {
   routeParams: any;
 
   constructor(
-    private stylesService: StylesService,
+    private settingsService: SettingsService,
     private route: ActivatedRoute
   )
   {}
@@ -43,10 +42,9 @@ export class SearchResultsFiltersComponent {
   }
 
   getStyles(): void {
-      this.stylesService.getStyles().then(styles => {
-        this.styles = styles;
-        this.deepLinked();
-      });
+    debugger
+      this.styles = this.settingsService.getStyles();
+      this.deepLinked();
   }
 
 }

@@ -23,6 +23,12 @@ export class CONSTANT {
     MODAL: {
       SHOW_MODAL:           'showModal',
       HIDE_MODAL:           'hideModal'
+    },
+
+    // Event messages from create listing screens
+    CREATE_LISTING: {
+      NEXT_STEP:            'nextStep',
+      PREVIOUS_STEP:        'previousStep'
     }
 
   };
@@ -73,7 +79,8 @@ export class CONSTANT {
   static readonly LOCALSTORAGE = {
 
     SESSION:                'session',
-    TOKEN:                  'token'
+    TOKEN:                  'token',
+    SETTINGS:               'settings'
 
   };
 

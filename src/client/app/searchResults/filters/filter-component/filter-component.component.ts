@@ -10,7 +10,7 @@ import { Router, ActivatedRoute }      from '@angular/router';
 
 export class FilterComponent {
   @Input()
-  name: string;
+  text: string;
 
   @Input()
   title: string;
@@ -35,26 +35,26 @@ export class FilterComponent {
     let currentParams = this.route.snapshot.params,
         queryParams: { [key: string] : string } = { };
 
-    if(this.name in currentParams && isSelected) {
-      queryParams[this.name] = elementId;
-      queryParams[this.name] = [currentParams[this.name], queryParams[this.name]].join(',');
+    if(this.text in currentParams && isSelected) {
+      queryParams[this.text] = elementId;
+      queryParams[this.text] = [currentParams[this.text], queryParams[this.text]].join(',');
     }
     else if(isSelected) {
-      queryParams[this.name] = elementId;
+      queryParams[this.text] = elementId;
       Object.assign(queryParams, currentParams);
     }
-    else if(this.name in currentParams && !isSelected) {
-      let currentParamsArray = currentParams[this.name].split(','),
+    else if(this.text in currentParams && !isSelected) {
+      let currentParamsArray = currentParams[this.text].split(','),
           index = currentParamsArray.indexOf(elementId);
 
       if (index > -1) {
         currentParamsArray.splice(index, 1);
       }
 
-      queryParams[this.name] = currentParamsArray.join(',');
+      queryParams[this.text] = currentParamsArray.join(',');
 
-      if(!queryParams[this.name]) {
-        delete queryParams[this.name];
+      if(!queryParams[this.text]) {
+        delete queryParams[this.text];
       }
     }
 

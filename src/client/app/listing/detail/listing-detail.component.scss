@@ -1,5 +1,5 @@
-@import '../../scss/core/variables';
-@import '../../scss/core/settings';
+@import '../../../scss/core/variables';
+@import '../../../scss/core/settings';
 
 $monthly: #EEB417;
 $annual: #1FB3E0;
@@ -17,7 +17,7 @@ $biannual: #744DA8;
   position: relative;
 
   .plan-name, .plan-price, .plan-details {
-    padding: $padding-base-vertical $padding-base-horizontal;
+    padding: 0 $padding-base-horizontal $padding-base-vertical $padding-base-horizontal;
   }
 
   .plan-box {
@@ -42,7 +42,7 @@ $biannual: #744DA8;
 
     .plan-options-heading {
       width: 100%;
-      padding: $padding-large-vertical $padding-base-horizontal;
+      padding: $padding-large-vertical $padding-base-horizontal 0 $padding-base-horizontal;
 
       &--title, &--term {
         width: 100%;
@@ -92,7 +92,7 @@ $biannual: #744DA8;
 
     text-align: center;
     font-weight: 800;
-    font-size: 50px;
+    font-size: 60px;
 
     &--currency {
       font-size: $font-size-base;
@@ -106,7 +106,7 @@ $biannual: #744DA8;
     text-align: center;
 
     color: $text-color;
-    font-size: 12px;
+    font-size: $font-size-base;
   }
 
   .plan-savings {

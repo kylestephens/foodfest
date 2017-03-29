@@ -7,7 +7,7 @@
     <div class="search-card__title">{{vendor.business_name}}</div>
 
     <div class="search-card__type-tags">
-      <span class="type-tag" *ngFor="let style of vendor.styles">{{style.name | uppercase}}</span>
+      <span class="type-tag" *ngFor="let style of vendor.styles">{{style.text | uppercase}}</span>
 
       <span *ngIf="vendor.styles?.length === 0">&nbsp;</span>
     </div>

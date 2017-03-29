@@ -1,8 +1,9 @@
-import { Component, ElementRef, NgZone, AfterViewInit, ViewChild } from '@angular/core';
-import { AgmCoreModule, MapsAPILoader }   from 'angular2-google-maps/core';
-import { SelectModule }                   from 'ng2-select';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Router }                              from '@angular/router';
+import { Subscription }                        from 'rxjs/Subscription';
+import { CreateListingService }                from './create-listing.service';
 
-declare var google: any;
+import { CONSTANT }                            from '../core/constant';
 
 /**
  * This class represents the lazy loaded CreateListingComponent.
@@ -11,88 +12,49 @@ declare var google: any;
   moduleId: module.id,
   selector: 'ak-create-listing',
   templateUrl: 'create-listing.component.html',
-  styleUrls: ['create-listing.component.css']
+  styleUrls: ['create-listing.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
-export class CreateListingComponent implements AfterViewInit {
+export class CreateListingComponent {
 
   public currentStep: number;
-  public latitude: number;
-  public longitude: number;
-
-  @ViewChild('autocompleteSearch')
-  public searchElementRef: ElementRef;
+  private subscription: Subscription;
+  private subMessage: any;
 
   constructor(
-    private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private createListingService: CreateListingService,
+    private router: Router
   ) {
     this.currentStep = 1;
-  };
 
-  ngAfterViewInit() {
-    var me = this;
-
-    //load Places Autocomplete
-    this.mapsAPILoader.load().then(() => {
-      let autocomplete = new google.maps.places.Autocomplete(me.searchElementRef.nativeElement);
-      autocomplete.addListener("place_changed", () => {
-        this.ngZone.run(() => {
-          //get the place result
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-
-          //verify result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
-
-          //set latitude, longitude
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
-        });
-      });
+    // subscribe to modal service messages
+    this.subscription = this.createListingService.getMessage().subscribe(subMessage => {
+      console.debug('CreateListingComponent::subscription');
+      this.subMessage = subMessage;
+      if(subMessage.event && subMessage.event === CONSTANT.EVENT.CREATE_LISTING.NEXT_STEP) {
+        this._nextStep();
+      }
+      if(subMessage.event && subMessage.event === CONSTANT.EVENT.CREATE_LISTING.PREVIOUS_STEP) {
+        this._previousStep();
+      }
     });
   };
 
-  public previousStep = function() {
+  public onEvent(message: string): void {
+    alert(message);
+  };
+
+  private _previousStep = function() {
     this.currentStep--;
+    this.router.navigate(['list-with-us/create-listing/step-' + this.currentStep], {relativeTo: this.route});
     window.scrollTo(0, 0);
   };
 
-  public nextStep = function() {
+  private _nextStep = function() {
     this.currentStep++;
+    this.router.navigate(['list-with-us/create-listing/step-' + this.currentStep], {relativeTo: this.route});
     window.scrollTo(0, 0);
   };
-
-  // Dummy data for select / multiselect
-  public items:Array<string> = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
-    'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
-    'Budapest', 'Cologne', 'Copenhagen', 'Dortmund', 'Dresden', 'Dublin',
-    'Düsseldorf', 'Essen', 'Frankfurt', 'Genoa', 'Glasgow', 'Gothenburg',
-    'Hamburg', 'Hannover', 'Helsinki', 'Kraków', 'Leeds', 'Leipzig', 'Lisbon',
-    'London', 'Madrid', 'Manchester', 'Marseille', 'Milan', 'Munich', 'Málaga',
-    'Naples', 'Palermo', 'Paris', 'Poznań', 'Prague', 'Riga', 'Rome',
-    'Rotterdam', 'Seville', 'Sheffield', 'Sofia', 'Stockholm', 'Stuttgart',
-    'The Hague', 'Turin', 'Valencia', 'Vienna', 'Vilnius', 'Warsaw', 'Wrocław',
-    'Zagreb', 'Zaragoza', 'Łódź'];
-
-  private value:any = {};
-
-  // Handlers for select / multiselect
-  public selected(value:any):void {
-    console.log('Selected value is: ', value);
-  }
-
-  public removed(value:any):void {
-    console.log('Removed value is: ', value);
-  }
-
-  public typed(value:any):void {
-    console.log('New search input: ', value);
-  }
-
-  public refreshValue(value:any):void {
-    this.value = value;
-  }
 
 };

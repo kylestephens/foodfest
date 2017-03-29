@@ -6,8 +6,7 @@ import { Component } from '@angular/core';
 @Component({
   moduleId: module.id,
   selector: 'ak-listing-master',
-  templateUrl: 'listing-master.component.html',
-  styleUrls: ['listing-master.component.css']
+  template: '<router-outlet></router-outlet>'
 })
 
 export class ListingMasterComponent {

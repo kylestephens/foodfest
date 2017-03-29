@@ -1,0 +1,63 @@
+<!-- Phone Number -->
+<div class="form-row [ row ]">
+  <div class="[ col-sm-6 col-xs-12 ]">
+    <label class="form-label">Phone Number *</label>
+    <div class="form-input form-input--has-icon sign-up-field">
+      <div class="form-icon ak-icon-phone"></div>
+      <input type="tel"
+        placeholder="e.g. 085 1234567"
+        required />
+    </div>
+  </div>
+</div>
+<!-- / Phone Number -->
+
+<!-- Business Address -->
+<div class="form-row [ row ]">
+  <div class="[ col-sm-6 col-xs-12 ]">
+    <label class="form-label">Business Address</label>
+    <div class="form-input form-input--has-icon sign-up-field">
+      <div class="form-icon ak-icon-pushpin"></div>
+      <input
+        placeholder="e.g. Domhnaills Donuts, Navan Road, Dublin 7"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="off"
+        type="text"
+        class="form-control"
+        #autocompleteSearch>
+    </div>
+  </div>
+</div>
+<!-- / Business Address -->
+
+<!-- Business Website -->
+<div class="form-row [ row ]">
+  <div class="[ col-sm-6 col-xs-12 ]">
+    <label class="form-label">Business Website</label>
+    <div class="form-input form-input--has-icon sign-up-field">
+      <div class="form-icon ak-icon-earth"></div>
+      <input type="text"
+        placeholder="e.g. www.DomhnaillsDonuts.com"
+        required />
+    </div>
+  </div>
+</div>
+<!-- / Business Website -->
+
+<!-- Mandatory Fields -->
+<div class="form-row [ row ]">
+  <div class="[ col-xs-12 ]">
+    <span class="form-mandatory">* denotes mandatory field</span>
+  </div>
+</div>
+<!-- / Mandatory Fields -->
+
+<!-- Form Buttons -->
+<div class="form-row [ row ]">
+  <div class="[ col-xs-12 text-right ]">
+    <button class="form-btn-cta" (click)="previousStep()">Previous step</button>
+    <button class="form-btn-cta" (click)="nextStep()">Next step</button>
+  </div>
+</div>
+<!-- / Form Buttons -->
