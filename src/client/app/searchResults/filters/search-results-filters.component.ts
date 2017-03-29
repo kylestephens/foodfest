@@ -42,9 +42,8 @@ export class SearchResultsFiltersComponent {
   }
 
   getStyles(): void {
-    debugger
-      this.styles = this.settingsService.getStyles();
-      this.deepLinked();
+    this.styles = this.settingsService.getStyles();
+    this.deepLinked();
   }
 
 }
