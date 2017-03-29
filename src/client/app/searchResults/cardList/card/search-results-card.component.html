@@ -1,16 +1,15 @@
 <section class="card search-card">
-  <div class="search-card__image" [ngClass]="{'search-card__image--unavailable ak-icon-image': !vendor.cover_photo_path}">
-    <img *ngIf="vendor.cover_photo_path" src="{{vendor.cover_photo_path}}" alt="" class="image">
+  <div class="search-card__image" [style.background]="vendor.safe_cover_photo_path" [ngClass]="{'search-card__image--unavailable ak-icon-image': !vendor.cover_photo_path}">
     <ak-heart [elementId]="vendor.id" (change)="vendorLiked($event)"></ak-heart>
   </div>
 
   <div class="search-card__content">
     <div class="search-card__title">{{vendor.business_name}}</div>
 
-    <div class="search-card__cuisines">
-      <span class="cuisine " *ngFor="let cuisine of vendor.cuisines">{{cuisine.name | uppercase}}</span>
+    <div class="search-card__type-tags">
+      <span class="type-tag" *ngFor="let style of vendor.styles">{{style.name | uppercase}}</span>
 
-      <span *ngIf="vendor.cuisines?.length === 0">&nbsp;</span>
+      <span *ngIf="vendor.styles?.length === 0">&nbsp;</span>
     </div>
 
     <div *ngIf="vendor.average_rating" class="search-card__rating">
