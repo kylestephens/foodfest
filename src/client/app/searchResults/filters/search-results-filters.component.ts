@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { Style }            from '../../shared/model/style';
-import { SettingsService }  from '../../services/settings.service';
 import { ActivatedRoute }   from '@angular/router';
+import { Style }            from '../../shared/model/style';
+import { DietRequirement }  from '../../shared/model/dietRequirement';
+import { SettingsService }  from '../../services/settings.service';
 
 @Component({
   moduleId: module.id,
@@ -11,6 +12,7 @@ import { ActivatedRoute }   from '@angular/router';
 
 export class SearchResultsFiltersComponent {
   styles: Style[];
+  dietRequirements: DietRequirement[];
   routeParams: any;
 
   constructor(
@@ -22,6 +24,7 @@ export class SearchResultsFiltersComponent {
   ngOnInit(): void {
     this.routeParams = this.route.snapshot.params;
     this.getStyles();
+    this.getDietRequirements();
     this.deepLinked();
   }
 
@@ -29,21 +32,31 @@ export class SearchResultsFiltersComponent {
     this.styles = this.settingsService.getStyles();
   }
 
+  getDietRequirements(): void {
+    this.dietRequirements = this.settingsService.getDietRequirements();
+  }
+
   private deepLinked() {
     if(this.routeParams) {
-      let selectedStyles = this.routeParams.styles;
+      let selectedStyles = this.routeParams.styles,
+          selectedDietRequirements = this.routeParams.dietreq;
 
       if(selectedStyles) {
-        let selectedStylesIds = selectedStyles.split(',');
-
-        for(let selectedStylesId of selectedStylesIds) {
-          let selectedStyle = this.styles.filter(function( obj ) {
-            return obj.id === +selectedStylesId;
-          });
-          selectedStyle[0].isSelected = true;
-        }
+        this.updateSelectedItems(selectedStyles, this.styles);
+      }
+      if(selectedDietRequirements) {
+        this.updateSelectedItems(selectedDietRequirements, this.dietRequirements)
       }
     }
   }
 
+  private updateSelectedItems(selectedItems: string, items: Array<any>) {
+    let selectedItemsIds = selectedItems.split(',');
+    for(let selectedItemsId of selectedItemsIds) {
+      let selectedItem = items.filter(function( obj ) {
+        return obj.id === +selectedItemsId;
+      });
+      selectedItem[0].isSelected = true;
+    }
+  }
 }

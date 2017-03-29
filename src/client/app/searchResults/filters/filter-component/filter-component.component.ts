@@ -30,7 +30,7 @@ export class FilterComponent {
     this.updateRouteParams(''+element.id, element.isSelected);
   }
 
-  //queryParams possible keys: styles,(TODO: add rest as developed)
+  //queryParams possible keys: styles,dietreq(TODO: add rest as developed)
   private updateRouteParams(elementId: string, isSelected: boolean) {
     let currentParams = this.route.snapshot.params,
         queryParams: { [key: string] : string } = { };
@@ -38,6 +38,7 @@ export class FilterComponent {
     if(this.text in currentParams && isSelected) {
       queryParams[this.text] = elementId;
       queryParams[this.text] = [currentParams[this.text], queryParams[this.text]].join(',');
+      this.copyRestOfCurrentParams(currentParams, queryParams);
     }
     else if(isSelected) {
       queryParams[this.text] = elementId;
@@ -56,9 +57,16 @@ export class FilterComponent {
       if(!queryParams[this.text]) {
         delete queryParams[this.text];
       }
+      this.copyRestOfCurrentParams(currentParams, queryParams);
     }
 
     this.router.navigate(['/search-results', queryParams ]);
+  }
+
+  private  copyRestOfCurrentParams(currentParams: { [key: string] : string }, queryParams: { [key: string] : string }): void {
+     for(let key in currentParams) {
+        if(key !== this.text) queryParams[key] = currentParams[key];
+      }
   }
 
 }

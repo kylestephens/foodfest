@@ -1,11 +1,12 @@
-<div>{{title}}</div>
+<div class="search-filter">
+  <div>{{title}}</div>
 
-<div>
-  <span *ngFor="let record of records">
-    <button class= "filter-button"  [ngClass]="{'selected': record.isSelected}" (click)="onClick($event, record)">{{record.text}}</button>
-  </span>
-<div>
-
+  <div>
+    <span *ngFor="let record of records">
+      <button class= "search-filter__button"  [ngClass]="{'selected': record.isSelected}" (click)="onClick($event, record)">{{record.text}}</button>
+    </span>
+  <div>
+</div>
 
 
 

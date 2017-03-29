@@ -4,6 +4,8 @@ import { RestService }      from './rest.service';
 import { WindowRefService } from './window-ref.service';
 import { CONSTANT }         from '../core/constant';
 import { Style }            from '../shared/model/style';
+import { DietRequirement }  from '../shared/model/dietRequirement';
+
 import {
   LocalStorageService,
   SessionStorageService
@@ -128,7 +130,7 @@ export class SettingsService {
   /**
    * Returns diet requirements available
    */
-  public getDietRequirements(): Array<Object> {
+  public getDietRequirements(): Array<DietRequirement> {
     return this.settings.dietRequirements;
   };
 
