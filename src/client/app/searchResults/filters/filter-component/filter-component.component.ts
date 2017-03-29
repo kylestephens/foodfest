@@ -30,7 +30,7 @@ export class FilterComponent {
     this.updateRouteParams(''+element.id, element.isSelected);
   }
 
-  //queryParams possible keys: styles,dietreq(TODO: add rest as developed)
+  //queryParams possible keys: styles, dietreq, bustype, busset(TODO: add rest as developed)
   private updateRouteParams(elementId: string, isSelected: boolean) {
     let currentParams = this.route.snapshot.params,
         queryParams: { [key: string] : string } = { };

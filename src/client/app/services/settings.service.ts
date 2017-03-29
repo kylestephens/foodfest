@@ -6,6 +6,7 @@ import { CONSTANT }         from '../core/constant';
 import { Style }            from '../shared/model/style';
 import { DietRequirement }  from '../shared/model/dietRequirement';
 import { BusinessType }     from '../shared/model/businessType';
+import { BusinessSetup }     from '../shared/model/businessSetup';
 
 import {
   LocalStorageService,
@@ -117,7 +118,7 @@ export class SettingsService {
   /**
    * Returns business setups available
    */
-  public getBusinessSetups(): Array<Object> {
+  public getBusinessSetups(): Array<BusinessSetup> {
     return this.settings.businessSetups;
   };
 
