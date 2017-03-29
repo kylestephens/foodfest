@@ -38,13 +38,13 @@
     color: $brand-secondary;
   }
 
-  &__type-tags {
+  &__style {
     padding: 5px 0;
     font-size: $font-size-smallest;
     color: $brand-body-bg;
     @include text-overflow();
 
-    .type-tag {
+    .style {
       margin-right: 5px;
       padding: 2px 4px;
       background-color: $brand-primary-cta;

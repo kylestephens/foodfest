@@ -1,12 +1,15 @@
+@import '../../scss/core/variables';
+
 .search-results {
   padding: 40px 0;
 
   &__filters {
-     padding-right: 10px;
-  }
+    padding-right: 10px;
 
-  &__list {
-    padding: 60px 0;
+    @media (max-width: $screen-xs-max) {
+      padding-right: 0;
+    }
+
   }
 }
 

@@ -22,6 +22,11 @@ export class SearchResultsFiltersComponent {
   ngOnInit(): void {
     this.routeParams = this.route.snapshot.params;
     this.getStyles();
+    this.deepLinked();
+  }
+
+  getStyles(): void {
+    this.styles = this.settingsService.getStyles();
   }
 
   private deepLinked() {
@@ -39,11 +44,6 @@ export class SearchResultsFiltersComponent {
         }
       }
     }
-  }
-
-  getStyles(): void {
-    this.styles = this.settingsService.getStyles();
-    this.deepLinked();
   }
 
 }
