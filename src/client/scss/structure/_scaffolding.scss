@@ -44,14 +44,15 @@ html, body {
   overflow-x: hidden;
 }
 
-// Reset fonts for relevant elements
+//Reset fonts for relevant elements
 input,
 button,
 select,
 textarea {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
+  font-family: $font-family-base;
+  font-size:  $font-size-base;
+  font-weight: 200;
+  line-height: $line-height-base;
 }
 
 button {
