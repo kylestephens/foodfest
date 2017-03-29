@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ActivatedRoute }   from '@angular/router';
 import { Style }            from '../../shared/model/style';
 import { DietRequirement }  from '../../shared/model/dietRequirement';
+import { BusinessType }     from '../../shared/model/businessType';
 import { SettingsService }  from '../../services/settings.service';
 
 @Component({
@@ -13,6 +14,7 @@ import { SettingsService }  from '../../services/settings.service';
 export class SearchResultsFiltersComponent {
   styles: Style[];
   dietRequirements: DietRequirement[];
+  businessTypes: BusinessType[];
   routeParams: any;
 
   constructor(
@@ -25,6 +27,7 @@ export class SearchResultsFiltersComponent {
     this.routeParams = this.route.snapshot.params;
     this.getStyles();
     this.getDietRequirements();
+    this.getBusinessTypes();
     this.deepLinked();
   }
 
@@ -36,16 +39,24 @@ export class SearchResultsFiltersComponent {
     this.dietRequirements = this.settingsService.getDietRequirements();
   }
 
+  getBusinessTypes(): void {
+    this.businessTypes = this.settingsService.getBusinessTypes();
+  }
+
   private deepLinked() {
     if(this.routeParams) {
       let selectedStyles = this.routeParams.styles,
-          selectedDietRequirements = this.routeParams.dietreq;
+          selectedDietRequirements = this.routeParams.dietreq,
+          selectedBusinessTypes = this.routeParams.bustype;
 
       if(selectedStyles) {
         this.updateSelectedItems(selectedStyles, this.styles);
       }
       if(selectedDietRequirements) {
-        this.updateSelectedItems(selectedDietRequirements, this.dietRequirements)
+        this.updateSelectedItems(selectedDietRequirements, this.dietRequirements);
+      }
+      if(selectedBusinessTypes) {
+        this.updateSelectedItems(selectedBusinessTypes, this.businessTypes);
       }
     }
   }

@@ -5,6 +5,7 @@ import { WindowRefService } from './window-ref.service';
 import { CONSTANT }         from '../core/constant';
 import { Style }            from '../shared/model/style';
 import { DietRequirement }  from '../shared/model/dietRequirement';
+import { BusinessType }     from '../shared/model/businessType';
 
 import {
   LocalStorageService,
@@ -123,7 +124,7 @@ export class SettingsService {
   /**
    * Returns business types available
    */
-  public getBusinessTypes(): Array<Object> {
+  public getBusinessTypes(): Array<BusinessType> {
     return this.settings.businessTypes;
   };
 
