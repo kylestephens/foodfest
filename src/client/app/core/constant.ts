@@ -80,7 +80,12 @@ export class CONSTANT {
 
     SESSION:                'session',
     TOKEN:                  'token',
-    SETTINGS:               'settings'
+    SETTINGS:               'settings',
+    LISTING_STEP_ONE:       'listing.step.1',
+    LISTING_STEP_TWO:       'listing.step.2',
+    LISTING_STEP_THREE:     'listing.step.3',
+    LISTING_STEP_FOUR:      'listing.step.4',
+    LISTING_ADDRESS:        'listing.address'
 
   };
 

@@ -1,5 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { Router }                              from '@angular/router';
+import { Router, NavigationEnd }               from '@angular/router';
 import { Subscription }                        from 'rxjs/Subscription';
 import { CreateListingService }                from './create-listing.service';
 
@@ -27,6 +27,19 @@ export class CreateListingComponent {
     private router: Router
   ) {
     this.currentStep = 1;
+
+    router.events.subscribe((val) => {
+        if(parseInt(val.url.slice(-1)) !== this.currentStep) {
+          console.debug(`
+            CreateListingComponent::routeSubscription - Invalid route\n
+            Returning to Step 1.
+          `);
+          this.router.navigate(
+            ['list-with-us/create-listing/step-1'],
+            {relativeTo: this.route}
+          );
+        }
+    });
 
     // subscribe to modal service messages
     this.subscription = this.createListingService.getMessage().subscribe(subMessage => {
