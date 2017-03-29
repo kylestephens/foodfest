@@ -1,63 +1,76 @@
-<!-- Facebook Address -->
-<div class="form-row [ row ]">
-  <div class="[ col-sm-6 col-xs-12 ]">
-    <label class="form-label">Facebook Address</label>
-    <div class="form-input form-input--has-icon sign-up-field">
-      <div class="form-icon ak-icon-facebook"></div>
-      <input type="text"
-        placeholder="e.g. www.facebook.com/DomhnaillsDonuts"
-        required />
+<form [formGroup]="stepThreeForm" (ngSubmit)="submitForm(stepThreeForm.value)">
+
+  <!-- Facebook Address -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Facebook Address</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-facebook"></div>
+        <input type="text"
+          placeholder="e.g. www.facebook.com/DomhnaillsDonuts"
+          formControlName="facebookAddress"
+          id="facebookAddress">
+      </div>
+      <ak-form-messages [control]="stepThreeForm.controls.facebookAddress">
+      </ak-form-messages>
+    </div>
+    <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
+      <div class="form-field-description">
+        Don't worry if you don't have this information to hand - you can always add it later
+      </div>
     </div>
   </div>
-  <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
-    <div class="form-field-description">
-      Don't worry if you don't have this information to hand - you can always add it later
+  <!-- / Facebook Address -->
+
+  <!-- Twitter Address -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Twitter Address</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-twitter"></div>
+        <input type="text"
+          placeholder="e.g. www.twitter.com/DomhnaillsDonuts"
+          formControlName="twitterAddress"
+          id="twitterAddress">
+      </div>
+      <ak-form-messages [control]="stepThreeForm.controls.twitterAddress">
+      </ak-form-messages>
     </div>
   </div>
-</div>
-<!-- / Facebook Address -->
+  <!-- / Twitter Address -->
 
-<!-- Twitter Address -->
-<div class="form-row [ row ]">
-  <div class="[ col-sm-6 col-xs-12 ]">
-    <label class="form-label">Twitter Address</label>
-    <div class="form-input form-input--has-icon sign-up-field">
-      <div class="form-icon ak-icon-twitter"></div>
-      <input type="text"
-        placeholder="e.g. www.twitter.com/DomhnaillsDonuts"
-        required />
+  <!-- Instagram Address -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Instagram Address</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-instagram"></div>
+        <input type="text"
+          placeholder="e.g. www.instagram.com/DomhnaillsDonuts"
+          formControlName="instagramAddress"
+          id="instagramAddress">
+      </div>
+      <ak-form-messages [control]="stepThreeForm.controls.instagramAddress">
+      </ak-form-messages>
     </div>
   </div>
-</div>
-<!-- / Twitter Address -->
+  <!-- / Instagram Address -->
 
-<!-- Instagram Address -->
-<div class="form-row [ row ]">
-  <div class="[ col-sm-6 col-xs-12 ]">
-    <label class="form-label">Instagram Address</label>
-    <div class="form-input form-input--has-icon sign-up-field">
-      <div class="form-icon ak-icon-instagram"></div>
-      <input type="text"
-        placeholder="e.g. www.instagram.com/DomhnaillsDonuts"
-        required />
+  <!-- Mandatory Fields -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 ]">
+      <span class="form-mandatory">* denotes mandatory field</span>
     </div>
   </div>
-</div>
-<!-- / Instagram Address -->
+  <!-- / Mandatory Fields -->
 
-<!-- Mandatory Fields -->
-<div class="form-row [ row ]">
-  <div class="[ col-xs-12 ]">
-    <span class="form-mandatory">* denotes mandatory field</span>
+  <!-- Form Buttons -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 text-right ]">
+      <button class="form-btn-cta" (click)="previousStep()">Previous step</button>
+      <button type="submit" class="form-btn-cta">Next step</button>
+    </div>
   </div>
-</div>
-<!-- / Mandatory Fields -->
+  <!-- / Form Buttons -->
 
-<!-- Form Buttons -->
-<div class="form-row [ row ]">
-  <div class="[ col-xs-12 text-right ]">
-    <button class="form-btn-cta" (click)="previousStep()">Previous step</button>
-    <button class="form-btn-cta" (click)="nextStep()">Next step</button>
-  </div>
-</div>
-<!-- / Form Buttons -->
+</form>

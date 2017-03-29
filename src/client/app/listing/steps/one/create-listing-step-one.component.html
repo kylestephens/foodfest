@@ -26,6 +26,7 @@
       <div class="form-select-wrapper">
         <div class="form-select">
           <ng-select
+            [multiple]="true"
             [items]="businessTypes"
             placeholder="No category selected"
             formControlName="businessType"></ng-select>
@@ -33,6 +34,11 @@
       </div>
       <ak-form-messages [control]="stepOneForm.controls.businessType">
       </ak-form-messages>
+    </div>
+    <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
+      <div class="form-field-description">
+        You may choose more than one option if applicable
+      </div>
     </div>
   </div>
   <!-- / Business Type -->
@@ -44,7 +50,6 @@
       <div class="form-select-wrapper">
         <div class="form-select">
           <ng-select
-            [multiple]="true"
             [items]="businessSetups"
             placeholder="No category selected"
             formControlName="businessSetup"></ng-select>

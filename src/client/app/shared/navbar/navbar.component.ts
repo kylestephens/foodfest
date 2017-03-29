@@ -1,5 +1,4 @@
 import { Component }         from '@angular/core';
-import { LocalStorageService, SessionStorageService } from 'ng2-webstorage';
 
 /**
  * This class represents the navigation bar component.
