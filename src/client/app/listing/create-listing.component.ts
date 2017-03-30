@@ -1,4 +1,13 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  Input,
+  ViewEncapsulation
+}                                              from '@angular/core';
+import {
+  LocalStorageService,
+  SessionStorageService
+}                                    from 'ng2-webstorage';
 import { Router, NavigationEnd }               from '@angular/router';
 import { Subscription }                        from 'rxjs/Subscription';
 import { CreateListingService }                from './create-listing.service';
@@ -19,30 +28,32 @@ import { CONSTANT }                            from '../core/constant';
 export class CreateListingComponent {
 
   public currentStep: number;
-  private subscription: Subscription;
+  private routeSubscription: Subscription;
+  private navSubscription: Subscription;
   private subMessage: any;
 
   constructor(
     private createListingService: CreateListingService,
+    private localStorageService: LocalStorageService,
     private router: Router
   ) {
     this.currentStep = 1;
 
-    router.events.subscribe((val) => {
-        if(parseInt(val.url.slice(-1)) !== this.currentStep) {
-          console.debug(`
-            CreateListingComponent::routeSubscription - Invalid route\n
-            Returning to Step 1.
-          `);
-          this.router.navigate(
-            ['list-with-us/create-listing/step-1'],
-            {relativeTo: this.route}
-          );
-        }
+    this.routeSubscription = this.router.events.subscribe((val) => {
+      if(parseInt(val.url.slice(-1)) > 1 && !this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_STEP_ONE)) {
+        console.debug(`
+          CreateListingComponent::routeSubscription - Invalid route\n
+          Returning to Step 1.
+        `);
+        this.router.navigate(
+          ['list-with-us/create-listing/step-1'],
+          {relativeTo: this.route}
+        );
+      }
     });
 
     // subscribe to modal service messages
-    this.subscription = this.createListingService.getMessage().subscribe(subMessage => {
+    this.navSubscription = this.createListingService.getMessage().subscribe(subMessage => {
       console.debug('CreateListingComponent::subscription');
       this.subMessage = subMessage;
       if(subMessage.event && subMessage.event === CONSTANT.EVENT.CREATE_LISTING.NEXT_STEP) {
@@ -54,8 +65,8 @@ export class CreateListingComponent {
     });
   };
 
-  public onEvent(message: string): void {
-    alert(message);
+  ngOnDestroy() {
+    this.routeSubscription.unsubscribe();
   };
 
   private _previousStep = function() {

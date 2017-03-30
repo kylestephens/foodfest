@@ -4,10 +4,10 @@
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: $brand-border-radius;
   position: absolute;
-  left: 0;
   top: 48px;
   z-index: 99;
 }
+
 .dropdown-menu:after {
   bottom: 100%;
   left: 82%;
@@ -21,4 +21,9 @@
   border-bottom-color: #ffffff;
   border-width: 15px;
   margin-left: -15px;
+}
+
+// for ng2-select only
+.ui-select-choices.dropdown-menu {
+  left: 0;
 }

@@ -1,10 +1,10 @@
-import { Component }        from '@angular/core';
-import { Subscription }     from 'rxjs/Subscription'
+import { Component, OnDestroy }  from '@angular/core';
+import { Subscription }          from 'rxjs/Subscription'
 
-import { AccountService }   from '../../services/account.service';
-import { ModalService }     from '../../services/modal.service';
+import { AccountService }        from '../../services/account.service';
+import { ModalService }          from '../../services/modal.service';
 
-import { CONSTANT }         from '../../core/constant';
+import { CONSTANT }              from '../../core/constant';
 
 /**
  * This class represents the navigation bar component.
@@ -45,6 +45,10 @@ export class AccountMetaComponent {
         }
       }
     });
+  };
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   };
 
   public showSignUp = function() {

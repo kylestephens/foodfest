@@ -1,15 +1,15 @@
-import { Component }        from '@angular/core';
-import { Subscription }     from 'rxjs/Subscription';
+import { Component, OnDestroy }   from '@angular/core';
+import { Subscription }           from 'rxjs/Subscription';
 
-import { LoginDetails }     from '../../model/login-details';
+import { LoginDetails }           from '../../model/login-details';
 
-import { AccountService }   from '../../../services/account.service';
-import { FacebookService }  from '../../../services/facebook.service';
-import { GoogleService }    from '../../../services/google.service';
-import { MessagingService } from '../../../services/messaging.service';
-import { ModalService }     from '../../../services/modal.service';
+import { AccountService }         from '../../../services/account.service';
+import { FacebookService }        from '../../../services/facebook.service';
+import { GoogleService }          from '../../../services/google.service';
+import { MessagingService }       from '../../../services/messaging.service';
+import { ModalService }           from '../../../services/modal.service';
 
-import { CONSTANT }         from '../../../core/constant';
+import { CONSTANT }               from '../../../core/constant';
 
 /**
  * This class represents the navigation bar component.
@@ -56,6 +56,11 @@ export class SignupComponent {
       }
     });
 
+  };
+
+  ngOnDestroy() {
+    this.modalSubscription.unsubscribe();
+    this.accountSubscription.unsubscribe();
   };
 
   // ------   Component Logic / Public   ------ //
