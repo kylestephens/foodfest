@@ -1,7 +1,23 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { SelectModule }                    from 'ng2-select';
-import { CreateListingService }            from '../../create-listing.service';
-import { CONSTANT }                        from '../../../core/constant';
+import {
+  Component,
+  EventEmitter,
+  Output
+}                                    from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  Validators
+}                                    from '@angular/forms';
+import {
+  LocalStorageService,
+  SessionStorageService
+}                                    from 'ng2-webstorage';
+import { FormMessagesComponent }     from '../../../shared/form-messages/form-messages.component';
+import { CreateListingService }      from '../../create-listing.service';
+import { SettingsService }           from '../../../services/settings.service';
+import { ValidationService }         from '../../../services/validation.service';
+import { CONSTANT }                  from '../../../core/constant';
 
 /**
  * This class represents the lazy loaded CreateListingComponent.
@@ -14,45 +30,49 @@ import { CONSTANT }                        from '../../../core/constant';
 
 export class CreateListingStepFourComponent {
 
-  constructor(private createListingService: CreateListingService) {}
+  public stepFourForm: FormGroup;
 
-  // Dummy data for select / multiselect
-  public items:Array<string> = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
-    'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
-    'Budapest', 'Cologne', 'Copenhagen', 'Dortmund', 'Dresden', 'Dublin',
-    'Düsseldorf', 'Essen', 'Frankfurt', 'Genoa', 'Glasgow', 'Gothenburg',
-    'Hamburg', 'Hannover', 'Helsinki', 'Kraków', 'Leeds', 'Leipzig', 'Lisbon',
-    'London', 'Madrid', 'Manchester', 'Marseille', 'Milan', 'Munich', 'Málaga',
-    'Naples', 'Palermo', 'Paris', 'Poznań', 'Prague', 'Riga', 'Rome',
-    'Rotterdam', 'Seville', 'Sheffield', 'Sofia', 'Stockholm', 'Stuttgart',
-    'The Hague', 'Turin', 'Valencia', 'Vienna', 'Vilnius', 'Warsaw', 'Wrocław',
-    'Zagreb', 'Zaragoza', 'Łódź'];
+  constructor(
+    private fb: FormBuilder,
+    private createListingService: CreateListingService,
+    private localStorageService: LocalStorageService,
+    private settingsService: SettingsService
+  ) {
+    this.stepFourForm = fb.group({
+      'businessLogo': new FormControl('', [
+          Validators.required
+        ]),
+      'businessCoverImage': [null],
+      'businessAdditionalImages': [null],
+      'businessDescription': new FormControl('', [
+          Validators.required
+        ])
+    });
+  };
 
-  private value:any = {};
-
-  public nextStep() {
-    this.createListingService.nextStep();
+  public submitForm(value: any) {
+    debugger;
+    if(this.stepFourForm.valid) {
+      this.localStorageService.store(
+        CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR,
+        value
+      );
+      this._nextStep();
+    } else {
+      // user might have hit next button without completing
+      // some mandatory fields - trigger validation ! :)
+      for (var i in this.stepFourForm.controls) {
+        this.stepFourForm.controls[i].markAsTouched();
+      }
+    }
   };
 
   public previousStep() {
     this.createListingService.previousStep();
   };
 
-  // Handlers for select / multiselect
-  public selected(value:any):void {
-    console.log('Selected value is: ', value);
-  };
-
-  public removed(value:any):void {
-    console.log('Removed value is: ', value);
-  };
-
-  public typed(value:any):void {
-    console.log('New search input: ', value);
-  };
-
-  public refreshValue(value:any):void {
-    this.value = value;
+  private _nextStep() {
+    this.createListingService.nextStep();
   };
 
 };
