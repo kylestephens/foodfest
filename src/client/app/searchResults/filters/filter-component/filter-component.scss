@@ -24,4 +24,16 @@
       color: $brand-body-bg;
     }
   }
+
+  &__title {
+    font-weight: 400;
+    color: $brand-secondary;
+    padding-bottom: 5px;
+
+    &__icon {
+      padding-right: 5px;
+    }
+  }
 }
+
+

@@ -24,6 +24,21 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ak-icon-event-type:before {
+  content: "\e91c";
+}
+.ak-icon-rating:before {
+  content: "\e91d";
+}
+.ak-icon-business-setup:before {
+  content: "\e91e";
+}
+.ak-icon-style:before {
+  content: "\e91f";
+}
+.ak-icon-diet-requirements:before {
+  content: "\e920";
+}
 .ak-icon-user-circle:before {
   content: "\e900";
 }

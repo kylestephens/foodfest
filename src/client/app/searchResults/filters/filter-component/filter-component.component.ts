@@ -18,6 +18,9 @@ export class FilterComponent {
   @Input()
   records: Array<any>;
 
+  @Input()
+  icon: string;
+
   constructor(
     private render: Renderer2,
     private route: ActivatedRoute,
