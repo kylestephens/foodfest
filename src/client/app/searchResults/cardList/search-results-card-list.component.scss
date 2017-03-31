@@ -1,3 +1,6 @@
+@import '../../../scss/core/settings';
+@import '../../../scss/core/variables';
+
 .card-list {
 
 	ul li {
@@ -9,5 +12,10 @@
 	&__card {
 		padding-bottom: 30px;
 	}
-	
-} 
+}
+
+.card-empty {
+  color: $brand-secondary;
+  font-size: $font-size-large;
+  padding: 50px;
+}

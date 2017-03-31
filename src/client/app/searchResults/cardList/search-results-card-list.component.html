@@ -1,4 +1,12 @@
 <div class="[ row ]">
+
+  <div *ngIf="!vendors?.length">
+    <p class="card-empty">
+      There are no vendors matching your search.
+      Try changing the criteria, we have some great vendors to offer you!
+    </p>
+  </div>
+
   <ul class="card-list" >
   	<li *ngFor="let vendor of vendors | paginate: { itemsPerPage: 18, currentPage: p }">
   		<div class="card-list__card [ col-sm-4 col-xs-12 ]">
