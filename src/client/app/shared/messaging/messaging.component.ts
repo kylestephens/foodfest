@@ -1,4 +1,8 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  Input
+}                           from '@angular/core';
 import { Subscription }     from 'rxjs/Subscription';
 
 import { MessagingService } from '../../services/messaging.service';
@@ -62,6 +66,10 @@ export class MessagingComponent {
         }
       }
     });
+  };
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   };
 
 }

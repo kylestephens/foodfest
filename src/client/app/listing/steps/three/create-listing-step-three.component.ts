@@ -9,7 +9,6 @@ import {
   LocalStorageService,
   SessionStorageService
 }                                          from 'ng2-webstorage';
-import { SelectModule }                    from 'ng2-select';
 import { CreateListingService }            from '../../create-listing.service';
 import { ValidationService }               from '../../../services/validation.service';
 import { CONSTANT }                        from '../../../core/constant';

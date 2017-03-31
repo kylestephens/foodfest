@@ -1,82 +1,106 @@
-<!-- Business Logo -->
-<div class="form-row [ row ]">
-  <div class="[ col-sm-6 col-xs-12 ]">
-    <label class="form-label">Business Logo *</label>
-    <div class="form-input form-input--has-icon sign-up-field">
-      <div class="form-icon ak-icon-camera"></div>
-      <input type="file"
-        required />
-    </div>
-  </div>
-  <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
-    <div class="form-field-description">
-      Square images work best. We recommend 250 x 250 pixels.
-    </div>
-  </div>
-</div>
-<!-- / Business Logo -->
+<form [formGroup]="stepFourForm" (ngSubmit)="submitForm(stepFourForm.value)">
 
-<!-- Cover Image -->
-<div class="form-row [ row ]">
-  <div class="[ col-sm-6 col-xs-12 ]">
-    <label class="form-label">Cover Image</label>
-    <div class="form-input form-input--has-icon sign-up-field">
-      <div class="form-icon ak-icon-image"></div>
-      <input type="file"
-        placeholder="e.g. www.facebook.com/DomhnaillsDonuts" />
+  <!-- Business Logo -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Business Logo *</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-camera"></div>
+        <input type="file"
+          accept="image/jpeg, image/png"
+          required
+          formControlName="businessLogo"
+          id="businessLogo">
+      </div>
+      <ak-form-messages [control]="stepFourForm.controls.businessLogo">
+      </ak-form-messages>
+    </div>
+    <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
+      <div class="form-field-description">
+        Square images work best. We recommend 250 x 250 pixels.
+        jpg, jpeg or png file formats accepted.
+      </div>
     </div>
   </div>
-  <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
-    <div class="form-field-description">
-      Don't worry if you don't have this information to hand - you can always add it later
-    </div>
-  </div>
-</div>
-<!-- / Cover Image -->
+  <!-- / Business Logo -->
 
-<!-- Additional Images -->
-<div class="form-row [ row ]">
-  <div class="[ col-sm-6 col-xs-12 ]">
-    <label class="form-label">Additional Images</label>
-    <div class="form-input form-input--has-icon sign-up-field">
-      <div class="form-icon ak-icon-images"></div>
-      <input type="file"
-        multiple />
+  <!-- Cover Image -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Cover Image</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-image"></div>
+        <input type="file"
+          accept="image/jpeg, image/png"
+          formControlName="businessCoverImage"
+          id="businessCoverImage">
+      </div>
+      <ak-form-messages [control]="stepFourForm.controls.businessCoverImage">
+      </ak-form-messages>
+    </div>
+    <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
+      <div class="form-field-description">
+        Don't worry if you don't have this information to hand - you can always add it later
+      </div>
     </div>
   </div>
-  <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
-    <div class="form-field-description">
-      Upload up to 12 additional images to showcase your business
+  <!-- / Cover Image -->
+
+  <!-- Additional Images -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Additional Images</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-images"></div>
+        <input type="file"
+          accept="image/jpeg, image/png"
+          multiple
+          formControlName="businessAdditionalImages"
+          id="businessAdditionalImages">
+      </div>
+      <ak-form-messages [control]="stepFourForm.controls.businessAdditionalImages">
+      </ak-form-messages>
+    </div>
+    <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
+      <div class="form-field-description">
+        Upload up to 12 additional images to showcase your business
+      </div>
     </div>
   </div>
-</div>
-<!-- / Additional Images -->
+  <!-- / Additional Images -->
 
-<!-- Description -->
-<div class="form-row [ row ]">
-  <div class="[ col-xs-12 ]">
-    <label class="form-label">Description</label>
-    <div class="form-input form-input--has-icon sign-up-field">
-      <div class="form-icon ak-icon-pencil"></div>
-      <textarea rows="8"></textarea>
+  <!-- Description -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 ]">
+      <label class="form-label">Description *</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-pencil"></div>
+        <textarea rows="8"
+          required
+          formControlName="businessDescription"
+          id="businessDescription"></textarea>
+      </div>
+      <ak-form-messages [control]="stepFourForm.controls.businessDescription">
+      </ak-form-messages>
     </div>
   </div>
-</div>
-<!-- / Description -->
+  <!-- / Description -->
 
-<!-- Mandatory Fields -->
-<div class="form-row [ row ]">
-  <div class="[ col-xs-12 ]">
-    <span class="form-mandatory">* denotes mandatory field</span>
+  <!-- Mandatory Fields -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 ]">
+      <span class="form-mandatory">* denotes mandatory field</span>
+    </div>
   </div>
-</div>
-<!-- / Mandatory Fields -->
+  <!-- / Mandatory Fields -->
 
-<!-- Form Buttons -->
-<div class="form-row [ row ]">
-  <div class="[ col-xs-12 text-right ]">
-    <button class="form-btn-cta" (click)="previousStep()">Previous step</button>
-    <button class="form-btn-cta" (click)="nextStep()">Next step</button>
+  <!-- Form Buttons -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 text-right ]">
+      <button class="form-btn-cta" (click)="previousStep()">Previous step</button>
+      <button type="submit" class="form-btn-cta">Preview your page</button>
+    </div>
   </div>
-</div>
-<!-- / Form Buttons -->
+  <!-- / Form Buttons -->
+
+</form>

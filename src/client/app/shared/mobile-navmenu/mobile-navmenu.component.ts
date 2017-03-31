@@ -1,5 +1,9 @@
-import { Component, OnInit }    from '@angular/core';
-import { Subscription }         from 'rxjs/Subscription'
+import {
+  Component,
+  OnDestroy,
+  OnInit
+}                               from '@angular/core';
+import { Subscription }         from 'rxjs/Subscription';
 
 import { AccountService }       from '../../services/account.service';
 import { ModalService }         from '../../services/modal.service';
@@ -36,6 +40,10 @@ export class MobileNavmenuComponent implements OnInit {
       console.debug('MobileNavmenuComponent::subscription');
       me.loggedIn = subMessage.sessionStatus;
     });
+  };
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   };
 
   public loggedIn: boolean = false;

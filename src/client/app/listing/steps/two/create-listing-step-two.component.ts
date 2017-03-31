@@ -20,7 +20,6 @@ import {
 }                                         from 'ng2-webstorage';
 import { CreateListingService }           from '../../create-listing.service';
 import { AgmCoreModule, MapsAPILoader }   from 'angular2-google-maps/core';
-import { SelectModule }                   from 'ng2-select';
 import { ValidationService }              from '../../../services/validation.service';
 import { CONSTANT }                       from '../../../core/constant';
 
