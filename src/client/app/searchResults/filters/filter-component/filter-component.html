@@ -1,11 +1,13 @@
 <div class="filter-component">
   <div class="filter-component__title"><h4><span class="{{icon}} filter-component__title__icon"></span><span>{{title}}</span></h4></div>
 
-  <span *ngFor="let record of records">
-    <button class= "filter-component__button button-list" [ngClass]="{'selected': record.isSelected}" (click)="onClickRecord($event, record)">{{record.text}}</button>
-  </span>
+  <div *ngIf="records">
+    <span *ngFor="let record of records">
+      <button class= "filter-component__button button-list" [ngClass]="{'selected': record.isSelected}" (click)="onClickRecord($event, record)">{{record.text}}</button>
+    </span>
+  </div>
 
-  <div *ngIf="!records">
+  <div *ngIf="rating || rating === 0">
     <button class= "filter-component__button rating" [ngClass]="{'selected': rating > 0 }" (click)="onClickRating($event, 1)">
       <span [ngClass]="rating > 0 ? 'ak-icon-star-full' : 'ak-icon-star-empty'"></span>
     </button>

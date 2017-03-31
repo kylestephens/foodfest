@@ -13,6 +13,7 @@ import { SettingsService }  from '../../services/settings.service';
 })
 
 export class SearchResultsFiltersComponent {
+  private subscription: Subscription;
   styles: Style[];
   dietRequirements: DietRequirement[];
   businessTypes: BusinessType[];
@@ -28,6 +29,19 @@ export class SearchResultsFiltersComponent {
 
   ngOnInit(): void {
     this.routeParams = this.route.snapshot.params;
+    if(this.settingsService.getIsSettingsCallDone()) {
+      this.initComponent();
+    }
+     this.subscription = this.settingsService.settingsRetrived.subscribe(
+      () => {
+        this.initComponent();
+        //unsubscribe now because we got the data
+        this.subscription.unsubscribe();
+      }
+    );
+  }
+
+  initComponent(): void {
     this.getStyles();
     this.getDietRequirements();
     this.getBusinessTypes();

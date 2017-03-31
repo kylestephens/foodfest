@@ -1,12 +1,12 @@
-import { Injectable }       from '@angular/core';
-import { BrowserService }   from './browser.service';
-import { RestService }      from './rest.service';
-import { WindowRefService } from './window-ref.service';
-import { CONSTANT }         from '../core/constant';
-import { Style }            from '../shared/model/style';
-import { DietRequirement }  from '../shared/model/dietRequirement';
-import { BusinessType }     from '../shared/model/businessType';
-import { BusinessSetup }     from '../shared/model/businessSetup';
+import { Injectable, EventEmitter } from '@angular/core';
+import { BrowserService }           from './browser.service';
+import { RestService }              from './rest.service';
+import { WindowRefService }         from './window-ref.service';
+import { CONSTANT }                 from '../core/constant';
+import { Style }                    from '../shared/model/style';
+import { DietRequirement }          from '../shared/model/dietRequirement';
+import { BusinessType }             from '../shared/model/businessType';
+import { BusinessSetup }            from '../shared/model/businessSetup';
 
 import {
   LocalStorageService,
@@ -15,7 +15,10 @@ import {
 
 @Injectable()
 export class SettingsService {
-
+  /**
+  * Event emitted when settings are retrived. Needed in case we access settings before the call is finished.
+  */
+  public settingsRetrived: EventEmitter = new EventEmitter();
   /**
    * Site configured parameters
    * These are constants, contained in index.html
@@ -62,6 +65,7 @@ export class SettingsService {
     // Check local storage for login details - keep signed in
     if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.SETTINGS)) {
       this.settings = this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.SETTINGS);
+      this.settingsRetrived.emit();
     } else {
       this.restService.get(this.getServerBaseUrl() + '/settings/' + this.getSiteId())
         .then((settings: any) => {
@@ -70,7 +74,8 @@ export class SettingsService {
           this.localStorageService.store(
             CONSTANT.LOCALSTORAGE.SETTINGS,
             this.settings
-          )
+          );
+          this.settingsRetrived.emit();
         });
     }
   };
@@ -116,6 +121,14 @@ export class SettingsService {
   };
 
   /**
+   * Returns are settings available
+   */
+  public getIsSettingsCallDone(): boolean {
+    if(this.settings) return true;
+    else return false;
+  }
+
+  /**
    * Returns business setups available
    */
   public getBusinessSetups(): Array<BusinessSetup> {
@@ -155,6 +168,7 @@ export class SettingsService {
    */
   public getStyles(): Array<Style> {
     return this.settings.styles;
+
   };
 
 };
