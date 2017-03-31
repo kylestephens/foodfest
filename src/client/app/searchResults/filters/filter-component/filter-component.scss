@@ -1,17 +1,14 @@
 @import '../../../../scss/core/settings';
 @import '../../../../scss/core/variables';
 
-.search-filter{
+.filter-component {
   padding-bottom: 40px;
 
   &__button {
     background-color: $brand-body-bg;
     border: 1px solid $brand-secondary;
     margin-bottom: 5px;
-    margin-right: 5px;
     padding: 2px 7px;
-    border-radius: $brand-border-radius;
-    font-size: $font-size-small;
     text-transform: uppercase;
 
     &:hover {
@@ -22,6 +19,37 @@
     &.selected {
       background-color: $brand-secondary;
       color: $brand-body-bg;
+    }
+
+    &.button-list {
+      margin-right: 5px;
+      border-radius: $brand-border-radius;
+      font-size: $font-size-small;
+    }
+
+    &.rating {
+      display: block;
+      float: left;
+      color: $brand-secondary;
+      font-size: $font-size-base;
+
+      &:not(:first-child) {
+        border-left: none;
+      }
+
+      &:first-child {
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+      }
+
+      &:last-child {
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+      }
+
+      &.selected {
+        color: $brand-body-bg;
+      }
     }
   }
 

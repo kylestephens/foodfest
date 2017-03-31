@@ -19,6 +19,9 @@ export class FilterComponent {
   records: Array<any>;
 
   @Input()
+  rating: number;
+
+  @Input()
   icon: string;
 
   constructor(
@@ -28,12 +31,22 @@ export class FilterComponent {
   )
   {}
 
-  onClick(event: any, element: any) {
-    element.isSelected = !element.isSelected;
-    this.updateRouteParams(''+element.id, element.isSelected);
+  onClickRecord(event: any, record: any) {
+    record.isSelected = !record.isSelected;
+    this.updateRouteParams(''+record.id, record.isSelected);
   }
 
-  //queryParams possible keys: styles, dietreq, bustype, busset(TODO: add rest as developed)
+  onClickRating(event: any, rating: number) {
+    if(+this.rating === +rating) {
+      this.rating = 0;
+    }
+    else {
+       this.rating = rating;
+    }
+    this.updateRouteParamRating();
+  }
+
+  //queryParams possible keys: styles, dietreq, bustype, busset, rating
   private updateRouteParams(elementId: string, isSelected: boolean) {
     let currentParams = this.route.snapshot.params,
         queryParams: { [key: string] : string } = { };
@@ -64,6 +77,19 @@ export class FilterComponent {
     }
 
     this.router.navigate(['/search-results', queryParams ]);
+  }
+
+  private updateRouteParamRating() {
+    let currentParams = this.route.snapshot.params,
+         queryParams: { [key: string] : number } = { };
+
+    Object.assign(queryParams, currentParams);
+    queryParams[this.text] = this.rating;
+
+    if(this.rating === 0) {
+      delete queryParams[this.text];
+    }
+    this.router.navigate(['/search-results', queryParams);
   }
 
   private  copyRestOfCurrentParams(currentParams: { [key: string] : string }, queryParams: { [key: string] : string }): void {

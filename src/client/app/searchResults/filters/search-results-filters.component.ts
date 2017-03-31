@@ -17,6 +17,7 @@ export class SearchResultsFiltersComponent {
   dietRequirements: DietRequirement[];
   businessTypes: BusinessType[];
   businessSetups: BusinessSetup[];
+  rating: number = 0;
   routeParams: any;
 
   constructor(
@@ -55,7 +56,8 @@ export class SearchResultsFiltersComponent {
       let selectedStyles = this.routeParams.styles,
           selectedDietRequirements = this.routeParams.dietreq,
           selectedBusinessTypes = this.routeParams.bustype,
-          selectedBusinessSetups = this.routeParams.busset;
+          selectedBusinessSetups = this.routeParams.busset,
+          selectedRating = this.routeParams.rating;
 
       if(selectedStyles) {
         this.updateSelectedItems(selectedStyles, this.styles);
@@ -68,6 +70,9 @@ export class SearchResultsFiltersComponent {
       }
       if(selectedBusinessSetups) {
         this.updateSelectedItems(selectedBusinessSetups, this.businessSetups);
+      }
+      if(selectedRating) {
+        this.rating = selectedRating;
       }
     }
   }

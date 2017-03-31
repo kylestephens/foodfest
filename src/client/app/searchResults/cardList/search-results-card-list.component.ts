@@ -26,7 +26,7 @@ export class SearchResultsCardListComponent implements OnInit {
   {}
 
   ngOnInit(): void {
-    ///params.styles, params.dietreq, params.bustype, params.busset
+    ///params.styles, params.dietreq, params.bustype, params.busset, params.rating
     this.subscription = this.route.params
       .subscribe(params => {
         if(Object.keys(params).length === 0) this.getVendors();
