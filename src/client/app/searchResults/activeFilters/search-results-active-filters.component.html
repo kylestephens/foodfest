@@ -1,0 +1,21 @@
+<div class="search-active-filter [ row ]">
+  <span *ngFor="let activeFilter of activeFilters">
+    <button class= "filter-button active-filter" (click)="onClick($event, activeFilter)">
+      <a class="close-link">x</a>
+      <span *ngIf="activeFilter.name !== 'rating'">
+        <span>{{activeFilter.text}}</span>
+      </span>
+
+      <span *ngIf="activeFilter.name === 'rating'">
+        <span *ngFor="let i of ratings">
+          <span class="ak-icon-star-full rating"></span>
+        </span>
+        <span> & more</span>
+
+      </span>
+
+  </button>
+  </span>
+</div>
+
+

@@ -1,17 +1,8 @@
 @import '../../../scss/core/settings';
 @import '../../../scss/core/variables';
 
-.card-list {
-
-	ul li {
-		padding: 0;
-		margin: 0;
-		list-style: none;
-	}
-
-	&__card {
-		padding-bottom: 30px;
-	}
+.card-list__card {
+  padding-bottom: 30px;
 }
 
 .card-empty {

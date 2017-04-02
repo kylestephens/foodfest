@@ -4,8 +4,9 @@ import { Subscription }            from 'rxjs/Subscription'
 import { Vendor }                  from '../../shared/model/vendor';
 import { VendorService }           from '../../services/vendor.service';
 import { CONSTANT }                from '../../core/constant';
+
 /**
- * This class represents the navigation bar component.
+ * This class represents list of cards on search results page.
  */
 @Component({
   moduleId: module.id,
@@ -25,8 +26,11 @@ export class SearchResultsCardListComponent implements OnInit {
   )
   {}
 
+  /*
+  * Subscribe on route change params - when search params are added/removed, refresh the list of vendors.
+  * Param keys are: styles, dietreq, bustype,busset,rating
+  */
   ngOnInit(): void {
-    ///params.styles, params.dietreq, params.bustype, params.busset, params.rating
     this.subscription = this.route.params
       .subscribe(params => {
         if(Object.keys(params).length === 0) this.getVendors();

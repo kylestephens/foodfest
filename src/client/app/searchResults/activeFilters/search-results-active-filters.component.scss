@@ -1,0 +1,19 @@
+@import '../../../scss/core/variables';
+
+.search-active-filter {
+  padding-bottom: 20px;
+
+  .filter-button.active-filter {
+    border: none;
+    background-color: $gray-lightest;
+    margin-right: 5px;
+
+    &:hover {
+       background-color: $gray-lighter;
+    }
+
+    .rating {
+      color: $brand-secondary
+    }
+  }
+}

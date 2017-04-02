@@ -4,34 +4,17 @@
 .filter-component {
   padding-bottom: 40px;
 
-  &__button {
-    background-color: $brand-body-bg;
-    border: 1px solid $brand-secondary;
-    margin-bottom: 5px;
-    padding: 2px 7px;
-    text-transform: uppercase;
-
-    &:hover {
-      cursor: pointer;
-      background-color: $gray-lightest;
-    }
-
-    &.selected {
-      background-color: $brand-secondary;
-      color: $brand-body-bg;
-    }
+  .filter-button {
 
     &.button-list {
       margin-right: 5px;
-      border-radius: $brand-border-radius;
-      font-size: $font-size-small;
     }
 
     &.rating {
       display: block;
       float: left;
       color: $brand-secondary;
-      font-size: $font-size-base;
+      border-radius: 0;
 
       &:not(:first-child) {
         border-left: none;
@@ -60,6 +43,7 @@
 
     &__icon {
       padding-right: 5px;
+      font-size: $font-size-base;
     }
   }
 }

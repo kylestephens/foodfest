@@ -4,6 +4,7 @@ import { HttpModule }        from '@angular/http';
 import { AccountService }    from './account.service';
 import { BrowserService }    from './browser.service';
 import { FacebookService }   from './facebook.service';
+import { FilterService }     from './filter.service';
 import { GoogleService }     from './google.service';
 import { MessagingService }  from './messaging.service';
 import { ModalService }      from './modal.service';
@@ -23,6 +24,7 @@ import { WindowRefService }  from './window-ref.service';
     BrowserService,
     GoogleService,
     FacebookService,
+    FilterService,
     MessagingService,
     ModalService,
     RestService,
@@ -41,6 +43,7 @@ export class ServicesModule {
         BrowserService,
         GoogleService,
         FacebookService,
+        FilterService,
         MessagingService,
         ModalService,
         RestService,

@@ -3,9 +3,15 @@ import { ActivatedRoute }   from '@angular/router';
 import { Style }            from '../../shared/model/style';
 import { DietRequirement }  from '../../shared/model/dietRequirement';
 import { BusinessType }     from '../../shared/model/businessType';
-import { BusinessSetup }     from '../../shared/model/businessSetup';
+import { BusinessSetup }    from '../../shared/model/businessSetup';
 import { SettingsService }  from '../../services/settings.service';
+import { FilterService }    from '../../services/filter.service';
+import { SearchFilter }     from './../../shared/model/searchFilter';
+import { Subscription }     from 'rxjs/Subscription';
 
+/**
+ * This class represents whole filter component on search results page.
+ */
 @Component({
   moduleId: module.id,
   selector: 'ak-search-results-filters',
@@ -23,6 +29,7 @@ export class SearchResultsFiltersComponent {
 
   constructor(
     private settingsService: SettingsService,
+    private filterService: FilterService,
     private route: ActivatedRoute
   )
   {}
@@ -32,7 +39,7 @@ export class SearchResultsFiltersComponent {
     if(this.settingsService.getIsSettingsCallDone()) {
       this.initComponent();
     }
-     this.subscription = this.settingsService.settingsRetrived.subscribe(
+    this.subscription = this.settingsService.settingsRetrived.subscribe(
       () => {
         this.initComponent();
         //unsubscribe now because we got the data
@@ -74,30 +81,33 @@ export class SearchResultsFiltersComponent {
           selectedRating = this.routeParams.rating;
 
       if(selectedStyles) {
-        this.updateSelectedItems(selectedStyles, this.styles);
+        this.updateSelectedItems('styles', selectedStyles, this.styles);
       }
       if(selectedDietRequirements) {
-        this.updateSelectedItems(selectedDietRequirements, this.dietRequirements);
+        this.updateSelectedItems('dietreq', selectedDietRequirements, this.dietRequirements);
       }
       if(selectedBusinessTypes) {
-        this.updateSelectedItems(selectedBusinessTypes, this.businessTypes);
+        this.updateSelectedItems('bustype', selectedBusinessTypes, this.businessTypes);
       }
       if(selectedBusinessSetups) {
-        this.updateSelectedItems(selectedBusinessSetups, this.businessSetups);
+        this.updateSelectedItems('busset', selectedBusinessSetups, this.businessSetups);
       }
       if(selectedRating) {
         this.rating = selectedRating;
+        this.filterService.addFilter(new SearchFilter('rating', null, +this.rating));
       }
     }
   }
 
-  private updateSelectedItems(selectedItems: string, items: Array<any>) {
+  private updateSelectedItems(name:string, selectedItems: string, items: Array<any>) {
     let selectedItemsIds = selectedItems.split(',');
     for(let selectedItemsId of selectedItemsIds) {
       let selectedItem = items.filter(function( obj ) {
         return obj.id === +selectedItemsId;
       });
       selectedItem[0].isSelected = true;
+      let searchFilter = new SearchFilter(name, selectedItem[0]);
+      this.filterService.addFilter(searchFilter);
     }
   }
 }

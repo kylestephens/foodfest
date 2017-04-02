@@ -1,6 +1,12 @@
-import { Component, Input, Renderer2 } from '@angular/core';
-import { Router, ActivatedRoute }      from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute }   from '@angular/router';
+import { FilterService }    from '../../../services/filter.service';
+import { SearchFilter }     from '../../../shared/model/searchFilter';
+import { Subscription }     from 'rxjs/Subscription';
 
+/**
+ * This class represents individual filter component on search results page.
+ */
 @Component({
   moduleId: module.id,
   selector: 'ak-search-results-filter-component',
@@ -24,80 +30,53 @@ export class FilterComponent {
   @Input()
   icon: string;
 
-  constructor(
-    private render: Renderer2,
-    private route: ActivatedRoute,
-    private router: Router
-  )
-  {}
+  private subscription: Subscription;
+
+  constructor(private route: ActivatedRoute, private filterService: FilterService) {
+     this.subscription = filterService.filterRemovedFromActive.subscribe(
+        searchFilter => {
+          if(searchFilter.name === 'rating' && searchFilter.name === this.text) {
+            this.rating = 0;
+          }
+          else if(searchFilter.name === this.text) {
+            let index = this.records.map(function(record) { return record.id; }).indexOf(searchFilter.id);
+            if (index > -1) {
+             this.records[index].isSelected = searchFilter.isSelected;
+          }
+        }
+      })
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   onClickRecord(event: any, record: any) {
+    let currentParams = this.route.snapshot.params;
     record.isSelected = !record.isSelected;
-    this.updateRouteParams(''+record.id, record.isSelected);
+
+    let searchFilter = new SearchFilter(this.text, record);
+    if(record.isSelected) this.filterService.addFilter(searchFilter);
+    else this.filterService.removeFilter(searchFilter);
+
+    this.filterService.updateRouteParams(currentParams, this.text, record);
   }
 
   onClickRating(event: any, rating: number) {
+    let currentParams = this.route.snapshot.params;
+
     if(+this.rating === +rating) {
       this.rating = 0;
     }
     else {
-       this.rating = rating;
+      this.rating = rating;
     }
-    this.updateRouteParamRating();
+    let searchFilter = new SearchFilter(this.text, null, this.rating);
+    if(this.rating !== 0 ) this.filterService.addFilter(searchFilter);
+    else this.filterService.removeFilter(searchFilter);
+
+    this.filterService.updateRouteParamRating(currentParams, this.text, this.rating);
   }
-
-  //queryParams possible keys: styles, dietreq, bustype, busset, rating
-  private updateRouteParams(elementId: string, isSelected: boolean) {
-    let currentParams = this.route.snapshot.params,
-        queryParams: { [key: string] : string } = { };
-
-    if(this.text in currentParams && isSelected) {
-      queryParams[this.text] = elementId;
-      queryParams[this.text] = [currentParams[this.text], queryParams[this.text]].join(',');
-      this.copyRestOfCurrentParams(currentParams, queryParams);
-    }
-    else if(isSelected) {
-      queryParams[this.text] = elementId;
-      Object.assign(queryParams, currentParams);
-    }
-    else if(this.text in currentParams && !isSelected) {
-      let currentParamsArray = currentParams[this.text].split(','),
-          index = currentParamsArray.indexOf(elementId);
-
-      if (index > -1) {
-        currentParamsArray.splice(index, 1);
-      }
-
-      queryParams[this.text] = currentParamsArray.join(',');
-
-      if(!queryParams[this.text]) {
-        delete queryParams[this.text];
-      }
-      this.copyRestOfCurrentParams(currentParams, queryParams);
-    }
-
-    this.router.navigate(['/search-results', queryParams ]);
-  }
-
-  private updateRouteParamRating() {
-    let currentParams = this.route.snapshot.params,
-         queryParams: { [key: string] : number } = { };
-
-    Object.assign(queryParams, currentParams);
-    queryParams[this.text] = this.rating;
-
-    if(this.rating === 0) {
-      delete queryParams[this.text];
-    }
-    this.router.navigate(['/search-results', queryParams);
-  }
-
-  private  copyRestOfCurrentParams(currentParams: { [key: string] : string }, queryParams: { [key: string] : string }): void {
-     for(let key in currentParams) {
-        if(key !== this.text) queryParams[key] = currentParams[key];
-      }
-  }
-
 }
 
 

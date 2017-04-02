@@ -3,24 +3,24 @@
 
   <div *ngIf="records">
     <span *ngFor="let record of records">
-      <button class= "filter-component__button button-list" [ngClass]="{'selected': record.isSelected}" (click)="onClickRecord($event, record)">{{record.text}}</button>
+      <button class= "filter-button button-list" [ngClass]="{'selected': record.isSelected}" (click)="onClickRecord($event, record)">{{record.text}}</button>
     </span>
   </div>
 
   <div *ngIf="rating || rating === 0">
-    <button class= "filter-component__button rating" [ngClass]="{'selected': rating > 0 }" (click)="onClickRating($event, 1)">
+    <button class= "filter-button rating" [ngClass]="{'selected': rating > 0 }" (click)="onClickRating($event, 1)">
       <span [ngClass]="rating > 0 ? 'ak-icon-star-full' : 'ak-icon-star-empty'"></span>
     </button>
-    <button class= "filter-component__button rating" [ngClass]="{'selected': rating > 1 }" (click)="onClickRating($event, 2)">
+    <button class= "filter-button rating" [ngClass]="{'selected': rating > 1 }" (click)="onClickRating($event, 2)">
       <span [ngClass]="rating > 1 ? 'ak-icon-star-full' : 'ak-icon-star-empty'"></span>
     </button>
-    <button class= "filter-component__button rating" [ngClass]="{'selected': rating > 2 }" (click)="onClickRating($event, 3)">
+    <button class= "filter-button rating" [ngClass]="{'selected': rating > 2 }" (click)="onClickRating($event, 3)">
       <span [ngClass]="rating > 2 ? 'ak-icon-star-full' : 'ak-icon-star-empty'"></span>
     </button>
-    <button class= "filter-component__button rating" [ngClass]="{'selected': rating > 3 }" (click)="onClickRating($event, 4)">
+    <button class= "filter-button rating" [ngClass]="{'selected': rating > 3 }" (click)="onClickRating($event, 4)">
       <span [ngClass]="rating > 3 ? 'ak-icon-star-full' : 'ak-icon-star-empty'"></span>
     </button>
-    <button class= "filter-component__button rating" [ngClass]="{'selected': rating > 4 }" (click)="onClickRating($event, 5)">
+    <button class= "filter-button rating" [ngClass]="{'selected': rating > 4 }" (click)="onClickRating($event, 5)">
       <span [ngClass]="rating > 4 ? 'ak-icon-star-full' : 'ak-icon-star-empty'"></span>
     </button>
   </div>
