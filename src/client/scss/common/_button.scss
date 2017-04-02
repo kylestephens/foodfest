@@ -19,3 +19,26 @@
     padding: $padding-small-vertical $padding-small-horizontal;
   }
 }
+
+/*
+* Filter buttons on search page
+*/
+.filter-button {
+  background-color: $brand-body-bg;
+  border: 1px solid $brand-secondary;
+  margin-bottom: 5px;
+  padding: 2px 7px;
+  text-transform: uppercase;
+  font-size: $font-size-small;
+  border-radius: $brand-border-radius;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $gray-lightest;
+    }
+
+    &.selected {
+      background-color: $brand-secondary;
+      color: $brand-body-bg;
+    }
+}
