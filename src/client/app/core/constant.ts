@@ -85,7 +85,8 @@ export class CONSTANT {
     LISTING_STEP_TWO:       'listing.step.2',
     LISTING_STEP_THREE:     'listing.step.3',
     LISTING_STEP_FOUR:      'listing.step.4',
-    LISTING_ADDRESS:        'listing.address'
+    LISTING_ADDRESS:        'listing.address',
+    VENDOR_ID:              'vendorId'
 
   };
 

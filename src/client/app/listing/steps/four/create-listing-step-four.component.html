@@ -3,14 +3,14 @@
   <!-- Business Logo -->
   <div class="form-row [ row ]">
     <div class="[ col-sm-6 col-xs-12 ]">
-      <label class="form-label">Business Logo *</label>
+      <label class="form-label">Business Logo</label>
       <div class="form-input form-input--has-icon sign-up-field">
         <div class="form-icon ak-icon-camera"></div>
         <input type="file"
           accept="image/jpeg, image/png"
-          required
           formControlName="businessLogo"
-          id="businessLogo">
+          id="businessLogo"
+          (change)="onChangeLogo($event)">
       </div>
       <ak-form-messages [control]="stepFourForm.controls.businessLogo">
       </ak-form-messages>
@@ -33,7 +33,8 @@
         <input type="file"
           accept="image/jpeg, image/png"
           formControlName="businessCoverImage"
-          id="businessCoverImage">
+          id="businessCoverImage"
+          (change)="onChangeCover($event)">
       </div>
       <ak-form-messages [control]="stepFourForm.controls.businessCoverImage">
       </ak-form-messages>
@@ -56,7 +57,8 @@
           accept="image/jpeg, image/png"
           multiple
           formControlName="businessAdditionalImages"
-          id="businessAdditionalImages">
+          id="businessAdditionalImages"
+          (change)="onChangeImages($event)">
       </div>
       <ak-form-messages [control]="stepFourForm.controls.businessAdditionalImages">
       </ak-form-messages>
