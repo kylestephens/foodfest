@@ -9,7 +9,25 @@
     @media (max-width: $screen-xs-max) {
       padding-right: 0;
     }
+  }
 
+  &__active {
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+
+    &-order {
+      float: right;
+
+      &__label {
+        padding-right: 10px;
+      }
+
+      &__select {
+        min-width: 90px;
+        text-transform: capitalize;
+      }
+    }
   }
 }
 

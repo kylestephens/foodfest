@@ -1,6 +1,6 @@
 <div class="[ row ]">
 
-  <div *ngIf="!vendors?.length">
+  <div *ngIf="loaded && !vendors?.length">
     <p class="card-empty">
       There are no vendors matching your search.
       Try changing the criteria, we have some great vendors to offer you!

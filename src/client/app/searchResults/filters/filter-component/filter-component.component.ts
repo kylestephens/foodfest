@@ -59,7 +59,7 @@ export class FilterComponent {
     if(record.isSelected) this.filterService.addFilter(searchFilter);
     else this.filterService.removeFilter(searchFilter);
 
-    this.filterService.updateRouteParams(currentParams, this.text, record);
+    this.filterService.updateRouteParamsBySelected(currentParams, this.text, record);
   }
 
   onClickRating(event: any, rating: number) {
@@ -75,7 +75,7 @@ export class FilterComponent {
     if(this.rating !== 0 ) this.filterService.addFilter(searchFilter);
     else this.filterService.removeFilter(searchFilter);
 
-    this.filterService.updateRouteParamRating(currentParams, this.text, this.rating);
+    this.filterService.updateRouteParam(currentParams, this.text, ''+this.rating);
   }
 }
 

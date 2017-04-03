@@ -6,13 +6,16 @@ import { SearchResultsActiveFiltersModule } from './activeFilters/search-results
 import { SearchResultsFiltersModule }       from './filters/search-results-filters.module';
 import { SharedModule }                     from '../shared/shared.module';
 
+import { SelectModule }                     from 'ng2-select';
+
 @NgModule({
   imports: [
   	SearchResultsRoutingModule,
   	SearchResultsCardListModule,
     SearchResultsActiveFiltersModule,
     SearchResultsFiltersModule,
-    SharedModule
+    SelectModule,
+    SharedModule,
   ],
   declarations: [SearchResultsComponent]
 })

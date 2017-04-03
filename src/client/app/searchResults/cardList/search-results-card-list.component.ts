@@ -18,6 +18,7 @@ import { CONSTANT }                from '../../core/constant';
 export class SearchResultsCardListComponent implements OnInit {
 	private vendors: Vendor[];
   private subscription: Subscription;
+  private loaded: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,17 +34,24 @@ export class SearchResultsCardListComponent implements OnInit {
   ngOnInit(): void {
     this.subscription = this.route.params
       .subscribe(params => {
+        this.loaded = false;
         if(Object.keys(params).length === 0) this.getVendors();
         else this.searchVendors(params);
       });
   }
 
   getVendors(): void {
-    this.vendorService.getVendors().then(vendors => this.vendors = vendors);
+    this.vendorService.getVendors().then(vendors => {
+      this.loaded = true;
+      this.vendors = vendors;
+    });
   }
 
   searchVendors(params: any): void {
-    this.vendorService.searchVendors(params).then(vendors => this.vendors = vendors);
+    this.vendorService.searchVendors(params).then(vendors => {
+      this.loaded = true;
+      this.vendors = vendors;
+    });
   }
 
   ngOnDestroy() {

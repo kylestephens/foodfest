@@ -72,10 +72,10 @@ export class SearchResultsActiveFiltersComponent {
     this.filterService.removeFilterFromActive(searchFilter);
 
     if(searchFilter.name !== 'rating') {
-      this.filterService.updateRouteParams(currentParams, searchFilter.name, searchFilter);
+      this.filterService.updateRouteParamsBySelected(currentParams, searchFilter.name, searchFilter);
     }
     else {
-      this.filterService.updateRouteParamRating(currentParams, searchFilter.name, searchFilter.value);
+      this.filterService.updateRouteParam(currentParams, searchFilter.name, ''+searchFilter.value);
     }
   }
 

@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component }       from '@angular/core';
+import { ActivatedRoute }  from '@angular/router';
+import { SelectModule }    from 'ng2-select';
+import { CONSTANT }        from '../core/constant';
+import { FilterService }   from '../services/filter.service';
 
 /**
  * This class represents the lazy loaded SearchResults.
@@ -11,5 +15,25 @@ import { Component } from '@angular/core';
 })
 
 export class SearchResultsComponent {
-  // orderByList = CONSTANT.SEARCH_RESULTS_ORDER_BY;
+  sorts: Array<string> = CONSTANT.SEARCH_RESULTS.ORDER_BY;
+  activeSort: string;
+
+  constructor(private route: ActivatedRoute, private filterService: FilterService) {}
+
+  ngOnInit(): void {
+    this.deepLinked();
+  }
+
+  onOrderByChange(sort: string) {
+    if(this.activeSort !== sort) {
+      this.activeSort = sort;
+      let currentParams = this.route.snapshot.params;
+      this.filterService.updateRouteParam(currentParams, 'sort', sort);
+    }
+  }
+
+   private deepLinked() {
+    let params: any = this.route.snapshot.params;
+    this.activeSort = params.sort ? params.sort : CONSTANT.SEARCH_RESULTS.DEFAULT;
+  }
 }

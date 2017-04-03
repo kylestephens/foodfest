@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Router }      from '@angular/router';
-import { Observable } from 'rxjs';
-import { Subject } from 'rxjs/Subject';
+import { Injectable }       from '@angular/core';
+import { Router }           from '@angular/router';
+import { Observable }       from 'rxjs';
+import { Subject }          from 'rxjs/Subject';
+import { CONSTANT }         from '../core/constant';
 import { Style }            from '../shared/model/style';
 import { DietRequirement }  from '../shared/model/dietRequirement';
 import { BusinessType }     from '../shared/model/businessType';
@@ -36,7 +37,7 @@ export class FilterService {
   }
 
   //queryParams possible keys: styles, dietreq, bustype, busset
-  updateRouteParams(currentParams: { [key: string]: string }, name: string, record: any) {
+  updateRouteParamsBySelected(currentParams: { [key: string]: string }, name: string, record: any) {
     let elementId = ''+record.id,
         isSelected = record.isSelected,
         queryParams: { [key: string]: string } = { };
@@ -69,16 +70,17 @@ export class FilterService {
     this.router.navigate(['/search-results', queryParams ]);
   }
 
-  //queryParams possible keys: rating
-  updateRouteParamRating(currentParams: { [key: string]: string }, text: string, rating: number) {
-    let queryParams: { [key: string]: number } = { };
+  //queryParams possible keys: rating, sort
+  updateRouteParam(currentParams: { [key: string]: string }, text: string, value: string) {
+    let queryParams: { [key: string]: string } = { };
 
     Object.assign(queryParams, currentParams);
-    queryParams[text] = rating;
+    queryParams[text] = value;
 
-    if(rating === 0) {
+    if(text === 'rating' && value === '0' || text === 'sort' && value ===  CONSTANT.SEARCH_RESULTS.DEFAULT) {
       delete queryParams[text];
     }
+
     this.router.navigate(['/search-results', queryParams);
   }
 
