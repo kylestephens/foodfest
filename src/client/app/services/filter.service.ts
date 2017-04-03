@@ -67,7 +67,7 @@ export class FilterService {
       this.copyRestOfCurrentParams(name, currentParams, queryParams);
     }
 
-    this.router.navigate(['/search-results', queryParams ]);
+    this.router.navigate(['/search-results', queryParams]);
   }
 
   //queryParams possible keys: rating, sort
@@ -77,11 +77,11 @@ export class FilterService {
     Object.assign(queryParams, currentParams);
     queryParams[text] = value;
 
-    if(text === 'rating' && value === '0' || text === 'sort' && value ===  CONSTANT.SEARCH_RESULTS.DEFAULT) {
+    if(text === 'rating' && value === '0' || text === 'sort' && value ===  CONSTANT.vendor.DEFAULT_SORT) {
       delete queryParams[text];
     }
 
-    this.router.navigate(['/search-results', queryParams);
+    this.router.navigate(['/search-results', queryParams]);
   }
 
   private copyRestOfCurrentParams(text: string, currentParams: { [key: string]: string }, queryParams: { [key: string]: string }): void {
