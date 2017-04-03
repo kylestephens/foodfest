@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 export class BrowserService {
 
   get() {
-    var EMPTY = '',
+    let EMPTY = '',
       UNKNOWN = '?',
       FUNC_TYPE = 'function',
       UNDEF_TYPE = 'undefined',
@@ -22,7 +22,7 @@ export class BrowserService {
       TABLET = 'tablet',
       SMARTTV = 'smarttv';
 
-    var util = {
+    let util = {
       has(str1: string, str2: string) {
         if (typeof str1 === 'string') {
           return str2.toLowerCase().indexOf(str1.toLowerCase()) !== -1;
@@ -34,7 +34,7 @@ export class BrowserService {
       }
     };
 
-    var mapper = {
+    let mapper = {
       rgx: function() {
         for (var result: any, i = 0, j, k, p, q, matches, match, args = arguments; i < args.length; i += 2) {
           var regex = args[i],
@@ -100,7 +100,7 @@ export class BrowserService {
         return str;
       }
     };
-    var maps = {
+    let maps = {
       browser: {
         oldsafari: {
           major: { 1: ['/8', '/1', '/3'], 2: '/4', '?': '/' },
@@ -134,7 +134,7 @@ export class BrowserService {
         }
       }
     };
-    var regexes = {
+    let regexes = {
       browser: [
         [/APP-([\w\s-\d]+)\/((\d+)?[\w\.]+)/i],
         [NAME, VERSION, MAJOR],
@@ -426,29 +426,35 @@ export class BrowserService {
       ]
     };
 
-    var UAParser = function(uastring?: any): void {
-      var ua = uastring || (window && window.navigator && window.navigator.userAgent ? window.navigator.userAgent.toLowerCase() : EMPTY);
-      if (!(this instanceof UAParser)) {
-        /* tslint:disable */
-        return new UAParser(uastring).getResult();
-        /* tslint:enable */
+    class UAParser {
+      ua: any;
+      constructor(uastring?: any) {
+        let ua = uastring || (window && window.navigator && window.navigator.userAgent ? window.navigator.userAgent.toLowerCase() : EMPTY);
+        if (!(this instanceof UAParser)) {
+          /* tslint:disable */
+          // return
+          new UAParser(uastring).getResult();
+          /* tslint:enable */
+        }
+        this.setUA(ua);
       }
-      this.getBrowser = function() {
+
+      getBrowser() {
         return mapper.rgx.apply(this, regexes.browser);
       };
-      this.getCPU = function() {
+      getCPU() {
         return mapper.rgx.apply(this, regexes.cpu);
       };
-      this.getDevice = function() {
+      getDevice() {
         return mapper.rgx.apply(this, regexes.device);
       };
-      this.getEngine = function() {
+      getEngine() {
         return mapper.rgx.apply(this, regexes.engine);
       };
-      this.getOS = function() {
+      getOS() {
         return mapper.rgx.apply(this, regexes.os);
       };
-      this.getResult = function() {
+      getResult() {
         return {
           ua: this.getUA(),
           browser: this.getBrowser(),
@@ -458,48 +464,60 @@ export class BrowserService {
           cpu: this.getCPU()
         };
       };
-      this.getUA = function() {
-        return ua;
+      getUA() {
+        return this.ua;
       };
-      this.setUA = function(uastring: any) {
-        ua = uastring;
+
+      setUA(uastring: any) {
+        this.ua = uastring;
         return this;
       };
-      this.setUA(ua);
-    };
+    }
 
     /* tslint:disable */
     // Run parser.
-    var parser = new UAParser();
+    let parser = new UAParser();
     /* tslint:enable */
 
     // check device type
-    var isPhone = true,
-      isTablet = false,
-      isMobile = true,
-      isDesktop = false;
+    let isPhone = true,
+        isTablet = false,
+        isMobile = true,
+        isDesktop = false;
     // TEST 1 - screen size - vague indicator
-    var pixelratio = window.devicePixelRatio || 1;
-    var comparator = ((window.screen.height > window.screen.width) ? window.screen.height : window.screen.width) / pixelratio;
-    if (comparator > 500) { isPhone = false;
-      isTablet = true; }
-    if (comparator > 768) { isTablet = false;
-      isMobile = false;
-      isDesktop = true; }
-    // TEST 2 - ua - more specific
-    if (/mobile|android|midp|iphone|ipod|(windows nt 6\.2.+arm|touch)/.test(parser.getUA())) { isMobile = true;
-      isDesktop = false; }
-    if (/ipad/.test(parser.getUA())) { isPhone = false;
+    let pixelratio = window.devicePixelRatio || 1;
+
+    let comparator = ((window.screen.height > window.screen.width) ? window.screen.height : window.screen.width) / pixelratio;
+    if(comparator > 500) {
+      isPhone = false;
       isTablet = true;
-      isMobile = true;
-      isDesktop = false; }
-    if (/Macintosh/.test(parser.getUA())) { isPhone = false;
+    }
+    if(comparator > 768) {
       isTablet = false;
       isMobile = false;
-      isDesktop = true; }
+      isDesktop = true;
+    }
+
+     // TEST 2 - ua - more specific
+    if (/mobile|android|midp|iphone|ipod|(windows nt 6\.2.+arm|touch)/.test(parser.getUA())) {
+      isMobile = true;
+      isDesktop = false;
+    }
+    if (/ipad/.test(parser.getUA())) {
+      isPhone = false;
+      isTablet = true;
+      isMobile = true;
+      isDesktop = false;
+    }
+    if (/Macintosh/.test(parser.getUA())) {
+      isPhone = false;
+      isTablet = false;
+      isMobile = false;
+      isDesktop = true;
+    }
 
     // tidy variable to simplify certain if statements
-    var is = isPhone ? 'phone' : isTablet ? 'tablet' : 'desktop';
+    let is = isPhone ? 'phone' : isTablet ? 'tablet' : 'desktop';
 
     return {
       'name': parser.getResult().browser.name,
