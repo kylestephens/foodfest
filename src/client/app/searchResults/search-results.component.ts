@@ -15,7 +15,7 @@ import { FilterService }   from '../services/filter.service';
 })
 
 export class SearchResultsComponent {
-  sorts: Array<string> = CONSTANT.SEARCH_RESULTS.ORDER_BY;
+  sorts: Array<string> = CONSTANT.SEARCH_RESULTS_SORT;
   activeSort: string;
 
   constructor(private route: ActivatedRoute, private filterService: FilterService) {}
@@ -34,6 +34,6 @@ export class SearchResultsComponent {
 
    private deepLinked() {
     let params: any = this.route.snapshot.params;
-    this.activeSort = params.sort ? params.sort : CONSTANT.SEARCH_RESULTS.DEFAULT;
+    this.activeSort = params.sort ? params.sort : CONSTANT.vendor.DEFAULT_SORT;
   }
 }
