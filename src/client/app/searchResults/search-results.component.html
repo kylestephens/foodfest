@@ -1,36 +1,36 @@
 <div class= "search-results [ container ]">
+  <div class="[ row ]">
 
-  <div class="[ col-sm-3 col-xs-12 ]">
-    <div class="[ row ]">
-      <section class="search-results__filters">
+    <div class="[ col-sm-3 col-xs-12 ]">
+      <div class="search-results__filters">
         <ak-search-results-filters></ak-search-results-filters>
-      </section>
+      </div>
     </div>
-  </div>
 
-  <div class= "[ col-sm-9 col-xs-12 ]">
-    <div class="search-results__active [ row ]">
-      <section class = "[ col-sm-9 col-xs-12 ]">
-        <ak-search-results-active-filters></ak-search-results-active-filters>
-      </section>
+    <div class= "[ col-sm-9 col-xs-12 ]">
 
-      <section class="[ col-sm-3 col-xs-12 ]">
-        <div class="search-results__active-order [ row ]">
-          <label class="search-results__active-order__label">Sort by:</label>
-          <span>
-            <select class="search-results__active-order__select" (change)="onOrderByChange($event.target.value)">
-              <option *ngFor="let sort of sorts" [selected]="sort === activeSort">{{sort}}</option>
-            </select>
-          </span>
+      <div class ="[ row ] search-results__active">
+        <div class="[ col-sm-9 col-xs-12 ]">
+          <ak-search-results-active-filters></ak-search-results-active-filters>
         </div>
+        <div class="[ col-sm-3 col-xs-12 ]">
+          <div class="active-order">
+            <label class="active-order__label">Sort by:</label>
+            <div class="active-order__select">
+                <select class="active-order__select-dropdown" (change)="onOrderByChange($event.target.value)">
+                  <option *ngFor="let sort of sorts" [selected]="sort === activeSort">{{sort}}</option>
+                </select>
+               <span class="active-order__select-arrow ak-icon-chevron-thin-down"></span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      </section>
+      <div class= "search-results__list">
+        <ak-search-results-card-list></ak-search-results-card-list>
+      </div>
+
     </div>
 
-    <div class="[ row ]">
-      <section class= "search-results__list">
-      	 <ak-search-results-card-list></ak-search-results-card-list>
-      </section>
-    </div>
   </div>
 </div>

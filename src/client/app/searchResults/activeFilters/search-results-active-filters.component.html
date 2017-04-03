@@ -1,4 +1,4 @@
-<div class="search-active-filter [ row ]">
+<div class="search-active-filter">
   <span *ngFor="let activeFilter of activeFilters">
     <button class= "filter-button active-filter" (click)="onClick($event, activeFilter)">
       <a class="close-link">x</a>
@@ -13,8 +13,7 @@
         <span> & more</span>
 
       </span>
-
-  </button>
+    </button>
   </span>
 </div>
 

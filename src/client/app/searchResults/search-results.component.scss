@@ -1,34 +1,61 @@
 @import '../../scss/core/variables';
+@import '../../scss/core/settings';
 
 .search-results {
-  padding: 40px 0;
+   padding-top: 20px;
+   padding-bottom: 20px;
 
-  &__filters {
-    padding-right: 10px;
 
-    @media (max-width: $screen-xs-max) {
-      padding-right: 0;
-    }
+  @media (min-width: $screen-xs-min) {
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
 
   &__active {
-    padding-bottom: 15px;
-    display: flex;
-    align-items: center;
+    padding-bottom: 20px;
 
-    &-order {
-      float: right;
+    @media (min-width: $screen-xs-min) {
+      display: flex;
+      align-items: center;
+    }
+
+/**********custom made dropdown ************/
+    .active-order {
+      padding-right: 1px;
+
+      @media (min-width: $screen-xs-min) {
+        float: right;
+      }
 
       &__label {
         padding-right: 10px;
+        display: inline-block;
       }
 
       &__select {
-        min-width: 90px;
-        text-transform: capitalize;
+        display: inline-block;
+
+        &-dropdown {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          outline: 0;
+          min-width: 100px;
+          text-transform: capitalize;
+          border: 1px solid $brand-secondary;
+          border-radius: $brand-border-radius;
+          padding: 2px 10px;
+        }
+
+        &-arrow {
+          position: absolute;
+          top: 7px;
+          right: 24px;
+          pointer-events: none;
+        }
       }
     }
+/*****end of custom made dropdown********/
   }
 }
-
 
