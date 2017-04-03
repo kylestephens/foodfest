@@ -47,7 +47,7 @@ $error-text:      #D8000C;
 
   &--temporary {
     margin-left: 2.5%;
-    position: absolute;
+    display: block;
     opacity: 0.8;
     animation: fadein 1s;
   }

@@ -55,7 +55,6 @@ export class CreateListingStepThreeComponent {
   };
 
   public submitForm(value: any) {
-    debugger;
     if(this.stepThreeForm.valid) {
       this.localStorageService.store(
         CONSTANT.LOCALSTORAGE.LISTING_STEP_THREE,

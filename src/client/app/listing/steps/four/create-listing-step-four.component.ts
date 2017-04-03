@@ -1,6 +1,9 @@
 import {
   Component,
+  ElementRef,
   EventEmitter,
+  NgZone,
+  OnInit,
   Output
 }                                    from '@angular/core';
 import {
@@ -31,17 +34,20 @@ import { CONSTANT }                  from '../../../core/constant';
 export class CreateListingStepFourComponent {
 
   public stepFourForm: FormGroup;
+  public businessLogo: Object = null;
+  public coverImage: Object = null;
+  public additionalImages: Array<Object> = [];
+  private vendorId: number = 0;
 
   constructor(
     private fb: FormBuilder,
     private createListingService: CreateListingService,
     private localStorageService: LocalStorageService,
+    private ngZone: NgZone,
     private settingsService: SettingsService
   ) {
     this.stepFourForm = fb.group({
-      'businessLogo': new FormControl('', [
-          Validators.required
-        ]),
+      'businessLogo': [null],
       'businessCoverImage': [null],
       'businessAdditionalImages': [null],
       'businessDescription': new FormControl('', [
@@ -50,19 +56,110 @@ export class CreateListingStepFourComponent {
     });
   };
 
+  ngOnInit() {
+    var _formValues;
+    if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR)) {
+      // user might be returning from next step
+      // restore values to fields to allow them to edit their data
+      _formValues = this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR);
+      this._restoreFormValues(_formValues);
+    }
+    // TODO - reinstate after dev done
+    // if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.VENDOR_ID)) {
+    //   this.vendorId = this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.VENDOR_ID);
+    // }
+  };
+
+  /**
+   * TODO - sorry for the ugly code :-(
+   * 1. Check valid
+   * 2. Check whether a) new vendor or b) current vendor who is editing
+   * A.1 - Create vendor
+   * A.2 - If images, upload images
+   * B.1 - Update vendor details
+   * B.2 - If images, update images
+   **/
   public submitForm(value: any) {
     debugger;
+    var me = this;
     if(this.stepFourForm.valid) {
-      this.localStorageService.store(
-        CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR,
-        value
-      );
-      this._nextStep();
+      if(this.vendorId === 0) {
+        // if first time around - won't have created a vendor
+        this.localStorageService.store(
+          CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR,
+          value
+        );
+        this.createListingService.create().then((response: any) => {
+          debugger;
+          me.vendorId = response.id;
+          me.localStorageService.store(
+            CONSTANT.LOCALSTORAGE.VENDOR_ID,
+            me.vendorId
+          );
+          debugger;
+          if(me.businessLogo || me.coverImage || me.additionalImages.length > 0) {
+            me.createListingService.uploadVendorImages(
+              me.vendorId,
+              me.businessLogo,
+              me.coverImage,
+              me.additionalImages
+            ).then((response: any) => {
+              me._nextStep();
+            });
+          } else {
+            me._nextStep();
+          }
+        });
+      } else {
+         // second time around - reviewing / editing information
+      }
     } else {
       // user might have hit next button without completing
       // some mandatory fields - trigger validation ! :)
       for (var i in this.stepFourForm.controls) {
         this.stepFourForm.controls[i].markAsTouched();
+      }
+    }
+  };
+
+  public onChangeLogo = function(fileInput: any) {
+    if (fileInput.target.files && fileInput.target.files[0]) {
+      var me = this,
+        reader = new FileReader();
+
+      reader.onload = function (e : any) {
+        me.businessLogo = e.target.result;
+      }
+
+      reader.readAsDataURL(fileInput.target.files[0]);
+    }
+  };
+
+  public onChangeCover = function(fileInput: any) {
+    if (fileInput.target.files && fileInput.target.files[0]) {
+      var me = this,
+        reader = new FileReader();
+
+      reader.onload = function (e : any) {
+        me.coverImage = e.target.result;
+      }
+
+      reader.readAsDataURL(fileInput.target.files[0]);
+    }
+  };
+
+  public onChangeImages = function(fileInput: any) {
+    if (fileInput.target.files) {
+      var me = this;
+
+      for(var image of fileInput.target.files) {
+        this.ngZone.run(() => {
+          var reader = new FileReader();
+          reader.onload = function (e : any) {
+            me.additionalImages.push(e.target.result);
+          }
+          reader.readAsDataURL(image);
+        });
       }
     }
   };
@@ -73,6 +170,12 @@ export class CreateListingStepFourComponent {
 
   private _nextStep() {
     this.createListingService.nextStep();
+  };
+
+  private _restoreFormValues(values: any) {
+    if(values.businessDescription) {
+      this.stepFourForm.controls['businessDescription'].setValue(values.businessDescription);
+    }
   };
 
 };

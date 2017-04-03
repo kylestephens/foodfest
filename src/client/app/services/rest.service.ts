@@ -37,6 +37,19 @@ export class RestService {
       .toPromise();
   };
 
+  /**
+   * Use multipart/form-data when your form includes
+   * any <input type="file"> elements
+   **/
+  public postMultiPart = function (url: string, data: any, headers: any, options: any) {
+    var headers = headers || {};
+    headers['Content-Type'] = 'multipart/form-data';
+
+    return this.http
+      .post(url, data, headers)
+      .toPromise();
+  };
+
   public put = function (url: string, data: any, headers: any, options: any) {
     return this.http
       .put(url, data,)
@@ -55,26 +68,6 @@ function translateErrorCode(response: any) {
 };
 
 function transferRequestId(response: any) {
-};
-
-function makeRequest(http: Http, method: string, url: string, data: any, headers: any, options: any) {
-
-
-  // return $http({
-  //   method: method,
-  //   url: url,
-  //   data: data,
-  //   headers: headers
-  //   //timeout: config.restCallTimeout * 1000
-  // }).then(function (response: any) {
-  //   return response.data;
-  // }).catch(function (error: any) {
-  //   //translateErrorCode(error);
-  //   //transferRequestId(error);
-  //   //handleFailure(error, options);
-  //   return $q.reject(error);
-  // });
-
 };
 
 function urlEncode(data: any) {

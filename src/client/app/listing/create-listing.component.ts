@@ -49,6 +49,8 @@ export class CreateListingComponent {
           ['list-with-us/create-listing/step-1'],
           {relativeTo: this.route}
         );
+      } else {
+        this.currentStep = parseInt(val.url.slice(-1));
       }
     });
 
