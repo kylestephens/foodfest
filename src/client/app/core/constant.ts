@@ -30,7 +30,8 @@ export class CONSTANT extends CommonConstants {
     // Event messages from create listing screens
     CREATE_LISTING: {
       NEXT_STEP:            'nextStep',
-      PREVIOUS_STEP:        'previousStep'
+      PREVIOUS_STEP:        'previousStep',
+      PREVIEW_LISTING:      'previewListing'
     }
 
   };
@@ -88,7 +89,8 @@ export class CONSTANT extends CommonConstants {
     LISTING_STEP_THREE:     'listing.step.3',
     LISTING_STEP_FOUR:      'listing.step.4',
     LISTING_ADDRESS:        'listing.address',
-    VENDOR_ID:              'vendorId'
+    VENDOR_ID:              'vendorId',
+    VENDOR_IMAGES:          'vendorImages'
 
   };
 

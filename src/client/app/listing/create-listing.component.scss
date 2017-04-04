@@ -5,9 +5,13 @@
 $progress-bar-height: 55px;
 
 .progress-bar {
+  z-index: 2;
   width: 100%;
+  position: fixed;
   height: $progress-bar-height;
+  top: 80px;  // height of header
   border-bottom: 2px solid #efefef;
+  background: #fff;
 
   &__step {
     padding: 16px $padding-large-horizontal;
@@ -59,7 +63,8 @@ $progress-bar-height: 55px;
 }
 
 .form-card {
-  margin-top: $padding-xlarge-vertical;
+  margin-top: $progress-bar-height + $padding-xlarge-vertical;
+  margin-bottom: $progress-bar-height + $padding-xlarge-vertical;
   padding: $padding-large-vertical $padding-large-horizontal;
 }
 

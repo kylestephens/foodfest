@@ -72,31 +72,27 @@ export class CreateListingStepFourComponent {
 
   /**
    * TODO - sorry for the ugly code :-(
+   *
    * 1. Check valid
    * 2. Check whether a) new vendor or b) current vendor who is editing
+   *
    * A.1 - Create vendor
    * A.2 - If images, upload images
+   *
    * B.1 - Update vendor details
    * B.2 - If images, update images
-   **/
+   */
   public submitForm(value: any) {
-    debugger;
     var me = this;
     if(this.stepFourForm.valid) {
       if(this.vendorId === 0) {
         // if first time around - won't have created a vendor
-        this.localStorageService.store(
-          CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR,
-          value
-        );
+        this.localStorageService.store(CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR, value);
+
         this.createListingService.create().then((response: any) => {
-          debugger;
           me.vendorId = response.id;
-          me.localStorageService.store(
-            CONSTANT.LOCALSTORAGE.VENDOR_ID,
-            me.vendorId
-          );
-          debugger;
+          me.localStorageService.store(CONSTANT.LOCALSTORAGE.VENDOR_ID, me.vendorId);
+
           if(me.businessLogo || me.coverImage || me.additionalImages.length > 0) {
             me.createListingService.uploadVendorImages(
               me.vendorId,
@@ -104,6 +100,21 @@ export class CreateListingStepFourComponent {
               me.coverImage,
               me.additionalImages
             ).then((response: any) => {
+              let additionalImages: Array<string> = [];
+              if(response.images && response.images.length > 0) {
+                response.images.forEach((image: string) => {
+                  additionalImages.push(this.settingsService.getServerBaseUrl() + '/' + image);
+                });
+              }
+              let allImages = {
+                'businessLogo': this.settingsService.getServerBaseUrl() + '/' + response.business_logo,
+                'coverImage': this.settingsService.getServerBaseUrl() + '/' + response.cover_photo,
+                'businessAdditionalImages': additionalImages
+              };
+              me.localStorageService.store(
+                CONSTANT.LOCALSTORAGE.VENDOR_IMAGES,
+                allImages
+              );
               me._nextStep();
             });
           } else {
@@ -122,6 +133,9 @@ export class CreateListingStepFourComponent {
     }
   };
 
+  /**
+   * Convert logo image file into base64 encoded file
+   */
   public onChangeLogo = function(fileInput: any) {
     if (fileInput.target.files && fileInput.target.files[0]) {
       var me = this,
@@ -135,6 +149,9 @@ export class CreateListingStepFourComponent {
     }
   };
 
+  /**
+   * Convert cover image file into base64 encoded file
+   */
   public onChangeCover = function(fileInput: any) {
     if (fileInput.target.files && fileInput.target.files[0]) {
       var me = this,
@@ -148,6 +165,10 @@ export class CreateListingStepFourComponent {
     }
   };
 
+  /**
+   * Convert extra image files into array of
+   * base64 encoded files
+   */
   public onChangeImages = function(fileInput: any) {
     if (fileInput.target.files) {
       var me = this;
@@ -169,7 +190,7 @@ export class CreateListingStepFourComponent {
   };
 
   private _nextStep() {
-    this.createListingService.nextStep();
+    this.createListingService.previewListing();
   };
 
   private _restoreFormValues(values: any) {

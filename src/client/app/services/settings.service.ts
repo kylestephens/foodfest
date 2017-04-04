@@ -76,6 +76,9 @@ export class SettingsService {
             this.settings
           );
           this.settingsRetrived.emit();
+        })
+        .catch((err: any) => {
+          console.dir(err);
         });
     }
   };
