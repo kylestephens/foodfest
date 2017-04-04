@@ -25,6 +25,8 @@ import { CONSTANT }                            from '../core/constant';
   encapsulation: ViewEncapsulation.None
 })
 
+
+// TODO - Ensure logged in / signed up
 export class CreateListingComponent {
 
   public currentStep: number;
@@ -64,6 +66,9 @@ export class CreateListingComponent {
       if(subMessage.event && subMessage.event === CONSTANT.EVENT.CREATE_LISTING.PREVIOUS_STEP) {
         this._previousStep();
       }
+      if(subMessage.event && subMessage.event === CONSTANT.EVENT.CREATE_LISTING.PREVIEW_LISTING) {
+        this._previewListing();
+      }
     });
   };
 
@@ -81,6 +86,10 @@ export class CreateListingComponent {
     this.currentStep++;
     this.router.navigate(['list-with-us/create-listing/step-' + this.currentStep], {relativeTo: this.route});
     window.scrollTo(0, 0);
+  };
+
+  private _previewListing = function() {
+    // TODO !
   };
 
 };

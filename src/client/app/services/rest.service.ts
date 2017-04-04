@@ -14,6 +14,7 @@ export class RestService {
       .toPromise();
   };
 
+  // TODO - handle timeouts better, e.g. if server is down / slow
   public get = function (url: string, params?: any, headers?: any, options?: any) {
     let searchParams: URLSearchParams;
     if(params) {

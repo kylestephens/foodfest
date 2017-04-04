@@ -15,6 +15,9 @@ import { CONSTANT }             from '../../../core/constant';
 
 /**
  * This class represents the navigation bar component.
+ *
+ * TODO: handle scenario where account doesn't exist yet better
+ *
  */
 @Component({
   moduleId: module.id,

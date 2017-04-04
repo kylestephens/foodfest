@@ -36,6 +36,13 @@ export class CreateListingService {
     });
   };
 
+  public previewListing = function() {
+    console.debug('CreateListingService::previewListing');
+    this.subject.next({
+      event: CONSTANT.EVENT.CREATE_LISTING.PREVIEW_LISTING
+    });
+  };
+
   /**
    * Create a new Vendor
    * Note: Assumes form data from create listing steps
@@ -59,6 +66,7 @@ export class CreateListingService {
         CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR
       );
 
+      // TODO - handle LOCATION + ADDRESS
       this.restService.post(
         me.settingsService.getServerBaseUrl() + '/vendors/create', {
           id: null,
@@ -70,10 +78,7 @@ export class CreateListingService {
           event_type: stepOne.eventType,
           business_setup: stepOne.businessSetup,
           styles: stepOne.styles,
-          diet_requirements: stepOne.dietRequirements,
-          logo_path: stepFour.businessLogo,
-          images_path: stepFour.businessAdditionalImages,
-          cover_photo_path: stepFour.businessCoverImage
+          diet_requirements: stepOne.dietRequirements
         }
       ).then(function(response: any) {
         let responseBody = response.json();
@@ -111,9 +116,7 @@ export class CreateListingService {
       ).then(function(response: any) {
         let responseBody = response.json();
         resolve(responseBody);
-        debugger;
       }, function(reason: any) {
-        debugger;
         reject(reason);
         me.messagingService.show(
           'create-listing',
