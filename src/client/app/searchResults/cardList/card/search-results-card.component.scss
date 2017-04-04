@@ -2,7 +2,7 @@
 @import '../../../../scss/core/mixins';
 
 .search-card {
-	height: 310px;
+	height: 330px;
   padding: 0 0;
 
   &__image {
@@ -31,11 +31,15 @@
 
   &__title {
     font-size: $font-size-large;
+    overflow: hidden;
+    max-height: 57px;
   }
 
   &__rating {
     font-size: $font-size-medium;
     color: $brand-secondary;
+    position: absolute;
+    bottom: 10px;
   }
 
   &__style {

@@ -95,6 +95,6 @@ export class CONSTANT extends CommonConstants {
   /*
   * Search results order by options
   */
-  static readonly SEARCH_RESULTS_SORT = ['name', 'newest', 'oldest', 'rating'],
+  static readonly SEARCH_RESULTS_SORT = ['name', 'newest', 'oldest', 'rating'];
 
 };

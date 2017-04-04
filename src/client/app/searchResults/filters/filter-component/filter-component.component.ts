@@ -1,6 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component,
+         Input, Output,
+         ElementRef,
+         EventEmitter }     from '@angular/core';
 import { ActivatedRoute }   from '@angular/router';
 import { FilterService }    from '../../../services/filter.service';
+import { BrowserService }   from '../../../services/browser.service';
 import { SearchFilter }     from '../../../shared/model/searchFilter';
 import { Subscription }     from 'rxjs/Subscription';
 
@@ -30,25 +34,56 @@ export class FilterComponent {
   @Input()
   icon: string;
 
-  private subscription: Subscription;
+  /*
+  * Emit padding to be set on grandparent in phone mode
+  */
+  @Output()
+  notify: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor(private route: ActivatedRoute, private filterService: FilterService) {
-     this.subscription = filterService.filterRemovedFromActive.subscribe(
-        searchFilter => {
-          if(searchFilter.name === 'rating' && searchFilter.name === this.text) {
-            this.rating = 0;
-          }
-          else if(searchFilter.name === this.text) {
-            let index = this.records.map(function(record) { return record.id; }).indexOf(searchFilter.id);
-            if (index > -1) {
-             this.records[index].isSelected = searchFilter.isSelected;
+  isHidden: boolean = false;
+  paddingBottom: number = 0;
+
+  private subscriptions: Subscription[] = [];
+  private browser: any = this.browserService.get();
+  private isPhone: boolean = this.browser.deviceType === 'phone';
+  private elementToShow: HTMLElement = null;
+
+  constructor(private route: ActivatedRoute, private filterService: FilterService, private browserService: BrowserService) {
+    this.setVisiabilityPerScreenSize();
+
+    this.subscriptions.push(filterService.filterRemovedFromActive.subscribe(
+      searchFilter => {
+        if(searchFilter.name === 'rating' && searchFilter.name === this.text) {
+          this.rating = 0;
+        }
+        else if(searchFilter.name === this.text) {
+          let index = this.records.map(function(record) { return record.id; }).indexOf(searchFilter.id);
+          if (index > -1) {
+           this.records[index].isSelected = searchFilter.isSelected;
           }
         }
-      })
+      }));
+
+    if(this.isPhone) {
+      this.subscriptions.push(filterService.filterShown.subscribe(
+      name => {
+        if(name !== this.text) {
+          this.isHidden = true;
+        }
+      }));
+    }
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    for (let subscription of this.subscriptions) {
+      subscription.unsubscribe();
+    }
+  }
+
+  setVisiabilityPerScreenSize() {
+    if(this.isPhone) {
+      this.isHidden = true;
+    }
   }
 
   onClickRecord(event: any, record: any) {
@@ -77,6 +112,32 @@ export class FilterComponent {
 
     this.filterService.updateRouteParam(currentParams, this.text, ''+this.rating);
   }
+
+  /**
+  * Set padding of grandparent to height of content in phone mode
+  */
+  onClickFilterTitle(element: any) {
+    if(this.isPhone) {
+      this.isHidden = !this.isHidden;
+
+      if(!this.isHidden) {
+        this.filterService.showFilter(this.text);
+        this.elementToShow = this.elementToShow ? this.elementToShow : <HTMLElement> document.getElementsByClassName('filter-component__content '+ this.text)[0];
+        this.paddingBottom = this.paddingBottom ? this.paddingBottom : this.elementToShow.offsetHeight;
+      }
+      else {
+        this.paddingBottom = 0;
+      }
+      this.notify.emit(this.paddingBottom);
+    }
+  }
+
+  onClickCloseContent() {
+    this.isHidden = true;
+    this.paddingBottom = 0;
+    this.notify.emit(this.paddingBottom);
+  }
+
 }
 
 

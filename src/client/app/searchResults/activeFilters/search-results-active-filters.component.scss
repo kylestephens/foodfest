@@ -1,6 +1,13 @@
 @import '../../../scss/core/variables';
 
+$padding: 10px;
+
 .search-active-filter {
+
+   @media (max-width: $screen-xs-max) {
+      padding-top: $padding;
+      padding-bottom: $padding;
+    }
 
   .filter-button.active-filter {
     border: none;

@@ -17,6 +17,7 @@ import { FilterService }   from '../services/filter.service';
 export class SearchResultsComponent {
   sorts: Array<string> = CONSTANT.SEARCH_RESULTS_SORT;
   activeSort: string;
+  paddingBottom: number = 0;
 
   constructor(private route: ActivatedRoute, private filterService: FilterService) {}
 
@@ -35,5 +36,12 @@ export class SearchResultsComponent {
    private deepLinked() {
     let params: any = this.route.snapshot.params;
     this.activeSort = params.sort ? params.sort : CONSTANT.vendor.DEFAULT_SORT;
+  }
+
+  /*
+  * Sets padding of filter element to value emitted from grandchild in phone mode
+  */
+  onNotify(paddingBottom: number):void {
+    this.paddingBottom = paddingBottom;
   }
 }

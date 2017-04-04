@@ -1,26 +1,34 @@
 <div class="filter-component">
-  <div class="filter-component__title"><h4><span class="{{icon}} filter-component__title__icon"></span><span>{{title}}</span></h4></div>
 
-  <div *ngIf="records">
+  <div class="filter-component" (click)="onClickFilterTitle($event)">
+    <h4 class="filter-component__title">
+      <div class="{{icon}} filter-component__title-icon"></div>
+      <div class="filter-component__title-text">{{title}}</div>
+    </h4>
+  </div>
+
+  <div *ngIf="records" [ngClass]="isHidden ? 'offsetted' : 'nooffset'" class="filter-component__content {{text}}">
+    <span class="filter-component__content-close visible-xs-block" (click)="onClickCloseContent()">x</span>
     <span *ngFor="let record of records">
       <button class= "filter-button button-list" [ngClass]="{'selected': record.isSelected}" (click)="onClickRecord($event, record)">{{record.text}}</button>
     </span>
   </div>
 
-  <div *ngIf="rating || rating === 0">
+  <div *ngIf="rating || rating === 0" [ngClass]="isHidden ? 'offsetted' : 'nooffset'" class="filter-component__content rating">
+    <span class="filter-component__content-close visible-xs-block" (click)="onClickCloseContent()">x</span>
     <button class= "filter-button rating" [ngClass]="{'selected': rating > 0 }" (click)="onClickRating($event, 1)">
       <span [ngClass]="rating > 0 ? 'ak-icon-star-full' : 'ak-icon-star-empty'"></span>
-    </button>
-    <button class= "filter-button rating" [ngClass]="{'selected': rating > 1 }" (click)="onClickRating($event, 2)">
+    </button><!--
+     --><button class= "filter-button rating" [ngClass]="{'selected': rating > 1 }" (click)="onClickRating($event, 2)">
       <span [ngClass]="rating > 1 ? 'ak-icon-star-full' : 'ak-icon-star-empty'"></span>
-    </button>
-    <button class= "filter-button rating" [ngClass]="{'selected': rating > 2 }" (click)="onClickRating($event, 3)">
+    </button><!--
+     --><button class= "filter-button rating" [ngClass]="{'selected': rating > 2 }" (click)="onClickRating($event, 3)">
       <span [ngClass]="rating > 2 ? 'ak-icon-star-full' : 'ak-icon-star-empty'"></span>
-    </button>
-    <button class= "filter-button rating" [ngClass]="{'selected': rating > 3 }" (click)="onClickRating($event, 4)">
+    </button><!--
+     --><button class= "filter-button rating" [ngClass]="{'selected': rating > 3 }" (click)="onClickRating($event, 4)">
       <span [ngClass]="rating > 3 ? 'ak-icon-star-full' : 'ak-icon-star-empty'"></span>
-    </button>
-    <button class= "filter-button rating" [ngClass]="{'selected': rating > 4 }" (click)="onClickRating($event, 5)">
+    </button><!--
+     --><button class= "filter-button rating" [ngClass]="{'selected': rating > 4 }" (click)="onClickRating($event, 5)">
       <span [ngClass]="rating > 4 ? 'ak-icon-star-full' : 'ak-icon-star-empty'"></span>
     </button>
   </div>

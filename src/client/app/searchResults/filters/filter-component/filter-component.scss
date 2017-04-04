@@ -1,8 +1,10 @@
 @import '../../../../scss/core/settings';
 @import '../../../../scss/core/variables';
 
+$padding: 10px;
+
 .filter-component {
-  padding-bottom: 20px;
+  height: 100%;
 
   .filter-button {
 
@@ -11,21 +13,18 @@
     }
 
     &.rating {
-      display: block;
-      float: left;
+      display: inline-block;
       color: $brand-secondary;
       border-radius: 0;
+      border-left: none;
 
-      &:not(:first-child) {
-        border-left: none;
-      }
-
-      &:first-child {
+      &:nth-of-type(1) {
         border-top-left-radius: 3px;
         border-bottom-left-radius: 3px;
+        border-left: 1px solid $brand-secondary;
       }
 
-      &:last-child {
+      &:nth-of-type(5) {
         border-top-right-radius: 3px;
         border-bottom-right-radius: 3px;
       }
@@ -37,15 +36,76 @@
   }
 
   &__title {
-    font-weight: 400;
     color: $brand-secondary;
     padding-bottom: 5px;
+    text-align: center;
 
-    &__icon {
-      padding-right: 5px;
-      font-size: $font-size-base;
+    //when phone smaller font-size for titles of filters
+    @media (max-width: $screen-xs-max) {
+      font-size: $font-size-small;
+    }
+
+    //when bigger then phone show filter title icon and text in one line
+    @media (min-width: $screen-sm-max) {
+      display: flex;
+      align-items: center;
+      text-align: left;
+    }
+
+    &-icon {
+      padding-bottom: 5px;
+
+      //when phone make icons big to look more like buttons
+      @media (max-width: $screen-xs-min) {
+        font-size: 25px;
+      }
+
+      @media (min-width: $screen-sm-min) {
+        padding-right: 5px;
+        padding-bottom: 0;
+      }
+    }
+
+    &-text {
+      width: 99%;
+      margin: 0 auto;
+
+      @media (min-width: $screen-sm-min) {
+        width: 100%;
+        margin: auto;
+      }
     }
   }
+
+  &__content {
+
+    @media (min-width: $screen-sm-min) {
+      padding-bottom: 20px;
+    }
+
+    //when phone show buttons below filters, overrides flex showing on content
+    @media (max-width: $screen-xs-max) {
+      position: absolute;
+      left: floor(($grid-gutter-width / 2));  //simulates container padding left
+      right: floor(($grid-gutter-width / 2)); //simulates container padding right
+      padding-top: $padding;
+      padding-bottom: $padding;
+      border-top: 1px solid $brand-secondary;
+
+      &.rating {
+        text-align: center;
+      }
+
+      &-close {
+        float: right;
+        color: $brand-secondary;
+      }
+    }
+  }
+}
+
+.offsetted {
+  top: -1000px;
 }
 
 

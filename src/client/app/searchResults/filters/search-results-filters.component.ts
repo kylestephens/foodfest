@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute }   from '@angular/router';
 import { Style }            from '../../shared/model/style';
 import { DietRequirement }  from '../../shared/model/dietRequirement';
@@ -19,6 +19,13 @@ import { Subscription }     from 'rxjs/Subscription';
 })
 
 export class SearchResultsFiltersComponent {
+
+  /*
+  * Emit padding to be set on parent in phone mode
+  */
+  @Output()
+  notify: EventEmitter<number> = new EventEmitter<number>();
+
   private subscription: Subscription;
   styles: Style[];
   dietRequirements: DietRequirement[];
@@ -109,5 +116,12 @@ export class SearchResultsFiltersComponent {
       let searchFilter = new SearchFilter(name, selectedItem[0]);
       this.filterService.addFilter(searchFilter);
     }
+  }
+
+  /**
+  * Set padding of parent to height emitted from child in phone mode
+  */
+  onNotify(paddingBottom: number):void {
+    this.notify.emit(paddingBottom);
   }
 }

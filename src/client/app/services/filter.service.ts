@@ -14,6 +14,7 @@ export class FilterService {
   private filterAddedSubject = new Subject<any>();
   private filterRemovedSubject = new Subject<any>();
   private filterRemovedFromActiveSubject = new Subject<any>();
+  private filterShownSubject = new Subject<any>();
 
   constructor(
     private router: Router
@@ -23,6 +24,7 @@ export class FilterService {
   filterAdded = this.filterAddedSubject.asObservable();
   filterRemoved = this.filterRemovedSubject.asObservable();
   filterRemovedFromActive = this.filterRemovedFromActiveSubject.asObservable();
+  filterShown = this.filterShownSubject.asObservable();
 
   addFilter(searchFilter: SearchFilter) {
     this.filterAddedSubject.next(searchFilter);
@@ -34,6 +36,10 @@ export class FilterService {
 
   removeFilterFromActive(searchFilter: SearchFilter) {
     this.filterRemovedFromActiveSubject.next(searchFilter);
+  }
+
+  showFilter(name: string) {
+    this.filterShownSubject.next(name);
   }
 
   //queryParams possible keys: styles, dietreq, bustype, busset
