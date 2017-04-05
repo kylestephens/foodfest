@@ -55,26 +55,39 @@ $logo-size-phone:   140px;
   }
 }
 
-.business-description {
-  padding-top: $logo-size / 2.5;
-  padding-bottom: $padding-xlarge-vertical;
+.card {
+  margin-bottom: $padding-xlarge-vertical;
   padding-left: $padding-large-horizontal;
   padding-right: $padding-large-horizontal;
 }
 
-.business-specifics {
-  text-transform: capitalize;
+.business-description {
+  padding-top: $logo-size / 2.5;
+  padding-bottom: $padding-xlarge-vertical;
 }
 
-.location-details {
-  margin-top: $padding-xlarge-vertical;
-  margin-bottom: $padding-xlarge-vertical;
+.vendor-details {
+  text-transform: capitalize;
 
-  color: $gray-light;
+  &__item {
+    padding-bottom: $padding-large-vertical;
+  }
 
-  h4 {
+  &__heading {
+    padding-left: $padding-large-horizontal;
+  }
+
+  &__text {
+    display: block;
     margin-top: $padding-large-vertical;
-    margin-bottom: $padding-small-vertical;
+    padding-left: 35px + $padding-large-horizontal; // 35 is magic number to cover width of icon
+  }
+
+  &__icon {
+    font-size: 30px;
+    color: $brand-secondary;
+    position: relative;
+    top: 6px;
   }
 }
 
