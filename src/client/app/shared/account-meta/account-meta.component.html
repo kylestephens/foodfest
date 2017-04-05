@@ -30,7 +30,7 @@
     <span class="account-meta__icon ak-icon-user-circle"></span>
     <a (click)="toggleDropdown()" class="account-meta__dropdown-link js-admin-link">
       <span class="account-meta__name js-admin-link">
-        {{firstName}}
+        {{firstname}}
       </span>
       <span class="account-meta__dropdown-icon ak-icon-chevron-thin-down js-admin-link"></span>
     </a>
@@ -39,29 +39,30 @@
 
   <div class="admin-dropdown dropdown-menu">
     <ul>
-      <li class="js-admin-link">
+    <!-- not needed for now -->
+      <!-- <li class="js-admin-link">
         <a ng-href="#/admin/dashboard">
           Dashboard
         </a>
-      </li>
+      </li> -->
       <li class="js-admin-link">
-        <a ng-href="#/admin/profile">
-          Profile
+        <a [routerLink]="['/dashboard/profile']">
+          My Profile
         </a>
       </li>
       <li class="js-admin-link">
-        <a ng-href="#/admin/my-listing">
-          My Listing
+        <a [routerLink]="['/dashboard/businesses']">
+          My Businesses
         </a>
       </li>
       <li class="js-admin-link">
-        <a ng-href="#/admin/messages">
+        <a [routerLink]="['/dashboard/inbox']">
           Messages
         </a>
       </li>
       <li class="js-admin-link">
-        <a ng-href="#/admin/saved-ads">
-          Saved Ads
+        <a [routerLink]="['/dashboard/favourites']">
+          Favourites
         </a>
       </li>
       <li class="js-admin-link">

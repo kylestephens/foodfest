@@ -28,7 +28,7 @@ export class FacebookService {
   public login = function() {
     var me = this;
     this.defer = new Promise((resolve, reject) => {
-      FB.getLoginStatus(response => {
+      FB.getLoginStatus((response: any) => {
         me.statusChangeCallback(resolve, reject, response);
       });
     });
@@ -63,7 +63,7 @@ export class FacebookService {
   };
 
   private _facebookDetails(resolve: Function) {
-    FB.api('/me?fields=name,email,picture', (response: any) => {
+    FB.api('/me?fields=name,email', (response: any) => {
       resolve(response);
     });
   };

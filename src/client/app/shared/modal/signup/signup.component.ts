@@ -37,13 +37,11 @@ export class SignupComponent {
     private messagingService: MessagingService,
     private modalService: ModalService
   ) {
-    var me = this;
-
     // subscribe to modal service messages
     this.modalSubscription = this.modalService.getMessage().subscribe(subMessage => {
       console.debug('SignupComponent::modalSubscription');
       if(subMessage.event && subMessage.event === CONSTANT.EVENT.MODAL.HIDE_MODAL) {
-        me.isEmailSignUp = false;
+        this.isEmailSignUp = false;
       }
     });
 
@@ -52,10 +50,9 @@ export class SignupComponent {
       console.debug('SignupComponent::accountSubscription');
       if(subMessage.event && subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN &&
         subMessage.sessionStatus) {
-        me.modalService.hide();
+        this.modalService.hide();
       }
     });
-
   };
 
   ngOnDestroy() {
@@ -65,34 +62,38 @@ export class SignupComponent {
 
   // ------   Component Logic / Public   ------ //
   public facebookSignUp = function() {
-    var me = this;
     event.stopPropagation();
-    this.facebookService.login().then((response: any) => {
-      me.accountService.setFacebookDetails(response);
-      me._createAccount();
-    }, function(reason: any) {
-      me.messagingService.show(
-        'modal',
-        CONSTANT.MESSAGING.ERROR,
-        reason.statusText ? reason.statusText : 'An unexpected error has occurred'
-      );
-    });
+    this.facebookService.login().then(
+      (response: any) => {
+        this.accountService.setFacebookDetails(response);
+        this._createAccount();
+      },
+      (reason: any) => {
+        this.messagingService.show(
+          'modal',
+          CONSTANT.MESSAGING.ERROR,
+          reason.statusText ? reason.statusText : 'An unexpected error has occurred'
+        );
+      }
+    );
   }
 
   public googleSignUp = function() {
     console.debug('SignupComponent::googleSignUp');
-    var me = this;
     event.stopPropagation();
-    this.googleService.login().then((response: any) => {
-      me.accountService.setGoogleDetails(response);
-      me._createAccount();
-    }, function(reason: any) {
-      me.messagingService.show(
-        'modal',
-        CONSTANT.MESSAGING.ERROR,
-        reason.statusText ? reason.statusText : 'An unexpected error has occurred'
-      );
-    });
+    this.googleService.login().then(
+      (response: any) => {
+        this.accountService.setGoogleDetails(response);
+        this._createAccount();
+      },
+      (reason: any) => {
+        this.messagingService.show(
+          'modal',
+          CONSTANT.MESSAGING.ERROR,
+          reason.statusText ? reason.statusText : 'An unexpected error has occurred'
+        );
+      }
+    );
   }
 
   public emailSignUp = function() {
@@ -102,28 +103,23 @@ export class SignupComponent {
 
   public submitEmailDetails = function(isValid: boolean) {
     if(isValid) {
-      this.accountService.setName(this.model.fullName);
-      this.accountService.setPassword(this.model.password);
-      this.accountService.setEmail(this.model.email);
+      this.accountService.setEmailDetails(this.model);
       this._createAccount();
     }
   }
 
   private _createAccount() {
     console.debug('SignupComponent::_createAccount');
-    var me = this;
-    this.accountService.createAccount().then(function(response: any) {
-      let responseBody = response.json();
-      me.accountService.setAkAccessToken(responseBody.token);
-      me.accountService.setLoggedIn(true);
-    }, function(reason: any) {
-      me.accountService.setLoggedIn(false);
-      me.messagingService.show(
-        'modal',
-        CONSTANT.MESSAGING.ERROR,
-        reason.statusText ? reason.statusText : 'An unexpected error has occurred'
-      );
-    });
+    this.accountService.createAccount().then(
+      (response: any) => {},
+      (reason: any) => {
+        this.messagingService.show(
+          'modal',
+          CONSTANT.MESSAGING.ERROR,
+          reason.statusText ? reason.statusText : 'An unexpected error has occurred'
+        );
+      }
+    );
   }
 
-};
+}

@@ -31,7 +31,6 @@ export class SigninComponent {
   private accountSubscription: Subscription;
   private firstName: string = '';
   private lastName: string = '';
-  private avatar: string = '';
   private loggedIn: boolean = false;
 
   model = new LoginDetails();
@@ -43,21 +42,16 @@ export class SigninComponent {
     private messagingService: MessagingService,
     private modalService: ModalService
   ) {
-    var me = this;
 
-    this.loggedIn = this.accountService.isLoggedIn();
-
-    if(this.loggedIn) {
-      me.firstName = me.accountService.getFirstName();
-      me.avatar = me.accountService.getProfilePictureUrl();
+    if(this.accountService.isLoggedIn()) {
+      this.firstName = this.accountService.getUser().firstName;
     }
 
     // subscribe to account service messages
     this.accountSubscription = this.accountService.getMessage().subscribe(subMessage => {
       console.debug('SignupComponent::accountSubscription');
-      if(subMessage.event && subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN &&
-        subMessage.sessionStatus) {
-        me.modalService.hide();
+      if(subMessage.event && subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN && subMessage.sessionStatus) {
+        this.modalService.hide();
       }
     });
   };
@@ -67,51 +61,50 @@ export class SigninComponent {
   };
 
   public facebookSignIn = function () {
-    var me = this;
     event.stopPropagation();
-    this.facebookService.login().then((response: any) => {
-      me.accountService.setFacebookDetails(response);
-      me._setupSession();
-    }, function(reason: any) {
-      me.modalService.hide();
-    });
+    this.facebookService.login().then(
+      (response: any) => {
+        this.accountService.setFacebookDetails(response);
+        this._setupSession();
+      },
+      (reason: any) => {
+        this.modalService.hide();
+      }
+    );
   };
 
   public googleSignIn = function () {
-    var me = this;
     event.stopPropagation();
-    this.googleService.login().then((response: any) => {
-      me.accountService.setGoogleDetails(response);
-      me._setupSession();
-    }).catch((reason: string) => {
-      me.modalService.hide();
-    });
+    this.googleService.login().then(
+      (response: any) => {
+        this.accountService.setGoogleDetails(response);
+        this._setupSession();
+      },
+      (reason: string) => {
+        this.modalService.hide();
+      }
+    );
   };
 
   public submitEmailDetails = function(isValid: boolean) {
     event.stopPropagation();
     if(isValid) {
-      this.accountService.setEmail(this.model.email);
-      this.accountService.setPassword(this.model.password);
+      this.accountService.setEmailDetails(this.model);
       this._setupSession();
     }
   };
 
   private _setupSession = function() {
-    var me = this;
-    this.accountService.login().then(function(response: any) {
-      let responseBody = JSON.parse(response._body);
-      me.accountService.setName(responseBody.firstname);
-      me.accountService.setAkAccessToken(responseBody.token);
-      me.accountService.setLoggedIn(true);
-    }, function(reason: any) {
-      me.accountService.setLoggedIn(false);
-      me.messagingService.show(
-        'modal',
-        CONSTANT.MESSAGING.ERROR,
-        reason.statusText ? reason.statusText : 'An unexpected error has occurred'
-      );
-    });
+    this.accountService.login().then(
+      (response: any) => {},
+      (reason: any) => {
+        this.messagingService.show(
+          'modal',
+          CONSTANT.MESSAGING.ERROR,
+          reason.statusText ? reason.statusText : 'An unexpected error has occurred'
+        );
+      }
+    );
   };
 
-};
+}

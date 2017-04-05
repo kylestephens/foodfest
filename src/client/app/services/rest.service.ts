@@ -55,7 +55,7 @@ export class RestService {
     return this.http
       .put(url, data,)
       .toPromise()
-      .then(response => response.json().data)
+      .then((response:any) => response.json().data)
       .catch(handleFailure);
   };
 

@@ -83,9 +83,7 @@ export class CreateListingService {
       ).then(function(response: any) {
         let responseBody = response.json();
         resolve(responseBody);
-        debugger;
       }, function(reason: any) {
-        debugger;
         reject(reason);
         me.messagingService.show(
           'create-listing',

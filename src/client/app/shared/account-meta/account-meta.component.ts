@@ -21,8 +21,7 @@ export class AccountMetaComponent {
   private subscription: Subscription;
   private subMessage: any;
 
-  public firstName: string = this.accountService.getFirstName();;
-  public avatar: string = '';
+  public firstname: string = this.accountService.getUser().firstname;
   public loggedIn: boolean = false;
   public adminDropdownActive: boolean = false;
   public firstClick: boolean = false;
@@ -40,8 +39,7 @@ export class AccountMetaComponent {
       if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN) {
         me.loggedIn = subMessage.sessionStatus;
         if(me.loggedIn) {
-          me.firstName = me.accountService.getFirstName();
-          me.avatar = me.accountService.getProfilePictureUrl();
+          me.firstname = me.accountService.getUser().firstname;
         }
       }
     });
@@ -81,7 +79,7 @@ export class AccountMetaComponent {
     window.location.pathname = '/';
   }
 
-  private bodyClick = function(event) {
+  private bodyClick = function(event: any) {
     if(!event.target.classList.contains('js-admin-link')) {
       var adminDropdown = document.getElementsByClassName('admin-dropdown')[0];
       adminDropdown.classList.remove('admin-dropdown--active');

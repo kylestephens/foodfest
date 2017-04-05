@@ -6,7 +6,6 @@ import { SettingsService }   from './settings.service';
 
 @Injectable()
 export class VendorService {
-  vendors: Vendor[];
 
   constructor(
     private restService: RestService,

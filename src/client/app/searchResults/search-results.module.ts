@@ -15,7 +15,7 @@ import { SelectModule }                     from 'ng2-select';
     SearchResultsActiveFiltersModule,
     SearchResultsFiltersModule,
     SelectModule,
-    SharedModule,
+    SharedModule
   ],
   declarations: [SearchResultsComponent]
 })
