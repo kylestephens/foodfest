@@ -7,11 +7,14 @@ import { CreateListingStepOneComponent }   from './steps/one/create-listing-step
 import { CreateListingStepTwoComponent }   from './steps/two/create-listing-step-two.component';
 import { CreateListingStepThreeComponent } from './steps/three/create-listing-step-three.component';
 import { CreateListingStepFourComponent }  from './steps/four/create-listing-step-four.component';
+import { VendorPageComponent }             from './vendorPage/vendor-page.component';
+import { CONSTANT }                 from '../core/constant';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'list-with-us', component: ListingMasterComponent,
+      {
+        path: 'list-with-us', component: ListingMasterComponent,
         children: [
           { path: '', redirectTo: 'details', pathMatch: 'full' },
           { path: 'details', component: ListingDetailComponent },
@@ -26,6 +29,8 @@ import { CreateListingStepFourComponent }  from './steps/four/create-listing-ste
           }
           //{ path: 'make-payment', component: MakePayment }
         ]
+      }, {
+        path: 'vendor', component: VendorPageComponent
       }
     ])
   ],

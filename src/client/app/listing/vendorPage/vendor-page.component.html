@@ -1,0 +1,126 @@
+<article>
+
+  <header class="hero"
+    [ngStyle]="{'background-image': 'url(' + coverPhotoUrl + ')'}">
+
+    <div class="hero__overlay">
+      <div class="[ container ]">
+        <div class="[ row ]">
+          <div class="[ col-xs-12 ]">
+            <img class="hero__business-logo" [src]="businessLogoUrl">
+            <h2 class="hero__business-name">
+              {{ businessName }}
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </header>
+
+  <section class="[ container ]">
+
+    <div class="card [ row ]">
+      <div class="business-description [ col-xs-12 ]">
+        {{ businessDescription }}
+      </div>
+    </div>
+
+  </section>
+
+  <section class="[ container ]">
+
+    <div class="card [ row ]">
+      <div class="vendor-details [ col-sm-6 col-xs-12 ]">
+        <div class="vendor-details__item" *ngIf="styles">
+          <h4>
+            <span class="vendor-details__icon ak-icon-style"></span>
+            <span class="vendor-details__heading">Cooking Style</span>
+          </h4>
+          <span class="vendor-details__text">{{ styles }}</span>
+        </div>
+
+        <div class="vendor-details__item" *ngIf="eventTypes">
+          <h4>
+            <span class="vendor-details__icon ak-icon-event-type"></span>
+            <span class="vendor-details__heading">Event Served</span>
+          </h4>
+          <span class="vendor-details__text">{{ eventTypes }}</span>
+        </div>
+      </div>
+      <div class="vendor-details [ col-sm-6 col-xs-12 ]">
+        <div class="vendor-details__item" *ngIf="businessSetup">
+          <h4>
+            <span class="vendor-details__icon ak-icon-business-setup"></span>
+            <span class="vendor-details__heading">Business Setup</span>
+          </h4>
+          <span class="vendor-details__text">{{ businessSetup }}</span>
+        </div>
+
+        <div class="vendor-details__item" *ngIf="dietRequirements">
+          <h4>
+            <span class="vendor-details__icon ak-icon-diet-requirements"></span>
+            <span class="vendor-details__heading">Diet Requirements Catered</span>
+          </h4>
+          <span class="vendor-details__text">{{ dietRequirements }}</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="[ container ]">
+
+    <div class="vendor-details card [ row ]">
+
+      <div class="[ col-sm-8 col-xs-12" *ngIf="mapLatitude && mapLongitude">
+        <sebm-google-map
+          [latitude]="mapLatitude"
+          [longitude]="mapLongitude"
+          [zoom]="zoomLevel"
+          [disableDefaultUI]="false"
+          [zoomControl]="true"
+          [styles]="mapStyles">
+          <sebm-google-map-marker
+            [latitude]="mapLatitude"
+            [longitude]="mapLongitude"
+            [markerDraggable]="false"
+            [iconUrl]="'assets/icons/svg/map-pin.svg'">
+            <sebm-google-map-info-window>
+              <strong>{{ businessName }}</strong>
+            </sebm-google-map-info-window>
+          </sebm-google-map-marker>
+        </sebm-google-map>
+      </div>
+
+      <div class="vendor-details [ col-sm-4 col-xs-12">
+        <div class="vendor-details__item" *ngIf="businessAddress">
+          <h4>
+            <span class="vendor-details__icon ak-icon-location"></span>
+            <span class="vendor-details__heading">Address</span>
+          </h4>
+          <span class="vendor-details__text">{{ businessAddress }}</span>
+        </div>
+
+        <div class="vendor-details__item" *ngIf="businessWebsite">
+          <h4>
+            <span class="vendor-details__icon ak-icon-earth"></span>
+            <span class="vendor-details__heading">Website</span>
+          </h4>
+          <span class="vendor-details__text">{{ businessWebsite }}</span>
+        </div>
+
+        <div class="vendor-details__item" *ngIf="businessPhoneNum">
+          <h4>
+            <span class="vendor-details__icon ak-icon-phone"></span>
+            <span class="vendor-details__heading">Phone</span>
+          </h4>
+          <span class="vendor-details__text">{{ businessPhoneNum }}</span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+</article>

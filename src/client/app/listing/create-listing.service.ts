@@ -65,13 +65,21 @@ export class CreateListingService {
       let stepFour = this.localStorageService.retrieve(
         CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR
       );
+      let addressInfo = this.localStorageService.retrieve(
+        CONSTANT.LOCALSTORAGE.LISTING_ADDRESS
+      );
 
-      // TODO - handle LOCATION + ADDRESS
       this.restService.post(
         me.settingsService.getServerBaseUrl() + '/vendors/create', {
           id: null,
           user_id: '1',
           business_name: stepOne.businessName,
+          business_address: stepTwo.businessAddress,
+          business_latitude: addressInfo.geometry.location.lat,
+          business_longitude: addressInfo.geometry.location.lng,
+          facebook_address: stepThree.facebookAddress,
+          twitter_address: stepThree.twitterAddress,
+          instagram_address: stepThree.instagramAddress,
           business_type: stepOne.businessType,
           phone_number: stepTwo.phoneNumber,
           description: stepFour.businessDescription,

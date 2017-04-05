@@ -9,6 +9,7 @@ import { CreateListingStepThreeComponent } from './steps/three/create-listing-st
 import { CreateListingStepFourComponent }  from './steps/four/create-listing-step-four.component';
 import { ListingDetailComponent } from './detail/listing-detail.component';
 import { ListingMasterComponent } from './listing-master.component';
+import { VendorPageComponent }    from './vendorPage/vendor-page.component';
 import { ListingRoutingModule }   from './listing-routing.module';
 
 import { SharedModule }           from '../shared/shared.module';
@@ -35,7 +36,8 @@ import { SelectModule }           from 'ng2-select';
     CreateListingStepThreeComponent,
     CreateListingStepFourComponent,
     ListingDetailComponent,
-    ListingMasterComponent
+    ListingMasterComponent,
+    VendorPageComponent
   ],
   exports: [
     CreateListingComponent,
@@ -44,7 +46,8 @@ import { SelectModule }           from 'ng2-select';
     CreateListingStepThreeComponent,
     CreateListingStepFourComponent,
     ListingDetailComponent,
-    ListingMasterComponent
+    ListingMasterComponent,
+    VendorPageComponent
   ],
   providers: [
     CreateListingService
