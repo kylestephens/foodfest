@@ -31,6 +31,10 @@ export class VendorPageComponent implements OnInit {
   public mapLatitude: number;
   public mapLongitude: number;
   public zoomLevel: number = 15;        // google maps zoom level
+  public styles: string;
+  public businessSetup: string;
+  public eventTypes: string;
+  public dietRequirements: string;
   public mapStyles: MapTypeStyle[] = [
     {
       "elementType": "geometry",
@@ -277,10 +281,24 @@ export class VendorPageComponent implements OnInit {
       this.mapLongitude = address.geometry.location.lng;
       this.businessAddress = stepTwo.businessAddress;
     }
+    this.styles = this._formatFilterString(stepOne.styles);
+    this.businessSetup = this._formatFilterString(stepOne.businessSetup);
+    this.eventTypes = this._formatFilterString(stepOne.eventType);
+    this.dietRequirements = this._formatFilterString(stepOne.dietRequirements);
     this.businessName = stepOne.businessName;
     this.businessPhoneNum = stepTwo.phoneNumber;
     this.businessWebsite = stepTwo.businessWebsite;
     this.businessDescription = stepFour.businessDescription;
+  }
+
+  private _formatFilterString(filterObject: any): string {
+    if (!filterObject) return '';
+    let formattedStr = '';
+    filterObject.forEach((filter: any, index: number) => {
+      if(index > 0) formattedStr += ', '
+      formattedStr += filter.text;
+    });
+    return formattedStr;
   }
 
 }

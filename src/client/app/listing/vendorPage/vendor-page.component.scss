@@ -62,6 +62,10 @@ $logo-size-phone:   140px;
   padding-right: $padding-large-horizontal;
 }
 
+.business-specifics {
+  text-transform: capitalize;
+}
+
 .location-details {
   margin-top: $padding-xlarge-vertical;
   margin-bottom: $padding-xlarge-vertical;

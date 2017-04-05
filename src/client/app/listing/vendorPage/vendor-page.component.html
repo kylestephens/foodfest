@@ -20,9 +20,38 @@
 
   <section class="[ container ]">
 
-    <div class="[ row ]">
-      <div class="business-description card [ col-xs-12 ]">
+    <div class="card [ row ]">
+      <div class="business-description [ col-xs-12 ]">
         {{ businessDescription }}
+      </div>
+    </div>
+
+  </section>
+
+  <section class="[ container ]">
+
+    <div class="card [ row ]">
+      <div class="business-specifics [ col-sm-6 col-xs-12 ]">
+        <div *ngIf="styles" class="[ row ]">
+          <span class="ak-icon-style"></span>
+          {{ styles }}
+        </div>
+
+        <div *ngIf="eventTypes" class="[ row ]">
+          <span class="ak-icon-event-type"></span>
+          {{ eventTypes }}
+        </div>
+      </div>
+      <div *ngIf="businessSetup" class="business-specifics [ col-sm-6 col-xs-12 ]">
+        <div class="[ row ]">
+          <span class="ak-icon-business-setup"></span>
+          {{ businessSetup }}
+        </div>
+
+        <div *ngIf="dietRequirements" class="[ row ]">
+          <span class="ak-icon-diet-requirements"></span>
+          {{ dietRequirements }}
+        </div>
       </div>
     </div>
 
