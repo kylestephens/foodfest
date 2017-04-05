@@ -28,6 +28,7 @@ import { CONSTANT }                  from '../../../core/constant';
 export class CreateListingStepOneComponent implements OnInit {
 
   // These objects consist of 'name' + 'id'
+  private styles: Array<any> = [];
   private businessSetups: Array<any> = [];
   private businessTypes: Array<any> = [];
   private eventTypes: Array<any> = [];
@@ -49,6 +50,7 @@ export class CreateListingStepOneComponent implements OnInit {
       'businessType': [null, Validators.required],
       'businessSetup': [null, Validators.required],
       'eventType': [null, Validators.required],
+      'styles': [null],
       'dietRequirements': [null]
     });
   };
@@ -85,6 +87,7 @@ export class CreateListingStepOneComponent implements OnInit {
   };
 
   private _initDropdowns() {
+    this.styles = this.settingsService.getStyles();
     this.businessSetups = this.settingsService.getBusinessSetups();
     this.businessTypes = this.settingsService.getBusinessTypes();
     this.eventTypes = this.settingsService.getEventTypes();
@@ -92,6 +95,9 @@ export class CreateListingStepOneComponent implements OnInit {
   };
 
   private _restoreFormValues(values: any) {
+    if(values.styles) {
+      this.stepOneForm.controls['styles'].setValue(values.styles);
+    }
     if(values.businessName) {
       this.stepOneForm.controls['businessName'].setValue(values.businessName);
     }

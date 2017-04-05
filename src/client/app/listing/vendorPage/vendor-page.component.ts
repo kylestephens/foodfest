@@ -8,6 +8,8 @@ import {
 }                                 from 'angular2-google-maps/core';
 import { CONSTANT }               from '../../core/constant';
 
+declare var google: any;
+
 /**
  * This class represents the lazy loaded ListingComponent.
  */
@@ -27,7 +29,7 @@ export class VendorPageComponent implements OnInit {
   public businessAddress: string;
   public mapLatitude: number;
   public mapLongitude: number;
-  public zoomLevel: number = 16;        // google maps zoom level
+  public zoomLevel: number = 15;        // google maps zoom level
   public mapStyles: MapTypeStyle[] = [
     {
       "elementType": "geometry",

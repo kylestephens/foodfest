@@ -85,6 +85,30 @@
   </div>
   <!-- / Event Types -->
 
+  <!-- Cooking Styles -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-6 col-xs-12 ]">
+      <label class="form-label">Cooking Styles</label>
+      <div class="form-select-wrapper">
+        <div class="form-select">
+          <ng-select
+            [multiple]="true"
+            [items]="styles"
+            placeholder="No category selected"
+            formControlName="styles"></ng-select>
+          </div>
+      </div>
+      <ak-form-messages [control]="stepOneForm.controls.styles">
+      </ak-form-messages>
+    </div>
+    <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
+      <div class="form-field-description">
+        Adding Cooking Styles will help customers find your business faster
+      </div>
+    </div>
+  </div>
+  <!-- / Cooking Styles -->
+
   <!-- Dietary Requirements Supported -->
   <div class="form-row [ row ]">
     <div class="[ col-sm-6 col-xs-12 ]">
