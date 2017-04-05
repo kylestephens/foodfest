@@ -11,7 +11,8 @@ export class CONSTANT extends CommonConstants {
 
     // Event messages coming from AccountService
     SESSION: {
-      LOGGED_IN:            'loggedInStatus'
+      LOGGED_IN:            'loggedInStatus',
+      USER_TYPE:            'userType'
     },
 
     // Event messages coming from MessagingService

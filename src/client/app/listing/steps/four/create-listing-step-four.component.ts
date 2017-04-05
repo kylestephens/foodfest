@@ -94,7 +94,7 @@ export class CreateListingStepFourComponent {
         this.createListingService.create().then((response: any) => {
           me.vendorId = response.id;
           me.localStorageService.store(CONSTANT.LOCALSTORAGE.VENDOR_ID, me.vendorId);
-          me.accountService.updateUserLocalStorage();
+          me.accountService.updateUserLocalStorage(CONSTANT.user.types.VENDOR.code);
 
           if(me.businessLogo || me.coverImage || me.additionalImages.length > 0) {
             me.createListingService.uploadVendorImages(

@@ -21,29 +21,33 @@ export class AccountMetaComponent {
   private subscription: Subscription;
   private subMessage: any;
 
-  public firstname: string = this.accountService.getUser().firstname;
+  public firstname: string;
+  public userType: number;
+  public isVendor: boolean = false;
   public loggedIn: boolean = false;
   public adminDropdownActive: boolean = false;
   public firstClick: boolean = false;
 
-  constructor(
-    private accountService: AccountService,
-    private modalService: ModalService
-  ) {
-    var me = this;
-    this.loggedIn = this.accountService.isLoggedIn();
+  constructor(private accountService: AccountService, private modalService: ModalService) {
+    this.setUserDetails();
 
     // subscribe to account service messages
     this.subscription = this.accountService.getMessage().subscribe(subMessage => {
       console.debug('AccountMetaComponent::subscription');
-      if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN) {
-        me.loggedIn = subMessage.sessionStatus;
-        if(me.loggedIn) {
-          me.firstname = me.accountService.getUser().firstname;
+      if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN || subMessage.event === CONSTANT.EVENT.SESSION.USER_TYPE) {
+        if(this.accountService.isLoggedIn()) {
+          this.setUserDetails();
         }
       }
     });
-  };
+  }
+
+  setUserDetails() {
+    this.firstname = this.accountService.getUser().firstname;
+    this.userType = this.accountService.getUser().user_type;
+    this.isVendor = (this.accountService.getUser().user_type === CONSTANT.user.types.VENDOR.code) ? true : false;
+    this.loggedIn = this.accountService.isLoggedIn();
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();

@@ -50,7 +50,7 @@
           My Profile
         </a>
       </li>
-      <li class="js-admin-link">
+      <li class="js-admin-link" [ngClass]="!isVendor ? 'hidden' : ''">
         <a [routerLink]="['/dashboard/businesses']">
           My Businesses
         </a>

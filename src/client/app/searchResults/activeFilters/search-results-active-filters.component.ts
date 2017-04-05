@@ -1,6 +1,6 @@
 import { Component }       from '@angular/core';
 import { ActivatedRoute }  from '@angular/router';
-import { FilterService }   from '../../services/filter.service';
+import { FilterService }   from '../filter.service';
 import { Subscription }    from 'rxjs/Subscription';
 import { SearchFilter }     from './../../shared/model/searchFilter';
 
@@ -55,9 +55,9 @@ export class SearchResultsActiveFiltersComponent {
   }
 
   ngOnDestroy() {
-      for (let subscription of this.subscriptions) {
-        subscription.unsubscribe();
-      }
+    for (let subscription of this.subscriptions) {
+      subscription.unsubscribe();
+    }
   }
 
   onClick(event: any, searchFilter: SearchFilter) {

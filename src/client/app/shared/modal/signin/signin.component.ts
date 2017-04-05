@@ -50,7 +50,7 @@ export class SigninComponent {
     // subscribe to account service messages
     this.accountSubscription = this.accountService.getMessage().subscribe(subMessage => {
       console.debug('SignupComponent::accountSubscription');
-      if(subMessage.event && subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN && subMessage.sessionStatus) {
+      if(subMessage.event && subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN && accountService.isLoggedIn()) {
         this.modalService.hide();
       }
     });

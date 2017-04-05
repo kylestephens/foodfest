@@ -83,11 +83,10 @@ export class AccountService {
   setLoggedIn = function (newSessionStatus: boolean) {
     console.debug('AccountService::setLoggedIn: ' + newSessionStatus);
     if(this.loggedIn !== newSessionStatus) {
-      this.subject.next({
-        event: CONSTANT.EVENT.SESSION.LOGGED_IN,
-        sessionStatus: newSessionStatus
-      });
       this.loggedIn = newSessionStatus;
+      this.subject.next({
+        event: CONSTANT.EVENT.SESSION.LOGGED_IN
+      });
     }
 
     if(this.loggedIn) {
@@ -169,14 +168,18 @@ export class AccountService {
     return json;
   };
 
-  updateUserLocalStorage() {
-    this.user.user_type = CONSTANT.user.types.VENDOR.code;
+  updateUserLocalStorage(userType: number) {
+    this.user.user_type = userType;
     let localStorageSession = this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.SESSION);
     localStorageSession.user_type = this.user.user_type;
     this.localStorageService.store(
         CONSTANT.LOCALSTORAGE.SESSION,
          localStorageSession
       );
+
+    this.subject.next({
+      event: CONSTANT.EVENT.SESSION.USER_TYPE
+    });
   }
 
   /**

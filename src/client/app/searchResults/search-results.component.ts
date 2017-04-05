@@ -2,7 +2,7 @@ import { Component }       from '@angular/core';
 import { ActivatedRoute }  from '@angular/router';
 import { SelectModule }    from 'ng2-select';
 import { CONSTANT }        from '../core/constant';
-import { FilterService }   from '../services/filter.service';
+import { FilterService }   from './filter.service';
 
 /**
  * This class represents the lazy loaded SearchResults.

@@ -5,7 +5,7 @@ import { DietRequirement }  from '../../shared/model/dietRequirement';
 import { BusinessType }     from '../../shared/model/businessType';
 import { BusinessSetup }    from '../../shared/model/businessSetup';
 import { SettingsService }  from '../../services/settings.service';
-import { FilterService }    from '../../services/filter.service';
+import { FilterService }    from '../filter.service';
 import { SearchFilter }     from './../../shared/model/searchFilter';
 import { Subscription }     from 'rxjs/Subscription';
 

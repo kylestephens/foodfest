@@ -3,7 +3,7 @@ import { Component,
          ElementRef,
          EventEmitter }     from '@angular/core';
 import { ActivatedRoute }   from '@angular/router';
-import { FilterService }    from '../../../services/filter.service';
+import { FilterService }    from '../../filter.service';
 import { BrowserService }   from '../../../services/browser.service';
 import { SearchFilter }     from '../../../shared/model/searchFilter';
 import { Subscription }     from 'rxjs/Subscription';
