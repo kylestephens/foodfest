@@ -1,11 +1,11 @@
 import { Injectable }        from '@angular/core';
 import { Response }          from '@angular/http';
 import { Vendor }            from '../shared/model/vendor';
-import { RestService }       from './rest.service';
-import { SettingsService }   from './settings.service';
+import { RestService }       from '../services/rest.service';
+import { SettingsService }   from '../services/settings.service';
 
 @Injectable()
-export class VendorService {
+export class SearchResultsService {
 
   constructor(
     private restService: RestService,

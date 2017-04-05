@@ -2,7 +2,7 @@ import { Component, OnInit }       from '@angular/core';
 import { ActivatedRoute, Router }  from '@angular/router';
 import { Subscription }            from 'rxjs/Subscription'
 import { Vendor }                  from '../../shared/model/vendor';
-import { VendorService }           from '../../services/vendor.service';
+import { SearchResultsService }    from '../search-results.service';
 import { CONSTANT }                from '../../core/constant';
 
 /**
@@ -23,7 +23,7 @@ export class SearchResultsCardListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private vendorService: VendorService
+    private searchResultsService: SearchResultsService
   )
   {}
 
@@ -41,14 +41,14 @@ export class SearchResultsCardListComponent implements OnInit {
   }
 
   getVendors(): void {
-    this.vendorService.getVendors().then(vendors => {
+    this.searchResultsService.getVendors().then(vendors => {
       this.loaded = true;
       this.vendors = vendors;
     });
   }
 
   searchVendors(params: any): void {
-    this.vendorService.searchVendors(params).then(vendors => {
+    this.searchResultsService.searchVendors(params).then(vendors => {
       this.loaded = true;
       this.vendors = vendors;
     });
