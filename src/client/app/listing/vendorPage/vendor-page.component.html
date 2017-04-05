@@ -1,0 +1,69 @@
+<article>
+
+  <header class="hero"
+    [ngStyle]="{'background-image': 'url(' + coverPhotoUrl + ')'}">
+
+    <div class="hero__overlay">
+      <div class="[ container ]">
+        <div class="[ row ]">
+          <div class="[ col-xs-12 ]">
+            <img class="hero__business-logo" [src]="businessLogoUrl">
+            <h2 class="hero__business-name">
+              {{ businessName }}
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </header>
+
+  <section class="[ container ]">
+
+    <div class="[ row ]">
+      <div class="business-description card [ col-xs-12 ]">
+        {{ businessDescription }}
+      </div>
+    </div>
+
+  </section>
+
+  <section class="[ container ]" *ngIf="mapLatitude && mapLongitude">
+
+    <div class="card [ row ]">
+      <div class="[ col-sm-8 col-xs-12">
+        <sebm-google-map
+          [latitude]="mapLatitude"
+          [longitude]="mapLongitude"
+          [zoom]="zoomLevel"
+          [disableDefaultUI]="false"
+          [zoomControl]="true"
+          [styles]="mapStyles">
+          <sebm-google-map-marker
+            [latitude]="mapLatitude"
+            [longitude]="mapLongitude"
+            [markerDraggable]="false">
+            <sebm-google-map-info-window>
+              <strong>{{ businessName }}</strong>
+            </sebm-google-map-info-window>
+          </sebm-google-map-marker>
+        </sebm-google-map>
+      </div>
+      <div class="[ col-sm-4 col-xs-12">
+        <h4>
+          <span class="ak-icon-location"></span> Address
+        </h4>
+        {{ businessAddress }}
+
+        <h4>
+          <span class="ak-icon-earth"></span> Website
+        </h4>
+        <a target="_blank" href="{{ businessWebsite }}" title="{{ businessName }}">
+          {{ businessWebsite }}
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+</article>

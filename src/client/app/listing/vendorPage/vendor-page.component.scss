@@ -1,0 +1,45 @@
+@import '../../../scss/core/variables';
+@import '../../../scss/core/settings';
+
+$logo-size:     220px;
+
+.hero {
+  background: #EAF7FC;
+  text-align: center;
+  background-position: center center;
+  background-size: cover;
+
+  &__overlay {
+    background: $brand-overlay-pattern;
+    padding: $padding-xlarge-vertical 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__business-logo {
+    position: relative;
+    top: $logo-size / 1.5;
+    width: $logo-size;
+    height: $logo-size;
+
+    border-radius: 100%;
+    border: 10px solid #fff;
+    z-index: 2;
+  }
+
+  &__business-name {
+    text-align: right;
+    color: #fff;
+  }
+}
+
+.business-description {
+  padding-top: $logo-size / 2.5;
+  padding-bottom: $padding-xlarge-vertical;
+  padding-left: $padding-large-horizontal;
+  padding-right: $padding-large-horizontal;
+}
+
+.sebm-google-map-container {
+  height: 300px;
+}

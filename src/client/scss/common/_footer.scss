@@ -57,6 +57,10 @@ $icon-width:       32px;
     display: inline-block;
     min-width: $icon-width;
 
+    object, image {
+      max-width: 32px;
+    }
+
     // pseudo element is necessary to get pointer cursor
     // over SVG elements
     &::after {
