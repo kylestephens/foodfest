@@ -27,6 +27,7 @@ export class VendorPageComponent implements OnInit {
   public businessWebsite: string;
   public businessDescription: string;
   public businessAddress: string;
+  public businessPhoneNum: string;
   public mapLatitude: number;
   public mapLongitude: number;
   public zoomLevel: number = 15;        // google maps zoom level
@@ -277,6 +278,7 @@ export class VendorPageComponent implements OnInit {
       this.businessAddress = stepTwo.businessAddress;
     }
     this.businessName = stepOne.businessName;
+    this.businessPhoneNum = stepTwo.phoneNumber;
     this.businessWebsite = stepTwo.businessWebsite;
     this.businessDescription = stepFour.businessDescription;
   }

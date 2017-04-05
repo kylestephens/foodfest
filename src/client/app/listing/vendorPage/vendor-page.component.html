@@ -42,7 +42,8 @@
           <sebm-google-map-marker
             [latitude]="mapLatitude"
             [longitude]="mapLongitude"
-            [markerDraggable]="false">
+            [markerDraggable]="false"
+            [iconUrl]="'assets/icons/svg/map-pin.svg'">
             <sebm-google-map-info-window>
               <strong>{{ businessName }}</strong>
             </sebm-google-map-info-window>
@@ -61,6 +62,11 @@
         <a target="_blank" href="{{ businessWebsite }}" title="{{ businessName }}">
           {{ businessWebsite }}
         </a>
+
+        <h4>
+          <span class="ak-icon-phone"></span> Phone
+        </h4>
+        {{ businessPhoneNum }}
       </div>
     </div>
 
