@@ -5,6 +5,7 @@ export class User {
   id:                 number;
   email:              string;
   user_type:          number;
+  active_vendor:      boolean; //DB 1 active, 0 not active
   password:           string;
   google_user_id:     string;
   facebook_user_id:   string;
@@ -12,9 +13,9 @@ export class User {
   middlename:         string;
   lastname:           string;
   location_id:        number;
-  date_joined:        any; //date
-  last_updated:       any;//ts
-  last_login:         any;//ts
+  date_joined:        any;
+  last_updated:       any;
+  last_login:         any;
 
   name:               string;
   facebookLogin:      boolean;

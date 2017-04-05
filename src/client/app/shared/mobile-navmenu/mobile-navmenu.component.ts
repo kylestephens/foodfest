@@ -83,7 +83,7 @@ export class MobileNavmenuComponent implements OnInit {
     this.settingsService.syncBrowserDetails();
     var screen = this.settingsService.getBrowserDetails().screen;
 
-    this.menuContent.style.width = parseInt(screen.width * 0.75) + 'px';
+    this.menuContent.style.width = (screen.width * 0.75) + 'px';
     this.menuContent.style.height = screen.height + 'px';
     this.menuContent.style.marginLeft = '-' + (screen.width * 0.75) + 'px';
   };

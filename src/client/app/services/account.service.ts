@@ -37,6 +37,8 @@ export class AccountService {
       (response: any) => {
         response = response.json();
         this.user.akAccessToken = response.token;
+        this.user.user_type = response.user_type;
+        this.user.active_vendor = response.active_vendor ? true : false;
         this.setLoggedIn(true);
       },
       (reason: any) => {
@@ -60,6 +62,8 @@ export class AccountService {
         response = response.json();
         this.user.name = response.firstname;
         this.user.akAccessToken = response.token;
+        this.user.user_type = response.user_type;
+        this.user.active_vendor = response.active_vendor ? true : false;
         this.setLoggedIn(true);
       },
       (reason: any) => {
@@ -139,8 +143,10 @@ export class AccountService {
     this.user.firstname = sessionDetails['firstname'];
     this.user.lastname = sessionDetails['lastname'];
     this.user.akAccessToken = sessionToken;
-    this.facebook_user_id = sessionDetails['facebook_user_id'];
-    this.google_user_id = sessionDetails['google_user_id'];
+    this.user.facebook_user_id = sessionDetails['facebook_user_id'];
+    this.user.google_user_id = sessionDetails['google_user_id'];
+    this.user.user_type = sessionDetails['user_id'];
+    this.user.active_vendor = sessionDetails['active_vendor'];
   };
 
   reset = function() {
@@ -158,8 +164,20 @@ export class AccountService {
     json['lastname'] = this.user.lastname;
     json['facebook_user_id'] = this.user.facebook_user_id;
     json['google_user_id'] = this.user.google_user_id;
+    json['user_type'] = this.user.user_type;
+    json['active_vendor'] = this.user.active_vendor;
     return json;
   };
+
+  updateUserLocalStorage() {
+    this.user.user_type = CONSTANT.user.types.VENDOR.code;
+    let localStorageSession = this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.SESSION);
+    localStorageSession.user_type = this.user.user_type;
+    this.localStorageService.store(
+        CONSTANT.LOCALSTORAGE.SESSION,
+         localStorageSession
+      );
+  }
 
   /**
   * Send message as observable

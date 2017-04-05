@@ -20,6 +20,7 @@ import { FormMessagesComponent }     from '../../../shared/form-messages/form-me
 import { CreateListingService }      from '../../create-listing.service';
 import { SettingsService }           from '../../../services/settings.service';
 import { ValidationService }         from '../../../services/validation.service';
+import { AccountService }            from '../../../services/account.service';
 import { CONSTANT }                  from '../../../core/constant';
 
 /**
@@ -44,7 +45,8 @@ export class CreateListingStepFourComponent {
     private createListingService: CreateListingService,
     private localStorageService: LocalStorageService,
     private ngZone: NgZone,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private accountService: AccountService
   ) {
     this.stepFourForm = fb.group({
       'businessLogo': [null],
@@ -92,6 +94,7 @@ export class CreateListingStepFourComponent {
         this.createListingService.create().then((response: any) => {
           me.vendorId = response.id;
           me.localStorageService.store(CONSTANT.LOCALSTORAGE.VENDOR_ID, me.vendorId);
+          me.accountService.updateUserLocalStorage();
 
           if(me.businessLogo || me.coverImage || me.additionalImages.length > 0) {
             me.createListingService.uploadVendorImages(
