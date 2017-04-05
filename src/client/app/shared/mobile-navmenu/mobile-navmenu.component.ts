@@ -8,6 +8,7 @@ import { Subscription }         from 'rxjs/Subscription';
 import { AccountService }       from '../../services/account.service';
 import { ModalService }         from '../../services/modal.service';
 import { SettingsService }      from '../../services/settings.service';
+import { CONSTANT }             from '../../core/constant';
 
 /**
  * This class represents the navigation bar component.
@@ -66,12 +67,12 @@ export class MobileNavmenuComponent implements OnInit {
 
   public showSignUp = function() {
     this.toggleMenu();
-    this.modalService.show('SignUp');
+    this.modalService.show(CONSTANT.MODAL.SIGN_UP);
   };
 
   public showSignIn = function() {
     this.toggleMenu();
-    this.modalService.show('SignIn');
+    this.modalService.show(CONSTANT.MODAL.SIGN_IN);
   };
 
   public toggleMenu = function() {
