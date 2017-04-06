@@ -16,12 +16,12 @@
         <ak-messaging ref="modal">
         </ak-messaging>
 
-        <signup class="modal-content"
+        <signup class="modal-content" [location]="'modal'"
           *ngIf="selectedModal === modalTypes.SIGN_UP"
           [ngClass]="{'hidden': selectedModal !== modalTypes.SIGN_UP} ">
         </signup>
 
-        <signin class="modal-content"
+        <signin class="modal-content" [location]="'modal'"
           *ngIf="selectedModal === modalTypes.SIGN_IN"
           [ngClass]="{'hidden': selectedModal !== modalTypes.SIGN_IN}">
         </signin>

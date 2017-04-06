@@ -112,5 +112,4 @@ export class ModalComponent implements OnInit, OnDestroy {
       body.classList.remove('modal-active');
     }, 500);
   };
-
 };

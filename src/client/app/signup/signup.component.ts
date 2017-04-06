@@ -1,4 +1,6 @@
-import { Component} from '@angular/core';
+import { Component}         from '@angular/core';
+import { AccountService }   from '../services/account.service';
+
 /**
  * This class represents sign up component.
  */
@@ -10,5 +12,4 @@ import { Component} from '@angular/core';
 })
 
 export class SignupComponent {
-
 }

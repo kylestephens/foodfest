@@ -1,4 +1,5 @@
-import { Component, OnDestroy}    from '@angular/core';
+import { Component, OnDestroy, Input }    from '@angular/core';
+import { Router }                 from '@angular/router';
 import { Subscription }           from 'rxjs/Subscription';
 
 import { LoginDetails }           from '../../model/login-details';
@@ -22,6 +23,9 @@ import { CONSTANT }               from '../../../core/constant';
 })
 
 export class SignupComponent {
+  @Input()
+  location: string;
+
   private modalSubscription: Subscription;
   private accountSubscription: Subscription;
 
@@ -34,12 +38,13 @@ export class SignupComponent {
     private facebookService: FacebookService,
     private googleService: GoogleService,
     private messagingService: MessagingService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    public router: Router
   ) {
     // subscribe to modal service messages
     this.modalSubscription = this.modalService.getMessage().subscribe(subMessage => {
       console.debug('SignupComponent::modalSubscription');
-      if(subMessage.event && subMessage.event === CONSTANT.EVENT.MODAL.HIDE_MODAL) {
+      if(subMessage.event && this.location === 'modal' && subMessage.event === CONSTANT.EVENT.MODAL.HIDE_MODAL) {
         this.isEmailSignUp = false;
       }
     });
@@ -48,7 +53,12 @@ export class SignupComponent {
     this.accountSubscription = this.accountService.getMessage().subscribe(subMessage => {
       console.debug('SignupComponent::accountSubscription');
       if(subMessage.event && subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN && accountService.isLoggedIn()) {
-        this.modalService.hide();
+        if(this.location === 'modal') {
+          this.modalService.hide();
+        }
+        else if(this.location === 'page') {
+          this.router.navigate(['']);
+        }
       }
     });
   };

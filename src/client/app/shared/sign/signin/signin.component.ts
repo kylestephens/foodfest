@@ -1,4 +1,5 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, Input } from '@angular/core';
+import { Router }                 from '@angular/router';
 import { Http, Response }       from '@angular/http';
 import { Subscription }         from 'rxjs/Subscription';
 import 'rxjs/add/operator/toPromise';
@@ -27,6 +28,9 @@ import { CONSTANT }             from '../../../core/constant';
 })
 
 export class SigninComponent {
+  @Input()
+  location: string;
+
   private accountSubscription: Subscription;
   private firstName: string = '';
   private lastName: string = '';
@@ -39,7 +43,8 @@ export class SigninComponent {
     private facebookService: FacebookService,
     private googleService: GoogleService,
     private messagingService: MessagingService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    public router: Router
   ) {
 
     if(this.accountService.isLoggedIn()) {
@@ -50,7 +55,12 @@ export class SigninComponent {
     this.accountSubscription = this.accountService.getMessage().subscribe(subMessage => {
       console.debug('SignupComponent::accountSubscription');
       if(subMessage.event && subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN && accountService.isLoggedIn()) {
-        this.modalService.hide();
+         if(this.location === 'modal') {
+          this.modalService.hide();
+        }
+        else if(this.location === 'page') {
+          this.router.navigate(['']);
+        }
       }
     });
   };
