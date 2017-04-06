@@ -1,6 +1,7 @@
 <div class="ak-image-scroller">
 
-  <div class="inset-overlay"></div>
+  <div class="inset-overlay"
+    *ngIf="deviceType !== 'phone'"></div>
 
   <div class="ak-image-scroller__arrow ak-image-scroller__arrow--left"
     (click)="scrollLeft()"
