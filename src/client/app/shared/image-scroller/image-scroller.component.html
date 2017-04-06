@@ -1,21 +1,28 @@
-<div class="image-scroller">
+<div class="ak-image-scroller">
 
-  <div class="image-scroller__arrow image-scroller__arrow--left"
+  <div class="inset-overlay"
+    *ngIf="deviceType !== 'phone'"></div>
+
+  <div class="ak-image-scroller__arrow ak-image-scroller__arrow--left"
+    (click)="scrollLeft()"
     *ngIf="deviceType !== 'phone'">
     <span class="ak-icon-chevron-thin-left">
     </span>
   </div>
 
-  <div class="image-scroller__container">
-    <div class="image-scroller__image-tile" *ngFor="let image of images">
-      <img [src]="image">
-    </div>
-  </div>
-
-  <div class="image-scroller__arrow  image-scroller__arrow--right"
+  <div class="ak-image-scroller__arrow  ak-image-scroller__arrow--right"
+    (click)="scrollRight()"
     *ngIf="deviceType !== 'phone'">
     <span class="ak-icon-chevron-thin-right">
     </span>
+  </div>
+
+  <div class="image-scroller" #scroller>
+    <div class="image-scroller__container">
+      <div class="image-scroller__image-tile" *ngFor="let image of images">
+        <img [src]="image">
+      </div>
+    </div>
   </div>
 
 </div>
