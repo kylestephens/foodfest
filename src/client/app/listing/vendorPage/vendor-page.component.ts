@@ -6,6 +6,7 @@ import {
   AgmCoreModule,
   MapTypeStyle
 }                                 from 'angular2-google-maps/core';
+import { ImageScrollerComponent } from '../../shared/image-scroller/image-scroller.component';
 import { Vendor }                 from '../../shared/model/vendor';
 import { CONSTANT }               from '../../core/constant';
 
@@ -29,6 +30,7 @@ export class VendorPageComponent implements OnInit {
   public formattedEventTypes: string;
   public formattedBusinessSetups: string;
   public formattedDietRequirements: string;
+  public additionalImages: Array<string>;
 
   public mapStyles: MapTypeStyle[] = [
     {
@@ -284,6 +286,7 @@ export class VendorPageComponent implements OnInit {
     this.vendor.phone_num = stepTwo.phoneNumber;
     this.vendor.business_website = stepTwo.businessWebsite;
     this.vendor.description = stepFour.businessDescription;
+    this.additionalImages = images.businessAdditionalImages;
   }
 
   private _formatFilterString(filterObject: any): string {

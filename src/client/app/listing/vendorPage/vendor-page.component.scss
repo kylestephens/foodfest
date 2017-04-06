@@ -4,6 +4,10 @@
 $logo-size:         220px;
 $logo-size-phone:   140px;
 
+article {
+  background: $gray-lightest;
+}
+
 .hero {
   background: #EAF7FC;
   text-align: center;

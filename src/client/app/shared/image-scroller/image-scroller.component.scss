@@ -1,0 +1,49 @@
+@import '../../../scss/core/variables';
+
+$scroller-height:     55vh;
+
+.image-scroller {
+  width: 100%;
+  max-height: $scroller-height;
+  margin-bottom: $padding-xlarge-vertical;
+  overflow-x: scroll;
+  position: relative;
+
+  &__arrow {
+    position: absolute;
+    height: 100%;
+    color: #fff;
+    font-size: 60px;
+    opacity: 0.6;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    span {
+      position: relative;
+      top: 20vh;
+    }
+
+    &--left {
+      left: $padding-xlarge-horizontal;
+    }
+
+    &--right {
+      right: $padding-xlarge-horizontal;
+    }
+  }
+
+  &__container {
+    width: 8000px;                // On Server IMG_MAX_WIDTH: 800 | This times 10
+    max-height: $scroller-height;
+  }
+
+  &__image-tile {
+    float: left;
+    max-height: $scroller-height;
+    img {
+      max-height: $scroller-height;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 <article>
 
+  <!-- HERO -->
   <header class="hero"
     [ngStyle]="{'background-image': 'url(' + vendor.cover_photo_path + ')'}">
 
@@ -17,21 +18,19 @@
     </div>
 
   </header>
+  <!-- / HERO -->
 
-  <section class="[ container ]">
+  <!-- DESCRIPTION + DETAILS -->
+  <section class="card [ container ]">
 
-    <div class="card [ row ]">
+    <div class="[ row ]">
       <div class="business-description [ col-xs-12 ]">
         {{ vendor.description }}
       </div>
     </div>
 
-  </section>
-
-  <section class="[ container ]">
-
-    <div class="card [ row ]">
-      <div class="vendor-details [ col-sm-6 col-xs-12 ]">
+    <div class="[ row ]">
+      <div class="vendor-details [ col-md-8 col-sm-6 col-xs-12 ]">
         <div class="vendor-details__item" *ngIf="formattedStyles">
           <h4>
             <span class="vendor-details__icon ak-icon-style"></span>
@@ -48,7 +47,7 @@
           <span class="vendor-details__text">{{ formattedEventTypes }}</span>
         </div>
       </div>
-      <div class="vendor-details [ col-sm-6 col-xs-12 ]">
+      <div class="vendor-details [ col-md-4 col-sm-6 col-xs-12 ]">
         <div class="vendor-details__item" *ngIf="formattedBusinessSetups">
           <h4>
             <span class="vendor-details__icon ak-icon-business-setup"></span>
@@ -60,7 +59,7 @@
         <div class="vendor-details__item" *ngIf="formattedDietRequirements">
           <h4>
             <span class="vendor-details__icon ak-icon-diet-requirements"></span>
-            <span class="vendor-details__heading">Diet Requirements Catered</span>
+            <span class="vendor-details__heading">Diets Catered</span>
           </h4>
           <span class="vendor-details__text">{{ formattedDietRequirements }}</span>
         </div>
@@ -68,12 +67,22 @@
     </div>
 
   </section>
+  <!-- / DESCRIPTION + DETAILS -->
 
+  <!-- IMAGES -->
+  <section>
+
+    <ak-image-scroller [images]="additionalImages"></ak-image-scroller>
+
+  </section>
+  <!-- / IMAGES -->
+
+  <!-- LOCATION + SOCIAL DETAILS  -->
   <section class="[ container ]">
 
     <div class="vendor-details card [ row ]">
 
-      <div class="[ col-sm-8 col-xs-12" *ngIf="vendor.business_latitude && vendor.business_longitude">
+      <div class="[ col-md-8 col-sm-6 col-xs-12" *ngIf="vendor.business_latitude && vendor.business_longitude">
         <sebm-google-map
           [latitude]="vendor.business_latitude"
           [longitude]="vendor.business_longitude"
@@ -93,7 +102,7 @@
         </sebm-google-map>
       </div>
 
-      <div class="vendor-details [ col-sm-4 col-xs-12">
+      <div class="vendor-details [ col-md-4 col-sm-6 col-xs-12">
         <div class="vendor-details__item" *ngIf="vendor.business_address">
           <h4>
             <span class="vendor-details__icon ak-icon-location"></span>
@@ -126,5 +135,6 @@
     </div>
 
   </section>
+  <!-- / LOCATION + SOCIAL DETAILS  -->
 
 </article>
