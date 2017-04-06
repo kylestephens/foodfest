@@ -1,15 +1,15 @@
-import { Component, OnDestroy }   from '@angular/core';
+import { Component, OnDestroy}    from '@angular/core';
 import { Subscription }           from 'rxjs/Subscription';
 
-import { LoginDetails }           from '../../shared/model/login-details';
+import { LoginDetails }           from '../../model/login-details';
 
-import { AccountService }         from '../../services/account.service';
-import { FacebookService }        from '../../services/facebook.service';
-import { GoogleService }          from '../../services/google.service';
-import { MessagingService }       from '../../services/messaging.service';
-import { ModalService }           from '../../services/modal.service';
+import { AccountService }         from '../../../services/account.service';
+import { FacebookService }        from '../../../services/facebook.service';
+import { GoogleService }          from '../../../services/google.service';
+import { MessagingService }       from '../../../services/messaging.service';
+import { ModalService }           from '../../../services/modal.service';
 
-import { CONSTANT }               from '../../core/constant';
+import { CONSTANT }               from '../../../core/constant';
 
 /**
  * This class represents the navigation bar component.
@@ -22,7 +22,6 @@ import { CONSTANT }               from '../../core/constant';
 })
 
 export class SignupComponent {
-
   private modalSubscription: Subscription;
   private accountSubscription: Subscription;
 
@@ -69,7 +68,7 @@ export class SignupComponent {
       },
       (reason: any) => {
         this.messagingService.show(
-          'modal',
+          'signup',
           CONSTANT.MESSAGING.ERROR,
           reason.statusText ? reason.statusText : 'An unexpected error has occurred'
         );
@@ -87,7 +86,7 @@ export class SignupComponent {
       },
       (reason: any) => {
         this.messagingService.show(
-          'modal',
+          'signup',
           CONSTANT.MESSAGING.ERROR,
           reason.statusText ? reason.statusText : 'An unexpected error has occurred'
         );
@@ -113,7 +112,7 @@ export class SignupComponent {
       (response: any) => {},
       (reason: any) => {
         this.messagingService.show(
-          'modal',
+          'signup',
           CONSTANT.MESSAGING.ERROR,
           reason.statusText ? reason.statusText : 'An unexpected error has occurred'
         );

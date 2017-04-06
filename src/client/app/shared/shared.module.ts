@@ -12,15 +12,15 @@ import { MobileNavmenuComponent }         from './mobile-navmenu/mobile-navmenu.
 import { NavbarComponent }                from './navbar/navbar.component';
 
 import { ModalComponent }                 from './modal/modal.component';
-import { SigninModule }                   from '../sign/signin/signin.module';
-import { SignupModule }                   from '../sign/signup/signup.module';
+import { SigninComponent }                from './sign/signin/signin.component';
+import { SignupComponent }                from './sign/signup/signup.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
-  imports: [CommonModule, RouterModule, FormsModule, SignupModule, SigninModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   declarations: [
     HeartComponent,
     NavbarComponent,
@@ -29,7 +29,9 @@ import { SignupModule }                   from '../sign/signup/signup.module';
     FormMessagesComponent,
     ImageScrollerComponent,
     MessagingComponent,
-    ModalComponent
+    ModalComponent,
+    SigninComponent,
+    SignupComponent
   ],
   exports: [
     HeartComponent,
@@ -40,6 +42,8 @@ import { SignupModule }                   from '../sign/signup/signup.module';
     ImageScrollerComponent,
     MessagingComponent,
     ModalComponent,
+    SignupComponent,
+    SigninComponent
     CommonModule,
     FormsModule,
     RouterModule

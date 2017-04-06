@@ -3,15 +3,15 @@ import { Http, Response }       from '@angular/http';
 import { Subscription }         from 'rxjs/Subscription';
 import 'rxjs/add/operator/toPromise';
 
-import { LoginDetails }         from '../../shared/model/login-details';
+import { LoginDetails }         from '../../model/login-details';
 
-import { AccountService }       from '../../services/account.service';
-import { FacebookService }      from '../../services/facebook.service';
-import { GoogleService }        from '../../services/google.service';
-import { MessagingService }     from '../../services/messaging.service';
-import { ModalService }         from '../../services/modal.service';
+import { AccountService }       from '../../../services/account.service';
+import { FacebookService }      from '../../../services/facebook.service';
+import { GoogleService }        from '../../../services/google.service';
+import { MessagingService }     from '../../../services/messaging.service';
+import { ModalService }         from '../../../services/modal.service';
 
-import { CONSTANT }             from '../../core/constant';
+import { CONSTANT }             from '../../../core/constant';
 
 /**
  * This class represents the navigation bar component.
@@ -27,7 +27,6 @@ import { CONSTANT }             from '../../core/constant';
 })
 
 export class SigninComponent {
-
   private accountSubscription: Subscription;
   private firstName: string = '';
   private lastName: string = '';
@@ -99,7 +98,7 @@ export class SigninComponent {
       (response: any) => {},
       (reason: any) => {
         this.messagingService.show(
-          'modal',
+          'signin',
           CONSTANT.MESSAGING.ERROR,
           reason.statusText ? reason.statusText : 'An unexpected error has occurred'
         );

@@ -38,7 +38,6 @@ export class ModalComponent implements OnInit, OnDestroy {
   ) {
     // subscribe to modal service messages
     this.subscription = this.modalService.getMessage().subscribe(subMessage => {
-      debugger
       console.debug('ModalComponent::subscription');
       this.subMessage = subMessage;
       if(subMessage.event && subMessage.event === CONSTANT.EVENT.MODAL.SHOW_MODAL) {
