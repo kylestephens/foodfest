@@ -147,7 +147,7 @@ export class AccountService {
     this.user.akAccessToken = sessionToken;
     this.user.facebook_user_id = sessionDetails['facebook_user_id'];
     this.user.google_user_id = sessionDetails['google_user_id'];
-    this.user.user_type = sessionDetails['user_id'];
+    this.user.user_type = sessionDetails['user_type'];
     this.user.active_vendor = sessionDetails['active_vendor'];
   };
 

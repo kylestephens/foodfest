@@ -1,0 +1,37 @@
+@import '../../scss/core/variables';
+@import '../../scss/core/settings';
+
+.side-menu {
+  height: 100vh;
+  background-color: $brand-primary;
+  text-align: center;
+  width: 70px;
+  float: left;
+
+  &-link {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: block;
+    color: $brand-body-bg;
+    padding-left: 4px;
+
+    &:hover {
+      background-color: darken($brand-primary, 10%)
+    }
+
+    &.active {
+      padding-left: 0px;
+      border-left: 4px solid $brand-secondary;
+    }
+  }
+
+  &-text {
+    font-size: $font-size-smallest;
+  }
+
+  &-icon {
+    font-size: 28px;
+    padding-bottom: 5px;
+  }
+
+}

@@ -1,0 +1,38 @@
+<div>
+  <div class="[ row ]">
+    <div class="[ col-xs-12 ]">
+      <div class="side-menu hidden-xs">
+        <a [routerLink]="['profile']" routerLinkActive="active" class="side-menu-link">
+          <div class="ak-icon-user-circle side-menu-icon"></div>
+          <div class="side-menu-text">
+            My Profile
+          </div>
+        </a>
+
+        <a [routerLink]="['listings']" routerLinkActive="active" class="side-menu-link" [ngClass]="!isVendor ? 'hidden' : ''">
+          <div class="ak-icon-food-truck side-menu-icon"></div>
+          <div class="side-menu-text">
+           My Listings
+          </div>
+        </a>
+
+        <a [routerLink]="['inbox']" routerLinkActive="active" class="side-menu-link">
+          <div class="ak-icon-mail side-menu-icon"></div>
+          <div class="side-menu-text">
+            My Messages
+          </div>
+        </a>
+
+        <a [routerLink]="['favourites']" routerLinkActive="active" class="side-menu-link">
+          <div class="ak-icon-heart side-menu-icon"></div>
+            <div class="side-menu-text">
+            Favourites
+          </div>
+        </a>
+      </div>
+
+      <router-outlet></router-outlet>
+
+    </div>
+  </div>
+</div>
