@@ -72,17 +72,30 @@
   <!-- IMAGES -->
   <section>
 
-    <ak-image-scroller [images]="additionalImages"></ak-image-scroller>
+    <ak-image-scroller [images]="additionalImages">
+    </ak-image-scroller>
 
   </section>
   <!-- / IMAGES -->
+
+  <!-- TWITTER -->
+  <section class="tweets [ container ]" *ngIf="vendor.twitter_address">
+
+    <div class="[ row ]">
+      <ak-twitter-feed
+        [twitterUrl]="vendor.twitter_address">
+      </ak-twitter-feed>
+    </div>
+
+  </section>
+  <!-- / TWITTER ->
 
   <!-- LOCATION + SOCIAL DETAILS  -->
   <section class="[ container ]">
 
     <div class="vendor-details card [ row ]">
 
-      <div class="[ col-md-8 col-sm-6 col-xs-12" *ngIf="vendor.business_latitude && vendor.business_longitude">
+      <div class="vendor-details__map [ col-md-8 col-sm-6 col-xs-12" *ngIf="vendor.business_latitude && vendor.business_longitude">
         <sebm-google-map
           [latitude]="vendor.business_latitude"
           [longitude]="vendor.business_longitude"

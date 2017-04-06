@@ -70,8 +70,19 @@ article {
   padding-bottom: $padding-xlarge-vertical;
 }
 
+.tweets {
+  margin-bottom: $padding-xlarge-vertical;
+  position: relative;
+}
+
 .vendor-details {
   text-transform: capitalize;
+
+  &__map {
+    @media (max-width: $screen-xs-max) {
+      padding-bottom: $padding-xlarge-vertical;
+    }
+  }
 
   &__item {
     padding-bottom: $padding-large-vertical;

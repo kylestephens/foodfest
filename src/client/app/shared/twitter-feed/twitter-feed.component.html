@@ -1,0 +1,21 @@
+<div class="ak-twitter-feed" *ngIf="tweets">
+
+  <h4 class="ak-twitter-feed__header">Latest Tweets</h4>
+
+  <div class="tweets-wrapper">
+    <div class="tweet" *ngFor="let tweet of tweets">
+      <div class="tweet__user">
+        <span class="icon ak-icon-twitter">
+        </span>
+        <div class="tweet__date">
+          {{ tweet.created_at | date: 'yMMMdjms' }}
+        </div>
+      </div>
+      <!-- Inner HTML will allow proper rendering of
+       encoded values like &nbsp; -->
+      <div class="tweet__text" [innerHTML]="tweet.text">
+      </div>
+    </div>
+  </div>
+
+</div>

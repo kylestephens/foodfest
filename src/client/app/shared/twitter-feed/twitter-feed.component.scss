@@ -1,0 +1,68 @@
+@import '../../../scss/core/variables';
+
+$header-height: 150px;
+
+.ak-twitter-feed {
+
+  &__header {
+    -ms-transform: rotate(-90deg); /* IE 9 */
+       -webkit-transform: rotate(-90deg); /* Safari */
+         transform: rotate(-90deg);
+
+    position: absolute;
+    left: -50px;
+    top: 50px;
+    background: $brand-secondary;
+    color: #fff;
+    padding: $padding-base-vertical $padding-base-horizontal;
+    min-width: $header-height;
+  }
+
+  .tweets-wrapper {
+    padding-left: 50px;
+    display: inline-block;
+    min-height: $header-height;
+  }
+
+  .tweet {
+    width: 33%;
+    float: left;
+    font-size: $font-size-base;
+    padding: 0 $padding-large-horizontal;
+
+    @media (max-width: $screen-md-max) {
+      width: 50%;
+      &:last-of-type {
+        display: none;
+      }
+    }
+
+    @media (max-width: $screen-xs-max) {
+      width: 100%;
+      &:nth-of-type(2), &:last-of-type {
+        display: none;
+      }
+    }
+
+    &__user {
+      width: 100%;
+      float: left;
+      .icon {
+        color: $brand-secondary;
+        font-size: 30px;
+        float: left;
+      }
+    }
+
+    &__date {
+      color: $gray-lighter;
+      float: left;
+      padding: $padding-large-vertical $padding-large-horizontal;
+    }
+
+    &__text {
+      margin-top: $padding-base-vertical;
+    }
+  }
+
+}

@@ -7,6 +7,7 @@ import {
   MapTypeStyle
 }                                 from 'angular2-google-maps/core';
 import { ImageScrollerComponent } from '../../shared/image-scroller/image-scroller.component';
+import { TwitterFeedComponent }   from '../../shared/twitter-feed/twitter-feed.component';
 import { Vendor }                 from '../../shared/model/vendor';
 import { CONSTANT }               from '../../core/constant';
 
@@ -287,6 +288,7 @@ export class VendorPageComponent implements OnInit {
     this.vendor.business_website = stepTwo.businessWebsite;
     this.vendor.description = stepFour.businessDescription;
     this.additionalImages = images.businessAdditionalImages;
+    this.vendor.twitter_address = stepThree.twitterAddress;
   }
 
   private _formatFilterString(filterObject: any): string {
