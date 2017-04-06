@@ -11,17 +11,16 @@ import { MessagingComponent }             from './messaging/messaging.component'
 import { MobileNavmenuComponent }         from './mobile-navmenu/mobile-navmenu.component';
 import { NavbarComponent }                from './navbar/navbar.component';
 
-// TODO : tidy these 3 into a single module
 import { ModalComponent }                 from './modal/modal.component';
-import { SigninComponent }                from './modal/signin/signin.component';
-import { SignupComponent }                from './modal/signup/signup.component';
+import { SigninModule }                   from '../sign/signin/signin.module';
+import { SignupModule }                   from '../sign/signup/signup.module';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, SignupModule, SigninModule],
   declarations: [
     HeartComponent,
     NavbarComponent,
@@ -30,9 +29,7 @@ import { SignupComponent }                from './modal/signup/signup.component'
     FormMessagesComponent,
     ImageScrollerComponent,
     MessagingComponent,
-    ModalComponent,
-    SigninComponent,
-    SignupComponent
+    ModalComponent
   ],
   exports: [
     HeartComponent,
@@ -43,8 +40,6 @@ import { SignupComponent }                from './modal/signup/signup.component'
     ImageScrollerComponent,
     MessagingComponent,
     ModalComponent,
-    SigninComponent,
-    SignupComponent,
     CommonModule,
     FormsModule,
     RouterModule

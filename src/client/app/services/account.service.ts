@@ -43,6 +43,7 @@ export class AccountService {
       },
       (reason: any) => {
         this.setLoggedIn(false);
+        return Promise.reject(reason);
       }
     );
   };
@@ -68,6 +69,7 @@ export class AccountService {
       },
       (reason: any) => {
         this.setLoggedIn(false);
+        return Promise.reject(reason);
       }
     );
   };

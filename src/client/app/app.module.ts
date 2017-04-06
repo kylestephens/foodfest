@@ -14,6 +14,8 @@ import { CommercialModule }     from './commercial/commercial.module';
 import { HelpModule }           from './help/help.module';
 import { HomeModule }           from './home/home.module';
 import { ListingModule }        from './listing/listing.module';
+import { SigninModule }         from './sign/signin/signin.module';
+import { SignupModule }         from './sign/signup/signup.module';
 import { SharedModule }         from './shared/shared.module';
 import { SearchResultsModule }  from './searchResults/search-results.module';
 import { ServicesModule }       from './services/services.module';
@@ -32,6 +34,8 @@ import { ServicesModule }       from './services/services.module';
     ListingModule,
     SearchResultsModule,
     ServicesModule,
+    SigninModule,
+    SignupModule,
     SharedModule.forRoot()
   ],
 

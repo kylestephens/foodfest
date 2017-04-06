@@ -3,15 +3,15 @@ import { Http, Response }       from '@angular/http';
 import { Subscription }         from 'rxjs/Subscription';
 import 'rxjs/add/operator/toPromise';
 
-import { LoginDetails }         from '../../model/login-details';
+import { LoginDetails }         from '../../shared/model/login-details';
 
-import { AccountService }       from '../../../services/account.service';
-import { FacebookService }      from '../../../services/facebook.service';
-import { GoogleService }        from '../../../services/google.service';
-import { MessagingService }     from '../../../services/messaging.service';
-import { ModalService }         from '../../../services/modal.service';
+import { AccountService }       from '../../services/account.service';
+import { FacebookService }      from '../../services/facebook.service';
+import { GoogleService }        from '../../services/google.service';
+import { MessagingService }     from '../../services/messaging.service';
+import { ModalService }         from '../../services/modal.service';
 
-import { CONSTANT }             from '../../../core/constant';
+import { CONSTANT }             from '../../core/constant';
 
 /**
  * This class represents the navigation bar component.
@@ -23,7 +23,7 @@ import { CONSTANT }             from '../../../core/constant';
   moduleId: module.id,
   selector: 'signin',
   templateUrl: 'signin.component.html',
-  styleUrls: ['../signup/signup.component.css']
+  styleUrls: ['../signup.component.css']
 })
 
 export class SigninComponent {

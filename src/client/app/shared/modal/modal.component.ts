@@ -1,9 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation }  from '@angular/core';
 import { Subscription }                  from 'rxjs/Subscription';
 
-import { SigninComponent }        from './signin/signin.component';
-import { SignupComponent }        from './signup/signup.component';
-
 import { MessagingService }       from '../../services/messaging.service';
 import { ModalService }           from '../../services/modal.service';
 import { SettingsService }        from '../../services/settings.service';
@@ -41,6 +38,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   ) {
     // subscribe to modal service messages
     this.subscription = this.modalService.getMessage().subscribe(subMessage => {
+      debugger
       console.debug('ModalComponent::subscription');
       this.subMessage = subMessage;
       if(subMessage.event && subMessage.event === CONSTANT.EVENT.MODAL.SHOW_MODAL) {
