@@ -91,6 +91,10 @@ $logo-size-phone:   140px;
   }
 }
 
+.no-capitalise {
+  text-transform: none !important;
+}
+
 .sebm-google-map-container {
   height: 300px;
 }

@@ -6,6 +6,7 @@ import {
   AgmCoreModule,
   MapTypeStyle
 }                                 from 'angular2-google-maps/core';
+import { Vendor }                 from '../../shared/model/vendor';
 import { CONSTANT }               from '../../core/constant';
 
 declare var google: any;
@@ -21,20 +22,14 @@ declare var google: any;
 })
 export class VendorPageComponent implements OnInit {
 
-  public coverPhotoUrl: string;
-  public businessLogoUrl: string;
-  public businessName: string;
-  public businessWebsite: string;
-  public businessDescription: string;
-  public businessAddress: string;
-  public businessPhoneNum: string;
-  public mapLatitude: number;
-  public mapLongitude: number;
+  public vendor = new Vendor();
   public zoomLevel: number = 15;        // google maps zoom level
-  public styles: string;
-  public businessSetup: string;
-  public eventTypes: string;
-  public dietRequirements: string;
+
+  public formattedStyles: string;
+  public formattedEventTypes: string;
+  public formattedBusinessSetups: string;
+  public formattedDietRequirements: string;
+
   public mapStyles: MapTypeStyle[] = [
     {
       "elementType": "geometry",
@@ -271,24 +266,24 @@ export class VendorPageComponent implements OnInit {
     );
 
     if(images.businessLogo) {
-      this.businessLogoUrl = images.businessLogo;
+      this.vendor.logo_photo = images.businessLogo;
     }
     if(images.coverImage) {
-      this.coverPhotoUrl = images.coverImage;
+      this.vendor.cover_photo_path = images.coverImage;
     }
     if(address) {
-      this.mapLatitude = address.geometry.location.lat;
-      this.mapLongitude = address.geometry.location.lng;
-      this.businessAddress = stepTwo.businessAddress;
+      this.vendor.business_latitude = address.geometry.location.lat;
+      this.vendor.business_longitude = address.geometry.location.lng;
+      this.vendor.business_address = stepTwo.businessAddress;
     }
-    this.styles = this._formatFilterString(stepOne.styles);
-    this.businessSetup = this._formatFilterString(stepOne.businessSetup);
-    this.eventTypes = this._formatFilterString(stepOne.eventType);
-    this.dietRequirements = this._formatFilterString(stepOne.dietRequirements);
-    this.businessName = stepOne.businessName;
-    this.businessPhoneNum = stepTwo.phoneNumber;
-    this.businessWebsite = stepTwo.businessWebsite;
-    this.businessDescription = stepFour.businessDescription;
+    this.formattedStyles= this._formatFilterString(stepOne.styles);
+    this.formattedBusinessSetups = this._formatFilterString(stepOne.businessSetup);
+    this.formattedEventTypes = this._formatFilterString(stepOne.eventType);
+    this.formattedDietRequirements = this._formatFilterString(stepOne.dietRequirements);
+    this.vendor.business_name = stepOne.businessName;
+    this.vendor.phone_num = stepTwo.phoneNumber;
+    this.vendor.business_website = stepTwo.businessWebsite;
+    this.vendor.description = stepFour.businessDescription;
   }
 
   private _formatFilterString(filterObject: any): string {

@@ -1,15 +1,15 @@
 <article>
 
   <header class="hero"
-    [ngStyle]="{'background-image': 'url(' + coverPhotoUrl + ')'}">
+    [ngStyle]="{'background-image': 'url(' + vendor.cover_photo_path + ')'}">
 
     <div class="hero__overlay">
       <div class="[ container ]">
         <div class="[ row ]">
           <div class="[ col-xs-12 ]">
-            <img class="hero__business-logo" [src]="businessLogoUrl">
+            <img class="hero__business-logo" [src]="vendor.logo_photo">
             <h2 class="hero__business-name">
-              {{ businessName }}
+              {{ vendor.business_name }}
             </h2>
           </div>
         </div>
@@ -22,7 +22,7 @@
 
     <div class="card [ row ]">
       <div class="business-description [ col-xs-12 ]">
-        {{ businessDescription }}
+        {{ vendor.description }}
       </div>
     </div>
 
@@ -32,37 +32,37 @@
 
     <div class="card [ row ]">
       <div class="vendor-details [ col-sm-6 col-xs-12 ]">
-        <div class="vendor-details__item" *ngIf="styles">
+        <div class="vendor-details__item" *ngIf="formattedStyles">
           <h4>
             <span class="vendor-details__icon ak-icon-style"></span>
             <span class="vendor-details__heading">Cooking Style</span>
           </h4>
-          <span class="vendor-details__text">{{ styles }}</span>
+          <span class="vendor-details__text">{{ formattedStyles }}</span>
         </div>
 
-        <div class="vendor-details__item" *ngIf="eventTypes">
+        <div class="vendor-details__item" *ngIf="formattedEventTypes">
           <h4>
             <span class="vendor-details__icon ak-icon-event-type"></span>
-            <span class="vendor-details__heading">Event Served</span>
+            <span class="vendor-details__heading">Events Served</span>
           </h4>
-          <span class="vendor-details__text">{{ eventTypes }}</span>
+          <span class="vendor-details__text">{{ formattedEventTypes }}</span>
         </div>
       </div>
       <div class="vendor-details [ col-sm-6 col-xs-12 ]">
-        <div class="vendor-details__item" *ngIf="businessSetup">
+        <div class="vendor-details__item" *ngIf="formattedBusinessSetups">
           <h4>
             <span class="vendor-details__icon ak-icon-business-setup"></span>
             <span class="vendor-details__heading">Business Setup</span>
           </h4>
-          <span class="vendor-details__text">{{ businessSetup }}</span>
+          <span class="vendor-details__text">{{ formattedBusinessSetups }}</span>
         </div>
 
-        <div class="vendor-details__item" *ngIf="dietRequirements">
+        <div class="vendor-details__item" *ngIf="formattedDietRequirements">
           <h4>
             <span class="vendor-details__icon ak-icon-diet-requirements"></span>
             <span class="vendor-details__heading">Diet Requirements Catered</span>
           </h4>
-          <span class="vendor-details__text">{{ dietRequirements }}</span>
+          <span class="vendor-details__text">{{ formattedDietRequirements }}</span>
         </div>
       </div>
     </div>
@@ -73,49 +73,53 @@
 
     <div class="vendor-details card [ row ]">
 
-      <div class="[ col-sm-8 col-xs-12" *ngIf="mapLatitude && mapLongitude">
+      <div class="[ col-sm-8 col-xs-12" *ngIf="vendor.business_latitude && vendor.business_longitude">
         <sebm-google-map
-          [latitude]="mapLatitude"
-          [longitude]="mapLongitude"
+          [latitude]="vendor.business_latitude"
+          [longitude]="vendor.business_longitude"
           [zoom]="zoomLevel"
           [disableDefaultUI]="false"
           [zoomControl]="true"
           [styles]="mapStyles">
           <sebm-google-map-marker
-            [latitude]="mapLatitude"
-            [longitude]="mapLongitude"
+            [latitude]="vendor.business_latitude"
+            [longitude]="vendor.business_longitude"
             [markerDraggable]="false"
             [iconUrl]="'assets/icons/svg/map-pin.svg'">
             <sebm-google-map-info-window>
-              <strong>{{ businessName }}</strong>
+              <strong>{{ vendor.business_name }}</strong>
             </sebm-google-map-info-window>
           </sebm-google-map-marker>
         </sebm-google-map>
       </div>
 
       <div class="vendor-details [ col-sm-4 col-xs-12">
-        <div class="vendor-details__item" *ngIf="businessAddress">
+        <div class="vendor-details__item" *ngIf="vendor.business_address">
           <h4>
             <span class="vendor-details__icon ak-icon-location"></span>
             <span class="vendor-details__heading">Address</span>
           </h4>
-          <span class="vendor-details__text">{{ businessAddress }}</span>
+          <span class="vendor-details__text">{{ vendor.business_address }}</span>
         </div>
 
-        <div class="vendor-details__item" *ngIf="businessWebsite">
+        <div class="vendor-details__item" *ngIf="vendor.business_website">
           <h4>
             <span class="vendor-details__icon ak-icon-earth"></span>
             <span class="vendor-details__heading">Website</span>
           </h4>
-          <span class="vendor-details__text">{{ businessWebsite }}</span>
+          <span class="no-capitalise vendor-details__text">
+            <a target="_blank" href="{{ vendor.business_website }}" title="{{ vendor.business_name }}">
+              {{ vendor.business_website }}
+            </a>
+          </span>
         </div>
 
-        <div class="vendor-details__item" *ngIf="businessPhoneNum">
+        <div class="vendor-details__item" *ngIf="vendor.phone_num">
           <h4>
             <span class="vendor-details__icon ak-icon-phone"></span>
             <span class="vendor-details__heading">Phone</span>
           </h4>
-          <span class="vendor-details__text">{{ businessPhoneNum }}</span>
+          <span class="vendor-details__text">{{ vendor.phone_num }}</span>
         </div>
       </div>
 
