@@ -16,6 +16,7 @@ export class AccountService {
   private subject = new Subject<any>();
   private user: User = new User();
   private loggedIn = false;
+  redirectUrl: string = '';
 
   constructor(
     private restService: RestService,

@@ -59,7 +59,8 @@ export class SigninComponent {
           this.modalService.hide();
         }
         else if(this.location === 'page') {
-          this.router.navigate(['']);
+          this.router.navigate([this.accountService.redirectUrl]);
+          this.accountService.redirectUrl = '';
         }
       }
     });
