@@ -54,8 +54,9 @@
   // Icons are not the same dimensions unfortunately
   &__icon-one {
     width: 145px;
+    height: 145px;
     position: relative;
-    top: 6px;
+    top: 14px;
     @media(max-width: $screen-sm-max) {
       width: 109px;
       height: 109px;
