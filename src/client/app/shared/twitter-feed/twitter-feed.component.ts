@@ -26,6 +26,8 @@ export class TwitterFeedComponent implements OnInit {
 
   public tweets: any = [];
 
+  public loading: boolean = true;
+
   constructor(
     private restService: RestService,
     private settingsService: SettingsService
@@ -37,9 +39,11 @@ export class TwitterFeedComponent implements OnInit {
     this.restService.get(this.settingsService.getServerBaseUrl() + '/twitter/' + screenName)
       .then((tweets: any) => {
         this.tweets = tweets.json();
+        this.loading = false;
       })
       .catch((err: any) => {
         console.dir(err);
+        this.loading = false;
       });
   };
 };

@@ -19,9 +19,11 @@ $header-height: 150px;
   }
 
   .tweets-wrapper {
+    width: 100%;
     padding-left: 50px;
     display: inline-block;
     min-height: $header-height;
+    position: relative;
   }
 
   .tweet {
