@@ -283,12 +283,15 @@ export class VendorPageComponent implements OnInit {
     this.formattedBusinessSetups = this._formatFilterString(stepOne.businessSetup);
     this.formattedEventTypes = this._formatFilterString(stepOne.eventType);
     this.formattedDietRequirements = this._formatFilterString(stepOne.dietRequirements);
+    this.additionalImages = images.businessAdditionalImages;
+
     this.vendor.business_name = stepOne.businessName;
     this.vendor.phone_num = stepTwo.phoneNumber;
     this.vendor.business_website = stepTwo.businessWebsite;
     this.vendor.description = stepFour.businessDescription;
-    this.additionalImages = images.businessAdditionalImages;
     this.vendor.twitter_address = stepThree.twitterAddress;
+    this.vendor.facebook_address = stepThree.facebookAddress;
+    this.vendor.instagram_address = stepThree.instagramAddress;
   }
 
   private _formatFilterString(filterObject: any): string {

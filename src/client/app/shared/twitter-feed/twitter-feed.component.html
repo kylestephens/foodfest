@@ -19,11 +19,13 @@
 
     <div class="tweet" *ngFor="let tweet of tweets">
       <div class="tweet__user">
-        <span class="icon ak-icon-twitter">
-        </span>
-        <div class="tweet__date">
-          {{ tweet.created_at | date: 'yMMMdjms' }}
-        </div>
+        <a target="_blank" href="{{ twitterUrl }}">
+          <span class="icon ak-icon-twitter">
+          </span>
+          <div class="tweet__date">
+            {{ tweet.created_at | date: 'yMMMdjms' }}
+          </div>
+        </a>
       </div>
       <!-- Inner HTML will allow proper rendering of
        encoded values like &nbsp; -->
