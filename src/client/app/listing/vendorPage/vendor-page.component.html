@@ -23,6 +23,18 @@
   <!-- DESCRIPTION + DETAILS -->
   <section class="card [ container ]">
 
+    <!-- ONLY IF EDITING -->
+    <a *ngIf="isEditing" [routerLink]="['/list-with-us/create-listing/step-4']" class="hero__return-editing">
+      <span class="ak-icon-chevron-thin-left">
+      </span> Edit Details
+    </a>
+    <button class="hero__proceed-payment" [routerLink]="['/search-results']">
+      Pay &amp; Publish
+      <span class="ak-icon-chevron-thin-right">
+      </span>
+    </button>
+    <!-- EDITING -->
+
     <div class="[ row ]">
       <div class="business-description [ col-xs-12 ]">
         {{ vendor.description }}

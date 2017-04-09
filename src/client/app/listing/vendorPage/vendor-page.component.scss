@@ -1,5 +1,6 @@
 @import '../../../scss/core/variables';
 @import '../../../scss/core/settings';
+@import '../../../scss/mixins/buttons';
 
 $logo-size:         220px;
 $logo-size-phone:   140px;
@@ -14,6 +15,24 @@ article {
   background: $gray;
   background-position: center center;
   background-size: cover;
+
+  &__return-editing, &__proceed-payment {
+    position: absolute;
+    z-index: 3;
+  }
+
+  &__return-editing {
+    top: $padding-large-vertical + 7px; // compensate for buttons padding
+    left: $padding-large-horizontal;
+  }
+
+  &__proceed-payment {
+    top: $padding-large-vertical;
+    right: $padding-large-horizontal;
+    @include button(#fff, $brand-primary-cta);
+    padding: 6px 12px;                  // overriding default button padding
+    font-weight: 400;
+  }
 
   &__overlay {
     background: $brand-overlay-pattern;
@@ -63,6 +82,7 @@ article {
   margin-bottom: $padding-xlarge-vertical;
   padding-left: $padding-large-horizontal;
   padding-right: $padding-large-horizontal;
+  position: relative;
 }
 
 .business-description {

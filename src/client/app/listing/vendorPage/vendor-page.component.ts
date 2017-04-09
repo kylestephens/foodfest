@@ -27,6 +27,7 @@ export class VendorPageComponent implements OnInit {
   public vendor = new Vendor();
   public zoomLevel: number = 15;        // google maps zoom level
 
+  public isEditing: boolean = false;
   public formattedStyles: string;
   public formattedEventTypes: string;
   public formattedBusinessSetups: string;
@@ -238,7 +239,11 @@ export class VendorPageComponent implements OnInit {
 
   constructor(
     private localStorageService: LocalStorageService
-  ) {};
+  ) {
+    if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_EDIT)) {
+      this.isEditing = true;
+    }
+  };
 
   ngOnInit() {
     this._initValuesFromLocalStorage();

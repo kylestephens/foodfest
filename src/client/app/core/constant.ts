@@ -85,6 +85,7 @@ export class CONSTANT extends CommonConstants {
     SESSION:                'session',
     TOKEN:                  'token',
     SETTINGS:               'settings',
+    LISTING_EDIT:           'listing.edit',
     LISTING_STEP_ONE:       'listing.step.1',
     LISTING_STEP_TWO:       'listing.step.2',
     LISTING_STEP_THREE:     'listing.step.3',
