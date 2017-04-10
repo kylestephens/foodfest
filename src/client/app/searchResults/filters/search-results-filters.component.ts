@@ -6,7 +6,7 @@ import { BusinessType }     from '../../shared/model/businessType';
 import { BusinessSetup }    from '../../shared/model/businessSetup';
 import { SettingsService }  from '../../services/settings.service';
 import { FilterService }    from '../filter.service';
-import { SearchFilter }     from './../../shared/model/searchFilter';
+import { SearchFilter }     from '../searchFilter';
 import { Subscription }     from 'rxjs/Subscription';
 
 /**

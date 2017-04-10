@@ -7,7 +7,7 @@ import { Style }            from '../shared/model/style';
 import { DietRequirement }  from '../shared/model/dietRequirement';
 import { BusinessType }     from '../shared/model/businessType';
 import { BusinessSetup }    from '../shared/model/businessSetup';
-import { SearchFilter }     from './../shared/model/searchFilter';
+import { SearchFilter }     from './searchFilter';
 
 @Injectable()
 export class FilterService {

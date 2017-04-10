@@ -2,7 +2,7 @@ import { Component }       from '@angular/core';
 import { ActivatedRoute }  from '@angular/router';
 import { FilterService }   from '../filter.service';
 import { Subscription }    from 'rxjs/Subscription';
-import { SearchFilter }     from './../../shared/model/searchFilter';
+import { SearchFilter }     from '../searchFilter';
 
 /**
  * This class represents active filters component on search results page.

@@ -1,6 +1,6 @@
 <div class="search-active-filter">
   <span *ngFor="let activeFilter of activeFilters">
-    <button class= "filter-button active-filter" (click)="onClick($event, activeFilter)">
+    <button class="filter-button active-filter" (click)="onClick($event, activeFilter)">
       <a class="close-link">x</a>
       <span *ngIf="activeFilter.name !== 'rating'">
         <span>{{activeFilter.text}}</span>
