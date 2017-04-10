@@ -1,5 +1,5 @@
 import { Injectable }                               from '@angular/core';
-import { Headers, Http, Response, URLSearchParams } from '@angular/http';
+import { Headers, Http, Response, URLSearchParams, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -15,7 +15,12 @@ export class RestService {
   };
 
   // TODO - handle timeouts better, e.g. if server is down / slow
-  public get = function (url: string, params?: any, headers?: any, options?: any) {
+  public get = function (url: string, params?: any, token?: string, options?: any) {
+    let headers: Headers = new Headers();
+    if(token) {
+      headers.append('Authorization', token);
+    }
+
     let searchParams: URLSearchParams;
     if(params) {
       searchParams = new URLSearchParams();
@@ -25,16 +30,19 @@ export class RestService {
     }
 
     return this.http
-      .get(url, { search: searchParams }, headers)
+      .get(url, { search: searchParams }, { headers: headers })
       .toPromise();
   };
 
-  public post = function (url: string, data: any, headers: any, options: any) {
-    var headers = headers || {};
-    headers['Content-Type'] = 'application/x-www-form-urlencoded';
+  public post = function (url: string, data: any, token?: string, options?: any) {
+    let headers: Headers = new Headers();
+    if(token) {
+       headers.append('Authorization', token);
+     }
+    //headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
     return this.http
-      .post(url, data, headers)
+      .post(url, data, { headers: headers })
       .toPromise();
   };
 
@@ -51,12 +59,15 @@ export class RestService {
       .toPromise();
   };
 
-  public put = function (url: string, data: any, headers: any, options: any) {
+  public put = function (url: string, data: any, token?: any, options?: any) {
+    let headers: Headers = new Headers();
+    if(token) {
+      headers.append('Authorization', token);
+    }
+
     return this.http
-      .put(url, data,)
-      .toPromise()
-      .then((response:any) => response.json().data)
-      .catch(handleFailure);
+      .put(url, data, { headers: headers })
+      .toPromise();
   };
 
 };
