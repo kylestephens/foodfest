@@ -1,0 +1,17 @@
+.confirm-dialog {
+  min-height: 80px;
+
+  &__buttons {
+    position: absolute;
+    bottom: -30px;
+    right: -35px;
+  }
+
+  .btn-negative.smaller, .btn-primary-cta.smaller {
+    padding: 4px 8px;
+  }
+
+  .btn-primary-cta.smaller {
+    margin-left: 10px;
+  }
+}

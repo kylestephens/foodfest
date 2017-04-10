@@ -1,16 +1,17 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { HttpModule }        from '@angular/http';
+import { HttpModule }            from '@angular/http';
 
-import { AccountService }    from './account.service';
-import { BrowserService }    from './browser.service';
-import { FacebookService }   from './facebook.service';
-import { GoogleService }     from './google.service';
-import { MessagingService }  from './messaging.service';
-import { ModalService }      from './modal.service';
-import { RestService }       from './rest.service';
-import { SettingsService }   from './settings.service';
-import { ValidationService } from './validation.service';
-import { WindowRefService }  from './window-ref.service';
+import { AccountService }        from './account.service';
+import { BrowserService }        from './browser.service';
+import { ConfirmDialogService }  from './confirm-dialog.service';
+import { FacebookService }       from './facebook.service';
+import { GoogleService }         from './google.service';
+import { MessagingService }      from './messaging.service';
+import { ModalService }          from './modal.service';
+import { RestService }           from './rest.service';
+import { SettingsService }       from './settings.service';
+import { ValidationService }     from './validation.service';
+import { WindowRefService }      from './window-ref.service';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -20,6 +21,7 @@ import { WindowRefService }  from './window-ref.service';
   providers: [
     AccountService,
     BrowserService,
+    ConfirmDialogService,
     GoogleService,
     FacebookService,
     MessagingService,
@@ -37,6 +39,7 @@ export class ServicesModule {
       providers: [
         AccountService,
         BrowserService,
+        ConfirmDialogService,
         GoogleService,
         FacebookService,
         MessagingService,

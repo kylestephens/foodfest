@@ -45,6 +45,7 @@ export class CONSTANT extends CommonConstants {
 
     SIGN_IN:                'signIn',
     SIGN_UP:                'signUp',
+    CONFIRM:                'confirm',
     MIN_HEIGHT:             400
 
   };

@@ -4,6 +4,7 @@ import { FormsModule }                    from '@angular/forms';
 import { RouterModule }                   from '@angular/router';
 
 import { AccountMetaComponent }           from './account-meta/account-meta.component';
+import { ConfirmDialogComponent }         from './confirm-dialog/confirm-dialog.component';
 import { FormMessagesComponent }          from './form-messages/form-messages.component';
 import { HeartComponent }                 from './heart/heart.component';
 import { ImageScrollerComponent }         from './image-scroller/image-scroller.component';
@@ -26,6 +27,7 @@ import { SignupComponent }                from './sign/signup/signup.component';
     NavbarComponent,
     MobileNavmenuComponent,
     AccountMetaComponent,
+    ConfirmDialogComponent,
     FormMessagesComponent,
     ImageScrollerComponent,
     MessagingComponent,
@@ -38,12 +40,13 @@ import { SignupComponent }                from './sign/signup/signup.component';
     NavbarComponent,
     MobileNavmenuComponent,
     AccountMetaComponent,
+    ConfirmDialogComponent,
     FormMessagesComponent,
     ImageScrollerComponent,
     MessagingComponent,
     ModalComponent,
     SignupComponent,
-    SigninComponent
+    SigninComponent,
     CommonModule,
     FormsModule,
     RouterModule
