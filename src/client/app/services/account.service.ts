@@ -37,6 +37,7 @@ export class AccountService {
     ).then(
       (response: any) => {
         response = response.json();
+        this.user.id = response.id;
         this.user.akAccessToken = response.token;
         this.user.user_type = response.user_type;
         this.user.active_vendor = response.active_vendor ? true : false;
@@ -62,6 +63,7 @@ export class AccountService {
     ).then(
       (response: any) => {
         response = response.json();
+        this.user.id = response.id;
         this.user.name = response.firstname;
         this.user.akAccessToken = response.token;
         this.user.user_type = response.user_type;
@@ -144,6 +146,7 @@ export class AccountService {
     this.user.name = sessionDetails['name'];
     this.user.firstname = sessionDetails['firstname'];
     this.user.lastname = sessionDetails['lastname'];
+    this.user.id = sessionDetails['id'];
     this.user.akAccessToken = sessionToken;
     this.user.facebook_user_id = sessionDetails['facebook_user_id'];
     this.user.google_user_id = sessionDetails['google_user_id'];
@@ -168,6 +171,7 @@ export class AccountService {
     json['google_user_id'] = this.user.google_user_id;
     json['user_type'] = this.user.user_type;
     json['active_vendor'] = this.user.active_vendor;
+    json['id'] = this.user.id;
     return json;
   };
 
