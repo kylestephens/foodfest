@@ -11,6 +11,7 @@ import { ImageScrollerComponent }         from './image-scroller/image-scroller.
 import { MessagingComponent }             from './messaging/messaging.component';
 import { MobileNavmenuComponent }         from './mobile-navmenu/mobile-navmenu.component';
 import { NavbarComponent }                from './navbar/navbar.component';
+import { TwitterFeedComponent }           from './twitter-feed/twitter-feed.component';
 
 import { ModalComponent }                 from './modal/modal.component';
 import { SigninComponent }                from './sign/signin/signin.component';
@@ -32,6 +33,7 @@ import { SignupComponent }                from './sign/signup/signup.component';
     ImageScrollerComponent,
     MessagingComponent,
     ModalComponent,
+    TwitterFeedComponent,
     SigninComponent,
     SignupComponent
   ],
@@ -45,8 +47,9 @@ import { SignupComponent }                from './sign/signup/signup.component';
     ImageScrollerComponent,
     MessagingComponent,
     ModalComponent,
-    SignupComponent,
+    TwitterFeedComponent,
     SigninComponent,
+    SignupComponent,
     CommonModule,
     FormsModule,
     RouterModule

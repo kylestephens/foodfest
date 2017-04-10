@@ -50,61 +50,26 @@
   }
 }
 
-.how-it-works {
-  text-align: center;
-  padding: 34px 0;
-  // background-image: url('../assets/img/patterns/food.png');
-  // background-repeat: repeat-x repeat-y;
-
-  @media(max-width: $screen-sm) {
-    padding-top:2em;
-    margin-bottom: 2.5em;
-  }
-
-  @media(max-width: $screen-sm) {
-    margin-bottom:1em;
-  }
-
-  &__steps {
-    text-align: left;
-    margin-bottom: 3em;
-
-    p {
-      margin-bottom: 0;
-
-      @media(max-width: $screen-sm) {
-        margin-bottom: 1.1666666667em;
-      }
+.home {
+  // Icons are not the same dimensions unfortunately
+  &__icon-one {
+    width: 145px;
+    height: 145px;
+    position: relative;
+    top: 14px;
+    margin-bottom: 18px;
+    @media(max-width: $screen-sm-max) {
+      width: 109px;
+      height: 109px;
     }
   }
-
-  &__description {
-    margin-top: 1em;
-  }
-
-  &__learn-more {
-    font-weight: $font-weight-normal;
-    font-size: 1.2857142857em;
-    margin-top: 54px;
+  // Icons are not the same dimensions unfortunately
+  &__icon-three {
+    position: relative;
+    top: -2px;
   }
 }
 
-.heading {
-
-  &__badge {
-    display: inline-block;
-    height: 1.875em;
-    width: 1.875em;
-    margin-right: .5833333333em;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    border-radius: 50px;
-    border: 3px solid $brand-secondary;
-    color:  $brand-secondary;
-    line-height: 1.675em;
-    text-align: center;
-    font-size: .8333333333em;
-    background: $body-bg;
-  }
-
+.how-it-works__steps {
+  margin-bottom: 3em;
 }

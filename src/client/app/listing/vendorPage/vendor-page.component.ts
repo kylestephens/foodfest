@@ -7,6 +7,7 @@ import {
   MapTypeStyle
 }                                 from 'angular2-google-maps/core';
 import { ImageScrollerComponent } from '../../shared/image-scroller/image-scroller.component';
+import { TwitterFeedComponent }   from '../../shared/twitter-feed/twitter-feed.component';
 import { Vendor }                 from '../../shared/model/vendor';
 import { CONSTANT }               from '../../core/constant';
 
@@ -26,6 +27,7 @@ export class VendorPageComponent implements OnInit {
   public vendor = new Vendor();
   public zoomLevel: number = 15;        // google maps zoom level
 
+  public isEditing: boolean = false;
   public formattedStyles: string;
   public formattedEventTypes: string;
   public formattedBusinessSetups: string;
@@ -237,7 +239,11 @@ export class VendorPageComponent implements OnInit {
 
   constructor(
     private localStorageService: LocalStorageService
-  ) {};
+  ) {
+    if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_EDIT)) {
+      this.isEditing = true;
+    }
+  };
 
   ngOnInit() {
     this._initValuesFromLocalStorage();
@@ -282,11 +288,15 @@ export class VendorPageComponent implements OnInit {
     this.formattedBusinessSetups = this._formatFilterString(stepOne.businessSetup);
     this.formattedEventTypes = this._formatFilterString(stepOne.eventType);
     this.formattedDietRequirements = this._formatFilterString(stepOne.dietRequirements);
+    this.additionalImages = images.businessAdditionalImages;
+
     this.vendor.business_name = stepOne.businessName;
     this.vendor.phone_num = stepTwo.phoneNumber;
     this.vendor.business_website = stepTwo.businessWebsite;
     this.vendor.description = stepFour.businessDescription;
-    this.additionalImages = images.businessAdditionalImages;
+    this.vendor.twitter_address = stepThree.twitterAddress;
+    this.vendor.facebook_address = stepThree.facebookAddress;
+    this.vendor.instagram_address = stepThree.instagramAddress;
   }
 
   private _formatFilterString(filterObject: any): string {

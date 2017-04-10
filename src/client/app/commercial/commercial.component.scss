@@ -13,7 +13,7 @@
   height: -moz-calc(100vh - 80px);    /* firefox */
   height: calc(100vh - 80px);
 
-  @media(max-width: $screen-sm) {
+  @media(max-width: $screen-sm-max) {
     height: 450px;
   }
 
@@ -50,40 +50,51 @@
   }
 }
 
-.how-it-works {
-  text-align: center;
-  padding: 54px 0;
+.desriptive-section {
+  height: 400px;
+  width: 100%;
+  background-image: url('../assets/img/event-planning.jpeg');
+  background-size: cover;
+  background-position: center bottom;
+  position: relative;
+  overflow: hidden;
+
+  .overlay {
+    background: $brand-overlay-pattern;
+    padding: $padding-xlarge-vertical 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 @media(max-width: $screen-sm) {
-  .how-it-works {
+  .desriptive-section {
     padding-top:2em;
     margin-bottom: 2.5em
   }
 }
 
-.how-it-works__steps {
+.desriptive-section__steps {
   text-align: left;
-  margin-bottom: 3em;
 }
 
 @media(max-width: $screen-sm) {
-  .how-it-works__steps {
+  .desriptive-section__steps {
     margin-bottom:1em;
   }
 }
 
-.how-it-works__steps p {
+.desriptive-section__steps p {
   margin-bottom: 0;
 }
 
 @media(max-width: $screen-sm) {
-  .how-it-works__steps p {
+  .desriptive-section__steps p {
     margin-bottom: 1.1666666667em;
   }
 }
 
-.how-it-works__learn-more {
+.desriptive-section__learn-more {
   font-weight: 400;
   font-size: 1.2857142857em;
   margin-top: 54px;

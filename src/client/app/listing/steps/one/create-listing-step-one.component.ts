@@ -72,6 +72,10 @@ export class CreateListingStepOneComponent implements OnInit {
         CONSTANT.LOCALSTORAGE.LISTING_STEP_ONE,
         value
       );
+      this.localStorageService.store(
+        CONSTANT.LOCALSTORAGE.LISTING_EDIT,
+        true
+      );
       this._nextStep();
     } else {
       // user might have hit next button without completing

@@ -8,6 +8,7 @@ import { Http, Response }    from '@angular/http';
 import { LocalStorageService, SessionStorageService } from 'ng2-webstorage';
 import { SettingsService }   from './settings.service';
 import { User }              from '../shared/model/user';
+import { Vendor }            from '../shared/model/vendor';
 import { CONSTANT }          from '../core/constant';
 
 @Injectable()
@@ -15,6 +16,7 @@ export class AccountService {
 
   private subject = new Subject<any>();
   private user: User = new User();
+  private vendor: Vendor = new Vendor();
   private loggedIn = false;
   redirectUrl: string = '';
 
@@ -136,7 +138,15 @@ export class AccountService {
     if(data.fullName) this.user.setName(data.fullName);
     this.user.password = data.password;
     this.user.email = data.email;
-  }
+  };
+
+  getVendorId = function() {
+    return this.vendor.id;
+  };
+
+  setVendorId = function(id: number) {
+    this.vendor.id = id;
+  };
 
   reloadSession = function(sessionDetails: any, sessionToken: any) {
     this.loggedIn = sessionDetails['loggedIn'];

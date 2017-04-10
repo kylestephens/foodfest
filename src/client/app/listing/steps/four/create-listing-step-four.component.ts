@@ -66,13 +66,12 @@ export class CreateListingStepFourComponent {
       _formValues = this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR);
       this._restoreFormValues(_formValues);
     }
-    if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.VENDOR_ID)) {
-      this.vendorId = this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.VENDOR_ID);
-    }
+    if(this.accountService.getVendorId()) { this.vendorId = this.accountService.getVendorId(); }
   };
 
   /**
    * TODO - sorry for the ugly code :-(
+   * TODO - when you have vendor ID created, all subsequent codes should use access token
    *
    * 1. Check valid
    * 2. Check whether a) new vendor or b) current vendor who is editing
@@ -84,54 +83,83 @@ export class CreateListingStepFourComponent {
    * B.2 - If images, update images
    */
   public submitForm(value: any) {
-    var me = this;
-    if(this.stepFourForm.valid) {
-      if(this.vendorId === 0) {
-        // if first time around - won't have created a vendor
-        this.localStorageService.store(CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR, value);
-
-        this.createListingService.create().then((response: any) => {
-          me.vendorId = response.id;
-          me.localStorageService.store(CONSTANT.LOCALSTORAGE.VENDOR_ID, me.vendorId);
-          me.accountService.updateUserLocalStorage(CONSTANT.user.types.VENDOR.code);
-
-          if(me.businessLogo || me.coverImage || me.additionalImages.length > 0) {
-            me.createListingService.uploadVendorImages(
-              me.vendorId,
-              me.businessLogo,
-              me.coverImage,
-              me.additionalImages
-            ).then((response: any) => {
-              let additionalImages: Array<string> = [];
-              if(response.images && response.images.length > 0) {
-                response.images.forEach((image: string) => {
-                  additionalImages.push(this.settingsService.getServerBaseUrl() + '/' + image);
-                });
-              }
-              let allImages = {
-                'businessLogo': this.settingsService.getServerBaseUrl() + '/' + response.business_logo,
-                'coverImage': this.settingsService.getServerBaseUrl() + '/' + response.cover_photo,
-                'businessAdditionalImages': additionalImages
-              };
-              me.localStorageService.store(
-                CONSTANT.LOCALSTORAGE.VENDOR_IMAGES,
-                allImages
-              );
-              me._nextStep();
-            });
-          } else {
-            me._nextStep();
-          }
-        });
-      } else {
-         // second time around - reviewing / editing information
-      }
-    } else {
+    if(!this.stepFourForm.valid) {
       // user might have hit next button without completing
       // some mandatory fields - trigger validation ! :)
       for (var i in this.stepFourForm.controls) {
         this.stepFourForm.controls[i].markAsTouched();
       }
+      return;
+    }
+
+    var me = this;
+    this.localStorageService.store(CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR, value);
+    if(this.vendorId === 0) {
+      // if first time around - won't have created a vendor
+      this.createListingService.create().then((response: any) => {
+        me.vendorId = response.id;
+        me.accountService.setVendorId(me.vendorId);
+        me.accountService.updateUserLocalStorage(CONSTANT.user.types.VENDOR.code);
+
+        if(me.businessLogo || me.coverImage || me.additionalImages.length > 0) {
+          me.createListingService.uploadVendorImages(
+            me.vendorId,
+            me.businessLogo,
+            me.coverImage,
+            me.additionalImages
+          ).then((response: any) => {
+            let additionalImages: Array<string> = [];
+            if(response.images && response.images.length > 0) {
+              response.images.forEach((image: string) => {
+                additionalImages.push(this.settingsService.getServerBaseUrl() + '/' + image);
+              });
+            }
+            let allImages = {
+              'businessLogo': this.settingsService.getServerBaseUrl() + '/' + response.business_logo,
+              'coverImage': this.settingsService.getServerBaseUrl() + '/' + response.cover_photo,
+              'businessAdditionalImages': additionalImages
+            };
+            me.localStorageService.store(
+              CONSTANT.LOCALSTORAGE.VENDOR_IMAGES,
+              allImages
+            );
+            me._nextStep();
+          });
+        } else {
+          me._nextStep();
+        }
+      });
+    } else {
+       // second time around - reviewing / editing information
+       this.createListingService.edit(me.accountService.getVendorId()).then((response: any) => {
+         if(me.businessLogo || me.coverImage || me.additionalImages.length > 0) {
+           me.createListingService.uploadVendorImages(
+             me.vendorId,
+             me.businessLogo,
+             me.coverImage,
+             me.additionalImages
+           ).then((response: any) => {
+             let additionalImages: Array<string> = [];
+             if(response.images && response.images.length > 0) {
+               response.images.forEach((image: string) => {
+                 additionalImages.push(this.settingsService.getServerBaseUrl() + '/' + image);
+               });
+             }
+             let allImages = {
+               'businessLogo': this.settingsService.getServerBaseUrl() + '/' + response.business_logo,
+               'coverImage': this.settingsService.getServerBaseUrl() + '/' + response.cover_photo,
+               'businessAdditionalImages': additionalImages
+             };
+             me.localStorageService.store(
+               CONSTANT.LOCALSTORAGE.VENDOR_IMAGES,
+               allImages
+             );
+             me._nextStep();
+           });
+         } else {
+           me._nextStep();
+         }
+       });
     }
   };
 

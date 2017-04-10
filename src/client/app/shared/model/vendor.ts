@@ -17,6 +17,9 @@ export class Vendor {
   event_types: Array<any>;
   diet_requirements: Array<any>;
   phone_num: string;
+  facebook_address: string;
+  twitter_address: string;
+  instagram_address: string;
 	description: string;
   logo_photo: string;
 	images_path: string;
