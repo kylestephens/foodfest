@@ -23,7 +23,7 @@ export class InboxService {
   deleteConversation(messageId: number): Promise<boolean> {
     return this.restService.put(
       this.settingsService.getServerBaseUrl() + '/messages/delete', {messageId: messageId}, this.accountService.getUser().akAccessToken,
-    ). then((response:Response) => //do nothing, success);
+    ). then((response:Response) => );//do nothing, success
   }
 
 };
