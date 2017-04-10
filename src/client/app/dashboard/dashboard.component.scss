@@ -16,12 +16,13 @@
     padding-left: 4px;
 
     &:hover {
-      background-color: darken($brand-primary, 10%)
+      background-color: darken($brand-primary, 5%);
     }
 
     &.active {
       padding-left: 0px;
       border-left: 4px solid $brand-secondary;
+      background-color: darken($brand-primary, 20%);
     }
   }
 

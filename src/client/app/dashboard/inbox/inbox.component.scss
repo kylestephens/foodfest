@@ -1,0 +1,76 @@
+@import '../../../scss/core/variables';
+@import '../../../scss/core/settings';
+@import '../../../scss/core/mixins';
+
+.details-menu {
+  background-color: $brand-secondary;
+  color: $brand-body-bg;
+}
+
+.inbox-overview {
+  height: 110px;
+  position: relative;
+  border-bottom: 1px solid darken($brand-secondary, 20%);
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
+
+  &.not-read {
+    background-color: darken($brand-secondary, 10%);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    margin-bottom: 5px;
+
+    &-icon {
+      vertical-align: middle;
+      line-height: 45px;
+      font-size: 35px;
+      flex: 0 0 50px;
+      min-width: 50px;
+      border: 1px solid;
+      border-radius: 50%;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    &-title {
+      flex-grow: 1;
+      margin-left: 10px;
+      min-width: 0;
+      position: relative;
+
+      &__name {
+        font-weight: 400;
+        max-height: 38px;
+        overflow: hidden;
+        font-size:$font-size-medium;
+      }
+
+      &__date {
+        font-size: $font-size-smallest;
+      }
+    }
+  }
+
+  &__content {
+    @include text-overflow();
+    width: 100%;
+    font-size: $font-size-smallest;
+  }
+
+  &__footer {
+    font-size: $font-size-smallest;
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
+  }
+}
+
+
+

@@ -1,6 +1,21 @@
-<!-- <div class="[ row ]">
-  <div class="[ col-sm-10 col-xs-12 ] "> -->
-  test inbox
-<!--   </div>
+<div class=" [ col-xs-12 col-sm-3 ] details-menu">
 
-</div> -->
+  <div *ngFor="let message of messages" class="inbox-overview" [ngClass]="{'not-read': !message.read_date}">
+    <div class="inbox-overview__header">
+      <div  class="inbox-overview__header-icon" [ngClass]="{'ak-icon-user': !message.show_vendor || !message.cover_photo_path}">
+      </div>
+
+      <div class="inbox-overview__header-title">
+        <div class="inbox-overview__header-title__name">{{message.name_to_show}}</div>
+        <div class="inbox-overview__header-title__date">{{message.send_date}}</div>
+      </div>
+    </div>
+
+    <div class="inbox-overview__content">{{message.content}}</div>
+
+    <div class="inbox-overview__footer">
+      <a (click)="confirmDelete($event, message)">Delete</a>
+    </div>
+
+  </div>
+</div>

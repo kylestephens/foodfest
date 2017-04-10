@@ -7,6 +7,7 @@ import { ListingsComponent }      from './listings/listings.component';
 import { InboxComponent }         from './inbox/inbox.component';
 import { FavouritesComponent }    from './favourites/favourites.component';
 
+import { InboxService }           from './inbox/inbox.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,6 +19,9 @@ import { FavouritesComponent }    from './favourites/favourites.component';
     ListingsComponent,
     InboxComponent,
     FavouritesComponent
+  ],
+  providers: [
+    InboxService
   ]
 })
 
