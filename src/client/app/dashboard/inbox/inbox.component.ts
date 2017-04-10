@@ -35,6 +35,7 @@ export class InboxComponent {
         if(confirmDialog.action && confirmDialog.action === 'deleteConversation') {
           this.inboxService.deleteConversation(confirmDialog.record.id).then(() => {
             this.modalService.hide();
+            //instead of getMessages request just remove the conversation
             this.removeConversation(confirmDialog.record.id);
           })
         }
