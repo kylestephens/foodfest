@@ -89,7 +89,8 @@ export class CreateListingComponent {
   };
 
   private _previewListing = function() {
-    // TODO !
+    this.router.navigate(['vendor'], {relativeTo: this.route});
+    window.scrollTo(0, 0);
   };
 
 };
