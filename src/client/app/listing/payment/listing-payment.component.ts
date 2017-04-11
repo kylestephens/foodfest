@@ -51,7 +51,7 @@ export class ListingPaymentComponent {
       locale: 'auto',
       currency: 'eur',
       panelLabel: 'Subscribe',
-      token: function (token: any) {
+      token: (token: any) => {
         debugger;
         let planDetails = {
           stripeId: token.id,
@@ -60,8 +60,9 @@ export class ListingPaymentComponent {
           planName: _planName
         };
         me.restService.post(me.settingsService.getServerBaseUrl() + '/subscribe',
-          planDetails, (resp: any) => {
-            debugger;
+          planDetails
+        ).then((resp: any) => {
+          debugger;
         });
       }
     });
