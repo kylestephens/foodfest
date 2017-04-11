@@ -1,15 +1,14 @@
-import { NgModule }                 from '@angular/core';
-import { RouterModule }             from '@angular/router';
-import { ListingMasterComponent }   from './listing-master.component';
-import { ListingDetailComponent }   from './detail/listing-detail.component';
-import { ListingPaymentComponent }   from './payment/listing-payment.component';
-import { CreateListingComponent }   from './create-listing.component';
+import { NgModule }                        from '@angular/core';
+import { RouterModule }                    from '@angular/router';
+import { ListingMasterComponent }          from './listing-master.component';
+import { ListingDetailComponent }          from './detail/listing-detail.component';
+import { ListingPaymentComponent }         from './payment/listing-payment.component';
+import { CreateListingComponent }          from './create-listing.component';
 import { CreateListingStepOneComponent }   from './steps/one/create-listing-step-one.component';
 import { CreateListingStepTwoComponent }   from './steps/two/create-listing-step-two.component';
 import { CreateListingStepThreeComponent } from './steps/three/create-listing-step-three.component';
 import { CreateListingStepFourComponent }  from './steps/four/create-listing-step-four.component';
-import { VendorPageComponent }             from './vendorPage/vendor-page.component';
-import { CONSTANT }                 from '../core/constant';
+import { CONSTANT }                        from '../core/constant';
 
 @NgModule({
   imports: [
@@ -28,11 +27,8 @@ import { CONSTANT }                 from '../core/constant';
               { path: 'step-4', component: CreateListingStepFourComponent }
             ]
           },
-          { path: 'payment', component: ListingPaymentComponent },
-          //{ path: 'make-payment', component: MakePayment }
+          { path: 'payment', component: ListingPaymentComponent }
         ]
-      }, {
-        path: 'vendor', component: VendorPageComponent
       }
     ])
   ],

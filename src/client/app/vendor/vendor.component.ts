@@ -1,28 +1,31 @@
-import { Component, OnInit }      from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  OnInit
+}                                 from '@angular/core';
 import {
   LocalStorageService
 }                                 from 'ng2-webstorage';
 import {
   AgmCoreModule,
-  MapTypeStyle
+  MapTypeStyle,
+  MapsAPILoader
 }                                 from 'angular2-google-maps/core';
-import { ImageScrollerComponent } from '../../shared/image-scroller/image-scroller.component';
-import { TwitterFeedComponent }   from '../../shared/twitter-feed/twitter-feed.component';
-import { Vendor }                 from '../../shared/model/vendor';
-import { CONSTANT }               from '../../core/constant';
-
-declare var google: any;
+import { ImageScrollerComponent } from '../shared/image-scroller/image-scroller.component';
+import { TwitterFeedComponent }   from '../shared/twitter-feed/twitter-feed.component';
+import { Vendor }                 from '../shared/model/vendor';
+import { CONSTANT }               from '../core/constant';
 
 /**
  * This class represents the lazy loaded ListingComponent.
  */
 @Component({
   moduleId: module.id,
-  selector: 'ak-vendor-page',
-  templateUrl: 'vendor-page.component.html',
-  styleUrls: ['vendor-page.component.css']
+  selector: 'ak-vendor',
+  templateUrl: 'vendor.component.html',
+  styleUrls: ['vendor.component.css']
 })
-export class VendorPageComponent implements OnInit {
+export class VendorComponent implements OnInit {
 
   public vendor = new Vendor();
   public zoomLevel: number = 15;        // google maps zoom level
@@ -238,7 +241,8 @@ export class VendorPageComponent implements OnInit {
   ];
 
   constructor(
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private mapsAPILoader: MapsAPILoader
   ) {
     if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_EDIT)) {
       this.isEditing = true;
@@ -248,6 +252,10 @@ export class VendorPageComponent implements OnInit {
   ngOnInit() {
     this._initValuesFromLocalStorage();
   }
+
+  ngAfterViewInit() {
+    this.mapsAPILoader.load();
+  };
 
   /**
    * If arriving from create listing steps - retrieve

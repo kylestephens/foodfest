@@ -1,22 +1,20 @@
-import { NgModule }               from '@angular/core';
-import { CommonModule }           from '@angular/common';
-import { ReactiveFormsModule }    from '@angular/forms';
-import { CreateListingComponent } from './create-listing.component';
-import { CreateListingService }   from './create-listing.service';
+import { NgModule }                        from '@angular/core';
+import { CommonModule }                    from '@angular/common';
+import { ReactiveFormsModule }             from '@angular/forms';
+import { CreateListingComponent }          from './create-listing.component';
+import { CreateListingService }            from './create-listing.service';
 import { CreateListingStepOneComponent }   from './steps/one/create-listing-step-one.component';
 import { CreateListingStepTwoComponent }   from './steps/two/create-listing-step-two.component';
 import { CreateListingStepThreeComponent } from './steps/three/create-listing-step-three.component';
 import { CreateListingStepFourComponent }  from './steps/four/create-listing-step-four.component';
-import { ListingDetailComponent }   from './detail/listing-detail.component';
-import { ListingPaymentComponent }  from './payment/listing-payment.component';
-import { ListingMasterComponent }   from './listing-master.component';
-import { VendorPageComponent }      from './vendorPage/vendor-page.component';
-import { ListingRoutingModule }     from './listing-routing.module';
+import { ListingDetailComponent }          from './detail/listing-detail.component';
+import { ListingPaymentComponent }         from './payment/listing-payment.component';
+import { ListingMasterComponent }          from './listing-master.component';
+import { ListingRoutingModule }            from './listing-routing.module';
 
-import { SharedModule }             from '../shared/shared.module';
-
-import { AgmCoreModule }            from 'angular2-google-maps/core';
-import { SelectModule }             from 'ng2-select';
+import { SharedModule }                    from '../shared/shared.module';
+import { AgmCoreModule }                   from 'angular2-google-maps/core';
+import { SelectModule }                    from 'ng2-select';
 
 @NgModule({
   imports: [
@@ -38,8 +36,7 @@ import { SelectModule }             from 'ng2-select';
     CreateListingStepFourComponent,
     ListingDetailComponent,
     ListingPaymentComponent,
-    ListingMasterComponent,
-    VendorPageComponent
+    ListingMasterComponent
   ],
   exports: [
     CreateListingComponent,
@@ -49,8 +46,7 @@ import { SelectModule }             from 'ng2-select';
     CreateListingStepFourComponent,
     ListingDetailComponent,
     ListingPaymentComponent,
-    ListingMasterComponent,
-    VendorPageComponent
+    ListingMasterComponent
   ],
   providers: [
     CreateListingService
