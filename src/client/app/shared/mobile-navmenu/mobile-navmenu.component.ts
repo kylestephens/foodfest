@@ -28,26 +28,37 @@ export class MobileNavmenuComponent implements OnInit {
   private menuButton: HTMLElement = null;
   private menuContent: HTMLElement = null;
 
+  public loggedIn: boolean = false;
+  public userType: number;
+  public isVendor: boolean = false;
+
   constructor(
     private accountService: AccountService,
     private modalService: ModalService,
     private settingsService: SettingsService
   ) {
-    var me = this;
-    this.loggedIn = this.accountService.isLoggedIn();
+    this.setUserDetails();
 
     // subscribe to account service messages
     this.subscription = this.accountService.getMessage().subscribe(subMessage => {
       console.debug('MobileNavmenuComponent::subscription');
-      me.loggedIn = subMessage.sessionStatus;
+      if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN || subMessage.event === CONSTANT.EVENT.SESSION.USER_TYPE) {
+        if(this.accountService.isLoggedIn()) {
+          this.setUserDetails();
+        }
+      }
     });
   };
+
+  setUserDetails() {
+    this.userType = this.accountService.getUser().user_type;
+    this.isVendor = (this.accountService.getUser().user_type === CONSTANT.user.types.VENDOR.code) ? true : false;
+    this.loggedIn = this.accountService.isLoggedIn();
+  }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   };
-
-  public loggedIn: boolean = false;
 
   /**
    * Resize the menu to fit screen OnInit
@@ -59,21 +70,6 @@ export class MobileNavmenuComponent implements OnInit {
     this._resizeMenu();
     window.onresize = () => { this._resizeMenu(); };
   }
-
-  // TODO
-  // $rootScope.$on('loggedInStatus', function(event, loggedIn) {
-  //   $scope.loggedIn = loggedIn;
-  // });
-
-  public showSignUp = function() {
-    this.toggleMenu();
-    this.modalService.show(CONSTANT.MODAL.SIGN_UP);
-  };
-
-  public showSignIn = function() {
-    this.toggleMenu();
-    this.modalService.show(CONSTANT.MODAL.SIGN_IN);
-  };
 
   public toggleMenu = function() {
     this.menuButton.classList.toggle('menu-open');
@@ -88,5 +84,11 @@ export class MobileNavmenuComponent implements OnInit {
     this.menuContent.style.height = screen.height + 'px';
     this.menuContent.style.marginLeft = '-' + (screen.width * 0.75) + 'px';
   };
+
+  public logout = function() {
+    console.debug('AccountMetaComponent::logout');
+    this.accountService.reset();
+    window.location.pathname = '/';
+  }
 
 };

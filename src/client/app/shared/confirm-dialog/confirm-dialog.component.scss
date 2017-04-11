@@ -1,10 +1,16 @@
+@import '../../../scss/core/variables';
+
 .confirm-dialog {
   min-height: 80px;
 
   &__buttons {
     position: absolute;
+    right: 0;
     bottom: -30px;
-    right: -35px;
+
+     @media (min-width: $screen-sm-min) {
+        right: -35px;
+      }
   }
 
   .btn-negative.smaller, .btn-primary-cta.smaller {

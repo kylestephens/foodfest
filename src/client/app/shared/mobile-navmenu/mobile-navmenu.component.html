@@ -8,33 +8,40 @@
       <li [routerLink]="['/']">
         Home
       </li>
-      <li (click)="showSignUp()"
+      <li [routerLink]="['/signup']"
         *ngIf="!loggedIn">
         Sign up
       </li>
-      <li (click)="showSignIn()"
+      <li [routerLink]="['/signin']"
         *ngIf="!loggedIn">
         Login
       </li>
+      <li [routerLink]="['/list-with-us']">
+        List with us
+      </li>
+      <li [routerLink]="['/commercial']">
+        Commercial events
+      </li>
+      <!-- TODO: not in phase 1
       <li [routerLink]="['/']"
         *ngIf="loggedIn">
         Dashboard
-      </li>
-      <li [routerLink]="['/']"
+      </li> -->
+      <li [routerLink]="['/dashboard/profile']"
         *ngIf="loggedIn">
-        Profile
+        My Profile
       </li>
-      <li [routerLink]="['/']"
+      <li [ngClass]="!isVendor ? 'hidden' : ''" [routerLink]="['/dashboard/listings']"
         *ngIf="loggedIn">
-        My Listing
+        My Listings
       </li>
-      <li [routerLink]="['/']"
+      <li [routerLink]="['/dashboard/inbox']"
         *ngIf="loggedIn">
         Messages
       </li>
-      <li [routerLink]="['/']"
+      <li [routerLink]="['/dashboard/favourites']"
         *ngIf="loggedIn">
-        Saved Ads
+        Favourites
       </li>
       <li (click)="logout()"
         *ngIf="loggedIn">
