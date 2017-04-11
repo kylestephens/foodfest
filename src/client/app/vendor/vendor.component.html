@@ -41,8 +41,9 @@
       </div>
     </div>
 
+    <!-- BUSINESS SPECIFICS -->
     <div class="[ row ]">
-      <div class="vendor-details [ col-md-8 col-sm-6 col-xs-12 ]">
+      <div class="vendor-details [ col-md-4 col-sm-6 col-xs-12 ]">
         <div class="vendor-details__item" *ngIf="formattedStyles">
           <h4>
             <span class="vendor-details__icon ak-icon-style"></span>
@@ -59,6 +60,9 @@
           <span class="vendor-details__text">{{ formattedEventTypes }}</span>
         </div>
       </div>
+
+      <div class="[ col-md-4 hidden-sm hidden-xs ]"></div>
+
       <div class="vendor-details [ col-md-4 col-sm-6 col-xs-12 ]">
         <div class="vendor-details__item" *ngIf="formattedBusinessSetups">
           <h4>
@@ -77,6 +81,7 @@
         </div>
       </div>
     </div>
+    <!-- / BUSINESS SPECIFICS -->
 
   </section>
   <!-- / DESCRIPTION + DETAILS -->
