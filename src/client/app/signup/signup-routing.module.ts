@@ -5,7 +5,7 @@ import { SignupComponent } from   './signup.component';
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'signup', component: SignupComponent }
+      { path: '', component: SignupComponent }
     ])
   ],
   exports: [RouterModule]

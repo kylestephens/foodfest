@@ -15,7 +15,7 @@ import { CONSTANT }                 from '../core/constant';
   imports: [
     RouterModule.forChild([
       {
-        path: 'list-with-us', component: ListingMasterComponent,
+        path: '', component: ListingMasterComponent,
         children: [
           { path: '', redirectTo: 'details', pathMatch: 'full' },
           { path: 'details', component: ListingDetailComponent },

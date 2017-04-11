@@ -1,13 +1,21 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { NgModule }               from '@angular/core';
+import { Routes, RouterModule }   from '@angular/router';
+
+export const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: 'about', loadChildren: 'app/about/about.module#AboutModule' },
+  { path: 'commercial', loadChildren: 'app/commercial/commercial.module#CommercialModule' },
+  { path: 'dashboard', loadChildren: 'app/dashboard/dashboard.module#DashboardModule' },
+  { path: 'help', loadChildren: 'app/help/help.module#HelpModule' },
+  { path: 'signin', loadChildren: 'app/signin/signin.module#SigninModule' },
+  { path: 'signup', loadChildren: 'app/signup/signup.module#SignupModule' },
+  { path: 'search-results', loadChildren: 'app/searchResults/search-results.module#SearchResultsModule' },
+  { path: 'list-with-us', loadChildren: 'app/listing/listing.module#ListingModule' }
+];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot([
-      /* define app module routes here, e.g., to lazily load a module
-         (do not place feature module routes here, use an own -routing.module.ts in the feature instead)
-       */
-    ])
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
 })

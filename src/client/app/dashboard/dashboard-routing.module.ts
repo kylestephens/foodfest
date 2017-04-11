@@ -12,7 +12,7 @@ import { FavouritesComponent } from './favourites/favourites.component';
   imports: [
     RouterModule.forChild([
       {
-        path: 'dashboard',
+        path: '',
         component: DashboardComponent,
         canActivate: [AuthGuard],
         children: [
