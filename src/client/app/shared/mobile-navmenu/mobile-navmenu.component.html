@@ -5,21 +5,21 @@
   </div>
   <div id="menu-content">
     <ul class="menu-links">
-      <li [routerLink]="['/']">
+      <li [routerLink]="['/']" (click)="toggleMenu()">
         Home
       </li>
-      <li [routerLink]="['/signup']"
+      <li [routerLink]="['/signup']" (click)="toggleMenu()"
         *ngIf="!loggedIn">
         Sign up
       </li>
-      <li [routerLink]="['/signin']"
+      <li [routerLink]="['/signin']" (click)="toggleMenu()"
         *ngIf="!loggedIn">
         Login
       </li>
-      <li [routerLink]="['/list-with-us']">
+      <li [routerLink]="['/list-with-us']" (click)="toggleMenu()">
         List with us
       </li>
-      <li [routerLink]="['/commercial']">
+      <li [routerLink]="['/commercial']" (click)="toggleMenu()">
         Commercial events
       </li>
       <!-- TODO: not in phase 1
@@ -27,28 +27,29 @@
         *ngIf="loggedIn">
         Dashboard
       </li> -->
-      <li [routerLink]="['/dashboard/profile']"
+      <li [routerLink]="['/dashboard/profile']" (click)="toggleMenu()"
         *ngIf="loggedIn">
         My Profile
       </li>
       <li [ngClass]="!isVendor ? 'hidden' : ''" [routerLink]="['/dashboard/listings']"
+        (click)="toggleMenu()"
         *ngIf="loggedIn">
         My Listings
       </li>
-      <li [routerLink]="['/dashboard/inbox']"
+      <li [routerLink]="['/dashboard/inbox']" (click)="toggleMenu()"
         *ngIf="loggedIn">
         Messages
       </li>
-      <li [routerLink]="['/dashboard/favourites']"
+      <li [routerLink]="['/dashboard/favourites']" (click)="toggleMenu()"
         *ngIf="loggedIn">
         Favourites
       </li>
-      <li (click)="logout()"
+      <li (click)="logout()" (click)="toggleMenu()"
         *ngIf="loggedIn">
         Logout
       </li>
       <hr />
-      <li [routerLink]="['/help']">
+      <li [routerLink]="['/help']" (click)="toggleMenu()">
         Help
       </li>
     </ul>
