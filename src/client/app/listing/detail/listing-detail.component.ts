@@ -12,15 +12,8 @@ import { Router }         from '@angular/router';
 })
 export class ListingDetailComponent {
 
-  private planType: number;
-
   constructor(
     private router: Router
   ) {}
-
-  public choosePlan = function(planNumber: number) {
-    this.planType = planNumber;
-    this.router.navigate(['/list-with-us/create-listing/step-1'], {relativeTo: this.route});
-  }
 
 }

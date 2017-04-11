@@ -1,65 +1,5 @@
 <article>
 
-  <header class="hero">
-    <div class="hero__title">
-      <h1>The better way to find food &amp; catering</h1>
-      <h2>FoodFest makes it easy to find quality food vendors and catering for your corporate event, concert, party or wedding</h2>
-      <button class="hero__browse-button" [routerLink]="['/list-with-us/create-listing/step-1']">
-        Create a Listing
-      </button>
-    </div>
-  </header>
-
-  <section class="how-it-works [ container ]">
-
-    <div class="how-it-works__steps [ row ]">
-
-      <div class="[ col-sm-4 col-xs-12 ]">
-        <h2 class="heading heading--medium">
-          <div class="heading__icon-holder">
-            <object class="heading__icon" data="assets/icons/svg/wireless-internet.svg" type="image/svg+xml">
-              <img src="assets/icons/img/wireless-internet.png" />
-            </object>
-          </div>
-          <span title="Allow your business to be discovered by those organising corporate events, festivals, concerts, parties and weddings in Ireland" class="jslink header-link">
-            <span class="heading__badge">1</span>Get Connected
-          </span>
-        </h2>
-          <p class="how-it-works__description">Instantly reach event organisers and planners from their phones or computers.</p>
-      </div>
-
-      <div class="[ col-sm-4 col-xs-12 ]">
-        <h2 class="heading heading--medium">
-          <div class="heading__icon-holder">
-            <object class="heading__icon" data="assets/icons/svg/clipboard.svg" type="image/svg+xml">
-              <img src="assets/icons/svg/clipboard.png" />
-            </object>
-          </div>
-          <span title="Use our messaging system to arrange bookings of your food stall, food van or catering with potential customers" class="jslink header-link">
-            <span class="heading__badge">2</span>Book Catering
-          </span>
-        </h2>
-          <p class="how-it-works__description">Get hired for private catering and large events to maximize your service calendar.</p>
-      </div>
-
-      <div class="[ col-sm-4 col-xs-12 ]">
-        <h2 class="heading heading--medium">
-          <div class="heading__icon-holder">
-            <object class="heading__icon listing__icon-three" data="assets/icons/svg/user.svg" type="image/svg+xml">
-              <img src="assets/icons/img/user.png" />
-            </object>
-          </div>
-          <span title="Personalise your message to convey your story to potential clients" class="jslink header-link">
-            <span class="heading__badge">3</span>Customize Profile
-          </span>
-        </h2>
-          <p class="how-it-works__description">Customize your FoodFest profile to convey your story to potential clients.</p>
-      </div>
-
-    </div>
-
-  </section>
-
   <section class="pricing">
     <header class="[ container ]">
 
@@ -89,6 +29,7 @@
                 <div class="plan-term">
                   per month
                 </div>
+                <a class="button" (click)="openCheckout(1)">Choose</a>
               </div>
             </div>
             <!-- / 1 month plan -->
@@ -123,6 +64,7 @@
                 <div class="plan-savings">
                   Save 15%
                 </div>
+                <a class="button" (click)="openCheckout(2)">Choose</a>
               </div>
             </div>
             <!-- / 1 year plan -->
@@ -150,6 +92,7 @@
                 <div class="plan-savings">
                   Save 17%
                 </div>
+                <a class="button" (click)="openCheckout(3)">Choose</a>
               </div>
             </div>
             <!-- / 6 month plan -->
@@ -162,14 +105,6 @@
 
       </div>
       <!-- / Row -->
-
-      <div class="[ row text-center ]">
-
-        <button class="hero__browse-button" [routerLink]="['/list-with-us/create-listing/step-1']">
-          Create a Listing
-        </button>
-
-      </div>
 
     </header>
     <!-- / Container -->

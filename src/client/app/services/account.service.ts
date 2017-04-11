@@ -140,6 +140,14 @@ export class AccountService {
     this.user.email = data.email;
   };
 
+  setVendor = function(vendor: any) {
+    this.vendor = vendor;
+  };
+
+  getVendor = function() {
+    return this.vendor;
+  };
+
   getVendorId = function() {
     return this.vendor.id;
   };
