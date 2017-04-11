@@ -34,7 +34,9 @@ export class AccountService {
         firstname: this.user.firstname,
         lastname: this.user.lastname,
         facebook_user_id: this.user.facebook_user_id,
-        google_user_id: this.user.google_user_id
+        google_user_id: this.user.google_user_id,
+        user_type: CONSTANT.user.types.USER.code,
+        active_vendor: '0'
       }
     ).then(
       (response: any) => {
