@@ -20,6 +20,7 @@ $modal-padding: 50px;
 
   @media (max-width: $screen-xs-max) {
     width: 96%;
+    min-width: 96%;
     margin: ($padding-large-vertical * 2) 2%;
   }
 
@@ -58,6 +59,10 @@ $modal-padding: 50px;
   left: -40px;
   position: relative;
   color: $brand-border-color;
+
+   @media (max-width: $screen-xs-max) {
+    left: -30px;
+  }
 }
 
 .sign-up-field {
