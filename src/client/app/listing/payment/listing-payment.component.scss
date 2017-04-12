@@ -59,6 +59,11 @@ $annual: #744DA8;
 .pricing {
   background: #EAF7FC;
   padding: $padding-xlarge-vertical 0;
+
+  h2 {
+    text-align: center;
+    margin-bottom: $padding-xlarge-vertical;
+  }
 }
 
 .price-plans {

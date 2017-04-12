@@ -18,17 +18,6 @@ $annual: #744DA8;
   height: -moz-calc(100vh - 80px);    /* firefox */
   height: calc(100vh - 80px);
 
-  .overlay {
-    background: $brand-overlay-pattern;
-    padding: $padding-xlarge-vertical 0;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-  }
-
   @media(max-width: $screen-sm) {
     height: 450px;
   }
@@ -58,19 +47,35 @@ $annual: #744DA8;
   }
 
   h1 {
-    color: #fff;
+    color: $brand-primary;
   }
 
   h2 {
-    color: #fff;
+    color: darken($brand-primary, 20%);
     font-size: 22px;
     padding-top: 26px;
   }
 }
 
+.overlay {
+  background: $brand-overlay-pattern;
+  padding: $padding-xlarge-vertical 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
 .pricing {
   background: #EAF7FC;
   padding: $padding-xlarge-vertical 0;
+
+  h2 {
+    text-align: center;
+    margin-bottom: $padding-xlarge-vertical;
+  }
 }
 
 .price-plans {
@@ -250,4 +255,25 @@ $annual: #744DA8;
     position: relative;
     top: 8px;
   }
+}
+
+.reasons-row {
+
+  &__text {
+    min-height: 400px;
+    padding-top: 50px;
+  }
+
+  &__image {
+    min-height: 400px;
+
+    &--events {
+      background: url('assets/img/list1.jpg');
+    }
+
+    &--connect {
+      background: url('assets/img/list2.jpg');
+    }
+  }
+
 }
