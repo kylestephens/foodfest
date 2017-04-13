@@ -34,7 +34,9 @@ export class AccountService {
         firstname: this.user.firstname,
         lastname: this.user.lastname,
         facebook_user_id: this.user.facebook_user_id,
-        google_user_id: this.user.google_user_id
+        google_user_id: this.user.google_user_id,
+        user_type: CONSTANT.user.types.USER.code,
+        active_vendor: '0'
       }
     ).then(
       (response: any) => {
@@ -138,6 +140,14 @@ export class AccountService {
     if(data.fullName) this.user.setName(data.fullName);
     this.user.password = data.password;
     this.user.email = data.email;
+  };
+
+  setVendor = function(vendor: any) {
+    this.vendor = vendor;
+  };
+
+  getVendor = function() {
+    return this.vendor;
   };
 
   getVendorId = function() {

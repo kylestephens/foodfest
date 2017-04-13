@@ -3,16 +3,15 @@
 @import '../../../scss/mixins/buttons';
 
 $monthly: #EEB417;
-$annual: #1FB3E0;
-$biannual: #744DA8;
+$biannual: #1FB3E0;
+$annual: #744DA8;
 
 .hero {
-  background-image: url('../assets/img/list.jpeg');
+  background-image: url('../assets/img/list.jpg');
   background-size: cover;
-  background-position: center bottom;
+  background-position: center center;
   position: relative;
   width: 100%;
-  color: #fff;
 
   height: -o-calc(100vh - 80px);      /* opera */
   height: -webkit-calc(100vh - 80px); /* google, safari */
@@ -29,6 +28,8 @@ $biannual: #744DA8;
     width: 60%;
     margin: 0 auto;
     text-align: center;
+    position: relative;
+    z-index: 2;
 
     @media (max-width: $screen-sm-max) {
       width: 70%;
@@ -50,15 +51,31 @@ $biannual: #744DA8;
   }
 
   h2 {
-    color: #5d5c5c;
+    color: darken($brand-primary, 20%);
     font-size: 22px;
     padding-top: 26px;
   }
 }
 
+.overlay {
+  background: $brand-overlay-pattern;
+  padding: $padding-xlarge-vertical 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
 .pricing {
   background: #EAF7FC;
   padding: $padding-xlarge-vertical 0;
+
+  h2 {
+    text-align: center;
+    margin-bottom: $padding-xlarge-vertical;
+  }
 }
 
 .price-plans {
@@ -81,14 +98,31 @@ $biannual: #744DA8;
 
     &--monthly {
       color: $monthly;
+
+      @media all and (min-width: $screen-sm-min) {
+        -ms-transform: rotate(-7deg);
+         -webkit-transform: rotate(-7deg);
+          transform: rotate(-7deg);
+          position: relative;
+          left: 5%;
+      }
     }
 
     &--annual {
       color: $annual;
+      z-index: 2;
     }
 
     &--biannual {
       color: $biannual;
+
+      @media all and (min-width: $screen-sm-min) {
+        -ms-transform: rotate(7deg);
+         -webkit-transform: rotate(7deg);
+          transform: rotate(7deg);
+          position: relative;
+          right: 5%;
+      }
     }
 
     .plan-options-heading {
@@ -221,4 +255,25 @@ $biannual: #744DA8;
     position: relative;
     top: 8px;
   }
+}
+
+.reasons-row {
+
+  &__text {
+    min-height: 400px;
+    padding-top: 50px;
+  }
+
+  &__image {
+    min-height: 400px;
+
+    &--events {
+      background: url('assets/img/list1.jpg');
+    }
+
+    &--connect {
+      background: url('assets/img/list2.jpg');
+    }
+  }
+
 }

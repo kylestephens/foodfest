@@ -5,7 +5,7 @@ import { SearchResultsComponent } from './search-results.component';
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'search-results', component: SearchResultsComponent }
+      { path: '', component: SearchResultsComponent }
     ])
   ],
   exports: [RouterModule]

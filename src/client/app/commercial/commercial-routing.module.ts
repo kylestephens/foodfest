@@ -5,7 +5,7 @@ import { CommercialComponent }  from './commercial.component';
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'commercial', component: CommercialComponent }
+      { path: '', component: CommercialComponent }
     ])
   ],
   exports: [RouterModule]

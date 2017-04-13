@@ -1,18 +1,35 @@
 <article>
 
   <header class="hero">
+    <div class="overlay"></div>
     <div class="hero__title">
-      <h1>The better way to find food &amp; catering</h1>
-      <h2>FoodFest makes it easy to find quality food vendors and catering for your corporate event, concert, party or wedding</h2>
-      <button class="hero__browse-button" [routerLink]="['/search-results']">
-        Browse now
-    </button>
+      <h1>Bring your business to a larger audience</h1>
+      <h2>
+        Get discovered easier by a larger audience and increase
+        your sales and calendar bookings.
+      </h2>
+      <button class="hero__browse-button" [routerLink]="['/list-with-us/create-listing/step-1']">
+        Join now and gain bookings
+      </button>
     </div>
   </header>
 
   <section class="how-it-works [ container ]">
-
     <div class="how-it-works__steps [ row ]">
+
+      <div class="[ col-sm-4 col-xs-12 ]">
+        <h2 class="heading heading--medium">
+          <div class="heading__icon-holder">
+            <object class="heading__icon listing__icon-three" data="assets/icons/svg/user.svg" type="image/svg+xml">
+              <img src="assets/icons/img/user.png" />
+            </object>
+          </div>
+          <span title="Personalise your message to convey your story to potential clients" class="header-link">
+            <span class="heading__badge">1</span>Customize Profile
+          </span>
+        </h2>
+          <p class="how-it-works__description">Customize your FoodFest profile to convey your story to potential clients.</p>
+      </div>
 
       <div class="[ col-sm-4 col-xs-12 ]">
         <h2 class="heading heading--medium">
@@ -21,11 +38,11 @@
               <img src="assets/icons/img/wireless-internet.png" />
             </object>
           </div>
-          <span title="Allow your business to be discovered by those organising corporate events, festivals, concerts, parties and weddings in Ireland" class="jslink header-link">
-            <span class="heading__badge">1</span>Get Connected
+          <span title="Allow your business to be discovered by those organising corporate events, festivals, concerts, parties and weddings in Ireland" class="header-link">
+            <span class="heading__badge">2</span>Get Connected
           </span>
         </h2>
-          <p class="how-it-works__description">Instantly reach event organisers and planners from their phones or computers.</p>
+          <p class="how-it-works__description">Gain instant exposure to event organisers and planners on their phones or computers.</p>
       </div>
 
       <div class="[ col-sm-4 col-xs-12 ]">
@@ -35,33 +52,20 @@
               <img src="assets/icons/svg/clipboard.png" />
             </object>
           </div>
-          <span title="Use our messaging system to arrange bookings of your food stall, food van or catering with potential customers" class="jslink header-link">
-            <span class="heading__badge">2</span>Book Catering
+          <span title="Use our messaging system to arrange bookings of your food stall, food van or catering with potential customers" class="header-link">
+            <span class="heading__badge">3</span>Arrange Bookings
           </span>
         </h2>
           <p class="how-it-works__description">Get hired for private catering and large events to maximize your service calendar.</p>
       </div>
 
-      <div class="[ col-sm-4 col-xs-12 ]">
-        <h2 class="heading heading--medium">
-          <div class="heading__icon-holder">
-            <object class="heading__icon listing__icon-three" data="assets/icons/svg/user.svg" type="image/svg+xml">
-              <img src="assets/icons/img/user.png" />
-            </object>
-          </div>
-          <span title="Personalise your message to convey your story to potential clients" class="jslink header-link">
-            <span class="heading__badge">3</span>Customize Profile
-          </span>
-        </h2>
-          <p class="how-it-works__description">Customize your FoodFest profile to convey your story to potential clients.</p>
-      </div>
-
     </div>
-
   </section>
 
   <section class="pricing">
     <header class="[ container ]">
+
+      <h2>Introductory Offer</h2>
 
       <div class="[ row ]">
         <div class="[ col-md-2 col-sm-1 hidden-xs ]"></div>
@@ -84,12 +88,11 @@
                   <span class="plan-price--currency">
                     &euro;
                   </span>
-                  20
+                  25
                 </div>
                 <div class="plan-term">
                   per month
                 </div>
-                <a class="button" (click)="choosePlan(1)">Choose</a>
               </div>
             </div>
             <!-- / 1 month plan -->
@@ -124,12 +127,11 @@
                 <div class="plan-savings">
                   Save 15%
                 </div>
-                <a class="button" (click)="choosePlan(2)">Choose</a>
               </div>
             </div>
             <!-- / 1 year plan -->
 
-            <!-- 2 year plan -->
+            <!-- 6 month plan -->
             <div class="plan-box plan-box--biannual">
               <div class="plan-options">
                 <div class="plan-options-heading">
@@ -137,14 +139,14 @@
                     Billed every
                   </div>
                   <div class="plan-options-heading--term">
-                    2 years
+                    6 months
                   </div>
                 </div>
                 <div class="plan-price">
                   <span class="plan-price--currency">
                     &euro;
                   </span>
-                  15
+                  20
                 </div>
                 <div class="plan-term">
                   per month
@@ -152,10 +154,9 @@
                 <div class="plan-savings">
                   Save 17%
                 </div>
-                <a class="button" (click)="choosePlan(3)">Choose</a>
               </div>
             </div>
-            <!-- / 2 year plan -->
+            <!-- / 6 month plan -->
 
           </div>
           <!-- / Price Plans -->
@@ -166,8 +167,72 @@
       </div>
       <!-- / Row -->
 
+      <div class="[ row text-center ]">
+
+        <button class="hero__browse-button" [routerLink]="['/list-with-us/create-listing/step-1']">
+          Create your listing and increase sales
+        </button>
+
+      </div>
+
     </header>
     <!-- / Container -->
+  </section>
+
+  <!-- Discover Available Events -->
+  <section>
+    <div class="reasons-row [ row ]">
+
+      <div class="reasons-row__text [ col-sm-6 col-xs-12 text-center ]">
+        <h2 class="heading heading--medium">
+          <div class="heading__icon-holder">
+            <object class="heading__icon" data="assets/icons/svg/calendar.svg" type="image/svg+xml">
+              <img src="assets/icons/img/calendar.png" />
+            </object>
+          </div>
+          <span title="Allow your business to be discovered by those organising corporate events, festivals, concerts, parties and weddings in Ireland" class="header-link">
+            Discover available events
+          </span>
+        </h2>
+          <p class="how-it-works__description">
+            Never miss out on potential business again! We will notify you of open tenders to contract for events.
+            Apply for work using your FoodFest profile.
+          </p>
+      </div>
+
+      <div class="reasons-row__image reasons-row__image--events [ col-sm-6 hidden-xs ]">
+        <div class="overlay"></div>
+      </div>
+
+    </div>
+  </section>
+  <!-- / Discover Available Events -->
+
+  <section>
+    <div class="reasons-row [ row ]">
+
+      <div class="reasons-row__image reasons-row__image--connect [ col-sm-6 hidden-xs ]">
+        <div class="overlay"></div>
+      </div>
+
+      <div class="reasons-row__text [ col-sm-6 col-xs-12 text-center ]">
+        <h2 class="heading heading--medium">
+          <div class="heading__icon-holder">
+            <object class="heading__icon" data="assets/icons/svg/chat.svg" type="image/svg+xml">
+              <img src="assets/icons/img/chat.png" />
+            </object>
+          </div>
+          <span title="Allow your business to be discovered by those organising corporate events, festivals, concerts, parties and weddings in Ireland" class="header-link">
+            Connect directly with clients
+          </span>
+        </h2>
+          <p class="how-it-works__description">
+            Our enquiry manager software allows you to connect directly with prospective clients
+            and avoid the need for expensive agencies.
+          </p>
+      </div>
+
+    </div>
   </section>
 
 </article>

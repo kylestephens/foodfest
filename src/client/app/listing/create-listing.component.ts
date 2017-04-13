@@ -3,16 +3,16 @@ import {
   OnDestroy,
   Input,
   ViewEncapsulation
-}                                              from '@angular/core';
+}                                           from '@angular/core';
 import {
   LocalStorageService,
   SessionStorageService
-}                                    from 'ng2-webstorage';
-import { Router, NavigationEnd }               from '@angular/router';
-import { Subscription }                        from 'rxjs/Subscription';
-import { CreateListingService }                from './create-listing.service';
+}                                           from 'ng2-webstorage';
+import { Router, NavigationEnd }            from '@angular/router';
+import { Subscription }                     from 'rxjs/Subscription';
+import { CreateListingService }             from './create-listing.service';
 
-import { CONSTANT }                            from '../core/constant';
+import { CONSTANT }                         from '../core/constant';
 
 /**
  * This class represents the lazy loaded CreateListingComponent.
@@ -24,7 +24,6 @@ import { CONSTANT }                            from '../core/constant';
   styleUrls: ['create-listing.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-
 
 // TODO - Ensure logged in / signed up
 export class CreateListingComponent {
@@ -41,18 +40,20 @@ export class CreateListingComponent {
   ) {
     this.currentStep = 1;
 
-    this.routeSubscription = this.router.events.subscribe((val) => {
-      if(parseInt(val.url.slice(-1)) > 1 && !this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_STEP_ONE)) {
-        console.debug(`
-          CreateListingComponent::routeSubscription - Invalid route\n
-          Returning to Step 1.
-        `);
-        this.router.navigate(
-          ['list-with-us/create-listing/step-1'],
-          {relativeTo: this.route}
-        );
-      } else {
-        this.currentStep = parseInt(val.url.slice(-1));
+    this.routeSubscription = this.router.events.subscribe((val: any) => {
+      if(val.url && val.url.split('/')[1] === 'list-with-us') {
+        if(parseInt(val.url.slice(-1)) > 1 && !this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_STEP_ONE)) {
+          console.debug(`
+            CreateListingComponent::routeSubscription - Invalid route\n
+            Returning to Step 1.
+          `);
+          this.router.navigate(
+            ['list-with-us/create-listing/step-1'],
+            {relativeTo: this.route}
+          );
+        } else {
+          this.currentStep = parseInt(val.url.slice(-1));
+        }
       }
     });
 

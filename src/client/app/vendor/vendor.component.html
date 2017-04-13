@@ -1,0 +1,183 @@
+<article>
+
+  <!-- HERO -->
+  <header class="hero"
+    [ngStyle]="{'background-image': 'url(' + vendor.cover_photo_path + ')'}">
+
+    <div class="hero__overlay">
+      <div class="[ container ]">
+        <div class="[ row ]">
+          <div class="[ col-xs-12 ]">
+            <img class="hero__business-logo" [src]="vendor.logo_photo">
+            <h2 class="hero__business-name">
+              {{ vendor.business_name }}
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </header>
+  <!-- / HERO -->
+
+  <!-- DESCRIPTION + DETAILS -->
+  <section class="card [ container ]">
+
+    <!-- ONLY IF EDITING -->
+    <a *ngIf="isEditing" [routerLink]="['/list-with-us/create-listing/step-4']" class="hero__return-editing">
+      <span class="ak-icon-chevron-thin-left">
+      </span> Edit Details
+    </a>
+    <button class="hero__proceed-payment" [routerLink]="['/list-with-us/payment/']">
+      Pay &amp; Publish
+      <span class="ak-icon-chevron-thin-right">
+      </span>
+    </button>
+    <!-- EDITING -->
+
+    <div class="[ row ]">
+      <div class="business-description [ col-xs-12 ]">
+        {{ vendor.description }}
+      </div>
+    </div>
+
+    <!-- BUSINESS SPECIFICS -->
+    <div class="[ row ]">
+      <div class="vendor-details [ col-md-4 col-sm-6 col-xs-12 ]">
+        <div class="vendor-details__item" *ngIf="formattedStyles">
+          <h4>
+            <span class="vendor-details__icon ak-icon-style"></span>
+            <span class="vendor-details__heading">Cooking Style</span>
+          </h4>
+          <span class="vendor-details__text">{{ formattedStyles }}</span>
+        </div>
+
+        <div class="vendor-details__item" *ngIf="formattedEventTypes">
+          <h4>
+            <span class="vendor-details__icon ak-icon-event-type"></span>
+            <span class="vendor-details__heading">Events Served</span>
+          </h4>
+          <span class="vendor-details__text">{{ formattedEventTypes }}</span>
+        </div>
+      </div>
+
+      <div class="[ col-md-4 hidden-sm hidden-xs ]"></div>
+
+      <div class="vendor-details [ col-md-4 col-sm-6 col-xs-12 ]">
+        <div class="vendor-details__item" *ngIf="formattedBusinessSetups">
+          <h4>
+            <span class="vendor-details__icon ak-icon-business-setup"></span>
+            <span class="vendor-details__heading">Business Setup</span>
+          </h4>
+          <span class="vendor-details__text">{{ formattedBusinessSetups }}</span>
+        </div>
+
+        <div class="vendor-details__item" *ngIf="formattedDietRequirements">
+          <h4>
+            <span class="vendor-details__icon ak-icon-diet-requirements"></span>
+            <span class="vendor-details__heading">Diets Catered</span>
+          </h4>
+          <span class="vendor-details__text">{{ formattedDietRequirements }}</span>
+        </div>
+      </div>
+    </div>
+    <!-- / BUSINESS SPECIFICS -->
+
+  </section>
+  <!-- / DESCRIPTION + DETAILS -->
+
+  <!-- IMAGES -->
+  <section>
+
+    <ak-image-scroller [images]="additionalImages">
+    </ak-image-scroller>
+
+  </section>
+  <!-- / IMAGES -->
+
+  <!-- TWITTER -->
+  <section class="tweets [ container ]" *ngIf="vendor.twitter_address">
+
+    <div class="[ row ]">
+      <ak-twitter-feed
+        [twitterUrl]="vendor.twitter_address">
+      </ak-twitter-feed>
+    </div>
+
+  </section>
+  <!-- / TWITTER ->
+
+  <!-- LOCATION + SOCIAL DETAILS  -->
+  <section class="[ container ]">
+
+    <div class="vendor-details card [ row ]">
+
+      <div class="vendor-details__map [ col-md-8 col-sm-6 col-xs-12" *ngIf="vendor.business_latitude && vendor.business_longitude">
+        <sebm-google-map
+          [latitude]="vendor.business_latitude"
+          [longitude]="vendor.business_longitude"
+          [zoom]="zoomLevel"
+          [disableDefaultUI]="false"
+          [zoomControl]="true"
+          [styles]="mapStyles">
+          <sebm-google-map-marker
+            [latitude]="vendor.business_latitude"
+            [longitude]="vendor.business_longitude"
+            [markerDraggable]="false"
+            [iconUrl]="'assets/icons/svg/map-pin.svg'">
+            <sebm-google-map-info-window>
+              <strong>{{ vendor.business_name }}</strong>
+            </sebm-google-map-info-window>
+          </sebm-google-map-marker>
+        </sebm-google-map>
+      </div>
+
+      <div class="vendor-details [ col-md-4 col-sm-6 col-xs-12">
+        <div class="vendor-details__item" *ngIf="vendor.business_address">
+          <h4>
+            <span class="vendor-details__icon ak-icon-location"></span>
+            <span class="vendor-details__heading">Address</span>
+          </h4>
+          <span class="vendor-details__text">{{ vendor.business_address }}</span>
+        </div>
+
+        <div class="vendor-details__item" *ngIf="vendor.business_website">
+          <h4>
+            <span class="vendor-details__icon ak-icon-earth"></span>
+            <span class="vendor-details__heading">Website</span>
+          </h4>
+          <span class="no-capitalise vendor-details__text">
+            <a target="_blank" href="{{ vendor.business_website }}" title="{{ vendor.business_name }}">
+              {{ vendor.business_website }}
+            </a>
+          </span>
+        </div>
+
+        <div class="vendor-details__item" *ngIf="vendor.phone_num">
+          <h4>
+            <span class="vendor-details__icon ak-icon-phone"></span>
+            <span class="vendor-details__heading">Phone</span>
+          </h4>
+          <span class="vendor-details__text">{{ vendor.phone_num }}</span>
+        </div>
+
+        <div class="vendor-details__item" *ngIf="vendor.phone_num">
+          <h4>
+            <a target="_blank" href="{{ vendor.facebook_website }}" title="{{ vendor.business_name }} - Facebook">
+              <span class="vendor-details__icon ak-icon-facebook"></span>
+            </a>
+            <span class="vendor-details__heading">
+              <a target="_blank" href="{{ vendor.instagram_website }}" title="{{ vendor.business_name }} - Instagram">
+                <span class="vendor-details__icon ak-icon-instagram"></span>
+              </a>
+            </span>
+          </h4>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+  <!-- / LOCATION + SOCIAL DETAILS  -->
+
+</article>

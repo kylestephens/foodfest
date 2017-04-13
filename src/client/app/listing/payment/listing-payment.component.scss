@@ -1,0 +1,246 @@
+@import '../../../scss/core/variables';
+@import '../../../scss/core/settings';
+@import '../../../scss/mixins/buttons';
+
+$monthly: #EEB417;
+$biannual: #1FB3E0;
+$annual: #744DA8;
+
+.hero {
+  background-image: url('../assets/img/list.jpeg');
+  background-size: cover;
+  background-position: center bottom;
+  position: relative;
+  width: 100%;
+  color: #fff;
+
+  height: -o-calc(100vh - 80px);      /* opera */
+  height: -webkit-calc(100vh - 80px); /* google, safari */
+  height: -moz-calc(100vh - 80px);    /* firefox */
+  height: calc(100vh - 80px);
+
+  @media(max-width: $screen-sm) {
+    height: 450px;
+  }
+
+  padding-top: 5%;
+
+  &__title {
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+
+    @media (max-width: $screen-sm-max) {
+      width: 70%;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      width: 80%;
+    }
+  }
+
+  &__browse-button {
+    margin-top: 16px;
+    @include button(#fff, $brand-primary-cta);
+    font-weight: 400;
+  }
+
+  h1 {
+    color: $brand-primary;
+  }
+
+  h2 {
+    color: #5d5c5c;
+    font-size: 22px;
+    padding-top: 26px;
+  }
+}
+
+.pricing {
+  background: #EAF7FC;
+  padding: $padding-xlarge-vertical 0;
+
+  h2 {
+    text-align: center;
+    margin-bottom: $padding-xlarge-vertical;
+  }
+}
+
+.price-plans {
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+
+  .plan-name, .plan-price, .plan-details {
+    padding: 0 $padding-base-horizontal $padding-base-vertical $padding-base-horizontal;
+  }
+
+  .plan-box {
+    display: flex;
+    width: 33.3333%;
+    background: #ffffff;
+    margin: $padding-large-vertical 0;
+    min-height: 280px;
+    border-radius: $brand-border-radius;
+
+    &--monthly {
+      color: $monthly;
+
+      @media all and (min-width: $screen-sm-min) {
+        -ms-transform: rotate(-7deg);
+         -webkit-transform: rotate(-7deg);
+          transform: rotate(-7deg);
+          position: relative;
+          left: 5%;
+      }
+    }
+
+    &--annual {
+      color: $annual;
+      z-index: 2;
+    }
+
+    &--biannual {
+      color: $biannual;
+
+      @media all and (min-width: $screen-sm-min) {
+        -ms-transform: rotate(7deg);
+         -webkit-transform: rotate(7deg);
+          transform: rotate(7deg);
+          position: relative;
+          right: 5%;
+      }
+    }
+
+    .plan-options-heading {
+      width: 100%;
+      padding: $padding-large-vertical $padding-base-horizontal 0 $padding-base-horizontal;
+
+      &--title, &--term {
+        width: 100%;
+        text-align: center;
+        font-weight: 600;
+      }
+      &--title {
+        font-size: $font-size-small;
+      }
+      &--term {
+        font-size: $font-size-large;
+        font-weight: 800;
+      }
+    }
+
+    @media all and (max-width: $screen-xs-max) {
+      &:first-child {
+        margin-bottom: 20px;
+      }
+    }
+
+    &:last-child {
+      //margin-right: 0;
+    }
+
+    &:nth-child(2) {
+      margin-top: 0;
+      box-shadow: -3px 0 3px rgba(0, 0, 0, .15), 3px 0 3px rgba(0, 0, 0, .15);
+      position: relative;
+    }
+
+    @media all and (max-width: $screen-xs-max) {
+      width: 100%;
+    }
+
+  }
+
+  .plan-name {
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+  }
+
+  .plan-price {
+    position: relative;
+    left: -6px;
+
+    text-align: center;
+    font-weight: 800;
+    font-size: 60px;
+
+    &--currency {
+      font-size: $font-size-base;
+    }
+  }
+
+  .plan-term {
+    width: 100%;
+    position: relative;
+    top: -12px;
+    text-align: center;
+
+    color: $text-color;
+    font-size: $font-size-base;
+  }
+
+  .plan-savings {
+    width: 100%;
+    text-align: center;
+    color: $text-color;
+    font-size: $font-size-base;
+    font-weight: 800;
+    margin-top: $padding-large-vertical;
+  }
+
+  .plan-options {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    text-align: center;
+
+    .recommended-plan {
+      width: 96px;
+      margin: $padding-small-vertical auto -5px;
+
+      span {
+        float: left;
+        color: #F4DB29;
+        &:nth-of-type(1), &:nth-of-type(5) {
+          position: relative;
+          top: 4px;
+        }
+        &:nth-of-type(2), &:nth-of-type(4) {
+          position: relative;
+          top: 2px;
+          font-size: 20px;
+        }
+        &:nth-of-type(3) {
+          font-size: 24px;
+        }
+      }
+    }
+
+    .button {
+      margin-top: auto;
+      display: block;
+      background: $brand-primary-cta;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 0 0 $brand-border-radius $brand-border-radius;
+      padding: 10px;
+
+      &:hover {
+        background: darken($brand-primary-cta, 10%);
+      }
+    }
+  }
+
+}
+
+.listing {
+  // Icons are not the same dimensions unfortunately
+  &__icon-three {
+    position: relative;
+    top: 8px;
+  }
+}

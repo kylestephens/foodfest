@@ -1,0 +1,135 @@
+@import '../../scss/core/variables';
+@import '../../scss/core/settings';
+@import '../../scss/mixins/buttons';
+
+$logo-size:         220px;
+$logo-size-phone:   140px;
+
+article {
+  background: $gray-lightest;
+}
+
+.hero {
+  background: #EAF7FC;
+  text-align: center;
+  background: $gray;
+  background-position: center center;
+  background-size: cover;
+
+  &__return-editing, &__proceed-payment {
+    position: absolute;
+    z-index: 3;
+  }
+
+  &__return-editing {
+    top: $padding-large-vertical + 7px; // compensate for buttons padding
+    left: $padding-large-horizontal;
+  }
+
+  &__proceed-payment {
+    top: $padding-large-vertical;
+    right: $padding-large-horizontal;
+    @include button(#fff, $brand-primary-cta);
+    padding: 6px 12px;                  // overriding default button padding
+    font-weight: 400;
+  }
+
+  &__overlay {
+    background: $brand-overlay-pattern;
+    padding: $padding-xlarge-vertical 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__business-logo {
+    position: relative;
+    top: $logo-size / 1.5;
+    width: $logo-size;
+    height: $logo-size;
+
+    border-radius: 100%;
+    border: 10px solid #fff;
+    z-index: 2;
+
+    @media (max-width: $screen-xs-max) {
+      width: $logo-size-phone;
+      height: $logo-size-phone;
+      top: $logo-size-phone / 1.5;
+    }
+  }
+
+  .col-xs-12 {
+    @media (max-width: $screen-xs-max) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  &__business-name {
+    text-align: right;
+    color: #fff;
+
+    @media (max-width: $screen-xs-max) {
+      width: 100%;
+      text-align: center;
+      position: absolute;
+      top: 0;
+    }
+  }
+}
+
+.card {
+  margin-bottom: $padding-xlarge-vertical;
+  padding-left: $padding-large-horizontal;
+  padding-right: $padding-large-horizontal;
+  position: relative;
+}
+
+.business-description {
+  padding-top: $logo-size / 2.5;
+  padding-bottom: $padding-xlarge-vertical;
+}
+
+.tweets {
+  margin-bottom: $padding-xlarge-vertical;
+  position: relative;
+}
+
+.vendor-details {
+  text-transform: capitalize;
+
+  &__map {
+    @media (max-width: $screen-xs-max) {
+      padding-bottom: $padding-xlarge-vertical;
+    }
+  }
+
+  &__item {
+    padding-bottom: $padding-large-vertical;
+  }
+
+  &__heading {
+    padding-left: $padding-large-horizontal;
+  }
+
+  &__text {
+    display: block;
+    margin-top: $padding-large-vertical;
+    padding-left: 35px + $padding-large-horizontal; // 35 is magic number to cover width of icon
+  }
+
+  &__icon {
+    font-size: 30px;
+    color: $brand-secondary;
+    position: relative;
+    top: 6px;
+  }
+}
+
+.no-capitalise {
+  text-transform: none !important;
+}
+
+.sebm-google-map-container {
+  height: 300px;
+}
