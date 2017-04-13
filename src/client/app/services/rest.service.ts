@@ -15,7 +15,7 @@ export class RestService {
   };
 
   // TODO - handle timeouts better, e.g. if server is down / slow
-  public get = function (url: string, params?: any, token?: string, options?: any) {
+  public get = function (url: string, params?: any, token?: string) {
     let headers: Headers = new Headers();
     if(token) {
       headers.append('Authorization', token);
@@ -29,8 +29,10 @@ export class RestService {
       }
     }
 
+    let options = new RequestOptions({ headers: headers, search: searchParams });
+
     return this.http
-      .get(url, { search: searchParams }, { headers: headers })
+      .get(url, options)
       .toPromise();
   };
 
