@@ -1,34 +1,42 @@
-/*
-Class for vendors. It corresponds to vendorsModel in service.
-*/
-import { SafeResourceUrl } from '@angular/platform-browser';
-import { Style }           from './style';
-
+/**
+ * Class for vendors.
+ * It corresponds to vendorsModel in service.
+ */
+import { SafeResourceUrl }   from '@angular/platform-browser';
+import { BusinessSetup }     from './businessSetup';
+import { BusinessType }      from './businessType';
+import { DietRequirement }   from './dietRequirement';
+import { Style }             from './style';
 
 export class Vendor {
-	id: number;
-	user_id: number;
-	business_name: string;
-  business_website: string;
-  business_address: string;
-  business_latitude: number;
-  business_longitude: number;
-  business_setup: Array<any>;
-  event_types: Array<any>;
-  diet_requirements: Array<any>;
-  phone_num: string;
-  facebook_address: string;
-  twitter_address: string;
-  instagram_address: string;
-	description: string;
-  logo_photo: string;
-	images_path: string;
-  cover_photo_path: string;
-  average_rating: number;
-  num_of_reviews: number;
-	date_registered: string;
-	last_updated: string;
-  styles: Style[];
+	id:                  number;
+	user_id:             number;
+	business_name:       string;
+  phone_number:        string;
+  business_website:    string;
+  business_address:    string;
+  business_latitude:   number;
+  business_longitude:  number;
+  phone_num:           string;
+  facebook_address:    string;
+  twitter_address:     string;
+  instagram_address:   string;
+	description:         string;
+  logo_photo:          number;
+  logo_path:           string;
+  num_photos:          number;
+	images:              Array<string>;
+  cover_photo:         number;     // bool, whether or not vendor uploaded img
+  cover_photo_path:    string;
+  average_rating:      number;
+  num_of_reviews:      number;
+	date_registered:     string;
+	last_updated:        string;
+  business_type:       string;
+  business_setup:      Array<BusinessSetup>;
+  diet_requirements:   Array<DietRequirement>;
+  event_types:         Array<any>;
+  styles:              Style[];
 
   safe_cover_photo_path: SafeResourceUrl | string;
 }

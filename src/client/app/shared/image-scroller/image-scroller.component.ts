@@ -41,12 +41,14 @@ export class ImageScrollerComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.scrollDistance = window.innerWidth * 0.5;
-    this.currentScroll = this.scroller.nativeElement.scrollLeft;
-    let images = document.getElementsByClassName('image-scroller__image-tile');
-    for(let i = 0; i < images.length; i++) {
-      this.availableWidth += images[i].clientWidth;
-    };
+    if(this.images && this.images.length > 0) {
+      this.scrollDistance = window.innerWidth * 0.5;
+      this.currentScroll = this.scroller.nativeElement.scrollLeft;
+      let images = document.getElementsByClassName('image-scroller__image-tile');
+      for(let i = 0; i < images.length; i++) {
+        this.availableWidth += images[i].clientWidth;
+      };
+    }
   };
 
   public scrollLeft = function() {

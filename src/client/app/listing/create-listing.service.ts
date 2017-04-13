@@ -176,8 +176,9 @@ export class CreateListingService {
       this.restService.postMultiPart(
         me.settingsService.getServerBaseUrl() + '/vendors/images', {
           id: vendorId,
-          business_logo: businessLogo,
-          cover_image: coverImage,
+          logo_photo: businessLogo,
+          cover_photo: coverImage,
+          num_photos: additionalImages.length,
           images: additionalImages
         }
       ).then(function(response: any) {
