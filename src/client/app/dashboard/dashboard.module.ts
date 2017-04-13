@@ -1,5 +1,6 @@
 import { NgModule } 					    from '@angular/core';
 import { CommonModule }           from '@angular/common';
+import { FormsModule }            from '@angular/forms';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent }     from './dashboard.component';
 import { ProfileComponent }       from './profile/profile.component';
@@ -11,7 +12,8 @@ import { InboxService }           from './inbox/inbox.service';
 @NgModule({
   imports: [
     CommonModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    FormsModule
   ],
   declarations: [
     DashboardComponent,

@@ -1,11 +1,13 @@
 @import '../../scss/core/variables';
 @import '../../scss/core/settings';
 
+$side-menu-width: 70px;
+
 .side-menu {
   height: 100vh;
   background-color: $brand-primary;
   text-align: center;
-  width: 70px;
+  width: $side-menu-width;
   float: left;
 
   &-link {
@@ -35,4 +37,10 @@
     padding-bottom: 5px;
   }
 
+}
+
+.dashboard-content {
+  @media (min-width: $screen-sm-min) {
+    margin-left: $side-menu-width;
+  }
 }

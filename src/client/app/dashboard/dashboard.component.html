@@ -1,7 +1,4 @@
-<div>
-  <div class="[ row ]">
-    <div class="[ col-xs-12 ]">
-      <div class="side-menu hidden-xs">
+<div class="side-menu hidden-xs">
         <a [routerLink]="['profile']" routerLinkActive="active" class="side-menu-link">
           <div class="ak-icon-user side-menu-icon"></div>
           <div class="side-menu-text">
@@ -29,10 +26,16 @@
             Favourites
           </div>
         </a>
+</div>
+
+<div class="[ container ] dashboard-content">
+  <div class="[ row ]">
+
+    <div class="col-xs-12">
+      <div class="row">
+        <router-outlet></router-outlet>
       </div>
-
-      <router-outlet></router-outlet>
-
     </div>
+
   </div>
 </div>
