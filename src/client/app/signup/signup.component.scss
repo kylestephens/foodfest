@@ -1,6 +1,11 @@
 @import '../../scss/core/settings';
+@import '../../scss/core/variables';
 
 .sign-up {
   padding-top: $brand-header-padding;
   padding-bottom: $brand-header-padding;
+}
+
+.alternative-option {
+  font-size: $font-size-small;
 }
