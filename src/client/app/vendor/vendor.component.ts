@@ -40,7 +40,7 @@ export class VendorComponent implements OnInit, OnDestroy {
   public formattedEventTypes: string;
   public formattedBusinessSetups: string;
   public formattedDietRequirements: string;
-  public additionalImages: Array<string>;
+  public additionalImages: Array<string> = [];
   public serverUrl: string;
 
   public mapStyles: MapTypeStyle[] = [
@@ -269,16 +269,17 @@ export class VendorComponent implements OnInit, OnDestroy {
     if(!this.vendorId) {
       this._initValuesFromLocalStorage(); // when creating for first time
     } else {
-      debugger;
       return this.restService.get(
          this.settingsService.getServerBaseUrl() + '/vendor/' + this.vendorId
       ).then((response: Response) => {
-        debugger;
         this.vendor = response.json()[0] as Vendor;
         this.formattedStyles= this._formatFilterString(this.vendor.styles);
         this.formattedBusinessSetups = this._formatFilterString(this.vendor.business_setup);
         this.formattedEventTypes = this._formatFilterString(this.vendor.event_types);
         this.formattedDietRequirements = this._formatFilterString(this.vendor.diet_requirements);
+        this.vendor.images.forEach((imageUrl: any) => {
+          this.additionalImages.push(this.serverUrl + imageUrl);
+        });
       });
     }
   }

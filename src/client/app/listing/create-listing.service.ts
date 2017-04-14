@@ -4,6 +4,7 @@ import { Subject }            from 'rxjs/Subject';
 import { CONSTANT }           from '../core/constant';
 import { MessagingService }   from '../services/messaging.service';
 import { RestService }        from '../services/rest.service';
+import { AccountService }     from '../services/account.service';
 import { SettingsService }    from '../services/settings.service';
 import {
   LocalStorageService,
@@ -16,6 +17,7 @@ export class CreateListingService {
   private subject = new Subject<any>();
 
   constructor(
+    private accountService: AccountService,
     private localStorageService: LocalStorageService,
     private messagingService: MessagingService,
     private restService: RestService,
@@ -36,10 +38,11 @@ export class CreateListingService {
     });
   };
 
-  public previewListing = function() {
+  public previewListing = function(vendorId: number) {
     console.debug('CreateListingService::previewListing');
     this.subject.next({
-      event: CONSTANT.EVENT.CREATE_LISTING.PREVIEW_LISTING
+      event: CONSTANT.EVENT.CREATE_LISTING.PREVIEW_LISTING,
+      vendorId: vendorId
     });
   };
 
@@ -72,11 +75,12 @@ export class CreateListingService {
       this.restService.post(
         me.settingsService.getServerBaseUrl() + '/vendors/create', {
           id: null,
-          user_id: '1',
+          user_id: this.accountService.getUser().id,
           business_name: stepOne.businessName,
           business_address: stepTwo.businessAddress,
           business_latitude: addressInfo.geometry.location.lat,
           business_longitude: addressInfo.geometry.location.lng,
+          business_website: stepTwo.businessWebsite,
           facebook_address: stepThree.facebookAddress,
           twitter_address: stepThree.twitterAddress,
           instagram_address: stepThree.instagramAddress,
@@ -133,7 +137,7 @@ export class CreateListingService {
       this.restService.post(
         me.settingsService.getServerBaseUrl() + '/vendors/edit', {
           id: vendorId,
-          user_id: '1',
+          user_id: this.accountService.getUser().id,
           business_name: stepOne.businessName,
           business_address: stepTwo.businessAddress,
           business_latitude: addressInfo.geometry.location.lat,

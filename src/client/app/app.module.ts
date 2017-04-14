@@ -7,6 +7,7 @@ import { AppRoutingModule }     from './app-routing.module';
 
 // 3rd party
 import { Ng2Webstorage }        from 'ng2-webstorage';
+import { AgmCoreModule }        from 'angular2-google-maps/core';
 // 3rd party
 
 import { HomeModule }           from './home/home.module';
@@ -18,6 +19,10 @@ import { AuthGuard }            from './auth-guard.service';
 @NgModule({
 
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDrNC8S7aRj9MdOZBXVKq6vVaRhg2uLalo',
+      libraries: ['places']
+    }),
     BrowserModule,
     HttpModule,
     AppRoutingModule,

@@ -11,6 +11,7 @@ export const routes: Routes = [
   { path: 'signup', loadChildren: 'app/signup/signup.module#SignupModule' },
   { path: 'search-results', loadChildren: 'app/searchResults/search-results.module#SearchResultsModule' },
   { path: 'list-with-us', loadChildren: 'app/listing/listing.module#ListingModule' },
+  { path: 'vendor', loadChildren: 'app/vendor/vendor.module#VendorModule' },
   { path: 'vendor/:id', loadChildren: 'app/vendor/vendor.module#VendorModule' }
 ];
 

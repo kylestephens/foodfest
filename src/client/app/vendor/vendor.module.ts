@@ -7,13 +7,13 @@ import { AgmCoreModule }        from 'angular2-google-maps/core';
 
 @NgModule({
   imports: [
+    AgmCoreModule,
     VendorRoutingModule,
     SharedModule,
-    ServicesModule,
-    AgmCoreModule.forRoot({apiKey: 'AIzaSyDrNC8S7aRj9MdOZBXVKq6vVaRhg2uLalo'})
+    ServicesModule
   ],
   declarations: [VendorComponent],
-  exports: [VendorComponent],
+  exports: [ VendorComponent],
   providers: []
 })
 export class VendorModule {}

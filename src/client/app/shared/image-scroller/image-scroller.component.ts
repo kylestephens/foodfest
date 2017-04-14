@@ -52,15 +52,19 @@ export class ImageScrollerComponent implements OnInit {
   };
 
   public scrollLeft = function() {
-    if (this.currentScroll - this.scrollDistance >= 0) { this.currentScroll -= this.scrollDistance; }
-    this.scroller.nativeElement.scrollLeft = this.currentScroll;
+    if(this.scroller) {
+      if (this.currentScroll - this.scrollDistance >= 0) { this.currentScroll -= this.scrollDistance; }
+      this.scroller.nativeElement.scrollLeft = this.currentScroll;
+    }
   };
 
   public scrollRight = function() {
-    if (this.currentScroll + this.scrollDistance <= this.availableWidth + (window.innerWidth * 1.5)) {
-      this.currentScroll += this.scrollDistance;
+    if(this.scroller) {
+      if (this.currentScroll + this.scrollDistance <= this.availableWidth + (window.innerWidth * 1.5)) {
+        this.currentScroll += this.scrollDistance;
+      }
+      this.scroller.nativeElement.scrollLeft = this.currentScroll;
     }
-    this.scroller.nativeElement.scrollLeft = this.currentScroll;
   };
 
 };

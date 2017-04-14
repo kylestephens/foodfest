@@ -68,7 +68,7 @@ export class CreateListingComponent {
         this._previousStep();
       }
       if(subMessage.event && subMessage.event === CONSTANT.EVENT.CREATE_LISTING.PREVIEW_LISTING) {
-        this._previewListing();
+        this._previewListing(subMessage.vendorId);
       }
     });
   };
@@ -89,8 +89,8 @@ export class CreateListingComponent {
     window.scrollTo(0, 0);
   };
 
-  private _previewListing = function() {
-    this.router.navigate(['vendor'], {relativeTo: this.route});
+  private _previewListing = function(vendorId: number) {
+    this.router.navigate(['vendor/' + vendorId]);
     window.scrollTo(0, 0);
   };
 

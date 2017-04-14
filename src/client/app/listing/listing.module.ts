@@ -13,15 +13,12 @@ import { ListingMasterComponent }          from './listing-master.component';
 import { ListingRoutingModule }            from './listing-routing.module';
 
 import { SharedModule }                    from '../shared/shared.module';
-import { AgmCoreModule }                   from 'angular2-google-maps/core';
 import { SelectModule }                    from 'ng2-select';
+import { AgmCoreModule }                   from 'angular2-google-maps/core';
 
 @NgModule({
   imports: [
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDrNC8S7aRj9MdOZBXVKq6vVaRhg2uLalo',
-      libraries: ['places']
-    }),
+    AgmCoreModule,
     CommonModule,
     ListingRoutingModule,
     ReactiveFormsModule,

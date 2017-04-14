@@ -220,7 +220,7 @@ export class CreateListingStepFourComponent {
   };
 
   private _nextStep() {
-    this.createListingService.previewListing();
+    this.createListingService.previewListing(this.vendorId);
   };
 
   private _restoreFormValues(values: any) {
