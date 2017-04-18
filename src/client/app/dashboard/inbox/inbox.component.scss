@@ -1,9 +1,6 @@
 @import '../../../scss/core/variables';
 @import '../../../scss/core/settings';
 @import '../../../scss/mixins/text-overflow';
-@import '../../../scss/mixins/buttons';
-
-$message-padding: 20px;
 
 @mixin inbox-icon() {
   vertical-align: middle;
@@ -16,14 +13,6 @@ $message-padding: 20px;
   text-align: center;
   overflow: hidden;
   height: 50px;
-}
-
-@mixin message-arrow() {
-  width: 0;
-  height: 0;
-  content: " ";
-  position: absolute;
-  border-style: solid;
 }
 
 .inbox-container {
@@ -111,126 +100,6 @@ $message-padding: 20px;
          &:hover {
           color: $brand-primary-cta;
          }
-      }
-    }
-  }
-}
-
-.inbox-thread {
-  padding: $brand-header-padding;
-
-  &__message {
-    padding-bottom: 50px;
-    display: flex;
-
-    &-icon {
-      @include inbox-icon();
-    }
-
-    &-content {
-      position: relative;
-      border: 1px solid $gray-lighter;
-      border-radius: $brand-border-radius;
-      display: inline-block;
-      width: calc(100% - 50px - 27px);
-      flex-grow: 1;
-      background-color: $gray-lightest;
-
-      &__body {
-        padding: $message-padding;
-
-        &__date {
-          padding-top: $message-padding;
-          font-size: $font-size-small;
-        }
-      }
-    }
-
-    &.right {
-      .inbox-thread__message-icon {
-        order: 2;
-        margin-left: 30px;
-      }
-      .inbox-thread__message-content {
-        order: 1;
-        background-color: $brand-body-bg;
-        border-top-right-radius: 0px;
-
-        &:before {
-          @include message-arrow();
-          top: -1px;
-          left: 100%;
-          border-width: 27px 27px 0 0;
-          border-color: $gray-lighter transparent transparent;
-        }
-
-        &__body:after {
-          @include message-arrow();
-          top: 0;
-          left: 100%;
-          border-width: 25px 25px 0 0;
-          border-color: $brand-body-bg transparent transparent;
-        }
-      }
-    }
-
-    &.left {
-      .inbox-thread__message-icon {
-        margin-right: 30px;
-      }
-
-      .inbox-thread__message-content {
-        background-color: $gray-lightest;
-        border-top-left-radius: 0px;
-
-        &:before {
-          @include message-arrow();
-          top: -1px;
-          left: initial;
-          right: 100%;
-          border-width: 0 27px 27px 0;
-          border-color: transparent $gray-lighter transparent transparent;
-        }
-
-        &__body:after {
-          @include message-arrow();
-          top: 0;
-          left: initial;
-          right: 100%;
-          border-width: 0 25px 25px 0;
-          border-color: transparent $gray-lightest transparent transparent;
-        }
-      }
-    }
-  }
-
-
-  .send-msg {
-
-    .inbox-thread__message-content {
-      background-color: $brand-body-bg;
-      padding: 0;
-
-      &__body {
-        &:after {
-          border-color: transparent $brand-body-bg transparent transparent;
-        }
-
-        &__text {
-          width: 100%;
-          border: none;
-        }
-      }
-
-      &__send {
-        padding: $message-padding;
-        text-align: right;
-        background-color: $gray-lightest;
-
-      &__button {
-        @include button($brand-body-bg, $brand-primary-cta);
-        padding: 5px 10px;
-      }
       }
     }
   }

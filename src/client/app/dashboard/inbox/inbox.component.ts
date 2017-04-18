@@ -23,14 +23,8 @@ import { Vendor }               from '../../shared/model/vendor';
 
 export class InboxComponent implements OnInit {
   conversations: Message[];
-  messagesInConversation: Message[];
-  userId: number = this.accountService.getUser().id;
-  messageText: string;
   openConversation: Message;
   private subscription: Subscription;
-  private inboxThread: HTMLElement;
-  private inboxOverview: HTMLElement;
-  private sideMenu: HTMLElement = <HTMLElement> document.getElementsByClassName('side-menu')[0];;
 
   constructor(
     private inboxService: InboxService,
@@ -54,20 +48,6 @@ export class InboxComponent implements OnInit {
     });
   }
 
-  ngAfterViewChecked() {
-    let inboxThread:HTMLElement = <HTMLElement> document.getElementsByClassName('inbox-thread')[0],
-        inboxOverview:HTMLElement = <HTMLElement> document.getElementsByClassName('inbox-container')[0],
-        height = inboxThread.offsetHeight;
-
-    if(height > inboxOverview.offsetHeight) {
-      inboxOverview.style.height = height + 'px';
-    }
-
-    if(height > this.sideMenu.offsetHeight) {
-      this.sideMenu.style.height = height + 'px';
-    }
-  }
-
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
@@ -77,9 +57,10 @@ export class InboxComponent implements OnInit {
     if (index > -1) {
       this.conversations.splice(index, 1);
     }
-    //if first conversation is removed, fetch messages for the next one that is now first in the list
+    //if first conversation is removed, new open conversation is next in the list
     if(index === 0) {
-      this.getMessagesInConversation(this.conversations[0]);
+      this.openConversation = this.conversations[0];
+      this.openConversation.is_read = true;
     }
   }
 
@@ -88,15 +69,6 @@ export class InboxComponent implements OnInit {
     this.inboxService.getConversations(params).then(conversations => {
       this.conversations = conversations;
       this.openConversation = this.conversations[0];
-      //get messages in the latest conversation (first in the list)
-      this.getMessagesInConversation(this.conversations[0]);
-    });
-  }
-
-  private getMessagesInConversation(conversation: Message) {
-    this.inboxService.getMessagesInConversation(conversation.id).then(messages => {
-      this.messagesInConversation = messages;
-      this.openConversation = conversation;
       this.openConversation.is_read = true;
     });
   }
@@ -108,25 +80,8 @@ export class InboxComponent implements OnInit {
   }
 
   changeConversation(event: any, conversation: Message) {
-    this.getMessagesInConversation(conversation);
-  }
-
-  sendMessage() {
-    let params = {
-        sender_id: this.accountService.getUser().id,
-        receiver_id: this.openConversation.sender.id === this.accountService.getUser().id ? this.openConversation.receiver.id : this.openConversation.sender.id,
-        vendor_id: this.openConversation.vendor.id,
-        content: this.messageText,
-        parent_message_id: this.openConversation.last_msg_id
-      }
-
-    this.inboxService.createMessage(params).then( message => {
-      this.messageText = null;
-      this.messagesInConversation.unshift(message);
-      this.openConversation.content = message.content;
-      this.openConversation.sent_date = message.sent_date;
-      this.openConversation.last_msg_id = message.id;
-    });
+    this.openConversation = conversation;
+    this.openConversation.is_read = true;
   }
 
 }
