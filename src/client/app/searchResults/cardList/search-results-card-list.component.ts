@@ -1,6 +1,10 @@
-import { Component, OnInit }       from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy
+}                                  from '@angular/core';
 import { ActivatedRoute, Router }  from '@angular/router';
-import { Subscription }            from 'rxjs/Subscription'
+import { Subscription }            from 'rxjs/Subscription';
 import { Vendor }                  from '../../shared/model/vendor';
 import { SearchResultsService }    from '../search-results.service';
 import { CONSTANT }                from '../../core/constant';
@@ -15,7 +19,7 @@ import { CONSTANT }                from '../../core/constant';
   styleUrls: ['search-results-card-list.component.css'],
 })
 
-export class SearchResultsCardListComponent implements OnInit {
+export class SearchResultsCardListComponent implements OnInit, OnDestroy {
 	private vendors: Vendor[];
   private subscription: Subscription;
   private loaded: boolean = false;
@@ -38,6 +42,9 @@ export class SearchResultsCardListComponent implements OnInit {
         if(Object.keys(params).length === 0) this.getVendors();
         else this.searchVendors(params);
       });
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   getVendors(): void {

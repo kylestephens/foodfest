@@ -9,6 +9,7 @@ import { CreateListingStepTwoComponent }   from './steps/two/create-listing-step
 import { CreateListingStepThreeComponent } from './steps/three/create-listing-step-three.component';
 import { CreateListingStepFourComponent }  from './steps/four/create-listing-step-four.component';
 import { CONSTANT }                        from '../core/constant';
+import { AuthGuard }                       from '../auth-guard.service';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { CONSTANT }                        from '../core/constant';
           { path: '', redirectTo: 'details', pathMatch: 'full' },
           { path: 'details', component: ListingDetailComponent },
           { path: 'create-listing', component: CreateListingComponent,
+            canActivate: [AuthGuard],
             children: [
               { path: '', redirectTo: 'step-1', pathMatch: 'full' },
               { path: 'step-1', component: CreateListingStepOneComponent },

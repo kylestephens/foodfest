@@ -41,24 +41,30 @@ export class ImageScrollerComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.scrollDistance = window.innerWidth * 0.5;
-    this.currentScroll = this.scroller.nativeElement.scrollLeft;
-    let images = document.getElementsByClassName('image-scroller__image-tile');
-    for(let i = 0; i < images.length; i++) {
-      this.availableWidth += images[i].clientWidth;
-    };
+    if(this.images && this.images.length > 0) {
+      this.scrollDistance = window.innerWidth * 0.5;
+      this.currentScroll = this.scroller.nativeElement.scrollLeft;
+      let images = document.getElementsByClassName('image-scroller__image-tile');
+      for(let i = 0; i < images.length; i++) {
+        this.availableWidth += images[i].clientWidth;
+      };
+    }
   };
 
   public scrollLeft = function() {
-    if (this.currentScroll - this.scrollDistance >= 0) { this.currentScroll -= this.scrollDistance; }
-    this.scroller.nativeElement.scrollLeft = this.currentScroll;
+    if(this.scroller) {
+      if (this.currentScroll - this.scrollDistance >= 0) { this.currentScroll -= this.scrollDistance; }
+      this.scroller.nativeElement.scrollLeft = this.currentScroll;
+    }
   };
 
   public scrollRight = function() {
-    if (this.currentScroll + this.scrollDistance <= this.availableWidth + (window.innerWidth * 1.5)) {
-      this.currentScroll += this.scrollDistance;
+    if(this.scroller) {
+      if (this.currentScroll + this.scrollDistance <= this.availableWidth + (window.innerWidth * 1.5)) {
+        this.currentScroll += this.scrollDistance;
+      }
+      this.scroller.nativeElement.scrollLeft = this.currentScroll;
     }
-    this.scroller.nativeElement.scrollLeft = this.currentScroll;
   };
 
 };

@@ -1,16 +1,22 @@
 import {
   Component,
   AfterViewInit,
-  OnInit
+  OnInit,
+  OnDestroy
 }                                 from '@angular/core';
+import { Response }               from '@angular/http';
+import { ActivatedRoute }         from '@angular/router';
 import {
   LocalStorageService
 }                                 from 'ng2-webstorage';
+import { Subscription }           from 'rxjs/Subscription';
 import {
   AgmCoreModule,
   MapTypeStyle,
   MapsAPILoader
 }                                 from 'angular2-google-maps/core';
+import { RestService }            from '../services/rest.service';
+import { SettingsService }        from '../services/settings.service';
 import { ImageScrollerComponent } from '../shared/image-scroller/image-scroller.component';
 import { TwitterFeedComponent }   from '../shared/twitter-feed/twitter-feed.component';
 import { Vendor }                 from '../shared/model/vendor';
@@ -25,17 +31,17 @@ import { CONSTANT }               from '../core/constant';
   templateUrl: 'vendor.component.html',
   styleUrls: ['vendor.component.css']
 })
-export class VendorComponent implements OnInit {
+export class VendorComponent implements OnInit, OnDestroy {
 
   public vendor = new Vendor();
   public zoomLevel: number = 15;        // google maps zoom level
-
   public isEditing: boolean = false;
   public formattedStyles: string;
   public formattedEventTypes: string;
   public formattedBusinessSetups: string;
   public formattedDietRequirements: string;
-  public additionalImages: Array<string>;
+  public additionalImages: Array<string> = [];
+  public serverUrl: string;
 
   public mapStyles: MapTypeStyle[] = [
     {
@@ -240,21 +246,69 @@ export class VendorComponent implements OnInit {
     }
   ];
 
+  private subscription: Subscription;
+  private vendorId: number;
+
   constructor(
     private localStorageService: LocalStorageService,
-    private mapsAPILoader: MapsAPILoader
+    private mapsAPILoader: MapsAPILoader,
+    private restService: RestService,
+    private route: ActivatedRoute,
+    private settingsService: SettingsService
   ) {
     if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_EDIT)) {
       this.isEditing = true;
     }
+    this.serverUrl = this.settingsService.getServerBaseUrl() + '/';
   };
 
   ngOnInit() {
-    this._initValuesFromLocalStorage();
+    this.subscription = this.route.params.subscribe(params => {
+      this.vendorId = +params['id'];
+    });
+    if(!this.vendorId) {
+      this._initValuesFromLocalStorage(); // when creating for first time
+    } else {
+      return this.restService.get(
+         this.settingsService.getServerBaseUrl() + '/vendor/' + this.vendorId
+      ).then((response: Response) => {
+        this.vendor = response.json()[0] as Vendor;
+        this.formattedStyles= this._formatFilterString(this.vendor.styles);
+        this.formattedBusinessSetups = this._formatFilterString(this.vendor.business_setup);
+        this.formattedEventTypes = this._formatFilterString(this.vendor.event_types);
+        this.formattedDietRequirements = this._formatFilterString(this.vendor.diet_requirements);
+        this.vendor.images.forEach((imageUrl: any) => {
+          this.additionalImages.push(this.serverUrl + imageUrl);
+        });
+      });
+    }
   }
 
   ngAfterViewInit() {
     this.mapsAPILoader.load();
+  };
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  };
+
+  /**
+   * Double forward slash ('//') is necessary to avoid
+   * prepending the app base path
+   */
+  public openFacebookLink() {
+    var w: any = window.open();
+    w.location.href = '//' + this.vendor.facebook_address;
+  };
+
+  public openInstagramLink() {
+    var w: any = window.open();
+    w.location.href = '//' + this.vendor.instagram_address;
+  };
+
+  public openBusinessWebsiteLink() {
+    var w: any = window.open();
+    w.location.href = '//' + this.vendor.business_website;
   };
 
   /**
@@ -282,7 +336,7 @@ export class VendorComponent implements OnInit {
     );
 
     if(images.businessLogo) {
-      this.vendor.logo_photo = images.businessLogo;
+      this.vendor.logo_path = images.businessLogo;
     }
     if(images.coverImage) {
       this.vendor.cover_photo_path = images.coverImage;
@@ -309,6 +363,7 @@ export class VendorComponent implements OnInit {
 
   private _formatFilterString(filterObject: any): string {
     if (!filterObject) return '';
+    if (!Array.isArray(filterObject)) return filterObject.text;
     let formattedStr = '';
     filterObject.forEach((filter: any, index: number) => {
       if(index > 0) formattedStr += ', '

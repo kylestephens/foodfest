@@ -52,7 +52,6 @@ export class ListingPaymentComponent {
       currency: 'eur',
       panelLabel: 'Subscribe',
       token: (token: any) => {
-        debugger;
         let planDetails = {
           stripeId: token.id,
           userId: me.accountService.getUser().id,
@@ -63,6 +62,7 @@ export class ListingPaymentComponent {
           planDetails
         ).then((resp: any) => {
           debugger;
+          // TODO : do something
         });
       }
     });

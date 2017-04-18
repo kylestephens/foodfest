@@ -5,6 +5,7 @@
 $monthly: #EEB417;
 $biannual: #1FB3E0;
 $annual: #744DA8;
+$block-height: 400px;
 
 .hero {
   background-image: url('../assets/img/list.jpg');
@@ -68,9 +69,18 @@ $annual: #744DA8;
   z-index: 1;
 }
 
+.heading {
+  padding-top: $padding-large-vertical;
+}
+
+.how-it-works {
+  min-height: $block-height;
+}
+
 .pricing {
   background: #EAF7FC;
   padding: $padding-xlarge-vertical 0;
+  min-height: $block-height;
 
   h2 {
     text-align: center;
@@ -260,12 +270,12 @@ $annual: #744DA8;
 .reasons-row {
 
   &__text {
-    min-height: 400px;
+    min-height: $block-height;
     padding-top: 50px;
   }
 
   &__image {
-    min-height: 400px;
+    min-height: $block-height;
 
     &--events {
       background: url('assets/img/list1.jpg');

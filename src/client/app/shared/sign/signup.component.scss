@@ -15,7 +15,7 @@ $modal-padding: 50px;
   border-radius: $brand-border-radius;
   border: 1px solid $brand-border-color;
   padding: ($padding-large-vertical * 2) 0;
-  margin: ($padding-large-vertical * 2) 0;
+  margin: $padding-large-vertical 0;
   transition: all .2s ease-out;
 
   @media (max-width: $screen-xs-max) {

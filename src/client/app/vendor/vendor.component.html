@@ -2,13 +2,13 @@
 
   <!-- HERO -->
   <header class="hero"
-    [ngStyle]="{'background-image': 'url(' + vendor.cover_photo_path + ')'}">
+    [ngStyle]="{'background-image': 'url(' + serverUrl + vendor.cover_photo_path + ')'}">
 
     <div class="hero__overlay">
       <div class="[ container ]">
         <div class="[ row ]">
           <div class="[ col-xs-12 ]">
-            <img class="hero__business-logo" [src]="vendor.logo_photo">
+            <img *ngIf="vendor.logo_path" class="hero__business-logo" [src]="serverUrl + vendor.logo_path">
             <h2 class="hero__business-name">
               {{ vendor.business_name }}
             </h2>
@@ -28,7 +28,7 @@
       <span class="ak-icon-chevron-thin-left">
       </span> Edit Details
     </a>
-    <button class="hero__proceed-payment" [routerLink]="['/list-with-us/payment/']">
+    <button *ngIf="isEditing" class="hero__proceed-payment" [routerLink]="['/list-with-us/payment/']">
       Pay &amp; Publish
       <span class="ak-icon-chevron-thin-right">
       </span>
@@ -147,7 +147,7 @@
             <span class="vendor-details__heading">Website</span>
           </h4>
           <span class="no-capitalise vendor-details__text">
-            <a target="_blank" href="{{ vendor.business_website }}" title="{{ vendor.business_name }}">
+            <a target="_blank" (click)="openBusinessWebsiteLink()" title="{{ vendor.business_name }}">
               {{ vendor.business_website }}
             </a>
           </span>
@@ -161,13 +161,13 @@
           <span class="vendor-details__text">{{ vendor.phone_num }}</span>
         </div>
 
-        <div class="vendor-details__item" *ngIf="vendor.phone_num">
+        <div class="vendor-details__item" *ngIf="vendor.facebook_address || vendor.instagram_address">
           <h4>
-            <a target="_blank" href="{{ vendor.facebook_website }}" title="{{ vendor.business_name }} - Facebook">
+            <a target="_blank" (click)="openFacebookLink()" title="{{ vendor.business_name }} - Facebook">
               <span class="vendor-details__icon ak-icon-facebook"></span>
             </a>
             <span class="vendor-details__heading">
-              <a target="_blank" href="{{ vendor.instagram_website }}" title="{{ vendor.business_name }} - Instagram">
+              <a target="_blank" (click)="openInstagramLink()" title="{{ vendor.business_name }} - Instagram">
                 <span class="vendor-details__icon ak-icon-instagram"></span>
               </a>
             </span>
