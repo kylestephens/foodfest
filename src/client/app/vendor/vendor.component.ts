@@ -306,6 +306,11 @@ export class VendorComponent implements OnInit, OnDestroy {
     w.location.href = '//' + this.vendor.instagram_address;
   };
 
+  public openBusinessWebsiteLink() {
+    var w: any = window.open();
+    w.location.href = '//' + this.vendor.business_website;
+  };
+
   /**
    * If arriving from create listing steps - retrieve
    * from local storage instead of doing a GET

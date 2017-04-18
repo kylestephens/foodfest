@@ -147,7 +147,7 @@
             <span class="vendor-details__heading">Website</span>
           </h4>
           <span class="no-capitalise vendor-details__text">
-            <a target="_blank" href="{{ vendor.business_website }}" title="{{ vendor.business_name }}">
+            <a target="_blank" (click)="openBusinessWebsiteLink()" title="{{ vendor.business_name }}">
               {{ vendor.business_website }}
             </a>
           </span>
