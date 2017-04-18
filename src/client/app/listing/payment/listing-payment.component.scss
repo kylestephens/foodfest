@@ -13,9 +13,9 @@ article {
 
 .pricing {
   padding: $padding-xlarge-vertical 0;
+  min-height: 100vh;
 
   h2 {
-    text-align: center;
     margin-bottom: $padding-xlarge-vertical;
   }
 }

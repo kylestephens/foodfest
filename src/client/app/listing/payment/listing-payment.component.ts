@@ -96,10 +96,10 @@ export class ListingPaymentComponent {
           planDetails
         ).then(
           (resp: any) => {
-            debugger;
             let _response = resp.json();
             if(_response && _response.id) {
               this.isPaid = true;
+              this._clearLocalStorage();
               setTimeout(() => {
                 this.renderer.addClass(this.tickAnimationElementRef.nativeElement, 'drawn');
               }, 300);
@@ -123,6 +123,30 @@ export class ListingPaymentComponent {
       description: _description,
       amount: _amount
     });
+  };
+
+  private _clearLocalStorage() {
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_ONE
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_TWO
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_THREE
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.VENDOR_IMAGES
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_ADDRESS
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_EDIT
+    );
   };
 
 }

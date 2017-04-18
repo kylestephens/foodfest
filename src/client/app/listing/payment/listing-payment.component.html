@@ -3,7 +3,17 @@
   <section class="pricing" *ngIf="!isPaid">
     <header class="[ container ]">
 
-      <h2>Introductory Offer</h2>
+      <div class="[ row ]">
+        <div class="[ col-xs-12 col-sm-4 ]">
+          <a [routerLink]="['/list-with-us/create-listing/step-4']" class="hero__return-editing">
+            <span class="ak-icon-chevron-thin-left">
+            </span> Edit Details
+          </a>
+        </div>
+        <div class="[ col-xs-12 col-sm-4 ]">
+          <h2 class="[ text-center ]">Introductory Offer</h2>
+        </div>
+      </div>
 
       <div class="[ row ]">
         <div class="[ col-md-2 col-sm-1 hidden-xs ]"></div>
