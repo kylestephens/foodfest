@@ -195,7 +195,7 @@ export class AccountService {
     return json;
   };
 
-  updateUserLocalStorage(userType: number) {
+  updateUserType(userType: number) {
     this.user.user_type = userType;
     let localStorageSession = this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.SESSION);
     localStorageSession.user_type = this.user.user_type;

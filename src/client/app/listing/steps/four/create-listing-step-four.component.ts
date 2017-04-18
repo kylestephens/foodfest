@@ -71,7 +71,7 @@ export class CreateListingStepFourComponent {
 
   /**
    * TODO - sorry for the ugly code :-(
-   * TODO - when you have vendor ID created, all subsequent codes should use access token
+   * TODO - when you have vendor ID created, all subsequent calls should use access token
    *
    * 1. Check valid
    * 2. Check whether a) new vendor or b) current vendor who is editing
@@ -99,7 +99,7 @@ export class CreateListingStepFourComponent {
       this.createListingService.create().then((response: any) => {
         me.vendorId = response.id;
         me.accountService.setVendorId(me.vendorId);
-        me.accountService.updateUserLocalStorage(CONSTANT.user.types.VENDOR.code);
+        me.accountService.updateUserType(CONSTANT.user.types.VENDOR.code);
 
         if(me.businessLogo || me.coverImage || me.additionalImages.length > 0) {
           me.createListingService.uploadVendorImages(
