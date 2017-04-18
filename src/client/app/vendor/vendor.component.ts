@@ -293,6 +293,20 @@ export class VendorComponent implements OnInit, OnDestroy {
   };
 
   /**
+   * Double forward slash ('//') is necessary to avoid
+   * prepending the app base path
+   */
+  public openFacebookLink() {
+    var w: any = window.open();
+    w.location.href = '//' + this.vendor.facebook_address;
+  };
+
+  public openInstagramLink() {
+    var w: any = window.open();
+    w.location.href = '//' + this.vendor.instagram_address;
+  };
+
+  /**
    * If arriving from create listing steps - retrieve
    * from local storage instead of doing a GET
    */

@@ -46,4 +46,9 @@ export class TwitterFeedComponent implements OnInit {
         this.loading = false;
       });
   };
+
+  public openTwitterLink() {
+    var w: any = window.open();
+    w.location.href = '//' + this.twitterUrl;
+  };
 };

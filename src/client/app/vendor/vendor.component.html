@@ -163,11 +163,11 @@
 
         <div class="vendor-details__item" *ngIf="vendor.facebook_address || vendor.instagram_address">
           <h4>
-            <a target="_blank" href="{{ vendor.facebook_address }}" title="{{ vendor.business_name }} - Facebook">
+            <a target="_blank" (click)="openFacebookLink()" title="{{ vendor.business_name }} - Facebook">
               <span class="vendor-details__icon ak-icon-facebook"></span>
             </a>
             <span class="vendor-details__heading">
-              <a target="_blank" href="{{ vendor.instagram_address }}" title="{{ vendor.business_name }} - Instagram">
+              <a target="_blank" (click)="openInstagramLink()" title="{{ vendor.business_name }} - Instagram">
                 <span class="vendor-details__icon ak-icon-instagram"></span>
               </a>
             </span>

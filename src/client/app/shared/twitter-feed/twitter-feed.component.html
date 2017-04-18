@@ -19,7 +19,7 @@
 
     <div class="tweet" *ngFor="let tweet of tweets">
       <div class="tweet__user">
-        <a target="_blank" href="{{ twitterUrl }}">
+        <a target="_blank" (click)="openTwitterLink()">
           <span class="icon ak-icon-twitter">
           </span>
           <div class="tweet__date">
