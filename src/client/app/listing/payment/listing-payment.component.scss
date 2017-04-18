@@ -6,58 +6,12 @@ $monthly: #EEB417;
 $biannual: #1FB3E0;
 $annual: #744DA8;
 
-.hero {
-  background-image: url('../assets/img/list.jpeg');
-  background-size: cover;
-  background-position: center bottom;
-  position: relative;
-  width: 100%;
-  color: #fff;
-
-  height: -o-calc(100vh - 80px);      /* opera */
-  height: -webkit-calc(100vh - 80px); /* google, safari */
-  height: -moz-calc(100vh - 80px);    /* firefox */
-  height: calc(100vh - 80px);
-
-  @media(max-width: $screen-sm) {
-    height: 450px;
-  }
-
-  padding-top: 5%;
-
-  &__title {
-    width: 60%;
-    margin: 0 auto;
-    text-align: center;
-
-    @media (max-width: $screen-sm-max) {
-      width: 70%;
-    }
-
-    @media (max-width: $screen-xs-max) {
-      width: 80%;
-    }
-  }
-
-  &__browse-button {
-    margin-top: 16px;
-    @include button(#fff, $brand-primary-cta);
-    font-weight: 400;
-  }
-
-  h1 {
-    color: $brand-primary;
-  }
-
-  h2 {
-    color: #5d5c5c;
-    font-size: 22px;
-    padding-top: 26px;
-  }
+article {
+  background: #EAF7FC;
+  min-height: 100vh;
 }
 
 .pricing {
-  background: #EAF7FC;
   padding: $padding-xlarge-vertical 0;
 
   h2 {
@@ -222,25 +176,53 @@ $annual: #744DA8;
     .button {
       margin-top: auto;
       display: block;
-      background: $brand-primary-cta;
-      color: white;
       text-align: center;
       text-decoration: none;
+      @include button(#fff, $brand-primary-cta);
       border-radius: 0 0 $brand-border-radius $brand-border-radius;
       padding: 10px;
-
-      &:hover {
-        background: darken($brand-primary-cta, 10%);
-      }
     }
   }
 
 }
 
-.listing {
-  // Icons are not the same dimensions unfortunately
-  &__icon-three {
-    position: relative;
-    top: 8px;
+.icon-holder {
+  min-height: 40vh;
+  padding: $padding-xlarge-vertical 0;
+
+  .complete-icon {
+    max-height: 40vh;
+
+    .circ {
+      stroke: $brand-secondary;
+      opacity: 0;
+      stroke-dasharray: 130;
+      stroke-dashoffset: 130;
+      -webkit-transition: all 1s;
+      -moz-transition: all 1s;
+      -ms-transition: all 1s;
+      -o-transition: all 1s;
+      transition: all 1s;
+    }
+
+    .tick {
+      stroke: $brand-secondary;
+      stroke-dasharray: 50;
+      stroke-dashoffset: 50;
+      -webkit-transition: stroke-dashoffset 1s 0.5s ease-out;
+      -moz-transition: stroke-dashoffset 1s 0.5s ease-out;
+      -ms-transition: stroke-dashoffset 1s 0.5s ease-out;
+      -o-transition: stroke-dashoffset 1s 0.5s ease-out;
+      transition: stroke-dashoffset 1s 0.5s ease-out;
+    }
   }
+
+  .drawn + svg .path {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+}
+
+.congrats {
+  margin: $padding-large-vertical 0;
 }

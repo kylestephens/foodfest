@@ -99,7 +99,8 @@ export class SignupComponent {
         this.messagingService.show(
           'signup',
           CONSTANT.MESSAGING.ERROR,
-          reason.statusText ? reason.statusText : 'An unexpected error has occurred'
+          reason.statusText ? reason.statusText : 'An unexpected error has occurred',
+          true
         );
       }
     );
