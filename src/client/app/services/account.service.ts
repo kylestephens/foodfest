@@ -5,7 +5,10 @@ import 'rxjs/add/operator/toPromise';
 import { RestService }       from './rest.service';
 import { Http, Response }    from '@angular/http';
 
-import { LocalStorageService, SessionStorageService } from 'ng2-webstorage';
+import {
+  LocalStorageService,
+  SessionStorageService
+}                            from 'ng2-webstorage';
 import { SettingsService }   from './settings.service';
 import { User }              from '../shared/model/user';
 import { Vendor }            from '../shared/model/vendor';
@@ -160,39 +163,35 @@ export class AccountService {
 
   reloadSession = function(sessionDetails: any, sessionToken: any) {
     this.loggedIn = sessionDetails['loggedIn'];
-    this.user.facebookLogin = sessionDetails['facebookLogin'];
-    this.user.googleLogin = sessionDetails['googleLogin'];
-    this.user.email = sessionDetails['email'];
-    this.user.name = sessionDetails['name'];
-    this.user.firstname = sessionDetails['firstname'];
-    this.user.lastname = sessionDetails['lastname'];
-    this.user.id = sessionDetails['id'];
-    this.user.akAccessToken = sessionToken;
-    this.user.facebook_user_id = sessionDetails['facebook_user_id'];
-    this.user.google_user_id = sessionDetails['google_user_id'];
-    this.user.user_type = sessionDetails['user_type'];
-    this.user.active_vendor = sessionDetails['active_vendor'];
+    this.user = sessionDetails['user'];
+    this.vendor = sessionDetails['vendor'];
   };
 
   reset = function() {
     this.setLoggedIn(false);
     this.user = new User();
+    this.vendor = new Vendor();
   };
 
   toJson = function() {
     var json: any = {};
     json['loggedIn'] = this.loggedIn;
-    json['facebookLogin'] = this.user.facebookLogin;
-    json['googleLogin'] = this.user.googleLogin;
-    json['email'] = this.user.email;
-    json['firstname'] = this.user.firstname;
-    json['lastname'] = this.user.lastname;
-    json['facebook_user_id'] = this.user.facebook_user_id;
-    json['google_user_id'] = this.user.google_user_id;
-    json['user_type'] = this.user.user_type;
-    json['active_vendor'] = this.user.active_vendor;
-    json['id'] = this.user.id;
+    json['user'] = this.user;
+    json['vendor'] = this.vendor;
     return json;
+  };
+
+  updateLocalStorage(userType: number) {
+    this.localStorageService.store(
+      CONSTANT.LOCALSTORAGE.SESSION,
+      this.toJson()
+    );
+  };
+
+  clearLocalStorage(userType: number) {
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.SESSION
+    );
   };
 
   updateUserType(userType: number) {
@@ -200,20 +199,20 @@ export class AccountService {
     let localStorageSession = this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.SESSION);
     localStorageSession.user_type = this.user.user_type;
     this.localStorageService.store(
-        CONSTANT.LOCALSTORAGE.SESSION,
-         localStorageSession
-      );
+      CONSTANT.LOCALSTORAGE.SESSION,
+      localStorageSession
+    );
 
     this.subject.next({
       event: CONSTANT.EVENT.SESSION.USER_TYPE
     });
-  }
+  };
 
   /**
   * Send message as observable
   */
   getMessage(): Observable<any> {
     return this.subject.asObservable();
-  }
+  };
 
 };
