@@ -9,7 +9,7 @@ import { ConfirmDialog }        from '../../shared/model/confirmDialog';
 import { ConfirmDialogService } from '../../services/confirm-dialog.service';
 import { User }                 from '../../shared/model/user';
 import { Vendor }               from '../../shared/model/vendor';
-//TODO: add dates formatting (db <-> fronted)
+
 //TODO: add mobile site
 /**
  * This class represents the lazy loaded Inbox.
@@ -26,6 +26,7 @@ export class InboxComponent implements OnInit {
   messagesInConversation: Message[];
   userId: number = this.accountService.getUser().id;
   messageText: string;
+  openConversation: Message;
   private subscription: Subscription;
   private inboxThread: HTMLElement;
   private inboxOverview: HTMLElement;
@@ -78,7 +79,7 @@ export class InboxComponent implements OnInit {
     }
     //if first conversation is removed, fetch messages for the next one that is now first in the list
     if(index === 0) {
-      this.getMessagesInConversation(this.conversations[0].id);
+      this.getMessagesInConversation(this.conversations[0]);
     }
   }
 
@@ -86,14 +87,17 @@ export class InboxComponent implements OnInit {
     let params = (({ id }) => ({ id }))(this.accountService.getUser());
     this.inboxService.getConversations(params).then(conversations => {
       this.conversations = conversations;
+      this.openConversation = this.conversations[0];
       //get messages in the latest conversation (first in the list)
-      this.getMessagesInConversation(this.conversations[0].id);
+      this.getMessagesInConversation(this.conversations[0]);
     });
   }
 
-  private getMessagesInConversation(conversationId: number) {
-    this.inboxService.getMessagesInConversation(conversationId).then(messages => {
+  private getMessagesInConversation(conversation: Message) {
+    this.inboxService.getMessagesInConversation(conversation.id).then(messages => {
       this.messagesInConversation = messages;
+      this.openConversation = conversation;
+      this.openConversation.is_read = true;
     });
   }
 
@@ -103,24 +107,26 @@ export class InboxComponent implements OnInit {
     this.modalService.show(CONSTANT.MODAL.CONFIRM, confirmDialog);
   }
 
-  //TODO: add for any selected conversation, for now hardcoded to first conversation
+  changeConversation(event: any, conversation: Message) {
+    this.getMessagesInConversation(conversation);
+  }
+
   sendMessage() {
     let params = {
         sender_id: this.accountService.getUser().id,
-        receiver_id: this.conversations[0].sender.id === this.accountService.getUser().id ? this.conversations[0].receiver.id : this.conversations[0].sender.id,
-        vendor_id: this.conversations[0].vendor.id,
+        receiver_id: this.openConversation.sender.id === this.accountService.getUser().id ? this.openConversation.receiver.id : this.openConversation.sender.id,
+        vendor_id: this.openConversation.vendor.id,
         content: this.messageText,
-        parent_message_id: this.conversations[0].last_msg_id
+        parent_message_id: this.openConversation.last_msg_id
       }
 
     this.inboxService.createMessage(params).then( message => {
       this.messageText = null;
       this.messagesInConversation.unshift(message);
-      this.conversations[0].content = message.content;
-      this.conversations[0].send_date = message.send_date;
-      this.conversations[0].last_msg_id = message.id;
+      this.openConversation.content = message.content;
+      this.openConversation.sent_date = message.sent_date;
+      this.openConversation.last_msg_id = message.id;
     });
   }
 
-  //TODO: add switching between conversations
 }

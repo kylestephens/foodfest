@@ -14,10 +14,24 @@ export class InboxService {
     private settingsService: SettingsService
   ) {};
 
+  private convertResponseToMessages(response: Response) {
+    let jsonResponse = response.json(),
+        messages: Message[] = [],
+        message: Message;
+
+    for(let data of jsonResponse) {
+      message = new Message(data);
+      messages.push(message);
+    }
+    return messages;
+  }
+
   getConversations(params: any): Promise<Message[]> {
     return this.restService.post(
       this.settingsService.getServerBaseUrl() + '/messages', params, this.accountService.getUser().akAccessToken,
-    ).then((response: Response) => response.json() as Message[]);
+    ).then((response: Response) => {
+      return this.convertResponseToMessages(response);
+    });
   }
 
   deleteConversation(messageId: number): Promise<boolean> {
@@ -29,14 +43,19 @@ export class InboxService {
   getMessagesInConversation(messageId: number): Promise<Message[]> {
     return this.restService.get(
         this.settingsService.getServerBaseUrl() + '/messages/' + messageId, null, this.accountService.getUser().akAccessToken,
-    ).then((response: Response) => response.json() as Message[]);
+    ).then((response: Response) => {
+      return this.convertResponseToMessages(response);
+    });
 
   }
 
   createMessage(params: any): Promise<Message> {
     return this.restService.post(
       this.settingsService.getServerBaseUrl() + '/messages/create', params, this.accountService.getUser().akAccessToken,
-    ).then((response: Response) => response.json() as Message);
+    ).then((response: Response) => {
+      let message = new Message(response.json());
+      return message;
+    });
     // TODO: handle error
   }
 

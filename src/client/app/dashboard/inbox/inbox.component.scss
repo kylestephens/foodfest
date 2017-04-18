@@ -102,7 +102,7 @@ $message-padding: 20px;
     &__footer {
       font-size: 18px;
       position: absolute;
-      bottom: 5px;
+      bottom: 1px;
       right: 15px;
 
       &-link {
@@ -138,6 +138,11 @@ $message-padding: 20px;
 
       &__body {
         padding: $message-padding;
+
+        &__date {
+          padding-top: $message-padding;
+          font-size: $font-size-small;
+        }
       }
     }
 
@@ -149,6 +154,7 @@ $message-padding: 20px;
       .inbox-thread__message-content {
         order: 1;
         background-color: $brand-body-bg;
+        border-top-right-radius: 0px;
 
         &:before {
           @include message-arrow();
@@ -175,6 +181,7 @@ $message-padding: 20px;
 
       .inbox-thread__message-content {
         background-color: $gray-lightest;
+        border-top-left-radius: 0px;
 
         &:before {
           @include message-arrow();
