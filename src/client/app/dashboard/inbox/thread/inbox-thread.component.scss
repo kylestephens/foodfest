@@ -26,7 +26,12 @@ $message-padding: 20px;
 }
 
 .inbox-thread {
-  padding: $brand-header-padding;
+  padding: $brand-header-padding 10px;
+
+  @media (min-width: $screen-sm-min) {
+    padding: $brand-header-padding;
+  }
+
 
   &__message {
     padding-bottom: 50px;
@@ -40,7 +45,7 @@ $message-padding: 20px;
       position: relative;
       border: 1px solid $gray-lighter;
       border-radius: $brand-border-radius;
-      display: inline-block;
+      //display: inline-block;
       width: calc(100% - 50px - 27px);
       flex-grow: 1;
       background-color: $gray-lightest;
@@ -115,7 +120,6 @@ $message-padding: 20px;
 
 
   .send-msg {
-
     .inbox-thread__message-content {
       background-color: $brand-body-bg;
       padding: 0;
@@ -140,6 +144,52 @@ $message-padding: 20px;
         @include button($brand-body-bg, $brand-primary-cta);
         padding: 5px 10px;
       }
+      }
+    }
+  }
+}
+
+
+@media (max-width: $screen-xs-max) {
+
+  .send-msg {
+    .inbox-thread__message {
+      &-icon {
+        display: none;
+      }
+
+      &-content {
+        border-radius: $brand-border-radius !important;
+
+        &:before {
+          content: none !important;
+        }
+
+        &__body:after {
+          content: none !important;
+        }
+      }
+    }
+  }
+
+  .inbox-thread__message-content {
+    &__body {
+      padding: 10px;
+      font-size: $font-size-medium;
+
+      &__date {
+        padding-top: 10px;
+        font-size: $font-size-smallest;
+      }
+
+      &__text{
+        font-size: $font-size-medium;
+      }
+
+      &__sender {
+        font-size: $font-size-small;
+        font-weight: 500;
+        padding-bottom: 10px;
       }
     }
   }

@@ -6,7 +6,7 @@ import { DashboardComponent }     from './dashboard.component';
 import { ProfileComponent }       from './profile/profile.component';
 import { ListingsComponent }      from './listings/listings.component';
 import { InboxComponent }         from './inbox/inbox.component';
-import { InboxTheadComponent }    from './inbox/thread/inbox-thread.component';
+import { InboxThreadComponent }    from './inbox/thread/inbox-thread.component';
 import { FavouritesComponent }    from './favourites/favourites.component';
 
 import { InboxService }           from './inbox/inbox.service';
@@ -21,7 +21,7 @@ import { InboxService }           from './inbox/inbox.service';
     ProfileComponent,
     ListingsComponent,
     InboxComponent,
-    InboxTheadComponent,
+    InboxThreadComponent,
     FavouritesComponent
   ],
   providers: [

@@ -6,6 +6,7 @@ import { DashboardComponent }  from './dashboard.component';
 import { ProfileComponent }    from './profile/profile.component';
 import { ListingsComponent }   from './listings/listings.component';
 import { InboxComponent }      from './inbox/inbox.component';
+//import { InboxThreadComponent } from './inbox/thread/inbox-thread.component';
 import { FavouritesComponent } from './favourites/favourites.component';
 
 @NgModule({
@@ -20,6 +21,7 @@ import { FavouritesComponent } from './favourites/favourites.component';
           { path: 'profile', component: ProfileComponent },
           { path: 'listings', component: ListingsComponent },
           { path: 'inbox', component: InboxComponent },
+          //{ path: 'inbox/:id', component: InboxThreadComponent },
           { path: 'favourites', component: FavouritesComponent }
         ]
       }

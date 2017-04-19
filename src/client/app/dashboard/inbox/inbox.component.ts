@@ -7,10 +7,10 @@ import { ModalService }         from '../../services/modal.service';
 import { CONSTANT }             from '../../core/constant';
 import { ConfirmDialog }        from '../../shared/model/confirmDialog';
 import { ConfirmDialogService } from '../../services/confirm-dialog.service';
+import { BrowserService }       from '../../services/browser.service';
 import { User }                 from '../../shared/model/user';
 import { Vendor }               from '../../shared/model/vendor';
 
-//TODO: add mobile site
 /**
  * This class represents the lazy loaded Inbox.
  */
@@ -24,13 +24,17 @@ import { Vendor }               from '../../shared/model/vendor';
 export class InboxComponent implements OnInit {
   conversations: Message[];
   openConversation: Message;
+  showThread: boolean = false;
   private subscription: Subscription;
+  private browser: any = this.browserService.get();
+  private isPhone: boolean = this.browser.deviceType === 'phone';
 
   constructor(
     private inboxService: InboxService,
     private accountService: AccountService,
     private modalService: ModalService,
-    private confirmDialogService: ConfirmDialogService
+    private confirmDialogService: ConfirmDialogService,
+    private browserService: BrowserService
     ) { }
 
   ngOnInit() {
@@ -68,8 +72,10 @@ export class InboxComponent implements OnInit {
     let params = (({ id }) => ({ id }))(this.accountService.getUser());
     this.inboxService.getConversations(params).then(conversations => {
       this.conversations = conversations;
-      this.openConversation = this.conversations[0];
-      this.openConversation.is_read = true;
+      if(!this.isPhone) {
+        this.openConversation = this.conversations[0];
+        this.openConversation.is_read = true;
+      }
     });
   }
 
@@ -80,8 +86,14 @@ export class InboxComponent implements OnInit {
   }
 
   changeConversation(event: any, conversation: Message) {
-    this.openConversation = conversation;
-    this.openConversation.is_read = true;
+    if(!this.openConversation || this.openConversation.id !== conversation.id) {
+      this.openConversation = conversation;
+      this.openConversation.is_read = true;
+    }
+
+    if(this.isPhone) {
+      this.showThread = true;
+    }
   }
 
 }

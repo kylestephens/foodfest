@@ -1,7 +1,7 @@
-<div class=" [ col-xs-12 col-sm-4 col-md-3 ] inbox-container">
+<div *ngIf="!isPhone || (isPhone && !showThread)" class=" [ col-xs-12 col-sm-4 col-md-3 ] inbox-container">
   <div *ngFor="let conversation of conversations; let i = index;"
       class="inbox-overview"
-      [ngClass]="{'not-read': !conversation.is_read && i!==0, 'active': conversation.id === openConversation.id }"
+      [ngClass]="{'not-read': !conversation.is_read && i!==0, 'active': conversation.id === openConversation?.id }"
       (click)="changeConversation($event, conversation)">
    <span class="inbox-overview__icon" [ngClass]="conversation.is_read ? 'ak-icon-msg-read' : 'ak-icon-msg-unread'"></span>
    <div class="inbox-overview__header">
@@ -21,4 +21,4 @@
   </div>
 </div>
 
-<ak-inbox-thread [conversation] = "openConversation"></ak-inbox-thread>
+<ak-inbox-thread [hidden]="isPhone && !showThread" [conversation]="openConversation"></ak-inbox-thread>

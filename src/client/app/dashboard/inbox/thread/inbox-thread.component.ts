@@ -1,6 +1,9 @@
 import { Component, Input, SimpleChanges }   from '@angular/core';
-import { Subscription }                      from 'rxjs/Subscription';
+//import { ActivatedRoute, Params, Router }   from '@angular/router';
+//import { Subscription }                      from 'rxjs/Subscription';
+//import 'rxjs/add/operator/switchMap';
 import { AccountService}                     from '../../../services/account.service';
+import { BrowserService }                    from '../../../services/browser.service';
 import { Message }                           from '../../../shared/model/message';
 import { InboxService }                      from '../inbox.service';
 
@@ -14,7 +17,7 @@ import { InboxService }                      from '../inbox.service';
   styleUrls: ['inbox-thread.component.css']
 })
 
-export class InboxTheadComponent {
+export class InboxThreadComponent {
   @Input()
   conversation: Message;
 
@@ -23,11 +26,15 @@ export class InboxTheadComponent {
   messageText: string;
   private inboxThread: HTMLElement;
   private inboxOverview: HTMLElement;
-  private sideMenu: HTMLElement = <HTMLElement> document.getElementsByClassName('side-menu')[0];;
+  private sideMenu: HTMLElement = <HTMLElement> document.getElementsByClassName('side-menu')[0];
+  private browser: any = this.browserService.get();
+  private isPhone: boolean = this.browser.deviceType === 'phone';
 
   constructor(
     private inboxService: InboxService,
-    private accountService: AccountService) { }
+    private accountService: AccountService,
+    private browserService: BrowserService) {
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if(changes.conversation.currentValue && (!changes.conversation.previousValue || changes.conversation.currentValue.id !== changes.conversation.previousValue.id)) {
@@ -35,17 +42,27 @@ export class InboxTheadComponent {
     }
   }
 
+  // ngOnInit(): void {
+  //   debugger
+  //     this.route.params
+  //     .switchMap((params: Params) => this.inboxService.getMessagesInConversation(+params['id']))
+  //     .subscribe(messages => this.messages = messages);
+
+  // }
+
   ngAfterViewChecked() {
-    let inboxThread:HTMLElement = <HTMLElement> document.getElementsByClassName('inbox-thread')[0],
-        inboxOverview:HTMLElement = <HTMLElement> document.getElementsByClassName('inbox-container')[0],
-        height = inboxThread.offsetHeight;
+    if(!this.isPhone) {
+      let inboxThread:HTMLElement = <HTMLElement> document.getElementsByClassName('inbox-thread')[0],
+          inboxOverview:HTMLElement = <HTMLElement> document.getElementsByClassName('inbox-container')[0],
+          height = inboxThread.offsetHeight;
 
-    if(height > inboxOverview.offsetHeight) {
-      inboxOverview.style.height = height + 'px';
-    }
+      if(height > inboxOverview.offsetHeight) {
+        inboxOverview.style.height = height + 'px';
+      }
 
-    if(height > this.sideMenu.offsetHeight) {
-      this.sideMenu.style.height = height + 'px';
+      if(height > this.sideMenu.offsetHeight) {
+        this.sideMenu.style.height = height + 'px';
+      }
     }
   }
 
