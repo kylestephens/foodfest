@@ -80,18 +80,18 @@ export class CreateListingComponent {
   private _previousStep = function() {
     this.currentStep--;
     this.router.navigate(['list-with-us/create-listing/step-' + this.currentStep], {relativeTo: this.route});
-    window.scrollTo(0, 0);
+    window.document.getElementsByClassName('page-body')[0].scrollIntoView();
   };
 
   private _nextStep = function() {
     this.currentStep++;
     this.router.navigate(['list-with-us/create-listing/step-' + this.currentStep], {relativeTo: this.route});
-    window.scrollTo(0, 0);
+    window.document.getElementsByClassName('page-body')[0].scrollIntoView();
   };
 
   private _previewListing = function(vendorId: number) {
     this.router.navigate(['vendor/' + vendorId]);
-    window.scrollTo(0, 0);
+    window.document.getElementsByClassName('page-body')[0].scrollIntoView();
   };
 
 };
