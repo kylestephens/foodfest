@@ -1,61 +1,63 @@
-<div class="card search-card">
-  <div class="search-card__image" [style.background]="vendor.safe_cover_photo_path" [ngClass]="{'search-card__image--unavailable ak-icon-image': !vendor.cover_photo_path}">
-    <ak-heart [elementId]="vendor.id" (change)="vendorLiked($event)"></ak-heart>
-  </div>
-
-  <div class="search-card__content">
-    <div class="search-card__title">{{vendor.business_name}}</div>
-
-    <div class="search-card__style">
-      <span class="style" *ngFor="let style of vendor.styles">{{style.text | uppercase}}</span>
-
-      <span *ngIf="vendor.styles?.length === 0">&nbsp;</span>
+<a class="search-card-link" [routerLink]="['/vendor/' + vendor.id]">
+  <div class="card search-card">
+    <div class="search-card__image" [style.background]="vendor.safe_cover_photo_path" [ngClass]="{'search-card__image--unavailable ak-icon-image': !vendor.cover_photo_path}">
+      <ak-heart [elementId]="vendor.id" (change)="vendorLiked($event)"></ak-heart>
     </div>
 
-    <div class="search-card__rating">
-      <div *ngIf="vendor.average_rating">
-        <span
-          [ngClass]="{
-            'ak-icon-star-full':   (vendor.average_rating >= 0.8),
-            'ak-icon-star-empty':  (vendor.average_rating < 0.2),
-            'ak-icon-star-half':   (vendor.average_rating >= 0.2 && vendor.average_rating < 0.8)
-          }">
-        </span>
-        <span
-          [ngClass]="{
-            'ak-icon-star-full':   (vendor.average_rating >= 1.8),
-            'ak-icon-star-empty':  (vendor.average_rating < 1.2),
-            'ak-icon-star-half':   (vendor.average_rating >= 1.2 && vendor.average_rating < 1.8)
-          }">
-        </span>
-        <span
-          [ngClass]="{
-            'ak-icon-star-full':   (vendor.average_rating >= 2.8),
-            'ak-icon-star-empty':  (vendor.average_rating < 2.2),
-            'ak-icon-star-half':   (vendor.average_rating >= 2.2 && vendor.average_rating < 2.8)
-          }">
-        </span>
-        <span
-          [ngClass]="{
-            'ak-icon-star-full':   (vendor.average_rating >= 3.8),
-            'ak-icon-star-empty':  (vendor.average_rating < 3.2),
-            'ak-icon-star-half':   (vendor.average_rating >= 3.2 && vendor.average_rating < 3.8)
-          }">
-        </span>
-        <span
-          [ngClass]="{
-            'ak-icon-star-full':   (vendor.average_rating >= 4.8),
-            'ak-icon-star-empty':  (vendor.average_rating < 4.2),
-            'ak-icon-star-half':   (vendor.average_rating >= 4.2 && vendor.average_rating < 4.8)
-          }">
-        </span>
+    <div class="search-card__content">
+      <div class="search-card__title">{{vendor.business_name}}</div>
 
-        <span>{{vendor.num_of_reviews}} reviews</span>
+      <div class="search-card__style">
+        <span class="style" *ngFor="let style of vendor.styles">{{style.text | uppercase}}</span>
+
+        <span *ngIf="vendor.styles?.length === 0">&nbsp;</span>
       </div>
 
-      <div *ngIf="!vendor.average_rating">
-        No reviews
+      <div class="search-card__rating">
+        <div *ngIf="vendor.average_rating">
+          <span
+            [ngClass]="{
+              'ak-icon-star-full':   (vendor.average_rating >= 0.8),
+              'ak-icon-star-empty':  (vendor.average_rating < 0.2),
+              'ak-icon-star-half':   (vendor.average_rating >= 0.2 && vendor.average_rating < 0.8)
+            }">
+          </span>
+          <span
+            [ngClass]="{
+              'ak-icon-star-full':   (vendor.average_rating >= 1.8),
+              'ak-icon-star-empty':  (vendor.average_rating < 1.2),
+              'ak-icon-star-half':   (vendor.average_rating >= 1.2 && vendor.average_rating < 1.8)
+            }">
+          </span>
+          <span
+            [ngClass]="{
+              'ak-icon-star-full':   (vendor.average_rating >= 2.8),
+              'ak-icon-star-empty':  (vendor.average_rating < 2.2),
+              'ak-icon-star-half':   (vendor.average_rating >= 2.2 && vendor.average_rating < 2.8)
+            }">
+          </span>
+          <span
+            [ngClass]="{
+              'ak-icon-star-full':   (vendor.average_rating >= 3.8),
+              'ak-icon-star-empty':  (vendor.average_rating < 3.2),
+              'ak-icon-star-half':   (vendor.average_rating >= 3.2 && vendor.average_rating < 3.8)
+            }">
+          </span>
+          <span
+            [ngClass]="{
+              'ak-icon-star-full':   (vendor.average_rating >= 4.8),
+              'ak-icon-star-empty':  (vendor.average_rating < 4.2),
+              'ak-icon-star-half':   (vendor.average_rating >= 4.2 && vendor.average_rating < 4.8)
+            }">
+          </span>
+
+          <span>{{vendor.num_of_reviews}} reviews</span>
+        </div>
+
+        <div *ngIf="!vendor.average_rating">
+          No reviews
+        </div>
       </div>
     </div>
   </div>
-</div>
+</a>

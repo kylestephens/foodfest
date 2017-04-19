@@ -6,6 +6,7 @@
 
 <!-- Main Page Content -->
 <div class="page-body">
+  <ak-messaging ref="global"></ak-messaging>
   <router-outlet></router-outlet>
 </div>
 <!-- / Main Page Content -->
@@ -16,7 +17,7 @@
 
     <div class="[ row ]">
       <div class="footer__links [ col-xs-12 text-center ]">
-        <span class="footer__link">
+        <span class="footer__link" [routerLink]="['/privacy']">
           Privacy &amp; Cookies
         </span>|
         <span class="footer__link">

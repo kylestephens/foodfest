@@ -1,8 +1,19 @@
-import { Component }        from '@angular/core';
-import { Router }           from '@angular/router';
-import { AccountService }   from '../../services/account.service';
-import { RestService }      from '../../services/rest.service';
-import { SettingsService }  from '../../services/settings.service';
+import {
+  Component,
+  ElementRef,
+  Renderer2,
+  ViewChild
+}                             from '@angular/core';
+import { Router }             from '@angular/router';
+import { AccountService }     from '../../services/account.service';
+import { MessagingService }   from '../../services/messaging.service';
+import { RestService }        from '../../services/rest.service';
+import { SettingsService }    from '../../services/settings.service';
+import { CONSTANT }           from '../../core/constant';
+import {
+  LocalStorageService,
+  SessionStorageService
+}                             from 'ng2-webstorage';
 
 /**
  * This class represents the lazy loaded ListingComponent.
@@ -15,14 +26,25 @@ import { SettingsService }  from '../../services/settings.service';
 })
 export class ListingPaymentComponent {
 
+  @ViewChild('tickAnimation')
+  public tickAnimationElementRef: ElementRef;
+
+  public isPaid: boolean = false;
+  public vendorId: number;
+
   private planType: number;
 
   constructor(
     private accountService: AccountService,
+    private localStorageService: LocalStorageService,
+    private messagingService: MessagingService,
     private restService: RestService,
     private settingsService: SettingsService,
+    private renderer: Renderer2,
     private router: Router
-  ) {};
+  ) {
+    this.vendorId = this.accountService.getVendorId();
+  };
 
   openCheckout(planNum: number) {
     var me = this,
@@ -44,27 +66,56 @@ export class ListingPaymentComponent {
       _planName = 'biannual';
     }
 
+    /**
+     * TODO: SSL / https required (https://goo.gl/zmWq3m)
+     * TODO: Change key when go live
+     */
     var handler = (<any>window).StripeCheckout.configure({
+
       key: 'pk_test_2mzBqvbawC9czSPnTGjM4pnA',
       email: me.accountService.getUser().email,
       image: me.settingsService.getBaseUrl() + '/assets/img/icon.png',
       locale: 'auto',
       currency: 'eur',
       panelLabel: 'Subscribe',
+
       token: (token: any) => {
+
+        let stepOne = this.localStorageService.retrieve(
+          CONSTANT.LOCALSTORAGE.LISTING_STEP_ONE
+        );
         let planDetails = {
           stripeId: token.id,
           userId: me.accountService.getUser().id,
-          businessName: me.accountService.getVendor().business_name,
+          businessName: stepOne.businessName,
           planName: _planName
         };
-        me.restService.post(me.settingsService.getServerBaseUrl() + '/subscribe',
+
+        me.restService.post(
+          me.settingsService.getServerBaseUrl() + '/subscribe',
           planDetails
-        ).then((resp: any) => {
-          debugger;
-          // TODO : do something
-        });
+        ).then(
+          (resp: any) => {
+            let _response = resp.json();
+            if(_response && _response.id) {
+              this.isPaid = true;
+              this._clearLocalStorage();
+              setTimeout(() => {
+                this.renderer.addClass(this.tickAnimationElementRef.nativeElement, 'drawn');
+              }, 300);
+            }
+          },
+          (reason: any) => {
+            this.messagingService.show(
+              'global',
+              CONSTANT.MESSAGING.ERROR,
+              reason.statusText ? reason.statusText : 'An unexpected error has occurred'
+            );
+          }
+        );
+
       }
+
     });
 
     handler.open({
@@ -72,6 +123,30 @@ export class ListingPaymentComponent {
       description: _description,
       amount: _amount
     });
+  };
+
+  private _clearLocalStorage() {
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_ONE
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_TWO
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_THREE
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.VENDOR_IMAGES
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_ADDRESS
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_EDIT
+    );
   };
 
 }

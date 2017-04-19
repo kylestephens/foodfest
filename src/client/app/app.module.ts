@@ -16,6 +16,9 @@ import { SharedModule }         from './shared/shared.module';
 import { ServicesModule }       from './services/services.module';
 import { AuthGuard }            from './auth-guard.service';
 
+/**
+ * TODO: Change apikey when go live
+ */
 @NgModule({
 
   imports: [
