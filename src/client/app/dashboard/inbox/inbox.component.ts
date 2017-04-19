@@ -1,15 +1,18 @@
-import { Component, OnInit }    from '@angular/core';
-import { Subscription }         from 'rxjs/Subscription';
-import { Message }              from '../../shared/model/message';
-import { InboxService }         from './inbox.service';
-import { AccountService}        from '../../services/account.service';
-import { ModalService }         from '../../services/modal.service';
-import { CONSTANT }             from '../../core/constant';
-import { ConfirmDialog }        from '../../shared/model/confirmDialog';
-import { ConfirmDialogService } from '../../services/confirm-dialog.service';
-import { BrowserService }       from '../../services/browser.service';
-import { User }                 from '../../shared/model/user';
-import { Vendor }               from '../../shared/model/vendor';
+import { Component, OnInit }          from '@angular/core';
+import { Location, PlatformLocation } from '@angular/common';
+import { ActivatedRoute }             from '@angular/router';
+import { Subscription }               from 'rxjs/Subscription';
+import { InboxService }               from './inbox.service';
+import { Message }                    from '../../shared/model/message';
+import { AccountService}              from '../../services/account.service';
+import { ModalService }               from '../../services/modal.service';
+import { CONSTANT }                   from '../../core/constant';
+import { ConfirmDialog }              from '../../shared/model/confirmDialog';
+import { ConfirmDialogService }       from '../../services/confirm-dialog.service';
+import { BrowserService }             from '../../services/browser.service';
+import { User }                       from '../../shared/model/user';
+import { Vendor }                     from '../../shared/model/vendor';
+
 
 /**
  * This class represents the lazy loaded Inbox.
@@ -24,6 +27,7 @@ import { Vendor }               from '../../shared/model/vendor';
 export class InboxComponent implements OnInit {
   conversations: Message[];
   openConversation: Message;
+  conversationId: number;
   showThread: boolean = false;
   private subscription: Subscription;
   private browser: any = this.browserService.get();
@@ -34,11 +38,22 @@ export class InboxComponent implements OnInit {
     private accountService: AccountService,
     private modalService: ModalService,
     private confirmDialogService: ConfirmDialogService,
-    private browserService: BrowserService
-    ) { }
+    private browserService: BrowserService,
+    private location: Location,
+    private route: ActivatedRoute,
+    private platformLocation: PlatformLocation
+    ) {
+      platformLocation.onPopState(() => {
+        this.clearInboxParameters();
+      });
+   }
 
   ngOnInit() {
     this.getConversations();
+
+    this.route.params.subscribe(
+      params => this.conversationId = params['id'];
+    );
 
     this.subscription = this.confirmDialogService.dialogConfirmed.subscribe(
     confirmDialog => {
@@ -54,6 +69,15 @@ export class InboxComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  private clearInboxParameters() {
+    if(this.isPhone) {
+      this.showThread = false;
+      this.openConversation = null;
+      this.conversationId = null;
+      window.document.getElementsByClassName('page-body')[0].scrollIntoView();
+    }
   }
 
   private removeConversation(messageId: number) {
@@ -72,11 +96,43 @@ export class InboxComponent implements OnInit {
     let params = (({ id }) => ({ id }))(this.accountService.getUser());
     this.inboxService.getConversations(params).then(conversations => {
       this.conversations = conversations;
-      if(!this.isPhone) {
-        this.openConversation = this.conversations[0];
-        this.openConversation.is_read = true;
+
+      if(this.isPhone) {
+        this.setInboxForPhone();
+      }
+      else {
+        this.setInbox();
       }
     });
+  }
+
+  private setInbox() {
+    if(this.conversationId) {
+      this.openConversation = this.conversations.filter(conversation => {
+        return conversation.id === +this.conversationId;
+      })[0];
+    }
+
+    if(!this.openConversation) this.openConversation = this.conversations[0];
+    this.openConversation.is_read = true;
+
+    if(!this.conversationId) this.location.replaceState('/dashboard/inbox/' + this.openConversation.id);
+  }
+
+  private setInboxForPhone() {
+    if(this.conversationId) {
+      this.openConversation = this.conversations.filter(conversation => {
+        return conversation.id === +this.conversationId;
+      })[0];
+
+      if(this.openConversation) {
+        this.showThread = true;
+        this.openConversation.is_read = true;
+      }
+      else {
+        this.location.replaceState('/dashboard/inbox');
+      }
+    }
   }
 
   confirmDelete(event: any, conversation: Message) {
@@ -89,11 +145,20 @@ export class InboxComponent implements OnInit {
     if(!this.openConversation || this.openConversation.id !== conversation.id) {
       this.openConversation = conversation;
       this.openConversation.is_read = true;
+      if(!this.isPhone) this.location.replaceState('/dashboard/inbox/' + this.openConversation.id);
     }
 
     if(this.isPhone) {
+      if(!this.conversationId) {
+        this.location.go('/dashboard/inbox/' + this.openConversation.id);
+      }
+      else {
+        this.location.replaceState('/dashboard/inbox/' + this.openConversation.id);
+      }
+      window.document.getElementsByClassName('page-body')[0].scrollIntoView();
       this.showThread = true;
     }
+
   }
 
 }

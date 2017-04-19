@@ -1,7 +1,4 @@
 import { Component, Input, SimpleChanges }   from '@angular/core';
-//import { ActivatedRoute, Params, Router }   from '@angular/router';
-//import { Subscription }                      from 'rxjs/Subscription';
-//import 'rxjs/add/operator/switchMap';
 import { AccountService}                     from '../../../services/account.service';
 import { BrowserService }                    from '../../../services/browser.service';
 import { Message }                           from '../../../shared/model/message';
@@ -41,14 +38,6 @@ export class InboxThreadComponent {
       this.getMessagesInConversation();
     }
   }
-
-  // ngOnInit(): void {
-  //   debugger
-  //     this.route.params
-  //     .switchMap((params: Params) => this.inboxService.getMessagesInConversation(+params['id']))
-  //     .subscribe(messages => this.messages = messages);
-
-  // }
 
   ngAfterViewChecked() {
     if(!this.isPhone) {
