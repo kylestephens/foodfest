@@ -48,8 +48,7 @@ export class CreateListingComponent {
             Returning to Step 1.
           `);
           this.router.navigate(
-            ['list-with-us/create-listing/step-1'],
-            {relativeTo: this.route}
+            ['list-with-us/create-listing/step-1']
           );
         } else {
           this.currentStep = parseInt(val.url.slice(-1));

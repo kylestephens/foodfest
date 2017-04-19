@@ -43,6 +43,7 @@ export class SearchResultsCardListComponent implements OnInit, OnDestroy {
         else this.searchVendors(params);
       });
   }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -59,9 +60,5 @@ export class SearchResultsCardListComponent implements OnInit, OnDestroy {
       this.loaded = true;
       this.vendors = vendors;
     });
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 }

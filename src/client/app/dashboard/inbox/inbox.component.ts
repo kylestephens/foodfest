@@ -52,7 +52,7 @@ export class InboxComponent implements OnInit {
     this.getConversations();
 
     this.route.params.subscribe(
-      params => this.conversationId = params['id'];
+      params => this.conversationId = params['id']
     );
 
     this.subscription = this.confirmDialogService.dialogConfirmed.subscribe(
