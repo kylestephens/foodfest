@@ -15,6 +15,7 @@ $scroller-height:     55vh;
     font-size: 60px;
     opacity: 0.6;
 
+    //this makes div dissaper when hovered over
     &:hover {
       opacity: 1;
     }
@@ -72,4 +73,8 @@ $scroller-height:     55vh;
       max-height: $scroller-height;
     }
   }
+}
+
+.image-scroller::-webkit-scrollbar {
+  display: none;
 }
