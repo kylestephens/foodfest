@@ -21,7 +21,11 @@ export class SearchResultsCardComponent {
   }
 
   //TODO: a placeholder for handling reacion on liked/unliked event:<EmitEvent>
-  vendorLiked(event: any) {
+  updateFavourites(event: any) {
     //event.elementId, event.isLiked
+  }
+
+  heartClicked(event: any) {
+    event.preventDefault();
   }
 }
