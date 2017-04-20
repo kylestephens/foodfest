@@ -1,9 +1,12 @@
 <div class="[ row ]">
   <div *ngIf="loaded && !vendors?.length">
-    <p class="card-empty">
-      There are no vendors matching your search.
-      Try changing the criteria, we have some great vendors to offer you!
-    </p>
+    <div class="card-empty">
+      <div class="ak-icon-food-truck card-empty__image"></div>
+      <div class="card-empty__text">
+        <div class="card-empty__text--line-one">There are no vendors matching your search.</div>
+        <div class="card-empty__text--line-two">Try changing the criteria and try again!</div>
+      </div>
+    </div>
   </div>
 
   <ul class="card-list">
