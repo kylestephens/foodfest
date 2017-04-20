@@ -33,12 +33,6 @@
     }
   }
 
-  &__browse-button {
-    margin-top: 16px;
-    @include button(#fff, $brand-primary-cta);
-    font-weight: 400;
-  }
-
   h1 {
     color: $brand-primary;
   }

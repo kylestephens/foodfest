@@ -20,6 +20,12 @@
   }
 }
 
+.hero__browse-button {
+  margin-top: 16px;
+  @include button($brand-body-bg, $brand-primary-cta);
+  font-weight: 400;
+}
+
 /*
 * Filter buttons on search page
 */
