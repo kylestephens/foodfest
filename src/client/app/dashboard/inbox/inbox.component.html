@@ -1,24 +1,41 @@
-<div *ngIf="!isPhone || (isPhone && !showThread)" class=" [ col-xs-12 col-sm-4 col-md-3 ] inbox-container">
-  <div *ngFor="let conversation of conversations; let i = index;"
-      class="inbox-overview"
-      [ngClass]="{'not-read': !conversation.is_read && i!==0, 'active': conversation.id === openConversation?.id }"
-      (click)="changeConversation($event, conversation)">
-   <span class="inbox-overview__icon" [ngClass]="conversation.is_read ? 'ak-icon-msg-read' : 'ak-icon-msg-unread'"></span>
-   <div class="inbox-overview__header">
-      <div  class="inbox-overview__header-icon ak-icon-user"> <!-- todo change this to real icons  -->
-      </div>
-      <div class="inbox-overview__header-title">
-        <div class="inbox-overview__header-title__name">{{conversation.name_to_show}}</div>
-        <div class="inbox-overview__header-title__date">{{conversation.sent_date}}</div>
-      </div>
+<div *ngIf="loaded && !conversations?.length">
+  <div class="card-empty">
+    <div class="ak-icon-mail card-empty__image"></div>
+    <div class="card-empty__text">
+      <div class="no-messages__line-one">You have no messages at the moment!</div>
+      <div class="no-messages__line-two">Why not browse our vendors?</div>
     </div>
-
-    <div class="inbox-overview__content">{{conversation.content}}</div>
-
-    <div class="inbox-overview__footer">
-      <a class="inbox-overview__footer-link ak-icon-delete" (click)="confirmDelete($event, conversation)"></a>
+    <div class="card-empty__action">
+       <button class="hero__browse-button" [routerLink]="['/search-results']">
+        Browse now<span class="[ hidden-xs ]"> and start planning</span>
+      </button>
     </div>
   </div>
 </div>
 
-<ak-inbox-thread [hidden]="isPhone && !showThread" [conversation]="openConversation"></ak-inbox-thread>
+<div *ngIf="conversations?.length">
+  <div *ngIf="!isPhone || (isPhone && !showThread)" class=" [ col-xs-12 col-sm-4 col-md-3 ] inbox-container">
+    <div *ngFor="let conversation of conversations; let i = index;"
+        class="inbox-overview"
+        [ngClass]="{'not-read': !conversation.is_read && i!==0, 'active': conversation.id === openConversation?.id }"
+        (click)="changeConversation($event, conversation)">
+     <span class="inbox-overview__icon" [ngClass]="conversation.is_read ? 'ak-icon-msg-read' : 'ak-icon-msg-unread'"></span>
+     <div class="inbox-overview__header">
+        <div  class="inbox-overview__header-icon ak-icon-user"> <!-- todo change this to real icons  -->
+        </div>
+        <div class="inbox-overview__header-title">
+          <div class="inbox-overview__header-title__name">{{conversation.name_to_show}}</div>
+          <div class="inbox-overview__header-title__date">{{conversation.sent_date}}</div>
+        </div>
+      </div>
+
+      <div class="inbox-overview__content">{{conversation.content}}</div>
+
+      <div class="inbox-overview__footer">
+        <a class="inbox-overview__footer-link ak-icon-delete" (click)="confirmDelete($event, conversation)"></a>
+      </div>
+    </div>
+  </div>
+
+  <ak-inbox-thread [hidden]="isPhone && !showThread" [conversation]="openConversation"></ak-inbox-thread>
+</div>

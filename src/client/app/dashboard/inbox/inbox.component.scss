@@ -106,4 +106,25 @@
 }
 
 
+.card-empty {
+  &__image {
+    font-size: 130px;
+    opacity: 0.6;
+  }
+
+  &__text {
+    margin-top: 30px;
+  }
+
+  .no-messages {
+    &__line-one {
+       font-size: 30px;
+    }
+
+    &__line-two {
+      padding-top: 10px;
+    }
+
+  }
+}
 

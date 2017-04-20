@@ -25,10 +25,11 @@ import { Vendor }                     from '../../shared/model/vendor';
 })
 
 export class InboxComponent implements OnInit {
-  conversations: Message[];
-  openConversation: Message;
-  conversationId: number;
-  showThread: boolean = false;
+  private conversations: Message[];
+  private openConversation: Message;
+  private conversationId: number;
+  private showThread: boolean = false;
+  private loaded: boolean = false;
   private subscription: Subscription;
   private browser: any = this.browserService.get();
   private isPhone: boolean = this.browser.deviceType === 'phone';
@@ -95,12 +96,13 @@ export class InboxComponent implements OnInit {
   getConversations() {
     let params = (({ id }) => ({ id }))(this.accountService.getUser());
     this.inboxService.getConversations(params).then(conversations => {
+      this.loaded = true;
       this.conversations = conversations;
 
-      if(this.isPhone) {
+      if(this.conversations.length > 0 && this.isPhone) {
         this.setInboxForPhone();
       }
-      else {
+      else if(this.conversations.length > 0) {
         this.setInbox();
       }
     });
