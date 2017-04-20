@@ -8,3 +8,10 @@
   padding: $padding-base-vertical $padding-base-horizontal;
   border-radius: $brand-border-radius;
 }
+
+.card-empty {
+  color: $brand-secondary;
+  font-size: $font-size-large;
+  padding: 50px;
+  text-align: center;
+}
