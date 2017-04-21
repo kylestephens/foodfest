@@ -89,7 +89,7 @@
   <!-- IMAGES -->
   <section>
 
-    <ak-image-scroller [images]="additionalImages">
+    <ak-image-scroller *ngIf="imagesLoaded" [images]="additionalImages">
     </ak-image-scroller>
 
   </section>

@@ -14,7 +14,7 @@ import { SettingsService }         from '../../services/settings.service';
   styleUrls: ['image-scroller.component.css']
 })
 
-export class ImageScrollerComponent implements OnInit {
+export class ImageScrollerComponent {
 
   /**
    * @Input
@@ -40,7 +40,7 @@ export class ImageScrollerComponent implements OnInit {
     this.deviceType = this.settingsService.getDeviceType();
   };
 
-  ngOnInit() {
+  ngAfterContentInit() {
     if(this.images && this.images.length > 0) {
       this.scrollDistance = window.innerWidth * 0.5;
       this.currentScroll = this.scroller.nativeElement.scrollLeft;

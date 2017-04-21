@@ -42,6 +42,7 @@ export class VendorComponent implements OnInit, OnDestroy {
   public formattedDietRequirements: string;
   public additionalImages: Array<string> = [];
   public serverUrl: string;
+  public imagesLoaded: boolean = false;
 
   public mapStyles: MapTypeStyle[] = [
     {
@@ -280,6 +281,7 @@ export class VendorComponent implements OnInit, OnDestroy {
         this.vendor.images.forEach((imageUrl: any) => {
           this.additionalImages.push(this.serverUrl + imageUrl);
         });
+        this.imagesLoaded = true;
       });
     }
   }
