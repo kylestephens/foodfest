@@ -11,6 +11,7 @@ import { Style }             from './style';
 export class Vendor {
 	id:                  number;
 	user_id:             number;
+  active_vendor:      boolean; //bool, whether or not vendor paid
 	business_name:       string;
   phone_number:        string;
   business_website:    string;

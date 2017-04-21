@@ -38,8 +38,7 @@ export class AccountService {
         lastname: this.user.lastname,
         facebook_user_id: this.user.facebook_user_id,
         google_user_id: this.user.google_user_id,
-        user_type: CONSTANT.user.types.USER.code,
-        active_vendor: '0'
+        user_type: CONSTANT.user.types.USER.code
       }
     ).then(
       (response: any) => {
@@ -47,7 +46,6 @@ export class AccountService {
         this.user.id = response.id;
         this.user.akAccessToken = response.token;
         this.user.user_type = response.user_type;
-        this.user.active_vendor = response.active_vendor ? true : false;
         this.setLoggedIn(true);
       },
       (reason: any) => {
@@ -74,7 +72,6 @@ export class AccountService {
         this.user.name = response.firstname;
         this.user.akAccessToken = response.token;
         this.user.user_type = response.user_type;
-        this.user.active_vendor = response.active_vendor ? true : false;
         this.setLoggedIn(true);
       },
       (reason: any) => {

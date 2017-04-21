@@ -5,7 +5,6 @@ export class User {
   id:                 number;
   email:              string;
   user_type:          number;
-  active_vendor:      boolean; //DB 1 active, 0 not active
   password:           string;
   google_user_id:     string;
   facebook_user_id:   string;
