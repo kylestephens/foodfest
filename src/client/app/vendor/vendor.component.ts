@@ -314,7 +314,6 @@ export class VendorComponent implements OnInit, OnDestroy {
   };
 
   public isVendorDetailsCardShown() {
-    debugger;
     if(
       !this.vendor.facebook_address &&
       !this.vendor.instagram_address &&
