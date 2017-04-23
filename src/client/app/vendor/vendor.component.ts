@@ -313,6 +313,19 @@ export class VendorComponent implements OnInit, OnDestroy {
     w.location.href = '//' + this.vendor.business_website;
   };
 
+  public isVendorDetailsCardShown() {
+    debugger;
+    if(
+      !this.vendor.facebook_address &&
+      !this.vendor.instagram_address &&
+      !this.vendor.business_website &&
+      !this.vendor.business_latitude &&
+      !this.vendor.business_address) {
+      return false;
+    }
+    return true;
+  }
+
   /**
    * If arriving from create listing steps - retrieve
    * from local storage instead of doing a GET

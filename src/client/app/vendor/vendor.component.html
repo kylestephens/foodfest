@@ -110,7 +110,7 @@
   <!-- LOCATION + SOCIAL DETAILS  -->
   <section class="[ container ]">
 
-    <div class="vendor-details card [ row ]">
+    <div class="vendor-details card [ row ]" *ngIf="isVendorDetailsCardShown()">
 
       <div class="vendor-details__map [ col-md-8 col-sm-6 col-xs-12" *ngIf="vendor.business_latitude && vendor.business_longitude">
         <sebm-google-map
