@@ -139,6 +139,9 @@ export class ListingPaymentComponent {
       CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR
     );
     this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_FIVE
+    );
+    this.localStorageService.clear(
       CONSTANT.LOCALSTORAGE.VENDOR_IMAGES
     );
     this.localStorageService.clear(
