@@ -78,13 +78,13 @@ export class CreateListingComponent {
 
   private _previousStep = function() {
     this.currentStep--;
-    this.router.navigate(['list-with-us/create-listing/step-' + this.currentStep], {relativeTo: this.route});
+    this.router.navigate(['list-with-us/create-listing/step-' + this.currentStep]);
     window.document.getElementsByClassName('page-body')[0].scrollIntoView();
   };
 
   private _nextStep = function() {
     this.currentStep++;
-    this.router.navigate(['list-with-us/create-listing/step-' + this.currentStep], {relativeTo: this.route});
+    this.router.navigate(['list-with-us/create-listing/step-' + this.currentStep]);
     window.document.getElementsByClassName('page-body')[0].scrollIntoView();
   };
 

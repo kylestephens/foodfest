@@ -8,6 +8,7 @@ import { CreateListingStepOneComponent }   from './steps/one/create-listing-step
 import { CreateListingStepTwoComponent }   from './steps/two/create-listing-step-two.component';
 import { CreateListingStepThreeComponent } from './steps/three/create-listing-step-three.component';
 import { CreateListingStepFourComponent }  from './steps/four/create-listing-step-four.component';
+import { CreateListingStepFiveComponent }  from './steps/five/create-listing-step-five.component';
 import { CONSTANT }                        from '../core/constant';
 import { AuthGuard }                       from '../auth-guard.service';
 
@@ -26,7 +27,8 @@ import { AuthGuard }                       from '../auth-guard.service';
               { path: 'step-1', component: CreateListingStepOneComponent },
               { path: 'step-2', component: CreateListingStepTwoComponent },
               { path: 'step-3', component: CreateListingStepThreeComponent },
-              { path: 'step-4', component: CreateListingStepFourComponent }
+              { path: 'step-4', component: CreateListingStepFourComponent },
+              { path: 'step-5', component: CreateListingStepFiveComponent }
             ]
           },
           { path: 'payment', component: ListingPaymentComponent }

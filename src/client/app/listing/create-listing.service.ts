@@ -68,9 +68,24 @@ export class CreateListingService {
       let stepFour = this.localStorageService.retrieve(
         CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR
       );
+      let stepFive = this.localStorageService.retrieve(
+        CONSTANT.LOCALSTORAGE.LISTING_STEP_FIVE
+      );
       let addressInfo = this.localStorageService.retrieve(
         CONSTANT.LOCALSTORAGE.LISTING_ADDRESS
       );
+
+      let lat = null;
+      let lng = null;
+      if(addressInfo) {
+        if (typeof addressInfo.geometry.location.lat == 'function') {
+          lat = addressInfo.geometry.location.lat();
+          lng = addressInfo.geometry.location.lng();
+        } else {
+          lat = addressInfo.geometry.location.lat;
+          lng = addressInfo.geometry.location.lng;
+        }
+      }
 
       this.restService.post(
         me.settingsService.getServerBaseUrl() + '/vendors/create', {
@@ -78,19 +93,20 @@ export class CreateListingService {
           user_id: this.accountService.getUser().id,
           business_name: stepOne.businessName,
           business_address: stepTwo.businessAddress,
-          business_latitude: addressInfo ? addressInfo.geometry.location.lat() : null,
-          business_longitude: addressInfo ? addressInfo.geometry.location.lng() : null,
+          business_latitude: lat,
+          business_longitude: lng,
           business_website: stepTwo.businessWebsite,
           facebook_address: stepThree.facebookAddress,
           twitter_address: stepThree.twitterAddress,
           instagram_address: stepThree.instagramAddress,
           business_type: stepOne.businessType,
           phone_number: stepTwo.phoneNumber,
-          description: stepFour.businessDescription,
+          description: stepFive.businessDescription,
           event_type: stepOne.eventType,
           business_setup: stepOne.businessSetup,
           styles: stepOne.styles,
-          diet_requirements: stepOne.dietRequirements
+          diet_requirements: stepOne.dietRequirements,
+          listed_items: stepFour
         }
       ).then(function(response: any) {
         let responseBody = response.json();
@@ -130,6 +146,9 @@ export class CreateListingService {
       let stepFour = this.localStorageService.retrieve(
         CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR
       );
+      let stepFive = this.localStorageService.retrieve(
+        CONSTANT.LOCALSTORAGE.LISTING_STEP_FIVE
+      );
       let addressInfo = this.localStorageService.retrieve(
         CONSTANT.LOCALSTORAGE.LISTING_ADDRESS
       );
@@ -147,7 +166,7 @@ export class CreateListingService {
           instagram_address: stepThree.instagramAddress,
           business_type: stepOne.businessType,
           phone_number: stepTwo.phoneNumber,
-          description: stepFour.businessDescription,
+          description: stepFive.businessDescription,
           event_type: stepOne.eventType,
           business_setup: stepOne.businessSetup,
           styles: stepOne.styles,

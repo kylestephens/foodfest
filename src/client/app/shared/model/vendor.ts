@@ -10,7 +10,7 @@ import { Style }             from './style';
 export class Vendor {
 	id:                  number;
 	user_id:             number;
-  active_vendor:      boolean; //bool, whether or not vendor paid
+  active_vendor:       boolean; //bool, whether or not vendor paid
 	business_name:       string;
   phone_number:        string;
   business_website:    string;
@@ -37,4 +37,5 @@ export class Vendor {
   diet_requirements:   Array<DietRequirement>;
   event_types:         Array<any>;
   styles:              Style[];
+  listed_items:        Array<any>;
 }

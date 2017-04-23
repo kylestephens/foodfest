@@ -33,7 +33,6 @@ article {
     right: $padding-large-horizontal;
     @include button(#fff, $brand-primary-cta);
     padding: 6px 12px;                  // overriding default button padding
-    font-weight: 400;
   }
 
   &__overlay {
@@ -126,6 +125,18 @@ article {
     color: $brand-secondary;
     position: relative;
     top: 6px;
+  }
+}
+
+.menu {
+  &__item-title {
+    text-transform: uppercase;
+    font-weight: $font-weight-bold;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: $padding-small-vertical;
+    margin: $padding-base-vertical 0;
+  }
+  &__item-description {
   }
 }
 

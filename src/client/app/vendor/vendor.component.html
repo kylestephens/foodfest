@@ -95,6 +95,21 @@
   </section>
   <!-- / IMAGES -->
 
+  <!-- MENU / PRODUCTS -->
+  <section class="menu [ container ]" *ngIf="vendor.listed_items?.length > 0">
+
+    <div class="[ row ]">
+      <div class="[ col-xs-12 col-sm-6 col-md-4 ]" *ngFor="let item of vendor.listed_items">
+        <div class="card">
+          <h5 class="menu__item-title">{{ item.item_title }}</h5>
+          <span class="menu__item-description">{{ item.item_description }}</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+  <!-- / MENU / PRODUCTS -->
+
   <!-- TWITTER -->
   <section class="tweets [ container ]" *ngIf="vendor.twitter_address">
 
@@ -105,7 +120,7 @@
     </div>
 
   </section>
-  <!-- / TWITTER ->
+  <!-- / TWITTER -->
 
   <!-- LOCATION + SOCIAL DETAILS  -->
   <section class="[ container ]">
