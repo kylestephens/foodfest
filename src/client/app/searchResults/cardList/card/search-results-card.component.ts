@@ -1,6 +1,6 @@
 import { Component, Input } 	            from '@angular/core';
 import { Vendor } 			                  from '../../../shared/model/vendor';
-import { DomSanitizer, SafeResourceUrl }  from '@angular/platform-browser';
+import { SettingsService }                from '../../../services/settings.service';
 
 @Component({
   moduleId: module.id,
@@ -13,12 +13,15 @@ export class SearchResultsCardComponent {
 	@Input()
 	vendor: Vendor;
 
-  constructor(private sanitationService: DomSanitizer) {};
+  private serverUrl: string = this.settingsService.getServerBaseUrl() + '/';
 
-  ngOnInit() {
-    this.vendor.safe_cover_photo_path = this.vendor.cover_photo_path ? this.sanitationService.bypassSecurityTrustStyle(
-      'url(' + this.vendor.cover_photo_path + ')') : this.vendor.cover_photo_path;
-  }
+  constructor(private settingsService: SettingsService) {};
+
+  //TODO: needed in case of cross browsing, not needed for now. Maybe will be later when deployed on server.
+  // ngOnInit() {
+  //   this.vendor.safe_cover_photo_path = this.vendor.cover_photo_path ? this.sanitationService.bypassSecurityTrustStyle(
+  //     'url(' + this.vendor.cover_photo_path + ')') : this.vendor.cover_photo_path;
+  // }
 
   //TODO: a placeholder for handling reacion on liked/unliked event:<EmitEvent>
   updateFavourites(event: any) {

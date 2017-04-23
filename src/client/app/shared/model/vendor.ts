@@ -2,7 +2,6 @@
  * Class for vendors.
  * It corresponds to vendorsModel in service.
  */
-import { SafeResourceUrl }   from '@angular/platform-browser';
 import { BusinessSetup }     from './businessSetup';
 import { BusinessType }      from './businessType';
 import { DietRequirement }   from './dietRequirement';
@@ -38,6 +37,4 @@ export class Vendor {
   diet_requirements:   Array<DietRequirement>;
   event_types:         Array<any>;
   styles:              Style[];
-
-  safe_cover_photo_path: SafeResourceUrl | string;
 }
