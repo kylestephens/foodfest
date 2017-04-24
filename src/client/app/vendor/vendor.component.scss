@@ -136,3 +136,34 @@ article {
 .sebm-google-map-container {
   height: 300px;
 }
+
+.vendor-contact {
+  padding: 0;
+
+  &__text {
+    width: 100%;
+    border: 1px solid $gray-lightest;
+    border-radius: $brand-border-radius;
+
+    &::placeholder {
+      font-style: italic;
+    }
+  }
+
+  &__message {
+    margin-left: 24px;
+    margin-right: 24px;
+    padding: 6px 12px;
+  }
+
+  &__button {
+    padding: 20px;
+    text-align: right;
+    background-color: $gray-lightest;
+  }
+
+  .send-button {
+    @include button($brand-body-bg, $brand-primary-cta);
+    padding: 5px 10px;
+  }
+}

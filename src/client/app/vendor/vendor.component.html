@@ -132,7 +132,7 @@
         </sebm-google-map>
       </div>
 
-      <div class="vendor-details [ col-md-4 col-sm-6 col-xs-12">
+      <div class="vendor-details [ col-md-4 col-sm-6 col-xs-12 ]">
         <div class="vendor-details__item" *ngIf="vendor.business_address">
           <h4>
             <span class="vendor-details__icon ak-icon-location"></span>
@@ -179,5 +179,22 @@
 
   </section>
   <!-- / LOCATION + SOCIAL DETAILS  -->
+
+  <!-- CONTACT  -->
+   <section class="[ container ]">
+    <div class="vendor-contact card [ row ]">
+      <div class="vendor-contact [ col-xs-12 ]">
+          <div class="vendor-contact__message">
+            <textarea class="vendor-contact__text" rows="5" [(ngModel)] ="messageText" placeholder="Write your message here..."></textarea>
+          </div>
+          <div class="vendor-contact__button">
+            <button class="send-button" (click)="sendMessage()">
+              Send Message
+            </button>
+          </div>
+      </div>
+    </div>
+  </section>
+  <!-- / CONTACT  -->
 
 </article>

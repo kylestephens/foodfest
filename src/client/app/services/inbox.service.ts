@@ -50,7 +50,6 @@ export class InboxService {
   }
 
   createMessage(params: any): Promise<Message> {
-    debugger
     return this.restService.post(
       this.settingsService.getServerBaseUrl() + '/messages/create', params, this.accountService.getUser().akAccessToken,
     ).then((response: Response) => {

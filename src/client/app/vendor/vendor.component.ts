@@ -17,6 +17,8 @@ import {
 }                                 from 'angular2-google-maps/core';
 import { RestService }            from '../services/rest.service';
 import { SettingsService }        from '../services/settings.service';
+import { AccountService}          from '../services/account.service';
+import { InboxService }           from '../services/inbox.service';
 import { ImageScrollerComponent } from '../shared/image-scroller/image-scroller.component';
 import { TwitterFeedComponent }   from '../shared/twitter-feed/twitter-feed.component';
 import { Vendor }                 from '../shared/model/vendor';
@@ -32,7 +34,7 @@ import { CONSTANT }               from '../core/constant';
   styleUrls: ['vendor.component.css']
 })
 export class VendorComponent implements OnInit, OnDestroy {
-
+  messageText: string;
   public vendor = new Vendor();
   public zoomLevel: number = 15;        // google maps zoom level
   public isEditing: boolean = false;
@@ -255,7 +257,9 @@ export class VendorComponent implements OnInit, OnDestroy {
     private mapsAPILoader: MapsAPILoader,
     private restService: RestService,
     private route: ActivatedRoute,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private inboxService: InboxService,
+    private accountService: AccountService
   ) {
     if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_EDIT)) {
       this.isEditing = true;
@@ -323,6 +327,19 @@ export class VendorComponent implements OnInit, OnDestroy {
       return false;
     }
     return true;
+  }
+
+  sendMessage() {
+    let params = {
+        sender_id: this.accountService.getUser().id,
+        receiver_id: this.vendor.id,
+        vendor_id: this.vendor.id,
+        content: this.messageText
+      }
+
+    this.inboxService.createMessage(params).then( message => {
+      this.messageText = null;
+    });//TODO: handle error and success
   }
 
   /**
