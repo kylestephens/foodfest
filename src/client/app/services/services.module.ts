@@ -6,6 +6,7 @@ import { BrowserService }        from './browser.service';
 import { ConfirmDialogService }  from './confirm-dialog.service';
 import { FacebookService }       from './facebook.service';
 import { GoogleService }         from './google.service';
+import { InboxService }          from './inbox.service';
 import { MessagingService }      from './messaging.service';
 import { ModalService }          from './modal.service';
 import { RestService }           from './rest.service';
@@ -23,6 +24,7 @@ import { WindowRefService }      from './window-ref.service';
     BrowserService,
     ConfirmDialogService,
     GoogleService,
+    InboxService,
     FacebookService,
     MessagingService,
     ModalService,
@@ -41,6 +43,7 @@ export class ServicesModule {
         BrowserService,
         ConfirmDialogService,
         GoogleService,
+        InboxService,
         FacebookService,
         MessagingService,
         ModalService,

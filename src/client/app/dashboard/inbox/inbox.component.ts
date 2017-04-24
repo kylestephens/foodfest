@@ -2,7 +2,6 @@ import { Component, OnInit }          from '@angular/core';
 import { Location, PlatformLocation } from '@angular/common';
 import { ActivatedRoute }             from '@angular/router';
 import { Subscription }               from 'rxjs/Subscription';
-import { InboxService }               from './inbox.service';
 import { Message }                    from '../../shared/model/message';
 import { AccountService}              from '../../services/account.service';
 import { ModalService }               from '../../services/modal.service';
@@ -10,6 +9,7 @@ import { CONSTANT }                   from '../../core/constant';
 import { ConfirmDialog }              from '../../shared/model/confirmDialog';
 import { ConfirmDialogService }       from '../../services/confirm-dialog.service';
 import { BrowserService }             from '../../services/browser.service';
+import { InboxService }               from '../../services/inbox.service';
 import { User }                       from '../../shared/model/user';
 import { Vendor }                     from '../../shared/model/vendor';
 

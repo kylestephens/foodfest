@@ -1,9 +1,9 @@
 import { Injectable }        from '@angular/core';
 import { Response }          from '@angular/http';
-import { Message }           from '../../shared/model/message';
-import { RestService }       from '../../services/rest.service';
-import { SettingsService }   from '../../services/settings.service';
-import { AccountService }    from '../../services/account.service';
+import { Message }           from '../shared/model/message';
+import { RestService }       from '../services/rest.service';
+import { SettingsService }   from '../services/settings.service';
+import { AccountService }    from '../services/account.service';
 
 @Injectable()
 export class InboxService {
@@ -50,6 +50,7 @@ export class InboxService {
   }
 
   createMessage(params: any): Promise<Message> {
+    debugger
     return this.restService.post(
       this.settingsService.getServerBaseUrl() + '/messages/create', params, this.accountService.getUser().akAccessToken,
     ).then((response: Response) => {

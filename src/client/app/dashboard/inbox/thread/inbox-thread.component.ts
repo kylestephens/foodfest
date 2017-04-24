@@ -1,8 +1,8 @@
 import { Component, Input, SimpleChanges }   from '@angular/core';
 import { AccountService}                     from '../../../services/account.service';
 import { BrowserService }                    from '../../../services/browser.service';
+import { InboxService }                      from '../../../services/inbox.service';
 import { Message }                           from '../../../shared/model/message';
-import { InboxService }                      from '../inbox.service';
 
 /**
  * This class represents the lazy loaded inbox message thread.

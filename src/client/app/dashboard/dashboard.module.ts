@@ -9,7 +9,6 @@ import { InboxComponent }         from './inbox/inbox.component';
 import { InboxThreadComponent }    from './inbox/thread/inbox-thread.component';
 import { FavouritesComponent }    from './favourites/favourites.component';
 
-import { InboxService }           from './inbox/inbox.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -23,9 +22,6 @@ import { InboxService }           from './inbox/inbox.service';
     InboxComponent,
     InboxThreadComponent,
     FavouritesComponent
-  ],
-  providers: [
-    InboxService
   ]
 })
 
