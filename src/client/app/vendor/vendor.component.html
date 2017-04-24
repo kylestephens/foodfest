@@ -2,7 +2,7 @@
 
   <!-- HERO -->
   <header class="hero"
-    [ngStyle]="{'background-image': 'url(' + serverUrl + vendor.cover_photo_path + ')'}">
+    *ngIf = "vendorLoaded" [ngStyle]="{'background-image': 'url(' +  serverUrl + vendor.cover_photo_path + ')'}">
 
     <div class="hero__overlay">
       <div class="[ container ]">
@@ -89,7 +89,7 @@
   <!-- IMAGES -->
   <section>
 
-    <ak-image-scroller *ngIf="imagesLoaded" [images]="additionalImages">
+    <ak-image-scroller *ngIf="additionalImagesLoaded" [images]="additionalImages">
     </ak-image-scroller>
 
   </section>

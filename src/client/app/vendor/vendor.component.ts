@@ -45,8 +45,8 @@ export class VendorComponent implements OnInit, OnDestroy {
   public formattedDietRequirements: string;
   public additionalImages: Array<string> = [];
   public serverUrl: string;
-  public imagesLoaded: boolean = false;
-
+  public additionalImagesLoaded: boolean = false;
+  public vendorLoaded: boolean = false;
   public mapStyles: MapTypeStyle[] = [
     {
       "elementType": "geometry",
@@ -275,10 +275,12 @@ export class VendorComponent implements OnInit, OnDestroy {
     });
     if(!this.vendorId) {
       this._initValuesFromLocalStorage(); // when creating for first time
+      this.vendorLoaded = true;
     } else {
       return this.restService.get(
          this.settingsService.getServerBaseUrl() + '/vendor/' + this.vendorId
       ).then((response: Response) => {
+        this.vendorLoaded = true;
         this.vendor = response.json()[0] as Vendor;
         this.formattedStyles= this._formatFilterString(this.vendor.styles);
         this.formattedBusinessSetups = this._formatFilterString(this.vendor.business_setup);
@@ -287,7 +289,7 @@ export class VendorComponent implements OnInit, OnDestroy {
         this.vendor.images.forEach((imageUrl: any) => {
           this.additionalImages.push(this.serverUrl + imageUrl);
         });
-        this.imagesLoaded = true;
+        this.additionalImagesLoaded = true;
       }, (reason: any) => {
         this.messagingService.show(
           'global',
