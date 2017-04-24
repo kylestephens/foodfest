@@ -1,92 +1,59 @@
 <form [formGroup]="stepFourForm" (ngSubmit)="submitForm(stepFourForm.value)">
 
-  <!-- Business Logo -->
-  <div class="form-row [ row ]">
-    <div class="[ col-sm-6 col-xs-12 ]">
-      <label class="form-label">Business Logo</label>
-      <div class="form-input form-input--has-icon sign-up-field">
-        <div class="form-icon ak-icon-camera"></div>
-        <input type="file"
-          accept="image/jpeg, image/png"
-          formControlName="businessLogo"
-          id="businessLogo"
-          (change)="onChangeLogo($event)">
-      </div>
-      <ak-form-messages [control]="stepFourForm.controls.businessLogo">
-      </ak-form-messages>
-    </div>
-    <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
-      <div class="form-field-description">
-        Square images work best. We recommend 250 x 250 pixels.
-        jpg, jpeg or png file formats accepted.
-      </div>
-    </div>
-  </div>
-  <!-- / Business Logo -->
+  <!-- Menu Item -->
+  <div class="form-row [ row ]" *ngFor="let item of stepFourForm.controls; let i=index">
+    <div class="[ col-sm-8 col-xs-12 ]">
 
-  <!-- Cover Image -->
-  <div class="form-row [ row ]">
-    <div class="[ col-sm-6 col-xs-12 ]">
-      <label class="form-label">Cover Image</label>
-      <div class="form-input form-input--has-icon sign-up-field">
-        <div class="form-icon ak-icon-image"></div>
-        <input type="file"
-          accept="image/jpeg, image/png"
-          formControlName="businessCoverImage"
-          id="businessCoverImage"
-          (change)="onChangeCover($event)">
-      </div>
-      <ak-form-messages [control]="stepFourForm.controls.businessCoverImage">
-      </ak-form-messages>
+      <fieldset [formGroupName]="i">
+        <!-- TODO - conditional text -->
+        <legend>Menu Item</legend>
+        <label class="form-label">Title</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-clipboard"></div>
+          <input type="text"
+            placeholder="e.g. Pizza Margherita"
+            formControlName="item_title"
+            class="item_title">
+        </div>
+        <ak-form-messages class="error-message" [control]="stepFourForm.controls[i].controls.item_title">
+        </ak-form-messages>
+
+        <label class="form-label">Description (max 300 characters)</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-pencil"></div>
+          <textarea
+            rows="2"
+            maxlength="300"
+            placeholder="e.g. Fresh Basil, Cubed Italian mozzarella, Grated parmesan"
+            formControlName="item_description"
+            class="item_description"></textarea>
+        </div>
+      </fieldset>
+
     </div>
-    <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
+
+    <!-- Only show this message on first row -->
+    <div *ngIf="i == 0" class="[ col-sm-4 col-xs-12 hidden-xs ]">
       <div class="form-field-description">
         Don't worry if you don't have this information to hand - you can always add it later
       </div>
     </div>
+    <!-- / Only show this message on first row -->
   </div>
-  <!-- / Cover Image -->
+  <!-- / Menu Item -->
 
-  <!-- Additional Images -->
+  <!-- Add Menu Item -->
   <div class="form-row [ row ]">
-    <div class="[ col-sm-6 col-xs-12 ]">
-      <label class="form-label">Additional Images</label>
-      <div class="form-input form-input--has-icon sign-up-field">
-        <div class="form-icon ak-icon-images"></div>
-        <input type="file"
-          accept="image/jpeg, image/png"
-          multiple
-          formControlName="businessAdditionalImages"
-          id="businessAdditionalImages"
-          (change)="onChangeImages($event)">
-      </div>
-      <ak-form-messages [control]="stepFourForm.controls.businessAdditionalImages">
-      </ak-form-messages>
-    </div>
-    <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
-      <div class="form-field-description">
-        Upload up to 12 additional images to showcase your business
-      </div>
-    </div>
-  </div>
-  <!-- / Additional Images -->
+    <div class="[ text-right col-sm-8 col-xs-12 ]">
 
-  <!-- Description -->
-  <div class="form-row [ row ]">
-    <div class="[ col-xs-12 ]">
-      <label class="form-label">Description *</label>
-      <div class="form-input form-input--has-icon sign-up-field">
-        <div class="form-icon ak-icon-pencil"></div>
-        <textarea rows="8"
-          required
-          formControlName="businessDescription"
-          id="businessDescription"></textarea>
-      </div>
-      <ak-form-messages [control]="stepFourForm.controls.businessDescription">
-      </ak-form-messages>
+      <a class="form-btn-add-item" (click)="onClickAddItem()">
+        <span class="ak-icon-plus"></span>
+        Add Menu Item
+      </a>
+
     </div>
   </div>
-  <!-- / Description -->
+  <!-- / Add Menu Item -->
 
   <!-- Mandatory Fields -->
   <div class="form-row [ row ]">
@@ -100,7 +67,7 @@
   <div class="form-row [ row ]">
     <div class="[ col-xs-12 text-right ]">
       <button class="form-btn-cta" (click)="previousStep()">Previous step</button>
-      <button type="submit" class="form-btn-cta">Preview your page</button>
+      <button type="submit" class="form-btn-cta">Next step</button>
     </div>
   </div>
   <!-- / Form Buttons -->

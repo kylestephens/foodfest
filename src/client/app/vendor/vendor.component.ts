@@ -16,6 +16,7 @@ import {
   MapsAPILoader
 }                                 from 'angular2-google-maps/core';
 import { RestService }            from '../services/rest.service';
+import { MessagingService }       from '../services/messaging.service';
 import { SettingsService }        from '../services/settings.service';
 import { AccountService}          from '../services/account.service';
 import { InboxService }           from '../services/inbox.service';
@@ -259,7 +260,8 @@ export class VendorComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private settingsService: SettingsService,
     private inboxService: InboxService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private messagingService: MessagingService
   ) {
     if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_EDIT)) {
       this.isEditing = true;
@@ -286,6 +288,13 @@ export class VendorComponent implements OnInit, OnDestroy {
           this.additionalImages.push(this.serverUrl + imageUrl);
         });
         this.imagesLoaded = true;
+      }, (reason: any) => {
+        this.messagingService.show(
+          'global',
+          CONSTANT.MESSAGING.ERROR,
+          reason.statusText ? reason.statusText : 'An unexpected error has occurred',
+          true
+        );
       });
     }
   }

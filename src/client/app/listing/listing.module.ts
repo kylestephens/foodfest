@@ -7,6 +7,7 @@ import { CreateListingStepOneComponent }   from './steps/one/create-listing-step
 import { CreateListingStepTwoComponent }   from './steps/two/create-listing-step-two.component';
 import { CreateListingStepThreeComponent } from './steps/three/create-listing-step-three.component';
 import { CreateListingStepFourComponent }  from './steps/four/create-listing-step-four.component';
+import { CreateListingStepFiveComponent }  from './steps/five/create-listing-step-five.component';
 import { ListingDetailComponent }          from './detail/listing-detail.component';
 import { ListingPaymentComponent }         from './payment/listing-payment.component';
 import { ListingMasterComponent }          from './listing-master.component';
@@ -31,6 +32,7 @@ import { AgmCoreModule }                   from 'angular2-google-maps/core';
     CreateListingStepTwoComponent,
     CreateListingStepThreeComponent,
     CreateListingStepFourComponent,
+    CreateListingStepFiveComponent,
     ListingDetailComponent,
     ListingPaymentComponent,
     ListingMasterComponent
@@ -41,6 +43,7 @@ import { AgmCoreModule }                   from 'angular2-google-maps/core';
     CreateListingStepTwoComponent,
     CreateListingStepThreeComponent,
     CreateListingStepFourComponent,
+    CreateListingStepFiveComponent,
     ListingDetailComponent,
     ListingPaymentComponent,
     ListingMasterComponent

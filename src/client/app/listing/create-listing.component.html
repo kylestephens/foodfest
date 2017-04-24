@@ -4,7 +4,8 @@
     'progress-bar--step-1': currentStep == 1,
     'progress-bar--step-2': currentStep == 2,
     'progress-bar--step-3': currentStep == 3,
-    'progress-bar--step-4': currentStep == 4
+    'progress-bar--step-4': currentStep == 4,
+    'progress-bar--step-5': currentStep == 5
   }">
   <div class="[ container ]">
     <div class="[ row-xs-12 ]">
@@ -15,7 +16,8 @@
         <span *ngIf="currentStep == 1">The Basics</span>
         <span *ngIf="currentStep == 2">Contact Details</span>
         <span *ngIf="currentStep == 3">Let's Get Social</span>
-        <span *ngIf="currentStep == 4">Setting The Scene</span>
+        <span *ngIf="currentStep == 4">The Menu</span>
+        <span *ngIf="currentStep == 5">Setting The Scene</span>
       </div>
     </div>
   </div>

@@ -39,25 +39,31 @@ $progress-bar-height: 55px;
 
   &--step-1 {
     &:after {
-      width: 20%;
+      width: 16%;
     }
   }
 
   &--step-2 {
     &:after {
-      width: 40%;
+      width: 33%;
     }
   }
 
   &--step-3 {
     &:after {
-      width: 60%;
+      width: 49%;
     }
   }
 
   &--step-4 {
     &:after {
-      width: 80%;
+      width: 65%;
+    }
+  }
+
+  &--step-5 {
+    &:after {
+      width: 82%;
     }
   }
 }
@@ -76,4 +82,29 @@ $progress-bar-height: 55px;
   margin-top: 16px;
   @include button(#fff, $brand-primary-cta);
   font-weight: 400;
+}
+
+.form-btn-add-item {
+  top: $padding-large-vertical;
+  right: $padding-large-horizontal;
+  @include button(#fff, $brand-secondary-cta);
+  padding: 6px 12px;                  // overriding default button padding
+}
+
+fieldset {
+  padding: $padding-large-vertical $padding-large-horizontal;
+  border-color: $brand-secondary;
+  -moz-border-radius: $brand-border-radius;
+  border-radius: $brand-border-radius;
+  -webkit-border-radius: $brand-border-radius;
+  margin-bottom: $padding-large-vertical;
+
+  .form-input {
+    margin-bottom: $padding-large-vertical;
+  }
+
+  .error-message {
+    display: block;
+    margin-bottom: $padding-large-vertical;
+  }
 }
