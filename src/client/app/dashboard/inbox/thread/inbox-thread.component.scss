@@ -45,8 +45,6 @@ $message-padding: 20px;
       position: relative;
       border: 1px solid $gray-lighter;
       border-radius: $brand-border-radius;
-      //display: inline-block;
-      width: calc(100% - 50px - 27px);
       flex-grow: 1;
       background-color: $gray-lightest;
 
@@ -140,10 +138,10 @@ $message-padding: 20px;
         text-align: right;
         background-color: $gray-lightest;
 
-      &__button {
-        @include button($brand-body-bg, $brand-primary-cta);
-        padding: 5px 10px;
-      }
+        &__button {
+          @include button($brand-body-bg, $brand-primary-cta);
+          padding: 5px 10px;
+        }
       }
     }
   }
