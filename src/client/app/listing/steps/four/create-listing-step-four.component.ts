@@ -26,6 +26,12 @@ import { CONSTANT }                        from '../../../core/constant';
 export class CreateListingStepFourComponent {
 
   public stepFourForm: FormArray;
+  public itemType: string = 'Menu';
+  public itemTitleExample: string = 'Pizza Margherita';
+  public itemDescriptionExample: string = 'Fresh Basil, Cubed Italian mozzarella, Grated parmesan';
+
+  // Chiavari Chair
+  // Our Chiavari chairs in lime wash have classic style and are our most popular chair for weddings and formal events.  These chairs are supplied with a seat pad and are stackable.
 
   constructor(
     private fb: FormBuilder,
@@ -46,6 +52,30 @@ export class CreateListingStepFourComponent {
       _formValues = this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR);
       this._restoreFormValues(_formValues);
     }
+    let stepOne = this.localStorageService.retrieve(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_ONE
+    );
+    for(var i = 0; i < stepOne.businessType.length; i++) {
+      if(stepOne.businessType[i].text === 'artisan food') {
+        this.itemType = 'Product';
+        this.itemTitleExample = 'Raspberry Jam';
+        this.itemDescriptionExample = `
+          Our raspberries have the best flavour and colour and are grown
+          to an amazing size allowing their flavours to develop.
+          This jam is fantastic on scones, homemade brown bread and in all
+          desserts.
+        `.replace(/\s+/g, " ");
+      } else if(stepOne.businessType[i].text === 'equipment hire') {
+        this.itemType = 'Item';
+        this.itemTitleExample = 'Chiavari Chair';
+        this.itemDescriptionExample = `
+          Our Chiavari chairs in lime wash have classic style and are
+          our most popular chair for weddings and formal events.
+          These chairs are supplied with a seat pad and are stackable.
+        `.replace(/\s+/g, " ");
+      }
+    }
+
   };
 
   public submitForm(value: any) {

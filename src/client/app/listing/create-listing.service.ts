@@ -111,9 +111,9 @@ export class CreateListingService {
       ).then(function(response: any) {
         let responseBody = response.json();
         resolve(responseBody);
-      }, function(reason: any) {
+      }, (reason: any) => {
         reject(reason);
-        me.messagingService.show(
+        this.messagingService.show(
           'create-listing',
           CONSTANT.MESSAGING.ERROR,
           reason.statusText ? reason.statusText : 'An unexpected error has occurred',
@@ -175,7 +175,7 @@ export class CreateListingService {
       ).then(function(response: any) {
         let responseBody = response.json();
         resolve(responseBody);
-      }, function(reason: any) {
+      }, (reason: any) => {
         reject(reason);
         me.messagingService.show(
           'create-listing',
@@ -207,7 +207,7 @@ export class CreateListingService {
       ).then(function(response: any) {
         let responseBody = response.json();
         resolve(responseBody);
-      }, function(reason: any) {
+      }, (reason: any) => {
         reject(reason);
         me.messagingService.show(
           'create-listing',
