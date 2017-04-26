@@ -343,7 +343,7 @@ export class VendorComponent implements OnInit, OnDestroy {
   sendMessage() {
     let params = {
         sender_id: this.accountService.getUser().id,
-        receiver_id: this.vendor.id,
+        receiver_id: this.vendor.user_id,
         vendor_id: this.vendor.id,
         content: this.messageText
       }

@@ -21,8 +21,9 @@
         (click)="changeConversation($event, conversation)">
      <span class="inbox-overview__icon" [ngClass]="conversation.is_read ? 'ak-icon-msg-read' : 'ak-icon-msg-unread'"></span>
      <div class="inbox-overview__header">
-        <div  class="inbox-overview__header-icon ak-icon-user"> <!-- todo change this to real icons  -->
-        </div>
+        <div *ngIf="!conversation.image_path_to_show" class="inbox-overview__header-icon ak-icon-user"> </div>
+        <img *ngIf="conversation.image_path_to_show" class="inbox-overview__header-icon" [src]="serverUrl + conversation.image_path_to_show">
+
         <div class="inbox-overview__header-title">
           <div class="inbox-overview__header-title__name">{{conversation.name_to_show}}</div>
           <div class="inbox-overview__header-title__date">{{conversation.sent_date}}</div>

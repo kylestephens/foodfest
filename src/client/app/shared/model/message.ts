@@ -13,6 +13,7 @@ export class Message {
   vendor: Vendor;
   is_read: boolean;
   name_to_show: string;
+  image_path_to_show: string;
   last_msg_id: number;
 
   constructor(message: any) {
@@ -25,6 +26,7 @@ export class Message {
     this.vendor = message.vendor ? message.vendor : null;
     this.is_read = message.is_read ? message.is_read : null;
     this.name_to_show = message.name_to_show ? message.name_to_show : null;
+    this.image_path_to_show = message.image_path_to_show ? message.image_path_to_show : null;
     this.last_msg_id = message.last_msg_id ? message.last_msg_id : null;
   }
 

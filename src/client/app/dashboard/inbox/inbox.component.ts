@@ -10,6 +10,7 @@ import { ConfirmDialog }              from '../../shared/model/confirmDialog';
 import { ConfirmDialogService }       from '../../services/confirm-dialog.service';
 import { BrowserService }             from '../../services/browser.service';
 import { InboxService }               from '../../services/inbox.service';
+import { SettingsService }            from '../../services/settings.service';
 import { User }                       from '../../shared/model/user';
 import { Vendor }                     from '../../shared/model/vendor';
 
@@ -33,6 +34,7 @@ export class InboxComponent implements OnInit {
   private subscription: Subscription;
   private browser: any = this.browserService.get();
   private isPhone: boolean = this.browser.deviceType === 'phone';
+  private serverUrl: string = this.settingsService.getServerBaseUrl() + '/';
 
   constructor(
     private inboxService: InboxService,
@@ -42,7 +44,8 @@ export class InboxComponent implements OnInit {
     private browserService: BrowserService,
     private location: Location,
     private route: ActivatedRoute,
-    private platformLocation: PlatformLocation
+    private platformLocation: PlatformLocation,
+    private settingsService: SettingsService
     ) {
       platformLocation.onPopState(() => {
         this.clearInboxParameters();
