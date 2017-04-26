@@ -18,6 +18,8 @@ $header-height: 80px;
 
   &__logo {
     text-align: center;
+    position: relative;
+    left: -30px;           // offset icon in logo to appear properly centered
 
     @media (max-width: $screen-xs-max) {
       position: relative;
@@ -30,6 +32,9 @@ $header-height: 80px;
       max-height: $header-height * 0.9;
       margin-top: 3px;
       max-width: 260px;
+      margin: 0 auto;
+      display: block;
+
       @media (max-width: $screen-xs-max) {
         max-height: $header-height * 0.75;
         margin-top: 12px;
@@ -39,27 +44,21 @@ $header-height: 80px;
     @media (min-width: $screen-sm-min) {
       text-align: left;
     }
-
   }
 
   &__actions-section {
     float: right;
+
+    &--left {
+      float: left;
+      margin-top: 30px;
+    }
   }
 
   &__primary-cta {
     @include button(#fff, $brand-primary-cta);
-
+    padding: 8px;
     margin-top: 18px;
-    padding: 10px 20px;
-    float: left;
-
-    font-size: 18px;
-    font-weight: $font-weight-light;
-
-    @media (max-width: $screen-xs-max) {
-      font-size: 16px;
-      padding: 10px 5px;
-      margin-top: 20px;
-    }
+    font-weight: 400;
   }
 }

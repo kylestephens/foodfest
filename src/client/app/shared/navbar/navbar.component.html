@@ -2,21 +2,36 @@
 <div class="header">
   <div class="[ container ]">
     <div class="[ row ]">
+
       <div class="[ hidden visible-xs col-xs-4 ]">
         <mobile-navmenu>
         </mobile-navmenu>
       </div>
-      <div class="header__logo [ col-xs-4 col-sm-4 ]">
+
+      <div class="[ hidden-xs col-sm-5 ]">
+        <div class="header__actions-section header__actions-section--left">
+          <a class="header__action" [routerLink]="['/commercial']">Markets</a>
+          <a class="header__action" [routerLink]="['/commercial']">Festivals</a>
+          <a class="header__action" [routerLink]="['/commercial']">Catering Jobs</a>
+        </div>
+      </div>
+
+      <div class="header__logo [ col-xs-4 col-sm-2 text-center ]">
         <a class="svg" [routerLink]="['/']">
           <img src="./assets/img/logo.png" />
         </a>
       </div>
-      <div class="[ col-xs-4 col-sm-8 text-right ]">
+
+      <div class="[ col-xs-4 col-sm-5 text-right ]">
         <div class="header__actions-section">
+          <a class="header__action header__action--browse [ hidden-xs ]" [routerLink]="['/search-results']">
+            Browse Vendors
+          </a>
           <account-meta>
           </account-meta>
         </div>
       </div>
+
     </div>
   </div>
 </div>

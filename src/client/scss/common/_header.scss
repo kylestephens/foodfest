@@ -1,0 +1,24 @@
+.header {
+
+  @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+    .container {
+      width: 100%;
+    }
+  }
+
+  &__action {
+    color: #fff;
+    font-size: 16px;
+    margin: 0 $padding-large-horizontal 0 0;
+
+    &--browse {
+      position: relative;
+      top: 30px;  // TODO: don't know why necessary
+    }
+
+    @media (max-width: $screen-sm-max) {
+      margin: 0 $padding-large-horizontal 0 0;
+    }
+  }
+
+}
