@@ -129,10 +129,18 @@ article {
 }
 
 .menu {
+  &__header {
+    border-bottom: 1px solid $brand-border-color;
+    padding-bottom: $padding-base-vertical;
+    margin-bottom: $padding-large-vertical;
+  }
+  &__card {
+    min-height: 160px;
+  }
   &__item-title {
     text-transform: uppercase;
     font-weight: $font-weight-bold;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid $brand-border-color;
     padding-bottom: $padding-small-vertical;
     margin: $padding-base-vertical 0;
   }

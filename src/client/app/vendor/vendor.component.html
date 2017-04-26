@@ -98,9 +98,14 @@
   <!-- MENU / PRODUCTS -->
   <section class="menu [ container ]" *ngIf="vendor.listed_items?.length > 0">
 
+    <h4 class="menu__header">
+      <span *ngIf="itemType === 'Menu'">Menu</span>
+      <span *ngIf="itemType === 'Product'">Products</span>
+      <span *ngIf="itemType === 'Item'">Inventory</span>
+    </h4>
     <div class="[ row ]">
       <div class="[ col-xs-12 col-sm-6 col-md-4 ]" *ngFor="let item of vendor.listed_items">
-        <div class="card">
+        <div class="menu__card card">
           <h5 class="menu__item-title">{{ item.item_title }}</h5>
           <span class="menu__item-description">{{ item.item_description }}</span>
         </div>

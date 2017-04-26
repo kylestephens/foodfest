@@ -2,6 +2,7 @@ import { Component, OnInit }       from '@angular/core';
 import { Router, NavigationEnd }   from '@angular/router';
 import { Config }                  from './shared/config/env.config';
 import { AccountService }          from './services/account.service';
+import { MessagingService }        from './services/messaging.service';
 import { SettingsService }         from './services/settings.service';
 import { CONSTANT }                from './core/constant';
 import {
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private accountService: AccountService,
     private localStorageService: LocalStorageService,
+    private messagingService: MessagingService,
     private settingsService: SettingsService
   ) {
     console.log('Environment config', Config);
@@ -46,6 +48,7 @@ export class AppComponent implements OnInit {
         return;
       }
       window.document.getElementsByClassName('page-body')[0].scrollIntoView();
+      this.messagingService.hideAll();  // clear any messages that were left behind from previous page
     });
 
     // Check for site settings

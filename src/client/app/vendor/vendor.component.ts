@@ -47,6 +47,9 @@ export class VendorComponent implements OnInit, OnDestroy {
   public serverUrl: string;
   public additionalImagesLoaded: boolean = false;
   public vendorLoaded: boolean = false;
+  public imagesLoaded: boolean = false;
+  public itemType: string = 'Menu';
+
   public mapStyles: MapTypeStyle[] = [
     {
       "elementType": "geometry",
@@ -290,6 +293,12 @@ export class VendorComponent implements OnInit, OnDestroy {
           this.additionalImages.push(this.serverUrl + imageUrl);
         });
         this.additionalImagesLoaded = true;
+        this.imagesLoaded = true;
+        if(this.vendor.business_type === 'artisan food') {
+          this.itemType = 'Product';
+        } else if(this.vendor.business_type === 'equipment hire') {
+          this.itemType = 'Item';
+        }
       }, (reason: any) => {
         this.messagingService.show(
           'global',

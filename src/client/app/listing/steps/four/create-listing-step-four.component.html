@@ -6,12 +6,15 @@
 
       <fieldset [formGroupName]="i">
         <!-- TODO - conditional text -->
-        <legend>Menu Item</legend>
+        <legend *ngIf="itemType == 'Menu'">Menu Item</legend>
+        <legend *ngIf="itemType == 'Product'">Product</legend>
+        <legend *ngIf="itemType == 'Item'">Item</legend>
         <label class="form-label">Title</label>
         <div class="form-input form-input--has-icon sign-up-field">
           <div class="form-icon ak-icon-clipboard"></div>
           <input type="text"
-            placeholder="e.g. Pizza Margherita"
+            maxlength="100"
+            placeholder="e.g. {{ itemTitleExample }}"
             formControlName="item_title"
             class="item_title">
         </div>
@@ -23,8 +26,8 @@
           <div class="form-icon ak-icon-pencil"></div>
           <textarea
             rows="2"
-            maxlength="300"
-            placeholder="e.g. Fresh Basil, Cubed Italian mozzarella, Grated parmesan"
+            maxlength="200"
+            placeholder="e.g.  {{ itemDescriptionExample }}"
             formControlName="item_description"
             class="item_description"></textarea>
         </div>
