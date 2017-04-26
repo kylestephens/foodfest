@@ -1,12 +1,4 @@
 <ak-search-results-filter-component
-  [text] = "'styles'"
-  [title] = "'Cooking style'"
-  [records] = "styles"
-  [icon] = "'ak-icon-style'"
-  (notify)="onNotify($event)">
-</ak-search-results-filter-component>
-
-<ak-search-results-filter-component
   [text] = "'bustype'"
   [title] = "'Event types'"
   [records] = "businessTypes"
@@ -27,6 +19,14 @@
   [title] = "'Dietary requirements'"
   [records] = "dietRequirements"
   [icon] = "'ak-icon-diet-requirements'"
+  (notify)="onNotify($event)">
+</ak-search-results-filter-component>
+
+<ak-search-results-filter-component
+  [text] = "'styles'"
+  [title] = "'Cooking style'"
+  [records] = "styles"
+  [icon] = "'ak-icon-style'"
   (notify)="onNotify($event)">
 </ak-search-results-filter-component>
 
