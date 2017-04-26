@@ -48,7 +48,7 @@ export class CreateListingStepOneComponent implements OnInit {
           ValidationService.textInputValidator
         ]),
       'businessType': [null, Validators.required],
-      'businessSetup': [null, Validators.required],
+      'businessSetup': [null],
       'eventType': [null, Validators.required],
       'styles': [null],
       'dietRequirements': [null]
