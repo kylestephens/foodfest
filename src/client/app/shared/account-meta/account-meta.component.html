@@ -1,23 +1,16 @@
 <div class="account-meta"
   [ngClass]="{'account-meta--logged-in': loggedIn}">
 
-  <a class="account-meta__action [ hidden-xs ]" [routerLink]="['/commercial']">
-    Commercial events
-  </a>
-  <a class="account-meta__action [ hidden-xs ]" [routerLink]="['/list-with-us']">
-    List with us
-  </a>
-
   <!-- TODO : Develop Logged IN handler to show/hide links based on login status -->
   <!-- /TODO -->
 
   <!-- Logged OUT -->
-  <a class="account-meta__action [ hidden-xs ]"
+  <a class="header__action [ hidden-xs ]"
     (click)="showSignUp()"
     *ngIf="!loggedIn">
     Sign up
   </a>
-  <a class="account-meta__action [ hidden-xs ]"
+  <a class="header__action [ hidden-xs ]"
     (click)="showSignIn()"
     *ngIf="!loggedIn">
     Login
@@ -25,7 +18,7 @@
   <!-- / Logged OUT -->
 
   <!-- Logged IN -->
-  <span class="account-meta__action [ hidden-xs ]"
+  <span class="header__action [ hidden-xs ]"
     *ngIf="loggedIn">
     <span class="account-meta__icon ak-icon-user-circle"></span>
     <a (click)="toggleDropdown()" class="account-meta__dropdown-link js-admin-link">

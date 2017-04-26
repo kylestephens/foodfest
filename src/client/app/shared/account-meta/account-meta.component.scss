@@ -48,19 +48,19 @@
   }
 
   &__dropdown-link {
-    color: #ccc;
+    color: #fff;
     &:focus, &:hover, &:active {
       text-decoration: none;
-      color: #ccc;
+      color: #fff;
     }
   }
 }
 
 .admin-dropdown {
-  color: #333;
+  color: #fff;
   position: absolute;
   top: 80px;
-  right: 14px;
+  right: 155px;
   z-index: 999;
   visibility: hidden;
   opacity: 0;
