@@ -2,6 +2,7 @@ import { Component, Input, SimpleChanges }   from '@angular/core';
 import { AccountService}                     from '../../../services/account.service';
 import { BrowserService }                    from '../../../services/browser.service';
 import { InboxService }                      from '../../../services/inbox.service';
+import { SettingsService }                   from '../../../services/settings.service';
 import { Message }                           from '../../../shared/model/message';
 
 /**
@@ -21,6 +22,7 @@ export class InboxThreadComponent {
   messages: Message[];
   userId: number = this.accountService.getUser().id;
   messageText: string;
+  serverUrl: string = this.settingsService.getServerBaseUrl() + '/';
   private inboxThread: HTMLElement;
   private inboxOverview: HTMLElement;
   private sideMenu: HTMLElement = <HTMLElement> document.getElementsByClassName('side-menu')[0];
@@ -30,7 +32,8 @@ export class InboxThreadComponent {
   constructor(
     private inboxService: InboxService,
     private accountService: AccountService,
-    private browserService: BrowserService) {
+    private browserService: BrowserService,
+    private settingsService: SettingsService) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -72,11 +75,16 @@ export class InboxThreadComponent {
 
     this.inboxService.createMessage(params).then( message => {
       this.messageText = null;
+      message.image_path_to_show = this.isUserVendorInConversation() ? this.conversation.vendor.logo_path : null;
       this.messages.unshift(message);
       this.conversation.content = message.content;
       this.conversation.sent_date = message.sent_date;
       this.conversation.last_msg_id = message.id;
     });
+  }
+
+  isUserVendorInConversation() {
+    return this.conversation.vendor.user_id === this.userId;
   }
 
 }
