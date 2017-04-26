@@ -34,7 +34,7 @@ export class Message {
     let jsDateTime = new Date(sqlTimestamp),
         jsTime = jsDateTime.toLocaleTimeString();
 
-    return jsDateTime.getDate() + '/' + (+jsDateTime.getMonth() + 1) + '/' + jsDateTime.getFullYear() + ', ' + jsTime.slice(0,5) + jsTime.slice(8);
+    return jsDateTime.getDate() + '/' + (+jsDateTime.getMonth() + 1) + '/' + jsDateTime.getFullYear() + ', ' + jsTime.slice(0,4) + jsTime.slice(8);
   }
 
 }
