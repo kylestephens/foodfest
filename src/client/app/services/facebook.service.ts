@@ -51,7 +51,7 @@ export class FacebookService {
   };
 
   private loadSdkAsync(callback: () => void) {
-    window.fbAsyncInit = () => this.zone.run(callback);
+    (<any>window).fbAsyncInit = () => this.zone.run(callback);
     // Load the Facebook SDK asynchronously
     const s = "script";
     const id = "facebook-jssdk";

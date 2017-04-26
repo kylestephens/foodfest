@@ -80,9 +80,9 @@ export class CreateListingStepFourComponent {
 
   public submitForm(value: any) {
     let count = this.stepFourForm.controls.length;
-    if(this.stepFourForm.controls[count - 1].controls.item_description.value != '' &&
-      this.stepFourForm.controls[count - 1].controls.item_title.value == '') {
-      this.stepFourForm.controls[count - 1].controls.item_title.markAsTouched();
+    if(this.stepFourForm.controls[count - 1].get('item_description').value != '' &&
+      this.stepFourForm.controls[count - 1].get('item_title').value == '') {
+      this.stepFourForm.controls[count - 1].get('item_title').markAsTouched();
     } else {
       this.localStorageService.store(
         CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR,
@@ -94,8 +94,8 @@ export class CreateListingStepFourComponent {
 
   public onClickAddItem() {
     let count = this.stepFourForm.controls.length;
-    if(this.stepFourForm.controls[count - 1].controls.item_title.value == '') {
-      this.stepFourForm.controls[count - 1].controls.item_title.markAsTouched();
+    if(this.stepFourForm.controls[count - 1].get('item_title').value == '') {
+      this.stepFourForm.controls[count - 1].get('item_title').markAsTouched();
     } else {
       this.stepFourForm.push(
         this._initItem()
