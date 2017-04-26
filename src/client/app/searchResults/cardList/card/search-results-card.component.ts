@@ -29,6 +29,7 @@ export class SearchResultsCardComponent {
   }
 
   heartClicked(event: any) {
+    event.stopPropagation();
     event.preventDefault();
   }
 }
