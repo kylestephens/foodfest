@@ -8,6 +8,9 @@
       <li [routerLink]="['/']" (click)="toggleMenu()">
         Home
       </li>
+      <li [routerLink]="['/']" (click)="toggleMenu()">
+        Browse Vendors
+      </li>
       <li [routerLink]="['/signup']" (click)="toggleMenu()"
         *ngIf="!loggedIn">
         Sign up
@@ -20,13 +23,15 @@
         List with us
       </li>
       <li [routerLink]="['/commercial']" (click)="toggleMenu()">
-        Commercial events
+        Markets
       </li>
-      <!-- TODO: not in phase 1
-      <li [routerLink]="['/']"
-        *ngIf="loggedIn">
-        Dashboard
-      </li> -->
+      <li [routerLink]="['/commercial']" (click)="toggleMenu()">
+        Festivals
+      </li>
+      <li [routerLink]="['/commercial']" (click)="toggleMenu()">
+        Catering jobs
+      </li>
+      <hr />
       <li [routerLink]="['/dashboard/profile']" (click)="toggleMenu()"
         *ngIf="loggedIn">
         My Profile

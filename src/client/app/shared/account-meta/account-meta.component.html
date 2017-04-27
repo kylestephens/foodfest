@@ -18,7 +18,7 @@
   <!-- / Logged OUT -->
 
   <!-- Logged IN -->
-  <span class="header__action [ hidden-xs ]"
+  <div class="header__action [ hidden-xs ]"
     *ngIf="loggedIn">
     <span class="account-meta__icon ak-icon-user-circle"></span>
     <a (click)="toggleDropdown()" class="account-meta__dropdown-link js-admin-link">
@@ -27,7 +27,7 @@
       </span>
       <span class="account-meta__dropdown-icon ak-icon-chevron-thin-down js-admin-link"></span>
     </a>
-  </span>
+  </div>
   <!-- Logged IN -->
 
   <div class="admin-dropdown dropdown-menu">
