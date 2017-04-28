@@ -1,4 +1,4 @@
-import {ReflectiveInjector} from '@angular/core';
+import { ReflectiveInjector } from '@angular/core';
 import { User }   from './user';
 import { Vendor } from './vendor';
 
