@@ -13,7 +13,8 @@ export const routes: Routes = [
   { path: 'list-with-us', loadChildren: 'app/listing/listing.module#ListingModule' },
   { path: 'privacy', loadChildren: 'app/privacy/privacy.module#PrivacyModule' },
   { path: 'vendor', loadChildren: 'app/vendor/vendor.module#VendorModule' },
-  { path: 'vendor/:id', loadChildren: 'app/vendor/vendor.module#VendorModule' }
+  { path: 'vendor/:id', loadChildren: 'app/vendor/vendor.module#VendorModule' },
+  { path: 'markets', loadChildren: 'app/markets/markets.module#MarketsModule' }
 ];
 
 @NgModule({
