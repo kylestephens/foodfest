@@ -18,16 +18,16 @@
   <!-- / Logged OUT -->
 
   <!-- Logged IN -->
-  <span class="header__action [ hidden-xs ]"
+  <a (click)="toggleDropdown()" class="header__action js-admin-link [ hidden-xs ]"
     *ngIf="loggedIn">
     <span class="account-meta__icon ak-icon-user-circle"></span>
-    <a (click)="toggleDropdown()" class="account-meta__dropdown-link js-admin-link">
+    <span class="account-meta__dropdown-link">
       <span class="account-meta__name js-admin-link">
         {{firstname}}
       </span>
       <span class="account-meta__dropdown-icon ak-icon-chevron-thin-down js-admin-link"></span>
-    </a>
-  </span>
+    </span>
+  </a>
   <!-- Logged IN -->
 
   <div class="admin-dropdown dropdown-menu">

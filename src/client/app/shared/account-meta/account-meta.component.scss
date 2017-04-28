@@ -2,23 +2,17 @@
 
 //
 // Account meta section - contained in header
+// General header styling is in common/header.scss
 // --------------------------------------------------
 
 .account-meta {
-  float: left;
-  margin-top: 30px;
+  float: right;
+  display: block;
+  height: 100%;
 
   &--logged-in {
-    margin-top: 19px;
-  }
-
-  &__action {
-    color: #fff;
-    font-size: 16px;
-    margin: 0 $padding-xlarge-horizontal 0 0;
-
-    @media (max-width: $screen-sm-max) {
-      margin: 0 $padding-large-horizontal 0 0;
+    .header__action {
+      padding-top: 20px;
     }
   }
 
@@ -60,7 +54,7 @@
   color: #fff;
   position: absolute;
   top: 80px;
-  right: 155px;
+  right: 167px;
   z-index: 999;
   visibility: hidden;
   opacity: 0;
