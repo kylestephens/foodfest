@@ -1,4 +1,3 @@
-@import '../../../../scss/mixins/buttons';
 @import '../../../../scss/core/variables';
 @import '../../../../scss/core/settings';
 
@@ -137,11 +136,6 @@ $message-padding: 20px;
         padding: $message-padding;
         text-align: right;
         background-color: $gray-lightest;
-
-        &__button {
-          @include button($brand-body-bg, $brand-primary-cta);
-          padding: 5px 10px;
-        }
       }
     }
   }

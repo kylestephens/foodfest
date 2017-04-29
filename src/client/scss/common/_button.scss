@@ -24,6 +24,11 @@
   margin-top: 16px;
   @include button($brand-body-bg, $brand-primary-cta);
   font-weight: 400;
+
+  &.slim {
+    margin-top: 0;
+    padding: 5px 10px;
+  }
 }
 
 /*

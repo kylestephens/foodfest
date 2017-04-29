@@ -35,6 +35,7 @@ export class InboxComponent implements OnInit {
   private browser: any = this.browserService.get();
   private isPhone: boolean = this.browser.deviceType === 'phone';
   private serverUrl: string = this.settingsService.getServerBaseUrl() + '/';
+  private DELETE_CONVERSATION_ACTION = 'deleteConversation';
 
   constructor(
     private inboxService: InboxService,
@@ -61,7 +62,7 @@ export class InboxComponent implements OnInit {
 
     this.subscription = this.confirmDialogService.dialogConfirmed.subscribe(
     confirmDialog => {
-      if(confirmDialog.action && confirmDialog.action === 'deleteConversation') {
+      if(confirmDialog.action && confirmDialog.action === this.DELETE_CONVERSATION_ACTION) {
         this.inboxService.deleteConversation(confirmDialog.record.last_msg_id).then(() => {
           this.modalService.hide();
           //instead of getConversations request just remove the conversation
@@ -142,7 +143,7 @@ export class InboxComponent implements OnInit {
 
   confirmDelete(event: any, conversation: Message) {
     event.stopPropagation();
-    let confirmDialog = new ConfirmDialog('Are you sure you want to delete the conversation with ' + conversation.name_to_show +'?', 'deleteConversation', conversation);
+    let confirmDialog = new ConfirmDialog('Are you sure you want to delete the conversation with ' + conversation.name_to_show +'?', this.DELETE_CONVERSATION_ACTION, conversation);
     this.modalService.show(CONSTANT.MODAL.CONFIRM, confirmDialog);
   }
 
