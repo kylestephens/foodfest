@@ -17,6 +17,9 @@ export class SearchResultsCardComponent {
 	@Input()
 	vendor: Vendor;
 
+  @Input()
+  favourite: boolean;
+
   private serverUrl: string = this.settingsService.getServerBaseUrl() + '/';
 
   constructor(
@@ -32,8 +35,7 @@ export class SearchResultsCardComponent {
   //     'url(' + this.vendor.cover_photo_path + ')') : this.vendor.cover_photo_path;
   // }
 
-  //TODO: a placeholder for handling reacion on liked/unliked event:<EmitEvent>
-  updateFavourites(event: any) {
+  onUpdateFavourite(event: any) {
     let params = {
       user_id: this.accountService.getUser().id,
       vendor_id: event.elementId,
@@ -43,10 +45,14 @@ export class SearchResultsCardComponent {
       this.settingsService.getServerBaseUrl() + '/users/favourite',
       params,
       this.accountService.getUser().akAccessToken
-    ).then(function(response: any) {
-      // do nothing
-      // be happy :)
-    }, (reason: any) => {
+    ).then((response: any) => {
+      debugger;
+      if(event.isLiked) {
+        this.accountService.addFavourite(event.elementId);
+      } else {
+        this.accountService.removeFavourite(event.elementId);
+      }
+    }).catch((reason: any) => {
       this.messagingService.show(
         'global',
         CONSTANT.MESSAGING.ERROR,
@@ -54,10 +60,10 @@ export class SearchResultsCardComponent {
         true
       );
     });
-  }
+  };
 
-  heartClicked(event: any) {
+  onHeartClicked(event: any) {
     event.stopPropagation();
     event.preventDefault();
-  }
+  };
 }

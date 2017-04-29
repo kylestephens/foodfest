@@ -15,10 +15,12 @@ import {
 
 @Injectable()
 export class SettingsService {
+
   /**
   * Event emitted when settings are retrived. Needed in case we access settings before the call is finished.
   */
   public settingsRetrived: EventEmitter<any> = new EventEmitter();
+
   /**
    * Site configured parameters
    * These are constants, contained in index.html

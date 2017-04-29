@@ -3,7 +3,12 @@
 
     <div class="search-card__image"
       [ngStyle]="{'background-image': 'url(' + serverUrl + vendor.cover_photo_path + ')'}" [ngClass]="{'search-card__image--unavailable ak-icon-image': !vendor.cover_photo_path}">
-      <ak-heart [elementId]="vendor.id" (change)="updateFavourites($event)" (click)="heartClicked($event)"></ak-heart>
+      <ak-heart
+        [elementId]="vendor.id"
+        [favourite]="favourite"
+        (change)="onUpdateFavourite($event)"
+        (click)="onHeartClicked($event)">
+      </ak-heart>
     </div>
 
     <div class="search-card__content">

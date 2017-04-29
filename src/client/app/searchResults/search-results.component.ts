@@ -19,7 +19,10 @@ export class SearchResultsComponent {
   activeSort: string;
   paddingBottom: number = 0;
 
-  constructor(private route: ActivatedRoute, private filterService: FilterService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private filterService: FilterService
+  ) {}
 
   ngOnInit(): void {
     this.deepLinked();
@@ -33,7 +36,7 @@ export class SearchResultsComponent {
     }
   }
 
-   private deepLinked() {
+  private deepLinked() {
     let params: any = this.route.snapshot.params;
     this.activeSort = params.sort ? params.sort : CONSTANT.vendor.DEFAULT_SORT;
   }
