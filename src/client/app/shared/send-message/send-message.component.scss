@@ -1,0 +1,32 @@
+@import '../../../scss/core/variables';
+@import '../../../scss/core/settings';
+
+.send-message {
+  min-height: 80px;
+  padding-bottom: 15px;
+
+  &__text {
+    width: 100%;
+    border: 1px solid $gray-lightest;
+    border-radius: $brand-border-radius;
+  }
+
+  &__buttons {
+    position: absolute;
+    right: 0;
+    bottom: -30px;
+
+     @media (min-width: $screen-sm-min) {
+        right: -35px;
+      }
+  }
+
+  .btn-negative.smaller, .btn-primary-cta.smaller {
+    padding: 4px 14px;
+  }
+
+  .btn-primary-cta.smaller {
+    margin-left: 10px;
+  }
+}
+

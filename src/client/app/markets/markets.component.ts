@@ -1,4 +1,5 @@
 import { Component, OnInit }   from '@angular/core';
+import { Subscription }        from 'rxjs/Subscription';
 import { MarketService }       from './market.service';
 import { Market }              from '../shared/model/market';
 
@@ -14,11 +15,11 @@ import { Market }              from '../shared/model/market';
 export class MarketsComponent implements OnInit {
   markets: Market[];
   loaded: boolean = false;
+  isVendor: boolean;
 
   constructor(
     private marketService: MarketService
-  )
-  {}
+  ) {}
 
   ngOnInit(): void {
     this.getMarkets();

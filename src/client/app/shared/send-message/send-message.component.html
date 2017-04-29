@@ -1,0 +1,11 @@
+<div class="send-message">
+  <div>
+    <textarea class="send-message__text" rows="5" [(ngModel)] ="message" placeholder="Write your message here..."></textarea>
+  </div>
+
+  <div class="send-message__buttons">
+    <button class="btn-negative smaller" (click)="cancel()">Cancel</button>
+    <button class="btn-primary-cta smaller" (click)="sendMessage()">Send</button>
+  </div>
+
+</div>

@@ -1,0 +1,54 @@
+@import '../../../scss/core/variables';
+@import '../../../scss/core/settings';
+
+.market-card {
+
+  &__title {
+    padding-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+    overflow: auto;
+
+    .title-item {
+      padding-left: 0;
+      padding-right: 0;
+
+      // &__contact {
+      //   margin-top: 0;
+      //   padding: 5px 10px;
+      //   float: right;
+      // }
+    }
+  }
+
+  &__location {
+    color: $gray-light;
+    font-size: $font-size-small;
+    padding-bottom: 10px;
+  }
+
+  &__opening {
+    color: $gray-light;
+    padding-bottom: 10px;
+    font-size: $font-size-medium;
+
+    &.day {
+      padding: 2px 7px;
+      border-radius: $brand-border-radius;
+      margin-right: 5px;
+      text-align: center;
+      background-color: $brand-secondary;
+      color: $brand-body-bg;
+    }
+  }
+
+  &__desc {
+    color: $gray-light;
+    font-size: $font-size-medium;
+  }
+
+}
+
+.hero__browse-button.slim {
+  float: right;
+}

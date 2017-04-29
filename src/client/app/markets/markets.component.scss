@@ -1,0 +1,17 @@
+@import '../../scss/core/variables';
+
+.markets {
+   padding-top: 20px;
+   padding-bottom: 20px;
+
+  @media (min-width: $screen-sm-min) {
+    padding-top: $brand-header-padding;
+    padding-bottom: $brand-header-padding;
+  }
+}
+
+.market-card {
+  margin-bottom: 30px;
+  overflow: hidden;
+  padding: 20px;
+}

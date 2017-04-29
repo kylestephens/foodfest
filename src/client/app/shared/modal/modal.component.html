@@ -32,6 +32,12 @@
           [ngClass]="{'hidden': selectedModal !== modalTypes.CONFIRM}">
         </confirm-dialog>
 
+        <send-message class="modal-content" [action]="data.action"
+          [record]="data.record"
+          *ngIf="selectedModal === modalTypes.SEND_MSG"
+          [ngClass]="{'hidden': selectedModal !== modalTypes.SEND_MSG}">
+        </send-message>
+
       </div>
 
       <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg"
