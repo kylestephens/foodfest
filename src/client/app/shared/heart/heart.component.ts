@@ -12,6 +12,9 @@ export class HeartComponent implements OnInit {
   @Input()
   elementId: number;
 
+  @Input()
+  favourite: boolean;
+
   isAnimating: boolean = false;
   emitEvent: EmitEvent;
 
@@ -20,10 +23,12 @@ export class HeartComponent implements OnInit {
 
   ngOnInit(): void {
     this.emitEvent = new EmitEvent(this.elementId);
+    this.isAnimating = this.favourite;
   }
 
   updateHeart() {
     this.isAnimating = !this.isAnimating;
+    this.favourite = this.isAnimating;
     this.emitEvent.isLiked = this.isAnimating;
     this.change.emit(this.emitEvent);
   }

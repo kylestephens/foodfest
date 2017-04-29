@@ -8,6 +8,7 @@ import { Subscription }            from 'rxjs/Subscription';
 import { Vendor }                  from '../../shared/model/vendor';
 import { SearchResultsService }    from '../search-results.service';
 import { CONSTANT }                from '../../core/constant';
+import { AccountService }          from '../../services/account.service';
 
 /**
  * This class represents list of cards on search results page.
@@ -20,21 +21,25 @@ import { CONSTANT }                from '../../core/constant';
 })
 
 export class SearchResultsCardListComponent implements OnInit, OnDestroy {
-	private vendors: Vendor[];
+
+  public favourites: Array<any> = [];
+
+  private vendors: Vendor[];
   private subscription: Subscription;
   private loaded: boolean = false;
 
   constructor(
+    private accountService: AccountService,
     private route: ActivatedRoute,
     private router: Router,
     private searchResultsService: SearchResultsService
   )
   {}
 
-  /*
-  * Subscribe on route change params - when search params are added/removed, refresh the list of vendors.
-  * Param keys are: styles, dietreq, bustype,busset,rating
-  */
+  /**
+   * Subscribe on route change params - when search params are added/removed, refresh the list of vendors.
+   * Param keys are: styles, dietreq, bustype, busset, rating
+   */
   ngOnInit(): void {
     this.subscription = this.route.params
       .subscribe(params => {
@@ -42,6 +47,11 @@ export class SearchResultsCardListComponent implements OnInit, OnDestroy {
         if(Object.keys(params).length === 0) this.getVendors();
         else this.searchVendors(params);
       });
+    if(this.accountService.isLoggedIn()) {
+      this.accountService.getFavourites().then((favourites: Array<number>) => {
+        this.favourites = favourites;
+      });
+    }
   }
 
   ngOnDestroy(): void {
@@ -60,5 +70,10 @@ export class SearchResultsCardListComponent implements OnInit, OnDestroy {
       this.loaded = true;
       this.vendors = vendors;
     });
+  }
+
+  isFavourite(vendor: any): boolean {
+    if(this.favourites && this.favourites.indexOf(vendor.id) > -1) return true;
+    return false;
   }
 }
