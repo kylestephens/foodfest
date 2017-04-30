@@ -31,7 +31,6 @@ $message-padding: 20px;
     padding: $brand-header-padding;
   }
 
-
   &__message {
     padding-bottom: 50px;
     display: flex;
@@ -115,7 +114,6 @@ $message-padding: 20px;
     }
   }
 
-
   .send-msg {
     .inbox-thread__message-content {
       background-color: $brand-body-bg;
@@ -139,8 +137,14 @@ $message-padding: 20px;
       }
     }
   }
-}
 
+  .ak-msg {
+    width: 100%;
+  }
+  .ak-msg--temporary {
+    margin-left: 0;
+  }
+}
 
 @media (max-width: $screen-xs-max) {
 

@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges }   from '@angular/core';
+import { Component, Input, SimpleChanges, ViewEncapsulation }   from '@angular/core';
 import { AccountService}                     from '../../../services/account.service';
 import { BrowserService }                    from '../../../services/browser.service';
 import { InboxService }                      from '../../../services/inbox.service';
@@ -12,7 +12,8 @@ import { Message }                           from '../../../shared/model/message
   moduleId: module.id,
   selector: 'ak-inbox-thread',
   templateUrl: 'inbox-thread.component.html',
-  styleUrls: ['inbox-thread.component.css']
+  styleUrls: ['inbox-thread.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class InboxThreadComponent {
@@ -73,13 +74,15 @@ export class InboxThreadComponent {
         parent_message_id: this.conversation.last_msg_id
       }
 
-    this.inboxService.createMessage(params).then( message => {
-      this.messageText = null;
-      message.image_path_to_show = this.isUserVendorInConversation() ? this.conversation.vendor.logo_path : null;
-      this.messages.unshift(message);
-      this.conversation.content = message.content;
-      this.conversation.sent_date = message.sent_date;
-      this.conversation.last_msg_id = message.id;
+    this.inboxService.createMessage(params, 'inbox-thread').then( message => {
+      if(message) {
+        this.messageText = null;
+        message.image_path_to_show = this.isUserVendorInConversation() ? this.conversation.vendor.logo_path : null;
+        this.messages.unshift(message);
+        this.conversation.content = message.content;
+        this.conversation.sent_date = message.sent_date;
+        this.conversation.last_msg_id = message.id;
+      }
     });
   }
 

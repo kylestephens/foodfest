@@ -52,25 +52,25 @@ export class InboxService {
 
   }
 
-  createMessage(params: any): Promise<Message> {
+  createMessage(params: any, calledFrom: string): Promise<Message> {
     return this.restService.post(
       this.settingsService.getServerBaseUrl() + '/messages/create', params, this.accountService.getUser().akAccessToken,
     ).then(
     (response: Response) => {
       let message = new Message(response.json());
        this.messagingService.show(
-        'vendor-messaging',
+        calledFrom,
         CONSTANT.MESSAGING.SUCCESS,
-        'Your message has been successfully sent',
+        'Message sent successfully',
         true
       );
       return message;
     }).catch(
     (reason: any) => {
       this.messagingService.show(
-        'vendor-messaging',
+        calledFrom,
         CONSTANT.MESSAGING.ERROR,
-        reason.statusText ? reason.statusText : 'An unexpected error has occurred',
+        reason.statusText ? reason.statusText : 'An unexpected error has occurred, try again later',
         true
       );
     });

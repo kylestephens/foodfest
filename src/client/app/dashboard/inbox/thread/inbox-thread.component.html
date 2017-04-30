@@ -1,4 +1,8 @@
 <div class="[ col-xs-12 col-sm-8 col-md-9 ] inbox-thread">
+
+  <ak-messaging ref="inbox-thread">
+  </ak-messaging>
+
   <div class="inbox-thread__message left send-msg">
     <div *ngIf="!isUserVendorInConversation()" class="inbox-thread__message-icon ak-icon-user"></div>
     <img *ngIf="isUserVendorInConversation()" class="inbox-thread__message-icon" [src]="serverUrl + conversation.vendor.logo_path">

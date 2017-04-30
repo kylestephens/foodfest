@@ -66,7 +66,7 @@ export class MarketCardComponent implements OnInit {
         content: message
       }
 
-    this.inboxService.createMessage(params).then( message => {
+    this.inboxService.createMessage(params, 'market-card').then( message => {
       debugger
     });//TODO: handle error and success
   }

@@ -379,7 +379,7 @@ export class VendorComponent implements OnInit, OnDestroy {
         content: this.messageText
       }
 
-    this.inboxService.createMessage(params).then( message => {
+    this.inboxService.createMessage(params, 'vendor-messaging').then( message => {
       if(message) {
         this.messageText = null;
       }
