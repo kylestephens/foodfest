@@ -29,6 +29,14 @@
     margin-top: 0;
     padding: 5px 10px;
   }
+
+  &:disabled {
+    background-color: lighten($brand-primary-cta, 10%);
+    &:hover {
+      cursor: default;
+      background-color: lighten($brand-primary-cta, 10%);
+    }
+  }
 }
 
 /*
