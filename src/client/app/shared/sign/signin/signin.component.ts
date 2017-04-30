@@ -119,6 +119,15 @@ export class SigninComponent {
     }
   };
 
+  signUp() {
+    if(this.location === 'page'){
+      this.router.navigate(['/signup']);
+    }
+    else if(this.location === 'modal') {
+      this.modalService.show(CONSTANT.MODAL.SIGN_UP);
+    }
+  }
+
   private _setupSession = function() {
     this.accountService.login().then(
       (response: any) => {},

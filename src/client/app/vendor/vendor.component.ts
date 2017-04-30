@@ -383,7 +383,7 @@ export class VendorComponent implements OnInit, OnDestroy {
       if(message) {
         this.messageText = null;
       }
-    }
+    });
   }
 
   /**

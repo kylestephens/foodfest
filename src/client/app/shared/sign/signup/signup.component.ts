@@ -118,6 +118,15 @@ export class SignupComponent {
     }
   }
 
+  signIn() {
+    if(this.location === 'page'){
+      this.router.navigate(['/signin']);
+    }
+    else if(this.location === 'modal') {
+      this.modalService.show(CONSTANT.MODAL.SIGN_IN);
+    }
+  }
+
   private _createAccount() {
     console.debug('SignupComponent::_createAccount');
     this.accountService.createAccount().then(
