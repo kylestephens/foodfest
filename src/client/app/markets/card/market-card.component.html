@@ -1,8 +1,8 @@
- <div class="market-card__title">
-  <div class="title-item" [ngClass]="isVendor && market.allow_contact ? '[ col-xs-8 col-sm-10 ]': '[ col-xs-12 ]'">
+<div class="market-card__title">
+  <div class="title-item" [ngClass]="market.allow_contact ? '[ col-xs-8 col-sm-10 ]': '[ col-xs-12 ]'">
     <h4>{{market.name}}</h4>
   </div>
-  <div *ngIf="isVendor && market.allow_contact" class="title-item [ col-xs-4 col-sm-2 ]">
+  <div *ngIf="market.allow_contact" class="title-item [ col-xs-4 col-sm-2 ]">
     <button class="hero__browse-button slim" (click)="sendMessage(market)">Contact organizer</button>
   </div>
 </div>

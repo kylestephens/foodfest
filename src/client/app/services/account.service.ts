@@ -82,6 +82,14 @@ export class AccountService {
     );
   };
 
+  userIsActiveVendor(): Promise<boolean> {
+    return this.restService.get(
+      this.settingsService.getServerBaseUrl() + '/users/active', null, this.getUser().akAccessToken,
+    ).then((response: Response) => {
+      return response.json();
+    });
+  }
+
   isLoggedIn = function () {
     return this.loggedIn;
   };

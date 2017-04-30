@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input }         from '@angular/core';
 import { Subscription }             from 'rxjs/Subscription';
 import { Market } 			            from '../../shared/model/market';
 import { AccountService }           from '../../services/account.service';
 import { InboxService }             from '../../services/inbox.service';
 import { ModalService }             from '../../services/modal.service';
 import { ConfirmDialogService }     from '../../services/confirm-dialog.service';
+import { MessagingService }         from '../../services/messaging.service';
 
 import { ConfirmDialog }            from '../../shared/model/confirmDialog';
 import { CONSTANT }                 from '../../core/constant';
@@ -16,11 +17,10 @@ import { CONSTANT }                 from '../../core/constant';
   styleUrls: ['market-card.component.css'],
 })
 
-export class MarketCardComponent implements OnInit {
+export class MarketCardComponent {
 	@Input()
 	market: Market;
 
-  isVendor: boolean;
   private subscription: Subscription;
   private SEND_MSG_ACTION = 'sendMessage';
 
@@ -28,7 +28,8 @@ export class MarketCardComponent implements OnInit {
     private accountService: AccountService,
     private modalService: ModalService,
     private confirmDialogService: ConfirmDialogService,
-    private inboxService: InboxService
+    private inboxService: InboxService,
+    private messagingService: MessagingService
   ) {
     this.subscription = this.confirmDialogService.dialogConfirmed.subscribe(
     confirmDialog => {
@@ -38,22 +39,34 @@ export class MarketCardComponent implements OnInit {
     });
   };
 
-  ngOnInit(): void {
-    this.setUserDetails();
-  }
-
    ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  setUserDetails() {
-    this.isVendor = (this.accountService.getUser().user_type === CONSTANT.user.types.VENDOR.code) ? true : false;
+  sendMessage(market: Market) {
+    if(!this.accountService.isLoggedIn()) {
+      this.showErrorMessage();
+      return;
+    }
+
+    this.accountService.userIsActiveVendor().then(isActiveVendor => {
+      if(isActiveVendor) {
+         let record = { receiver: market.organized_by, sender: this.accountService.getUser().id, market: market.id },
+             confirmDialog = new ConfirmDialog(null, this.SEND_MSG_ACTION, record);
+         this.modalService.show(CONSTANT.MODAL.SEND_MSG, confirmDialog);
+      }
+      else {
+        this.showErrorMessage();
+      }
+    })
   }
 
-  sendMessage(market: Market) {
-    let record = { receiver: market.organized_by, sender: this.accountService.getUser().id, market: market.id },
-        confirmDialog = new ConfirmDialog(null, this.SEND_MSG_ACTION, record);
-    this.modalService.show(CONSTANT.MODAL.SEND_MSG, confirmDialog);
+  showErrorMessage() {
+   this.messagingService.show(
+      'global',
+       CONSTANT.MESSAGING.ERROR,
+      'You have to be a vendor to send a message'
+    );
   }
 
   sendMessageConfirmed(message: string, record: any) {
