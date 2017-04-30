@@ -204,6 +204,8 @@
    <section class="[ container ]">
     <div class="vendor-contact card [ row ]">
       <div class="vendor-contact [ col-xs-12 ]">
+          <ak-messaging ref="vendor-messaging">
+          </ak-messaging>
           <div class="vendor-contact__message">
             <textarea class="vendor-contact__text" rows="5" [(ngModel)] ="messageText" [placeholder]="placeholder" [disabled]="!isLoggedIn"></textarea>
           </div>
