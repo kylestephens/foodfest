@@ -167,6 +167,15 @@ article {
     &::placeholder {
       font-style: italic;
     }
+
+
+    &:disabled {
+      background-color: $brand-body-bg;
+
+      &::placeholder {
+        color: $gray-lighter;
+      }
+    }
   }
 
   &__message {
@@ -181,8 +190,4 @@ article {
     background-color: $gray-lightest;
   }
 
-  .send-button {
-    @include button($brand-body-bg, $brand-primary-cta);
-    padding: 5px 10px;
-  }
 }

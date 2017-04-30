@@ -20,6 +20,7 @@ import { MessagingService }       from '../services/messaging.service';
 import { SettingsService }        from '../services/settings.service';
 import { AccountService}          from '../services/account.service';
 import { InboxService }           from '../services/inbox.service';
+
 import { ImageScrollerComponent } from '../shared/image-scroller/image-scroller.component';
 import { TwitterFeedComponent }   from '../shared/twitter-feed/twitter-feed.component';
 import { Vendor }                 from '../shared/model/vendor';
@@ -49,6 +50,8 @@ export class VendorComponent implements OnInit, OnDestroy {
   public vendorLoaded: boolean = false;
   public imagesLoaded: boolean = false;
   public itemType: string = 'Menu';
+  public isLoggedIn: boolean;
+  public placeholder: string;
 
   public mapStyles: MapTypeStyle[] = [
     {
@@ -253,7 +256,7 @@ export class VendorComponent implements OnInit, OnDestroy {
     }
   ];
 
-  private subscription: Subscription;
+  private subscriptions: Array<Subscription> = [];
   private vendorId: number;
 
   constructor(
@@ -273,9 +276,20 @@ export class VendorComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit() {
-    this.subscription = this.route.params.subscribe(params => {
+    this.isLoggedIn = this.accountService.isLoggedIn();
+    this.setPlaceholder();
+
+    this.subscriptions.push(this.route.params.subscribe(params => {
       this.vendorId = +params['id'];
-    });
+    }));
+
+    this.subscriptions.push(this.accountService.getMessage().subscribe(subMessage => {
+      if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN) {
+       this.isLoggedIn = this.accountService.isLoggedIn();
+       this.setPlaceholder();
+      }
+    }));
+
     if(!this.vendorId) {
       this._initValuesFromLocalStorage(); // when creating for first time
       this.vendorLoaded = true;
@@ -315,8 +329,14 @@ export class VendorComponent implements OnInit, OnDestroy {
   };
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+   for (let subscription of this.subscriptions) {
+      subscription.unsubscribe();
+    }
   };
+
+  setPlaceholder() {
+    this.placeholder = this.isLoggedIn ? 'Write your message here...' : 'You have to be logged in to send a message.';
+  }
 
   /**
    * Double forward slash ('//') is necessary to avoid
@@ -350,6 +370,8 @@ export class VendorComponent implements OnInit, OnDestroy {
   }
 
   sendMessage() {
+    if(!this.messageText.trim()) return;
+
     let params = {
         sender_id: this.accountService.getUser().id,
         receiver_id: this.vendor.user_id,
@@ -358,8 +380,10 @@ export class VendorComponent implements OnInit, OnDestroy {
       }
 
     this.inboxService.createMessage(params).then( message => {
-      this.messageText = null;
-    });//TODO: handle error and success
+      if(message) {
+        this.messageText = null;
+      }
+    }
   }
 
   /**
