@@ -31,11 +31,13 @@ export class SigninComponent {
   @Input()
   location: string;
 
+  private modalSubscription: Subscription;
   private accountSubscription: Subscription;
   private firstName: string = '';
   private lastName: string = '';
   private loggedIn: boolean = false;
 
+  isEmailSignIn: boolean = false;
   model = new LoginDetails();
 
   constructor(
@@ -51,9 +53,17 @@ export class SigninComponent {
       this.firstName = this.accountService.getUser().firstName;
     }
 
+    this.modalSubscription = this.modalService.getMessage().subscribe(subMessage => {
+      console.debug('SigninComponent::modalSubscription');
+      if(subMessage.event && this.location === 'modal' && subMessage.event === CONSTANT.EVENT.MODAL.HIDE_MODAL) {
+        this.isEmailSignIn = false;
+      }
+    });
+
+
     // subscribe to account service messages
     this.accountSubscription = this.accountService.getMessage().subscribe(subMessage => {
-      console.debug('SignupComponent::accountSubscription');
+      console.debug('SigninComponent::accountSubscription');
       if(subMessage.event && subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN && accountService.isLoggedIn()) {
          if(this.location === 'modal') {
           this.modalService.hide();
@@ -95,6 +105,11 @@ export class SigninComponent {
       }
     );
   };
+
+  public emailSignIn = function() {
+    event.stopPropagation();
+    this.isEmailSignIn = true;
+  }
 
   public submitEmailDetails = function(isValid: boolean) {
     event.stopPropagation();
