@@ -20,6 +20,9 @@ export class SearchResultsCardComponent {
   @Input()
   favourite: boolean;
 
+  @Input()
+  showFavourite: boolean;
+
   private serverUrl: string = this.settingsService.getServerBaseUrl() + '/';
 
   constructor(

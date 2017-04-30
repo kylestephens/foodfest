@@ -40,6 +40,7 @@ $side-menu-width: 70px;
 }
 
 .dashboard-content {
+  padding-top: $padding-large-vertical;
   @media (min-width: $screen-sm-min) {
     margin-left: $side-menu-width;
   }
