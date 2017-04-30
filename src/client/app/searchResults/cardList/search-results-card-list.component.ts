@@ -25,7 +25,8 @@ export class SearchResultsCardListComponent implements OnInit, OnDestroy {
   public favourites: Array<any> = [];
 
   private vendors: Vendor[];
-  private subscription: Subscription;
+  private routeSub: Subscription;
+  private loginSub: Subscription;
   private loaded: boolean = false;
 
   constructor(
@@ -33,29 +34,35 @@ export class SearchResultsCardListComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private searchResultsService: SearchResultsService
-  )
-  {}
+  ) {
+    this.loginSub = this.accountService.getMessage().subscribe(subMessage => {
+      if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN || subMessage.event === CONSTANT.EVENT.SESSION.USER_TYPE) {
+        if(this.accountService.isLoggedIn()) {
+          this.setFavourites();
+        }
+      }
+    });
+  }
 
   /**
    * Subscribe on route change params - when search params are added/removed, refresh the list of vendors.
    * Param keys are: styles, dietreq, bustype, busset, rating
    */
   ngOnInit(): void {
-    this.subscription = this.route.params
+    this.routeSub = this.route.params
       .subscribe(params => {
         this.loaded = false;
         if(Object.keys(params).length === 0) this.getVendors();
         else this.searchVendors(params);
       });
     if(this.accountService.isLoggedIn()) {
-      this.accountService.getFavourites().then((favourites: Array<number>) => {
-        this.favourites = favourites;
-      });
+      this.setFavourites();
     }
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.loginSub.unsubscribe();
+    this.routeSub.unsubscribe();
   }
 
   getVendors(): void {
@@ -70,6 +77,16 @@ export class SearchResultsCardListComponent implements OnInit, OnDestroy {
       this.loaded = true;
       this.vendors = vendors;
     });
+  }
+
+  setFavourites(): void {
+    this.accountService.getFavourites().then((favourites: Array<number>) => {
+      this.favourites = favourites;
+    });
+  }
+
+  isLoggedIn(): boolean {
+    return this.accountService.isLoggedIn();
   }
 
   isFavourite(vendor: any): boolean {

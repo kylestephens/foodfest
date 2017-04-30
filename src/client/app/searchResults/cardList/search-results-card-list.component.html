@@ -12,7 +12,11 @@
   <ul class="card-list">
   	<li *ngFor="let vendor of vendors | paginate: { itemsPerPage: 18, currentPage: p }">
   		<div class="card-list__card [ col-sm-4 col-xs-12 ]">
-  	 		<ak-search-results-card [vendor]="vendor" [favourite]="isFavourite(vendor)" ></ak-search-results-card>
+  	 		<ak-search-results-card
+          [vendor]="vendor"
+          [showFavourite]="isLoggedIn()"
+          [favourite]="isFavourite(vendor)">
+        </ak-search-results-card>
   	 	</div>
   	</li>
   </ul>

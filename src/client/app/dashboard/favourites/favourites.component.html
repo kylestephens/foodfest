@@ -1,1 +1,30 @@
-favourites
+<div class="[ row ]">
+  <div *ngIf="loaded && !vendors?.length">
+    <div class="card-empty">
+      <div class="ak-icon-food-truck card-empty__image"></div>
+      <div class="card-empty__text">
+        <div class="card-empty__text--line-one">You have no favourites!</div>
+      </div>
+    </div>
+  </div>
+
+  <ul class="card-list">
+    <li *ngFor="let vendor of vendors | paginate: { itemsPerPage: 18, currentPage: p }">
+      <div class="card-list__card [ col-sm-4 col-xs-12 ]">
+        <ak-search-results-card
+          [vendor]="vendor"
+          [showFavourite]="true"
+          [favourite]="true">
+        </ak-search-results-card>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="pagination [ row ]">
+  <pagination-controls (pageChange)="p = $event"
+    autoHide="true"
+    previousLabel="<"
+    nextLabel=">">
+  </pagination-controls>
+</div>

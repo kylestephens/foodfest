@@ -133,7 +133,6 @@ export class AccountService {
    * @param {number} vendorId
    */
   addFavourite = function(vendorId: number) {
-    debugger;
     this.favourites.push(vendorId);
     this.localStorageService.store(
       CONSTANT.LOCALSTORAGE.FAVOURITES,
@@ -147,9 +146,8 @@ export class AccountService {
    * @param {number} vendorId
    */
   removeFavourite = function(vendorId: number) {
-    debugger;
     let index = this.favourites.indexOf(vendorId);
-    if(index > 0) {
+    if(index > -1) {
       this.favourites.splice(index, 1);
       this.localStorageService.store(
         CONSTANT.LOCALSTORAGE.FAVOURITES,
