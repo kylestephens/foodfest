@@ -205,10 +205,10 @@
     <div class="vendor-contact card [ row ]">
       <div class="vendor-contact [ col-xs-12 ]">
           <div class="vendor-contact__message">
-            <textarea class="vendor-contact__text" rows="5" [(ngModel)] ="messageText" placeholder="Write your message here..."></textarea>
+            <textarea class="vendor-contact__text" rows="5" [(ngModel)] ="messageText" [placeholder]="placeholder" [disabled]="!isLoggedIn"></textarea>
           </div>
           <div class="vendor-contact__button">
-            <button class="send-button" (click)="sendMessage()">
+            <button class="hero__browse-button slim" (click)="sendMessage()" [disabled]="!isLoggedIn">
               Send Message
             </button>
           </div>
