@@ -46,7 +46,6 @@ export class SearchResultsCardComponent {
       params,
       this.accountService.getUser().akAccessToken
     ).then((response: any) => {
-      debugger;
       if(event.isLiked) {
         this.accountService.addFavourite(event.elementId);
       } else {
