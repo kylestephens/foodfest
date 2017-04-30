@@ -1,5 +1,5 @@
 @import '../../../scss/core/variables';
 
 .favourites {
-  padding-top: $padding-large-vertical;
+  padding: $padding-large-vertical $padding-large-horizontal $padding-large-horizontal;
 }
