@@ -1,21 +1,26 @@
-import { Component, OnDestroy, Input } from '@angular/core';
-import { Router }                 from '@angular/router';
-import { Http, Response }       from '@angular/http';
-import { Subscription }         from 'rxjs/Subscription';
+import { Component, OnDestroy, Input }  from '@angular/core';
+import { Router }                       from '@angular/router';
+import { Http, Response }               from '@angular/http';
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  Validators
+}                                       from '@angular/forms';
+import { Subscription }                 from 'rxjs/Subscription';
 import 'rxjs/add/operator/toPromise';
 
-import { LoginDetails }         from '../../model/login-details';
+import { AccountService }               from '../../../services/account.service';
+import { FacebookService }              from '../../../services/facebook.service';
+import { GoogleService }                from '../../../services/google.service';
+import { MessagingService }             from '../../../services/messaging.service';
+import { ModalService }                 from '../../../services/modal.service';
+import { ValidationService }            from '../../../services/validation.service';
 
-import { AccountService }       from '../../../services/account.service';
-import { FacebookService }      from '../../../services/facebook.service';
-import { GoogleService }        from '../../../services/google.service';
-import { MessagingService }     from '../../../services/messaging.service';
-import { ModalService }         from '../../../services/modal.service';
-
-import { CONSTANT }             from '../../../core/constant';
+import { CONSTANT }                     from '../../../core/constant';
 
 /**
- * This class represents the navigation bar component.
+ * This class represents the sign in component.
  *
  * TODO: handle scenario where account doesn't exist yet better
  *
@@ -33,25 +38,32 @@ export class SigninComponent {
 
   private modalSubscription: Subscription;
   private accountSubscription: Subscription;
-  private firstName: string = '';
-  private lastName: string = '';
   private loggedIn: boolean = false;
 
-  isEmailSignIn: boolean = false;
-  model = new LoginDetails();
+  public isEmailSignIn: boolean = false;
+  public signInForm: FormGroup;
 
   constructor(
+    private fb: FormBuilder,
     private accountService: AccountService,
     private facebookService: FacebookService,
     private googleService: GoogleService,
     private messagingService: MessagingService,
     private modalService: ModalService,
+    private validationService: ValidationService,
     public router: Router
   ) {
 
-    if(this.accountService.isLoggedIn()) {
-      this.firstName = this.accountService.getUser().firstName;
-    }
+    this.signInForm = fb.group({
+      'userEmail' : new FormControl('', [
+          Validators.required,
+          ValidationService.emailValidator
+        ]),
+      'userPassword': new FormControl('', [
+          Validators.required,
+          ValidationService.passwordValidator
+        ])
+    });
 
     this.modalSubscription = this.modalService.getMessage().subscribe(subMessage => {
       console.debug('SigninComponent::modalSubscription');
@@ -59,7 +71,6 @@ export class SigninComponent {
         this.isEmailSignIn = false;
       }
     });
-
 
     // subscribe to account service messages
     this.accountSubscription = this.accountService.getMessage().subscribe(subMessage => {
@@ -74,6 +85,7 @@ export class SigninComponent {
         }
       }
     });
+
   };
 
   ngOnDestroy() {
@@ -111,15 +123,22 @@ export class SigninComponent {
     this.isEmailSignIn = true;
   }
 
-  public submitEmailDetails = function(isValid: boolean) {
+  public submitForm(value: any) {
     event.stopPropagation();
-    if(isValid) {
-      this.accountService.setEmailDetails(this.model);
+    if(this.signInForm.valid) {
+      this.accountService.setEmailDetails({
+        email: this.signInForm.controls['userEmail'].value,
+        password: this.signInForm.controls['userPassword'].value
+      });
       this._setupSession();
+    } else {
+      for (var i in this.signInForm.controls) {
+        this.signInForm.controls[i].markAsTouched();
+      }
     }
   };
 
-  signUp() {
+  public signUp() {
     if(this.location === 'page'){
       this.router.navigate(['/signup']);
     }

@@ -219,7 +219,7 @@ export class AccountService {
   };
 
   setEmailDetails = function(data: any) {
-    if(data.fullName) this.user.setName(data.fullName);
+    if(data.fullName) this.setName(data.fullName);
     this.user.password = data.password;
     this.user.email = data.email;
   };

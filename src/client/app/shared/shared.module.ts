@@ -1,6 +1,7 @@
 import { NgModule, ModuleWithProviders }  from '@angular/core';
 import { CommonModule }                   from '@angular/common';
 import { FormsModule }                    from '@angular/forms';
+import { ReactiveFormsModule }            from '@angular/forms';
 import { RouterModule }                   from '@angular/router';
 
 import { AccountMetaComponent }           from './account-meta/account-meta.component';
@@ -23,7 +24,7 @@ import { SignupComponent }                from './sign/signup/signup.component';
  */
 
 @NgModule({
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   declarations: [
     HeartComponent,
     NavbarComponent,
@@ -54,6 +55,7 @@ import { SignupComponent }                from './sign/signup/signup.component';
     SigninComponent,
     SignupComponent,
     CommonModule,
+    ReactiveFormsModule,
     FormsModule,
     RouterModule
   ]
