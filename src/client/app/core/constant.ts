@@ -84,6 +84,7 @@ export class CONSTANT extends CommonConstants {
    */
   static readonly LOCALSTORAGE = {
 
+    COOKIES:                'cookies',
     FAVOURITES:             'favourites',
     SESSION:                'session',
     TOKEN:                  'token',

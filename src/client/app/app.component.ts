@@ -8,7 +8,7 @@ import { CONSTANT }                from './core/constant';
 import {
   LocalStorageService,
   SessionStorageService
-} from 'ng2-webstorage';
+}                                  from 'ng2-webstorage';
 import './operators';
 
 /**
@@ -21,6 +21,8 @@ import './operators';
   styleUrls: ['app.component.css'],
 })
 export class AppComponent implements OnInit {
+
+  public displayCookies: boolean = true;
 
   constructor(
     private router: Router,
@@ -53,6 +55,10 @@ export class AppComponent implements OnInit {
 
     // Check for site settings
     this.settingsService.syncSiteSettings();
+
+    if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.COOKIES)) {
+      this.displayCookies = false;
+    }
   };
 
 }

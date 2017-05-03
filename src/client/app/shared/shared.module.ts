@@ -5,6 +5,7 @@ import { ReactiveFormsModule }            from '@angular/forms';
 import { RouterModule }                   from '@angular/router';
 
 import { AccountMetaComponent }           from './account-meta/account-meta.component';
+import { CookiesNotificationComponent }   from './cookies-notification/cookies-notification.component';
 import { ConfirmDialogComponent }         from './confirm-dialog/confirm-dialog.component';
 import { FormMessagesComponent }          from './form-messages/form-messages.component';
 import { HeartComponent }                 from './heart/heart.component';
@@ -30,6 +31,7 @@ import { SignupComponent }                from './sign/signup/signup.component';
     NavbarComponent,
     MobileNavmenuComponent,
     AccountMetaComponent,
+    CookiesNotificationComponent,
     ConfirmDialogComponent,
     FormMessagesComponent,
     ImageScrollerComponent,
@@ -45,6 +47,7 @@ import { SignupComponent }                from './sign/signup/signup.component';
     NavbarComponent,
     MobileNavmenuComponent,
     AccountMetaComponent,
+    CookiesNotificationComponent,
     ConfirmDialogComponent,
     FormMessagesComponent,
     ImageScrollerComponent,

@@ -1,0 +1,13 @@
+<div class="cookies-notification" *ngIf="display">
+  <div class="[ container ]">
+    <div class="[ col-xs-9 ]">
+      {{ display }} Welcome to FoodFest. This site uses cookies. Read <a [routerLink]="['/privacy']">our policy</a>.
+    </div>
+    <div class="[ col-xs-3 ]">
+      <div (click)="acceptCookies()" class="cookies-notification__dismiss-button [ text-right ]">
+        <span class="ak-icon-cross">
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
