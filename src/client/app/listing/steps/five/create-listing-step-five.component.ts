@@ -66,6 +66,8 @@ export class CreateListingStepFiveComponent {
       _formValues = this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_STEP_FIVE);
       this._restoreFormValues(_formValues);
     }
+
+    // check if vendor id exists, in this case we are editing an existing vendor
     if(this.accountService.getVendorId()) { this.vendorId = this.accountService.getVendorId(); }
   };
 
