@@ -38,7 +38,10 @@ export class CreateListingStepFiveComponent {
   public businessLogo: Object = null;
   public coverImage: Object = null;
   public additionalImages: Array<Object> = [];
+
   private vendorId: number = 0;
+  private maxImagesExceeded: boolean = false;
+  private MAX_NUM_IMAGES: number = 2;
 
   constructor(
     private fb: FormBuilder,
@@ -85,7 +88,7 @@ export class CreateListingStepFiveComponent {
    * B.2 - If images, update images
    */
   public submitForm(value: any) {
-    if(!this.stepFiveForm.valid) {
+    if(!this.stepFiveForm.valid || this.maxImagesExceeded) {
       // user might have hit next button without completing
       // some mandatory fields - trigger validation ! :)
       for (var i in this.stepFiveForm.controls) {
@@ -116,15 +119,6 @@ export class CreateListingStepFiveComponent {
                 additionalImages.push(this.settingsService.getServerBaseUrl() + '/' + image);
               });
             }
-            let allImages = {
-              'businessLogo': this.settingsService.getServerBaseUrl() + '/' + response.business_logo,
-              'coverImage': this.settingsService.getServerBaseUrl() + '/' + response.cover_photo,
-              'businessAdditionalImages': additionalImages
-            };
-            me.localStorageService.store(
-              CONSTANT.LOCALSTORAGE.VENDOR_IMAGES,
-              allImages
-            );
             me._nextStep();
           });
         } else {
@@ -147,15 +141,6 @@ export class CreateListingStepFiveComponent {
                  additionalImages.push(this.settingsService.getServerBaseUrl() + '/' + image);
                });
              }
-             let allImages = {
-               'businessLogo': this.settingsService.getServerBaseUrl() + '/' + response.business_logo,
-               'coverImage': this.settingsService.getServerBaseUrl() + '/' + response.cover_photo,
-               'businessAdditionalImages': additionalImages
-             };
-             me.localStorageService.store(
-               CONSTANT.LOCALSTORAGE.VENDOR_IMAGES,
-               allImages
-             );
              me._nextStep();
            });
          } else {
@@ -202,7 +187,8 @@ export class CreateListingStepFiveComponent {
    * base64 encoded files
    */
   public onChangeImages = function(fileInput: any) {
-    if (fileInput.target.files) {
+    this.maxImagesExceeded = false;
+    if(fileInput.target.files && fileInput.target.files.length < this.MAX_NUM_IMAGES) {
       var me = this;
 
       for(var image of fileInput.target.files) {
@@ -214,6 +200,8 @@ export class CreateListingStepFiveComponent {
           reader.readAsDataURL(image);
         });
       }
+    } else if (fileInput.target.files && fileInput.target.files.length > this.MAX_NUM_IMAGES) {
+      this.maxImagesExceeded = true;
     }
   };
 

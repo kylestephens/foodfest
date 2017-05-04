@@ -62,6 +62,9 @@
       </div>
       <ak-form-messages [control]="stepFiveForm.controls.businessAdditionalImages">
       </ak-form-messages>
+      <div *ngIf="maxImagesExceeded" style="color:maroon">
+        Maximum number of images is {{ MAX_NUM_IMAGES }}
+      </div>
     </div>
     <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
       <div class="form-field-description">
