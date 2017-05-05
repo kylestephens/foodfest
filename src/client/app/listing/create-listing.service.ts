@@ -7,8 +7,7 @@ import { RestService }        from '../services/rest.service';
 import { AccountService }     from '../services/account.service';
 import { SettingsService }    from '../services/settings.service';
 import {
-  LocalStorageService,
-  SessionStorageService
+  LocalStorageService
 }                             from 'ng2-webstorage';
 
 @Injectable()
@@ -170,7 +169,8 @@ export class CreateListingService {
           event_type: stepOne.eventType,
           business_setup: stepOne.businessSetup,
           styles: stepOne.styles,
-          diet_requirements: stepOne.dietRequirements
+          diet_requirements: stepOne.dietRequirements,
+          listed_items: stepFour
         }
       ).then(function(response: any) {
         let responseBody = response.json();

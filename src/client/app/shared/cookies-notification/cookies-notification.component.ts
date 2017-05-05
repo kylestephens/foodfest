@@ -1,7 +1,6 @@
 import { Component, Input }       from '@angular/core';
 import {
-  LocalStorageService,
-  SessionStorageService
+  LocalStorageService
 }                                 from 'ng2-webstorage';
 
 import { SettingsService }        from '../../services/settings.service';

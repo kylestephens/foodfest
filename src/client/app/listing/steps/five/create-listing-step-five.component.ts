@@ -13,8 +13,7 @@ import {
   Validators
 }                                    from '@angular/forms';
 import {
-  LocalStorageService,
-  SessionStorageService
+  LocalStorageService
 }                                    from 'ng2-webstorage';
 import { FormMessagesComponent }     from '../../../shared/form-messages/form-messages.component';
 import { CreateListingService }      from '../../create-listing.service';
@@ -71,7 +70,9 @@ export class CreateListingStepFiveComponent {
     }
 
     // check if vendor id exists, in this case we are editing an existing vendor
-    if(this.accountService.getVendorId()) { this.vendorId = this.accountService.getVendorId(); }
+    if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.VENDOR_ID)) {
+      this.vendorId = this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.VENDOR_ID);
+    }
   };
 
   /**
@@ -103,7 +104,8 @@ export class CreateListingStepFiveComponent {
       // if first time around - won't have created a vendor
       this.createListingService.create().then((response: any) => {
         me.vendorId = response.id;
-        me.accountService.setVendorId(me.vendorId);
+        me.localStorageService.store(CONSTANT.LOCALSTORAGE.VENDOR_ID, response.id);
+        me.accountService.addVendor(response);
         me.accountService.updateUserType(CONSTANT.user.types.VENDOR.code);
 
         if(me.businessLogo || me.coverImage || me.additionalImages.length > 0) {
@@ -127,7 +129,8 @@ export class CreateListingStepFiveComponent {
       });
     } else {
        // second time around - reviewing / editing information
-       this.createListingService.edit(me.accountService.getVendorId()).then((response: any) => {
+       this.createListingService.edit(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.VENDOR_ID))
+       .then((response: any) => {
          if(me.businessLogo || me.coverImage || me.additionalImages.length > 0) {
            me.createListingService.uploadVendorImages(
              me.vendorId,

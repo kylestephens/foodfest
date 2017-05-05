@@ -6,8 +6,7 @@ import { RestService }       from './rest.service';
 import { Http, Response }    from '@angular/http';
 
 import {
-  LocalStorageService,
-  SessionStorageService
+  LocalStorageService
 }                            from 'ng2-webstorage';
 import { SettingsService }   from './settings.service';
 import { User }              from '../shared/model/user';
@@ -19,7 +18,7 @@ export class AccountService {
 
   private subject = new Subject<any>();
   private user: User = new User();
-  private vendor: Vendor = new Vendor();
+  private vendors: Array<Vendor> = [];
   private favourites: Array<any> = [];
   private loggedIn = false;
   redirectUrl: string = '';
@@ -224,20 +223,19 @@ export class AccountService {
     this.user.email = data.email;
   };
 
-  setVendor = function(vendor: any) {
-    this.vendor = vendor;
+  addVendor = function(vendor: any) {
+    this.vendors.push(vendor);
   };
 
-  getVendor = function() {
-    return this.vendor;
+  getVendors = function() {
+    return this.vendors;
   };
 
-  getVendorId = function() {
-    return this.vendor.id;
-  };
-
-  setVendorId = function(id: number) {
-    this.vendor.id = id;
+  getVendorIds = function() {
+    debugger;
+    return this.vendors.map((vendor) => {
+      return vendor.id;
+    });
   };
 
   reloadSession = function(sessionDetails: any, sessionToken: any) {

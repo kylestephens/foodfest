@@ -6,8 +6,7 @@ import { MessagingService }        from './services/messaging.service';
 import { SettingsService }         from './services/settings.service';
 import { CONSTANT }                from './core/constant';
 import {
-  LocalStorageService,
-  SessionStorageService
+  LocalStorageService
 }                                  from 'ng2-webstorage';
 import './operators';
 

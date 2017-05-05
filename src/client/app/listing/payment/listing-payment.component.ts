@@ -11,8 +11,7 @@ import { RestService }        from '../../services/rest.service';
 import { SettingsService }    from '../../services/settings.service';
 import { CONSTANT }           from '../../core/constant';
 import {
-  LocalStorageService,
-  SessionStorageService
+  LocalStorageService
 }                             from 'ng2-webstorage';
 
 /**
@@ -43,7 +42,7 @@ export class ListingPaymentComponent {
     private renderer: Renderer2,
     private router: Router
   ) {
-    this.vendorId = this.accountService.getVendorId();
+    this.vendorId = this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.VENDOR_ID);
   };
 
   openCheckout(planNum: number) {
@@ -125,6 +124,10 @@ export class ListingPaymentComponent {
     });
   };
 
+  /**
+   * Clear down the local storage objects that were used to
+   * persist state across the various listing screens
+   */
   private _clearLocalStorage() {
     this.localStorageService.clear(
       CONSTANT.LOCALSTORAGE.LISTING_STEP_ONE
@@ -140,6 +143,9 @@ export class ListingPaymentComponent {
     );
     this.localStorageService.clear(
       CONSTANT.LOCALSTORAGE.LISTING_STEP_FIVE
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.VENDOR_ID
     );
     this.localStorageService.clear(
       CONSTANT.LOCALSTORAGE.VENDOR_IMAGES

@@ -5,8 +5,7 @@ import {
   ViewEncapsulation
 }                                           from '@angular/core';
 import {
-  LocalStorageService,
-  SessionStorageService
+  LocalStorageService
 }                                           from 'ng2-webstorage';
 import { Router, NavigationEnd }            from '@angular/router';
 import { Subscription }                     from 'rxjs/Subscription';
