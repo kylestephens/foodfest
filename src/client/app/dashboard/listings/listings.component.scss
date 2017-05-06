@@ -2,7 +2,7 @@
 @import '../../../scss/core/settings';
 @import '../../../scss/mixins/text-overflow';
 
-@mixin inbox-icon() {
+@mixin listings-icon() {
   vertical-align: middle;
   line-height: 45px;
   font-size: 35px;
@@ -15,16 +15,17 @@
   height: 50px;
 }
 
-.inbox-container {
+.listings-container {
   background-color: $brand-secondary;
   color: $brand-body-bg;
   height: 100vh;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
 
   :hover {
     cursor: pointer;
   }
 
-  .inbox-overview {
+  .listings-overview {
     height: 110px;
     position: relative;
     border-bottom: 1px solid darken($brand-secondary, 20%);
@@ -41,7 +42,7 @@
     &.active {
       background-color: $brand-primary-cta;
 
-      .inbox-overview__footer-link:hover {
+      .listings-overview__footer-link:hover {
         color: $brand-secondary;
       }
     }
@@ -60,7 +61,7 @@
       margin-bottom: 5px;
 
       &-icon {
-        @include inbox-icon();
+        @include listings-icon();
       }
 
       &-title {
@@ -103,5 +104,9 @@
       }
     }
   }
+}
+
+.listings-edit {
+  padding-left: 0;  // override column padding
 }
 

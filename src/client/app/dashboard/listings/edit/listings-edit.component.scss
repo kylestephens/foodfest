@@ -1,0 +1,18 @@
+@import '../../../../scss/core/variables';
+@import '../../../../scss/core/settings';
+
+.listings-edit-menu {
+
+  background: #ccc;
+  width: 100%;
+  float: left;
+
+  &__item {
+    width: 33%;
+    float: left;
+    text-align: center;
+    padding: $padding-large-vertical 0;
+    border-right: 1px solid black;
+  }
+
+}

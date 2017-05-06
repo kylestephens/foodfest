@@ -247,7 +247,6 @@ export class AccountService {
   };
 
   getVendorIds = function() {
-    debugger;
     return this.vendors.map((vendor) => {
       return vendor.id;
     });

@@ -136,7 +136,6 @@ export class SignupComponent {
   }
 
   public submitForm(value: any) {
-    debugger;
     event.stopPropagation();
     if(this.signUpForm.valid) {
       this.accountService.setEmailDetails({

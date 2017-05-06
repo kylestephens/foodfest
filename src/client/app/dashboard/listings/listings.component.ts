@@ -60,7 +60,6 @@ export class ListingsComponent {
   }
 
   public getListings() {
-    debugger;
     this.accountService.getVendors().then((vendors: Array<Vendor>) => {
       this.loaded = true;
       this.vendors = vendors;

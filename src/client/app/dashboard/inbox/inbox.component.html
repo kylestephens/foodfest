@@ -18,7 +18,7 @@
 <div *ngIf="conversations?.length">
 
   <!-- SIDE BAR -->
-  <div *ngIf="!isPhone || (isPhone && !showThread)" class=" [ col-xs-12 col-sm-4 col-md-3 ] inbox-container">
+  <div *ngIf="!isPhone || (isPhone && !showThread)" class="inbox-container [ col-xs-12 col-sm-4 col-md-3 ]">
     <div *ngFor="let conversation of conversations; let i = index;"
         class="inbox-overview"
         [ngClass]="{'not-read': !conversation.is_read && i!==0, 'active': conversation.id === openConversation?.id }"
@@ -44,8 +44,10 @@
   <!-- / SIDE BAR -->
 
   <!-- MAIN CONTENT -->
-  <ak-inbox-thread [hidden]="isPhone && !showThread" [conversation]="openConversation">
-  </ak-inbox-thread>
+  <div class="inbox-messages [ col-xs-12 col-sm-8 col-md-9 ]">
+    <ak-inbox-thread [hidden]="isPhone && !showThread" [conversation]="openConversation">
+    </ak-inbox-thread>
+  </div>
   <!-- / MAIN CONTENT -->
 
 </div>

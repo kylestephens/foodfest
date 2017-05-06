@@ -41,6 +41,6 @@ $side-menu-width: 70px;
 
 .dashboard-content {
   @media (min-width: $screen-sm-min) {
-    margin-left: $side-menu-width;
+    margin-left: $side-menu-width + 15px;
   }
 }
