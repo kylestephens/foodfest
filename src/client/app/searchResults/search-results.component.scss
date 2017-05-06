@@ -20,43 +20,11 @@ $padding: 10px;
       align-items: center;
     }
 
-/**********custom made dropdown ************/
-    .active-order {
-      display: flex;
-
-      @media (min-width: $screen-sm-min) {
-        float: right;
-      }
-
-      &__label {
-        padding-right: 10px;
-      }
-
-      &__select {
-        flex-grow: 1;
-
-        &-dropdown {
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          appearance: none;
-          outline: 0;
-          min-width: 100px;
-          width: 100%;
-          text-transform: capitalize;
-          border: 1px solid $brand-secondary;
-          border-radius: $brand-border-radius;
-          padding: 1px 10px;
-        }
-
-        &-arrow {
-          position: absolute;
-          top: 7px;
-          right: 24px;
-          pointer-events: none;
-        }
-      }
+   .custom-dropdown {
+     @media (min-width: $screen-sm-min) {
+      float: right;
     }
-/*****end of custom made dropdown********/
+   }
   }
 
 

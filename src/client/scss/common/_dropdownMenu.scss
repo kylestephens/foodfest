@@ -27,3 +27,42 @@
 .ui-select-choices.dropdown-menu {
   left: 0;
 }
+
+/**********custom made dropdown ************/
+.custom-dropdown {
+  display: flex;
+  flex-direction: row;
+
+  &__label {
+    padding-right: 10px;
+    line-height: calc(1.42857 + 0.2);
+  }
+
+  &__select {
+    flex-grow: 1;
+    position: relative;
+
+    &-dropdown {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      outline: 0;
+      min-width: 100px;
+      width: 100%;
+      text-transform: capitalize;
+      border: 1px solid $brand-secondary;
+      border-radius: $brand-border-radius;
+      padding: 1px 10px;
+      line-height: calc(#{$line-height-base} + 0.2);
+      padding-right: 30px;
+    }
+
+    &-arrow {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      pointer-events: none;
+    }
+  }
+}
+/*****end of custom made dropdown********/
