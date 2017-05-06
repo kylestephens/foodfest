@@ -6,8 +6,7 @@ import {
   Validators
 }                                    from '@angular/forms';
 import {
-  LocalStorageService,
-  SessionStorageService
+  LocalStorageService
 }                                    from 'ng2-webstorage';
 import { SelectModule }              from 'ng2-select';
 import { FormMessagesComponent }     from '../../../shared/form-messages/form-messages.component';

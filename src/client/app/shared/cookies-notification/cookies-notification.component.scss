@@ -1,0 +1,31 @@
+@import '../../../scss/core/variables';
+@import '../../../scss/core/settings';
+
+.cookies-notification {
+
+  width: 100%;
+  min-height: 45px;
+  line-height: 45px;
+  position: fixed;
+  bottom: 0;
+  z-index: 99;
+
+  background: $brand-primary;
+  color: #fff;
+
+  &__dismiss-button {
+    > span {  // the icon itself
+      padding: $padding-small-vertical;
+      border-radius: 100%;
+      border: 1px solid #fff;
+
+      &:hover {
+        color: $brand-links;
+        border-color: $brand-links;
+        cursor: pointer;
+      }
+    }
+  }
+
+}
+

@@ -7,8 +7,7 @@ import {
   Validators
 }                                          from '@angular/forms';
 import {
-  LocalStorageService,
-  SessionStorageService
+  LocalStorageService
 }                                          from 'ng2-webstorage';
 import { CreateListingService }            from '../../create-listing.service';
 import { ValidationService }               from '../../../services/validation.service';

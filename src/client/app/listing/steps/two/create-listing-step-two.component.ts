@@ -15,8 +15,7 @@ import {
   Validators
 }                                         from '@angular/forms';
 import {
-  LocalStorageService,
-  SessionStorageService
+  LocalStorageService
 }                                         from 'ng2-webstorage';
 import { CreateListingService }           from '../../create-listing.service';
 import { AgmCoreModule, MapsAPILoader }   from 'angular2-google-maps/core';

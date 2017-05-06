@@ -24,59 +24,45 @@
       <span class="sign-up-icon ak-icon-mail"></span>
       Continue with Email
     </div>
-
   </div>
 
    <div [hidden]="!isEmailSignIn">
+
     <!-- Email Login -->
-    <form name="emailForm">
+    <form [formGroup]="signInForm" (ngSubmit)="submitForm(signInForm.value)">
 
-      <!--
-        TODO: Implement inline validation with error messages
-        See ng-messages $error dirty check on usage on other project
-      -->
-      <!-- <div class="[ text-left ]">
-        <div ng-message="required">Email is required</div>
-        <div ng-message="email">Invalid email format</div>
-      </div> -->
-
-      <div class="[ text-left ]"
-        [hidden]="email.valid || email.pristine" style="color:maroon" role="alert">
-        <div ng-message="required">Email is required</div>
-      </div>
       <div class="form-input form-input--has-icon sign-up-field">
         <div class="form-icon ak-icon-mail"></div>
-        <input type="email"
-          [(ngModel)]="model.email" name="email"
-          ng-model-options="{ 'updateOn': 'blur' }"
+        <input
+          type="email"
           placeholder="Email"
           required
-          #email="ngModel">
+          formControlName="userEmail"
+          id="userEmail">
       </div>
+      <ak-form-messages [control]="signInForm.controls.userEmail">
+      </ak-form-messages>
 
-      <div class="[ text-left ]"
-        [hidden]="password.valid || password.pristine" style="color:maroon" role="alert">
-        <div ng-message="required">Password is required</div>
-      </div>
       <div class="form-input form-input--has-icon sign-up-field">
         <div class="form-icon ak-icon-lock"></div>
-        <input type="password"
-          [(ngModel)]="model.password" name="password"
-          ng-model-options="{ 'updateOn': 'blur' }"
+        <input
+          type="password"
           placeholder="Password"
           minlength="6"
           required
-          #password="ngModel">
+          formControlName="userPassword"
+          id="userPassword">
       </div>
+      <ak-form-messages [control]="signInForm.controls.userPassword">
+      </ak-form-messages>
 
-      <div class="sign-up-button sign-up-button--email"
-        (class)="{ 'sign-up-button--disabled' : emailForm.$invalid }"
-        (click)="submitEmailDetails(!emailForm.$invalid)">
+      <button type="submit" class="sign-up-button sign-up-button--email">
         Login
-      </div>
+      </button>
 
     </form>
     <!-- / Email Login -->
+
   </div>
 
   <div class="[ text-center ]">

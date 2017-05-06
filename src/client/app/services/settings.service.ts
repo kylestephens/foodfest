@@ -9,8 +9,7 @@ import { BusinessType }             from '../shared/model/businessType';
 import { BusinessSetup }            from '../shared/model/businessSetup';
 
 import {
-  LocalStorageService,
-  SessionStorageService
+  LocalStorageService
 } from 'ng2-webstorage';
 
 @Injectable()

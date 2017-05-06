@@ -19,6 +19,7 @@ import { FavouritesComponent } from './favourites/favourites.component';
           { path: '', redirectTo: 'profile', pathMatch: 'full'},
           { path: 'profile', component: ProfileComponent },
           { path: 'listings', component: ListingsComponent },
+          { path: 'listings/:id', component: ListingsComponent },
           { path: 'inbox', component: InboxComponent },
           { path: 'inbox/:id', component: InboxComponent },
           { path: 'favourites', component: FavouritesComponent }

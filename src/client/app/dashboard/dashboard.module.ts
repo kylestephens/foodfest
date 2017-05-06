@@ -6,6 +6,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent }     from './dashboard.component';
 import { ProfileComponent }       from './profile/profile.component';
 import { ListingsComponent }      from './listings/listings.component';
+import { ListingsEditComponent }  from './listings/edit/listings-edit.component';
 import { InboxComponent }         from './inbox/inbox.component';
 import { InboxThreadComponent }   from './inbox/thread/inbox-thread.component';
 import {
@@ -29,6 +30,7 @@ import { Ng2PaginationModule }    from 'ng2-pagination';
     DashboardComponent,
     ProfileComponent,
     ListingsComponent,
+    ListingsEditComponent,
     InboxComponent,
     InboxThreadComponent,
     FavouritesComponent

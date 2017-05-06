@@ -5,7 +5,7 @@ import { ValidationService }       from '../../services/validation.service';
 @Component({
   selector: 'ak-form-messages',
   template: `
-    <div *ngIf="getErrorMessage() !== null" style="color:maroon">
+    <div *ngIf="getErrorMessage() !== null" style="color:maroon; text-align: left;">
       {{ getErrorMessage() }}
     </div>
   `

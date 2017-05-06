@@ -290,38 +290,33 @@ export class VendorComponent implements OnInit, OnDestroy {
       }
     }));
 
-    if(!this.vendorId) {
-      this._initValuesFromLocalStorage(); // when creating for first time
+    this.restService.get(
+       this.settingsService.getServerBaseUrl() + '/vendor/' + this.vendorId
+    ).then((response: Response) => {
       this.vendorLoaded = true;
-    } else {
-      return this.restService.get(
-         this.settingsService.getServerBaseUrl() + '/vendor/' + this.vendorId
-      ).then((response: Response) => {
-        this.vendorLoaded = true;
-        this.vendor = response.json()[0] as Vendor;
-        this.formattedStyles= this._formatFilterString(this.vendor.styles);
-        this.formattedBusinessSetups = this._formatFilterString(this.vendor.business_setup);
-        this.formattedEventTypes = this._formatFilterString(this.vendor.event_types);
-        this.formattedDietRequirements = this._formatFilterString(this.vendor.diet_requirements);
-        this.vendor.images.forEach((imageUrl: any) => {
-          this.additionalImages.push(this.serverUrl + imageUrl);
-        });
-        this.additionalImagesLoaded = true;
-        this.imagesLoaded = true;
-        if(this.vendor.business_type === 'artisan food') {
-          this.itemType = 'Product';
-        } else if(this.vendor.business_type === 'equipment hire') {
-          this.itemType = 'Item';
-        }
-      }, (reason: any) => {
-        this.messagingService.show(
-          'global',
-          CONSTANT.MESSAGING.ERROR,
-          reason.statusText ? reason.statusText : 'An unexpected error has occurred',
-          true
-        );
+      this.vendor = response.json()[0] as Vendor;
+      this.formattedStyles= this._formatFilterString(this.vendor.styles);
+      this.formattedBusinessSetups = this._formatFilterString(this.vendor.business_setup);
+      this.formattedEventTypes = this._formatFilterString(this.vendor.event_types);
+      this.formattedDietRequirements = this._formatFilterString(this.vendor.diet_requirements);
+      this.vendor.images.forEach((imageUrl: any) => {
+        this.additionalImages.push(this.serverUrl + imageUrl);
       });
-    }
+      this.additionalImagesLoaded = true;
+      this.imagesLoaded = true;
+      if(this.vendor.business_type === 'artisan food') {
+        this.itemType = 'Product';
+      } else if(this.vendor.business_type === 'equipment hire') {
+        this.itemType = 'Item';
+      }
+    }, (reason: any) => {
+      this.messagingService.show(
+        'global',
+        CONSTANT.MESSAGING.ERROR,
+        reason.statusText ? reason.statusText : 'An unexpected error has occurred',
+        true
+      );
+    });
   }
 
   ngAfterViewInit() {
@@ -384,56 +379,6 @@ export class VendorComponent implements OnInit, OnDestroy {
         this.messageText = null;
       }
     });
-  }
-
-  /**
-   * If arriving from create listing steps - retrieve
-   * from local storage instead of doing a GET
-   */
-  private _initValuesFromLocalStorage() {
-    let stepOne = this.localStorageService.retrieve(
-      CONSTANT.LOCALSTORAGE.LISTING_STEP_ONE
-    );
-    let stepTwo = this.localStorageService.retrieve(
-      CONSTANT.LOCALSTORAGE.LISTING_STEP_TWO
-    );
-    let stepThree = this.localStorageService.retrieve(
-      CONSTANT.LOCALSTORAGE.LISTING_STEP_THREE
-    );
-    let stepFour = this.localStorageService.retrieve(
-      CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR
-    );
-    let images = this.localStorageService.retrieve(
-      CONSTANT.LOCALSTORAGE.VENDOR_IMAGES
-    );
-    let address = this.localStorageService.retrieve(
-      CONSTANT.LOCALSTORAGE.LISTING_ADDRESS
-    );
-
-    if(images.businessLogo) {
-      this.vendor.logo_path = images.businessLogo;
-    }
-    if(images.coverImage) {
-      this.vendor.cover_photo_path = images.coverImage;
-    }
-    if(address) {
-      this.vendor.business_latitude = address.geometry.location.lat;
-      this.vendor.business_longitude = address.geometry.location.lng;
-      this.vendor.business_address = stepTwo.businessAddress;
-    }
-    this.formattedStyles= this._formatFilterString(stepOne.styles);
-    this.formattedBusinessSetups = this._formatFilterString(stepOne.businessSetup);
-    this.formattedEventTypes = this._formatFilterString(stepOne.eventType);
-    this.formattedDietRequirements = this._formatFilterString(stepOne.dietRequirements);
-    this.additionalImages = images.businessAdditionalImages;
-
-    this.vendor.business_name = stepOne.businessName;
-    this.vendor.phone_num = stepTwo.phoneNumber;
-    this.vendor.business_website = stepTwo.businessWebsite;
-    this.vendor.description = stepFour.businessDescription;
-    this.vendor.twitter_address = stepThree.twitterAddress;
-    this.vendor.facebook_address = stepThree.facebookAddress;
-    this.vendor.instagram_address = stepThree.instagramAddress;
   }
 
   private _formatFilterString(filterObject: any): string {

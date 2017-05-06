@@ -30,70 +30,62 @@
 
   <div [hidden]="!isEmailSignUp">
 
-    <form name="emailForm">
+    <form [formGroup]="signUpForm" (ngSubmit)="submitForm(signUpForm.value)">
 
-      <!-- Form Fields -->
+      <!-- FORM FIELDS -->
+        <!-- Full Name -->
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-user"></div>
+          <input
+            type="text"
+            placeholder="Full Name"
+            required
+            formControlName="userName"
+            id="userName">
+        </div>
+        <ak-form-messages [control]="signUpForm.controls.userName">
+        </ak-form-messages>
+        <!-- / Full Name -->
 
-      <!-- Full Name -->
-      <div class="[ text-left ]"
-        [hidden]="fullName.valid || fullName.pristine" style="color:maroon" role="alert">
-        <div ng-message="required">Full name is required</div>
-      </div>
-      <div class="form-input form-input--has-icon sign-up-field">
-        <div class="form-icon ak-icon-user"></div>
-        <input type="text"
-          [(ngModel)]="model.fullName" name="fullName"
-          placeholder="Full Name"
-          required
-          #fullName="ngModel">
-      </div>
+        <!-- Email -->
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-mail"></div>
+          <input
+            type="email"
+            placeholder="Email"
+            required
+            formControlName="userEmail"
+            id="userEmail">
+        </div>
+        <ak-form-messages [control]="signUpForm.controls.userEmail">
+        </ak-form-messages>
+        <!-- / Email -->
 
-      <!-- Email -->
-      <div class="[ text-left ]" ng-messages="emailForm.email.$error"
-        [hidden]="email.valid || email.pristine" style="color:maroon" role="alert">
-        <div ng-message="required">Email is required</div>
-        <!-- <div ng-message="email">Email must be valid</div> -->
-      </div>
-      <div class="form-input form-input--has-icon sign-up-field">
-        <div class="form-icon ak-icon-mail"></div>
-        <input type="email"
-          [(ngModel)]="model.email" name="email"
-          placeholder="Full Name"
-          ng-model-options="{ 'updateOn': 'blur' }"
-          placeholder="Email"
-          required
-          #email="ngModel" />
-      </div>
+        <!-- Password -->
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-lock"></div>
+          <input
+            type="password"
+            placeholder="Password"
+            required
+            formControlName="userPassword"
+            id="userPassword">
+        </div>
+        <ak-form-messages [control]="signUpForm.controls.userPassword">
+        </ak-form-messages>
+        <!-- / Password -->
+      <!-- /FORM FIELDS -->
 
-      <!-- Password -->
-      <!-- <div class="[ text-left ]" ng-messages="emailForm.password.$error"
-        ng-if="emailForm.password.$dirty" style="color:maroon" role="alert">
-        <div ng-message="required">{{'form.password.validation.required' | translate}}</div>
-      </div> -->
-      <div class="form-input form-input--has-icon sign-up-field">
-        <div class="form-icon ak-icon-lock"></div>
-        <input type="password"
-          [(ngModel)]="model.password" name="password"
-          placeholder="Full Name"
-          placeholder="Password"
-          ng-minlength="6"
-          required />
-      </div>
-
-      <!-- /Form Fields -->
-
-      <!-- reCaptcha -->
+      <!-- TODO : Get this working again : reCaptcha -->
       <div vc-recaptcha
         ng-model="recaptchaResponse"
         key="'6Lfg2SUTAAAAAPZS5zQZoycRhMmaXNmZ4rceTam_'">
       </div>
       <!-- /reCaptcha -->
 
-      <div class="sign-up-button sign-up-button--email"
-        ng-class="{ 'sign-up-button--disabled' : emailForm.$invalid || !recaptchaResponse }"
-        ng-click="submitEmailDetails(!emailForm.$invalid && recaptchaResponse !== null)">
+      <button type="submit" class="sign-up-button sign-up-button--email">
         Sign up
-      </div>
+      </button>
 
     </form>
 

@@ -1,1 +1,28 @@
-listings
+<div *ngIf="vendors?.length">
+
+  <!-- SIDE BAR -->
+  <div *ngIf="!isPhone || (isPhone && !showThread)" class=" [ col-xs-12 col-sm-4 col-md-3 ] listings-container">
+    <div *ngFor="let vendor of vendors; let i = index;"
+        class="listings-overview"
+        [ngClass]="{ 'active': vendor.id === selectedVendor?.id }"
+        (click)="changeVendor($event, vendor)">
+     <div class="listings-overview__header">
+        <div *ngIf="!vendor.logo_path" class="listings-overview__header-icon ak-icon-user"></div>
+        <img *ngIf="vendor.logo_path" class="listings-overview__header-icon" [src]="serverUrl + vendor.logo_path">
+
+        <div class="listings-overview__header-title">
+          <div class="listings-overview__header-title__name">{{vendor.business_name}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- / SIDE BAR -->
+
+  <!-- MAIN CONTENT -->
+  <div class="listings-edit [ col-xs-12 col-sm-8 col-md-9 ]">
+    <ak-listings-edit [hidden]="isPhone && !showThread" [vendor]="selectedVendor">
+    </ak-listings-edit>
+  </div>
+  <!-- / MAIN CONTENT -->
+
+</div>

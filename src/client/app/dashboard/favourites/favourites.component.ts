@@ -19,6 +19,7 @@ export class FavouritesComponent {
 
   public favourites: Array<any> = [];
 
+  private loaded: boolean = false;
   private vendors: Vendor[];
 
   constructor(
@@ -36,15 +37,16 @@ export class FavouritesComponent {
   setup(): void {
     this.accountService.getFavourites().then((favourites: Array<number>) => {
       this.favourites = favourites;
+      this.loaded = true;
       let filter = '';
-      if(this.favourites) {
+      if(this.favourites && this.favourites.length > 0) {
         filter = this.favourites.join(',');
+        this.restService.get(
+          this.settingsService.getServerBaseUrl() + '/vendors?id=' + filter
+        ).then((response: Response) => {
+          this.vendors = response.json() as Vendor[]
+        });
       }
-      this.restService.get(
-        this.settingsService.getServerBaseUrl() + '/vendors?id=' + filter
-      ).then((response: Response) => {
-        this.vendors = response.json() as Vendor[]
-      });
     });
   }
 

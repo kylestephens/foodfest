@@ -6,8 +6,7 @@ import { RestService }       from './rest.service';
 import { Http, Response }    from '@angular/http';
 
 import {
-  LocalStorageService,
-  SessionStorageService
+  LocalStorageService
 }                            from 'ng2-webstorage';
 import { SettingsService }   from './settings.service';
 import { User }              from '../shared/model/user';
@@ -19,7 +18,7 @@ export class AccountService {
 
   private subject = new Subject<any>();
   private user: User = new User();
-  private vendor: Vendor = new Vendor();
+  private vendors: Array<Vendor> = [];
   private favourites: Array<any> = [];
   private loggedIn = false;
   redirectUrl: string = '';
@@ -219,25 +218,38 @@ export class AccountService {
   };
 
   setEmailDetails = function(data: any) {
-    if(data.fullName) this.user.setName(data.fullName);
+    if(data.fullName) this.setName(data.fullName);
     this.user.password = data.password;
     this.user.email = data.email;
   };
 
-  setVendor = function(vendor: any) {
-    this.vendor = vendor;
+  addVendor = function(vendor: any) {
+    this.vendors.push(vendor);
   };
 
-  getVendor = function() {
-    return this.vendor;
-  };
+  getVendors = function() {
+    return new Promise((resolve, reject) => {
+      if(this.vendors && this.vendors.length > 0) {
+        resolve(this.vendors);
+      } else {
+        this.restService.get(
+          this.settingsService.getServerBaseUrl() + '/users/vendors',
+          null, this.getUser().akAccessToken
+        ).then((response: any) => {
+          this.vendors = response.json();
+          resolve(this.vendors);
+        }).catch((reason: any) => {
+          this.vendors = [];
+          reject(reason);
+        });
+      }
+    });
+  }
 
-  getVendorId = function() {
-    return this.vendor.id;
-  };
-
-  setVendorId = function(id: number) {
-    this.vendor.id = id;
+  getVendorIds = function() {
+    return this.vendors.map((vendor: Vendor) => {
+      return vendor.id;
+    });
   };
 
   reloadSession = function(sessionDetails: any, sessionToken: any) {

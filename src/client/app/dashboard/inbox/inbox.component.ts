@@ -47,11 +47,11 @@ export class InboxComponent implements OnInit {
     private route: ActivatedRoute,
     private platformLocation: PlatformLocation,
     private settingsService: SettingsService
-    ) {
-      platformLocation.onPopState(() => {
-        this.clearInboxParameters();
-      });
-   }
+  ) {
+    platformLocation.onPopState(() => {
+      this.clearInboxParameters();
+    });
+  }
 
   ngOnInit() {
     this.getConversations();
@@ -87,10 +87,9 @@ export class InboxComponent implements OnInit {
   }
 
   private removeConversation(conversationId: number) {
-    debugger
     let currentIndex: number;
     if(conversationId === this.openConversation.id) {
-      currentIndex = this.conversations.map(function(record) { return record.id; }).indexOf(this.openConversation.id));
+      currentIndex = this.conversations.map(function(record) { return record.id; }).indexOf(this.openConversation.id);
       if(currentIndex === this.conversations.length -1) {
         currentIndex -=1;
       }

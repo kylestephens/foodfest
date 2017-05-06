@@ -36,7 +36,6 @@ export class InboxService {
       return this.convertResponseToMessages(response);
     }).catch(
     (reason:any) => {
-      debugger
       this.messagingService.show(
         'inbox',
         CONSTANT.MESSAGING.ERROR,

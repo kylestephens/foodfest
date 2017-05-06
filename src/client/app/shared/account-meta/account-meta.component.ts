@@ -69,11 +69,11 @@ export class AccountMetaComponent {
     if(!this.adminDropdownActive) {
       this.adminDropdownActive = true;
       adminDropdown.classList.add('admin-dropdown--active');
-      document.getElementsByTagName('body')[0].addEventListener('click', this.bodyClick);
+      document.getElementsByTagName('body')[0].addEventListener('click', this._bodyClick.bind(this));
     } else {
       this.adminDropdownActive = false;
       adminDropdown.classList.remove('admin-dropdown--active');
-      document.getElementsByTagName('body')[0].removeEventListener('click', this.bodyClick);
+      document.getElementsByTagName('body')[0].removeEventListener('click', this._bodyClick);
     }
   };
 
@@ -83,12 +83,12 @@ export class AccountMetaComponent {
     window.location.pathname = '/';
   }
 
-  private bodyClick = function(event: any) {
+  private _bodyClick = function(event: any) {
     if(!event.target.classList.contains('js-admin-link')) {
       var adminDropdown = document.getElementsByClassName('admin-dropdown')[0];
       adminDropdown.classList.remove('admin-dropdown--active');
       this.adminDropdownActive = false;
-      document.getElementsByTagName('body')[0].removeEventListener('click', this.bodyClick);
+      document.getElementsByTagName('body')[0].removeEventListener('click', this._bodyClick);
     } else {
       this.firstClick = false;
     }

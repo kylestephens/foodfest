@@ -1,19 +1,24 @@
 import { Component, OnDestroy, Input }    from '@angular/core';
-import { Router }                 from '@angular/router';
-import { Subscription }           from 'rxjs/Subscription';
+import { Router }                         from '@angular/router';
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  Validators
+}                                         from '@angular/forms';
+import { Subscription }                   from 'rxjs/Subscription';
 
-import { LoginDetails }           from '../../model/login-details';
+import { AccountService }                 from '../../../services/account.service';
+import { FacebookService }                from '../../../services/facebook.service';
+import { GoogleService }                  from '../../../services/google.service';
+import { MessagingService }               from '../../../services/messaging.service';
+import { ModalService }                   from '../../../services/modal.service';
+import { ValidationService }              from '../../../services/validation.service';
 
-import { AccountService }         from '../../../services/account.service';
-import { FacebookService }        from '../../../services/facebook.service';
-import { GoogleService }          from '../../../services/google.service';
-import { MessagingService }       from '../../../services/messaging.service';
-import { ModalService }           from '../../../services/modal.service';
-
-import { CONSTANT }               from '../../../core/constant';
+import { CONSTANT }                       from '../../../core/constant';
 
 /**
- * This class represents the navigation bar component.
+ * This class represents the sign up component.
  */
 @Component({
   moduleId: module.id,
@@ -29,18 +34,36 @@ export class SignupComponent {
   private modalSubscription: Subscription;
   private accountSubscription: Subscription;
 
-  isEmailSignUp: boolean = false;
-  recaptchaResponse: string = null;
-  model = new LoginDetails();
+  public isEmailSignUp: boolean = false;
+  public recaptchaResponse: string = null;
+  public signUpForm: FormGroup;
 
   constructor(
+    private fb: FormBuilder,
     private accountService: AccountService,
     private facebookService: FacebookService,
     private googleService: GoogleService,
     private messagingService: MessagingService,
     private modalService: ModalService,
+    private validationService: ValidationService,
     public router: Router
   ) {
+
+    this.signUpForm = fb.group({
+      'userName' : new FormControl('', [
+        Validators.required,
+        ValidationService.alphaNumericValidator
+      ]),
+      'userEmail' : new FormControl('', [
+        Validators.required,
+        ValidationService.emailValidator
+      ]),
+      'userPassword': new FormControl('', [
+        Validators.required,
+        ValidationService.passwordValidator
+      ])
+    });
+
     // subscribe to modal service messages
     this.modalSubscription = this.modalService.getMessage().subscribe(subMessage => {
       console.debug('SignupComponent::modalSubscription');
@@ -62,6 +85,7 @@ export class SignupComponent {
         }
       }
     });
+
   };
 
   ngOnDestroy() {
@@ -111,14 +135,23 @@ export class SignupComponent {
     this.isEmailSignUp = true;
   }
 
-  public submitEmailDetails = function(isValid: boolean) {
-    if(isValid) {
-      this.accountService.setEmailDetails(this.model);
+  public submitForm(value: any) {
+    event.stopPropagation();
+    if(this.signUpForm.valid) {
+      this.accountService.setEmailDetails({
+        fullName: this.signUpForm.controls['userName'].value,
+        email: this.signUpForm.controls['userEmail'].value,
+        password: this.signUpForm.controls['userPassword'].value
+      });
       this._createAccount();
+    } else {
+      for (var i in this.signUpForm.controls) {
+        this.signUpForm.controls[i].markAsTouched();
+      }
     }
-  }
+  };
 
-  signIn() {
+  public signIn() {
     if(this.location === 'page'){
       this.router.navigate(['/signin']);
     }
