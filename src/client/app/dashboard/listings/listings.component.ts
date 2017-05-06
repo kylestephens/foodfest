@@ -73,10 +73,9 @@ export class ListingsComponent {
     });
   }
 
-  public changeVendor(event: any, conversation: Message) {
-    if(!this.selectedVendor || this.selectedVendor.id !== conversation.id) {
-      this.selectedVendor = conversation;
-      this.selectedVendor.is_read = true;
+  public changeVendor(event: any, vendor: Vendor) {
+    if(!this.selectedVendor || this.selectedVendor.id !== vendor.id) {
+      this.selectedVendor = vendor;
       if(!this.isPhone) this.location.replaceState('/dashboard/listings/' + this.selectedVendor.id);
     }
 
