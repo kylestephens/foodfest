@@ -89,7 +89,6 @@ export class CreateListingService {
       this.restService.post(
         me.settingsService.getServerBaseUrl() + '/vendors/create', {
           id: null,
-          user_id: this.accountService.getUser().id,
           business_name: stepOne.businessName,
           business_address: stepTwo.businessAddress,
           business_latitude: lat,
@@ -106,7 +105,7 @@ export class CreateListingService {
           styles: stepOne.styles,
           diet_requirements: stepOne.dietRequirements,
           listed_items: stepFour
-        }
+        }, this.accountService.getUser().akAccessToken
       ).then(function(response: any) {
         let responseBody = response.json();
         resolve(responseBody);
@@ -155,7 +154,6 @@ export class CreateListingService {
       this.restService.post(
         me.settingsService.getServerBaseUrl() + '/vendors/edit', {
           id: vendorId,
-          user_id: this.accountService.getUser().id,
           business_name: stepOne.businessName,
           business_address: stepTwo.businessAddress,
           business_latitude: addressInfo.geometry.location.lat,
@@ -171,7 +169,7 @@ export class CreateListingService {
           styles: stepOne.styles,
           diet_requirements: stepOne.dietRequirements,
           listed_items: stepFour
-        }
+        }, this.accountService.getUser().akAccessToken
       ).then(function(response: any) {
         let responseBody = response.json();
         resolve(responseBody);
@@ -203,7 +201,7 @@ export class CreateListingService {
           cover_photo: coverImage,
           num_photos: additionalImages.length,
           images: additionalImages
-        }
+        }, this.accountService.getUser().akAccessToken
       ).then(function(response: any) {
         let responseBody = response.json();
         resolve(responseBody);

@@ -85,14 +85,13 @@ export class ListingPaymentComponent {
         );
         let planDetails = {
           stripeId: token.id,
-          userId: me.accountService.getUser().id,
           businessName: stepOne.businessName,
           planName: _planName
         };
 
         me.restService.post(
           me.settingsService.getServerBaseUrl() + '/subscribe',
-          planDetails
+          planDetails, this.accountService.getUser().akAccessToken
         ).then(
           (resp: any) => {
             let _response = resp.json();

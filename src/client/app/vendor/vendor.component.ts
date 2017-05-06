@@ -291,7 +291,7 @@ export class VendorComponent implements OnInit, OnDestroy {
     }));
 
     this.restService.get(
-       this.settingsService.getServerBaseUrl() + '/vendor/' + this.vendorId
+       this.settingsService.getServerBaseUrl() + '/vendors/' + this.vendorId
     ).then((response: Response) => {
       this.vendorLoaded = true;
       this.vendor = response.json()[0] as Vendor;

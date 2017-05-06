@@ -1,5 +1,6 @@
 import {
   Component,
+  OnInit,
   OnDestroy,
   Input,
   ViewEncapsulation
@@ -25,7 +26,7 @@ import { CONSTANT }                         from '../core/constant';
 })
 
 // TODO - Ensure logged in / signed up
-export class CreateListingComponent {
+export class CreateListingComponent implements OnInit {
 
   public currentStep: number;
   private routeSubscription: Subscription;
@@ -71,6 +72,9 @@ export class CreateListingComponent {
     });
   };
 
+  ngOnInit() {
+    this.currentStep = 1;
+  }
   ngOnDestroy() {
     this.routeSubscription.unsubscribe();
   };
