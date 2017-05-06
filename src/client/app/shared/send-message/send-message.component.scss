@@ -11,6 +11,11 @@
     border-radius: $brand-border-radius;
   }
 
+  &__vendors {
+    text-align: left;
+    padding-top: 10px;
+  }
+
   &__buttons {
     position: absolute;
     right: 0;
@@ -19,6 +24,10 @@
      @media (min-width: $screen-sm-min) {
         right: -35px;
       }
+  }
+
+  .custom-dropdown {
+    flex-direction: column;
   }
 
   .btn-negative.smaller, .btn-primary-cta.smaller {
@@ -30,3 +39,13 @@
   }
 }
 
+.vedors-choice {
+  width: auto !important;
+  margin-right: 5px !important;
+}
+
+.message-space {
+  display: block;
+  margin-right: -10px;
+  margin-left: -10px;
+}

@@ -3,7 +3,7 @@
     <h4>{{market.name}}</h4>
   </div>
   <div *ngIf="market.allow_contact" class="title-item [ col-xs-4 col-sm-2 ]">
-    <button class="hero__browse-button slim" (click)="sendMessage(market)">Contact organizer</button>
+    <button class="hero__browse-button slim" (click)="openConfirmationDialog(market)">Contact organizer</button>
   </div>
 </div>
 <div class="market-card__location"><span class="ak-icon-location"></span>{{market.location}}</div>

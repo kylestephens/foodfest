@@ -1,6 +1,19 @@
 <div class="send-message">
+  <ak-messaging ref="send-message" class="message-space"></ak-messaging>
   <div>
     <textarea class="send-message__text" rows="5" [(ngModel)] ="message" placeholder="Write your message here..."></textarea>
+  </div>
+
+  <div *ngIf="multipleVendors" class="send-message__vendors">
+    <div class="custom-dropdown">
+      <label class="custom-dropdown__label">Send message as:</label>
+      <div class="custom-dropdown__select">
+          <select class="custom-dropdown__select-dropdown" [(ngModel)]="selectedVendorId">
+            <option *ngFor="let vendor of record.vendors" [selected]="selectedVendorId == vendor.id" [value]="vendor.id">{{vendor.business_name}}</option>
+          </select>
+         <span class="custom-dropdown__select-arrow ak-icon-chevron-thin-down"></span>
+      </div>
+    </div>
   </div>
 
   <div class="send-message__buttons">

@@ -2,7 +2,7 @@
   <div class="[ row ] markets">
     <div class="[ col-xs-12 ]">
       <div *ngFor="let market of markets | paginate: { itemsPerPage: 15, currentPage: p }" class="card market-card">
-        <ak-market-card [market]="market"></ak-market-card>
+        <ak-market-card [action]="SEND_MSG_ACTION" [market]="market" [vendors]="vendors"></ak-market-card>
       </div>
     </div>
   </div>
