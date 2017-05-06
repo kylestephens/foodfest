@@ -83,7 +83,9 @@ export class ModalComponent implements OnInit, OnDestroy {
   };
 
   private _hideModal = function() {
-    this.messagingService.hideAll();
+    this.messagingService.hideByRef('modal');
+    this.messagingService.hideByRef('signin');
+    this.messagingService.hideByRef('signup');
     this._onHideModal(this.modalContainer);
   };
 
