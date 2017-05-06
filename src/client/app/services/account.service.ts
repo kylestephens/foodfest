@@ -82,11 +82,11 @@ export class AccountService {
     );
   };
 
-  userIsActiveVendor(): Promise<boolean> {
+  getUserVendors(): Promise<Array<Vendor>> {
     return this.restService.get(
-      this.settingsService.getServerBaseUrl() + '/users/active', null, this.getUser().akAccessToken,
+      this.settingsService.getServerBaseUrl() + '/users/activevendors', null, this.getUser().akAccessToken,
     ).then((response: Response) => {
-      return response.json();
+      return response.json() as Vendor[];
     });
   }
 
