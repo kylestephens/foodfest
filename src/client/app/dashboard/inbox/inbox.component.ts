@@ -57,16 +57,17 @@ export class InboxComponent implements OnInit {
     this.getConversations();
 
     this.route.params.subscribe(
-      params => this.conversationId = params['id']
+      params => this.conversationId = +params['id']
     );
 
     this.subscription = this.confirmDialogService.dialogConfirmed.subscribe(
     confirmDialog => {
       if(confirmDialog.action && confirmDialog.action === this.DELETE_CONVERSATION_ACTION) {
-        this.inboxService.deleteConversation(confirmDialog.record.last_msg_id).then(() => {
+        this.inboxService.deleteConversation(confirmDialog.record.id).then((success) => {
           this.modalService.hide();
-          //instead of getConversations request just remove the conversation
-          this.removeConversation(confirmDialog.record.id);
+          if(success) {
+            this.removeConversation(confirmDialog.record.id);
+          }
         })
       }
     });
@@ -85,30 +86,46 @@ export class InboxComponent implements OnInit {
     }
   }
 
-  private removeConversation(messageId: number) {
-    let index = this.conversations.map(function(record) { return record.id; }).indexOf(messageId);
-    if (index > -1) {
-      this.conversations.splice(index, 1);
+  private removeConversation(conversationId: number) {
+    debugger
+    let currentIndex: number;
+    if(conversationId === this.openConversation.id) {
+      currentIndex = this.conversations.map(function(record) { return record.id; }).indexOf(this.openConversation.id));
+      if(currentIndex === this.conversations.length -1) {
+        currentIndex -=1;
+      }
     }
-    //if first conversation is removed, new open conversation is next in the list
-    if(index === 0) {
-      this.openConversation = this.conversations[0];
-      this.openConversation.is_read = true;
+
+    let conversationDeletedIndex = this.conversations.map(function(record) { return record.id; }).indexOf(conversationId);
+    if (conversationDeletedIndex > -1) {
+      this.conversations.splice(conversationDeletedIndex, 1);
     }
+
+    if(currentIndex) {
+      this.openConversation = this.conversations.length > 0 ? this.conversations[currentIndex] : null;
+      if(this.openConversation) this.openConversation.is_read = true;
+    }
+    else {
+      this.openConversation = this.conversations.length > 0 ? this.conversations[0] : null;
+      if(this.openConversation) this.openConversation.is_read = true;
+    }
+
   }
 
   getConversations() {
-    let params = (({ id }) => ({ id }))(this.accountService.getUser());
-    this.inboxService.getConversations(params).then(conversations => {
-      this.loaded = true;
-      this.conversations = conversations;
+    this.inboxService.getConversations().then(conversations => {
+      if(conversations) {
+        this.loaded = true;
+        this.conversations = conversations;
 
-      if(this.conversations.length > 0 && this.isPhone) {
-        this.setInboxForPhone();
+        if(this.conversations.length > 0 && this.isPhone) {
+          this.setInboxForPhone();
+        }
+        else if(this.conversations.length > 0) {
+          this.setInbox();
+        }
       }
-      else if(this.conversations.length > 0) {
-        this.setInbox();
-      }
+
     });
   }
 
@@ -143,7 +160,7 @@ export class InboxComponent implements OnInit {
 
   confirmDelete(event: any, conversation: Message) {
     event.stopPropagation();
-    let confirmDialog = new ConfirmDialog('Are you sure you want to delete the conversation with ' + conversation.name_to_show +'?', this.DELETE_CONVERSATION_ACTION, conversation);
+    let confirmDialog = new ConfirmDialog('Are you sure you want to delete the conversation with ' + conversation.message_title +'?', this.DELETE_CONVERSATION_ACTION, conversation);
     this.modalService.show(CONSTANT.MODAL.CONFIRM, confirmDialog);
   }
 
@@ -164,7 +181,6 @@ export class InboxComponent implements OnInit {
       window.document.getElementsByClassName('page-body')[0].scrollIntoView();
       this.showThread = true;
     }
-
   }
 
 }

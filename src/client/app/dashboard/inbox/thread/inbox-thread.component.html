@@ -3,7 +3,7 @@
   <ak-messaging ref="inbox-thread">
   </ak-messaging>
 
-  <div class="inbox-thread__message left send-msg">
+  <div *ngIf="messages" class="inbox-thread__message left send-msg">
     <div *ngIf="!isUserVendorInConversation()" class="inbox-thread__message-icon ak-icon-user"></div>
     <img *ngIf="isUserVendorInConversation()" class="inbox-thread__message-icon" [src]="serverUrl + conversation.vendor.logo_path">
     <div class="inbox-thread__message-content">
@@ -19,8 +19,8 @@
   </div>
 
   <div *ngFor="let message of messages" class="inbox-thread__message" [ngClass]="userId===message.sender.id ? 'left' : 'right'">
-      <div *ngIf="!message.image_path_to_show" class="inbox-thread__message-icon ak-icon-user"></div>
-      <img *ngIf="message.image_path_to_show" class="inbox-thread__message-icon" [src]="serverUrl + message.image_path_to_show">
+      <div *ngIf="!message.image_path" class="inbox-thread__message-icon ak-icon-user"></div>
+      <img *ngIf="message.image_path" class="inbox-thread__message-icon" [src]="serverUrl + message.image_path">
 
       <div class="inbox-thread__message-content">
         <div class="inbox-thread__message-content__body">

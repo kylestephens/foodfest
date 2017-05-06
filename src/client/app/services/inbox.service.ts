@@ -29,25 +29,57 @@ export class InboxService {
     return messages;
   }
 
-  getConversations(params: any): Promise<Message[]> {
-    return this.restService.post(
-      this.settingsService.getServerBaseUrl() + '/messages', params, this.accountService.getUser().akAccessToken,
+  getConversations(): Promise<Message[]> {
+    return this.restService.get(
+      this.settingsService.getServerBaseUrl() + '/messages', null, this.accountService.getUser().akAccessToken,
     ).then((response: Response) => {
       return this.convertResponseToMessages(response);
+    }).catch(
+    (reason:any) => {
+      debugger
+      this.messagingService.show(
+        'inbox',
+        CONSTANT.MESSAGING.ERROR,
+        reason.statusText ? reason.statusText : 'An unexpected error has occurred, try again later'
+      );
     });
   }
 
-  deleteConversation(messageId: number): Promise<boolean> {
+  deleteConversation(conversationId: number): Promise<boolean> {
     return this.restService.put(
-      this.settingsService.getServerBaseUrl() + '/messages/delete', { messageId: messageId }, this.accountService.getUser().akAccessToken,
-    ). then((response:Response) => {});//do nothing, success TODO: handle error
+      this.settingsService.getServerBaseUrl() + '/messages/delete', { conversationId: conversationId }, this.accountService.getUser().akAccessToken,
+    ). then((response:Response) => {
+       this.messagingService.show(
+        'inbox-thread',
+        CONSTANT.MESSAGING.SUCCESS,
+        'Conversation successfully deleted',
+        true
+      );
+      return true;
+    }).catch(
+    (reason: any) => {
+      this.messagingService.show(
+        'inbox-thread',
+        CONSTANT.MESSAGING.ERROR,
+        reason.statusText ? reason.statusText : 'An unexpected error has occurred, try again later',
+        true
+      );
+      return false;
+    });
   }
 
-  getMessagesInConversation(messageId: number): Promise<Message[]> {
+  getMessagesInConversation(conversationId: number): Promise<Message[]> {
     return this.restService.get(
-        this.settingsService.getServerBaseUrl() + '/messages/' + messageId, null, this.accountService.getUser().akAccessToken,
+        this.settingsService.getServerBaseUrl() + '/messages/' + conversationId, null, this.accountService.getUser().akAccessToken,
     ).then((response: Response) => {
       return this.convertResponseToMessages(response);
+    }).catch(
+    (reason: any) => {
+       this.messagingService.show(
+        'inbox-thread',
+        CONSTANT.MESSAGING.ERROR,
+        reason.statusText ? reason.statusText : 'An unexpected error has occurred, try again later'
+      );
     });
 
   }
