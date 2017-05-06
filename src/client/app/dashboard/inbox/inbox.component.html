@@ -1,3 +1,4 @@
+<!-- EMPTY -->
 <div *ngIf="loaded && !conversations?.length">
   <div class="card-empty">
     <div class="ak-icon-mail card-empty__image"></div>
@@ -12,8 +13,11 @@
     </div>
   </div>
 </div>
+<!-- / EMPTY -->
 
 <div *ngIf="conversations?.length">
+
+  <!-- SIDE BAR -->
   <div *ngIf="!isPhone || (isPhone && !showThread)" class=" [ col-xs-12 col-sm-4 col-md-3 ] inbox-container">
     <div *ngFor="let conversation of conversations; let i = index;"
         class="inbox-overview"
@@ -37,6 +41,11 @@
       </div>
     </div>
   </div>
+  <!-- / SIDE BAR -->
 
-  <ak-inbox-thread [hidden]="isPhone && !showThread" [conversation]="openConversation"></ak-inbox-thread>
+  <!-- MAIN CONTENT -->
+  <ak-inbox-thread [hidden]="isPhone && !showThread" [conversation]="openConversation">
+  </ak-inbox-thread>
+  <!-- / MAIN CONTENT -->
+
 </div>

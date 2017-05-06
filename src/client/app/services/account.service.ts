@@ -228,7 +228,22 @@ export class AccountService {
   };
 
   getVendors = function() {
-    return this.vendors;
+    return new Promise((resolve, reject) => {
+      if(this.vendors && this.vendors.length > 0) {
+        resolve(this.vendors);
+      } else {
+        this.restService.get(
+          this.settingsService.getServerBaseUrl() + '/users/vendors',
+          null, this.getUser().akAccessToken
+        ).then((response: any) => {
+          this.vendors = response.json();
+          resolve(this.vendors);
+        }).catch((reason: any) => {
+          this.vendors = [];
+          reject(reason);
+        });
+      }
+    };
   };
 
   getVendorIds = function() {

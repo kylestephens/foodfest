@@ -47,11 +47,11 @@ export class InboxComponent implements OnInit {
     private route: ActivatedRoute,
     private platformLocation: PlatformLocation,
     private settingsService: SettingsService
-    ) {
-      platformLocation.onPopState(() => {
-        this.clearInboxParameters();
-      });
-   }
+  ) {
+    platformLocation.onPopState(() => {
+      this.clearInboxParameters();
+    });
+  }
 
   ngOnInit() {
     this.getConversations();

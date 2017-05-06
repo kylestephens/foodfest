@@ -1,1 +1,26 @@
-listings
+<div *ngIf="vendors?.length">
+
+  <!-- SIDE BAR -->
+  <div *ngIf="!isPhone || (isPhone && !showThread)" class=" [ col-xs-12 col-sm-4 col-md-3 ] inbox-container">
+    <div *ngFor="let vendor of vendors; let i = index;"
+        class="inbox-overview"
+        [ngClass]="{ 'active': vendor.id === selectedVendor?.id }"
+        (click)="changeVendor($event, vendor)">
+     <div class="inbox-overview__header">
+        <div *ngIf="!vendor.logo_path" class="inbox-overview__header-icon ak-icon-user"></div>
+        <img *ngIf="vendor.logo_path" class="inbox-overview__header-icon" [src]="serverUrl + vendor.logo_path">
+
+        <div class="inbox-overview__header-title">
+          <div class="inbox-overview__header-title__name">{{vendor.business_name}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- / SIDE BAR -->
+
+  <!-- MAIN CONTENT -->
+  <!-- <ak-inbox-thread [hidden]="isPhone && !showThread" [conversation]="selectedVendor">
+  </ak-inbox-thread> -->
+  <!-- / MAIN CONTENT -->
+
+</div>
