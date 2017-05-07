@@ -89,7 +89,7 @@ export class InboxService {
     ).then(
     (response: Response) => {
       let message = new Message(response.json());
-       this.messagingService.show(
+      this.messagingService.show(
         calledFrom,
         CONSTANT.MESSAGING.SUCCESS,
         'Message sent successfully',

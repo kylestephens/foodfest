@@ -1,4 +1,6 @@
-import { Component, Input }         from '@angular/core';
+import { Component,
+         Input,
+         SimpleChanges }            from '@angular/core';
 import { Subscription }             from 'rxjs/Subscription';
 import { Market } 			            from '../../shared/model/market';
 import { Vendor }                   from '../../shared/model/vendor';
@@ -29,6 +31,12 @@ export class MarketCardComponent {
     private messagingService: MessagingService
   ) {};
 
+   ngOnChanges(changes: SimpleChanges) {
+    if(changes.vendors.currentValue && (!changes.vendors.previousValue || changes.vendors.currentValue.lenght !== changes.vendors.previousValue.length)) {
+      this.vendors = changes.vendors.currentValue;
+    }
+  }
+
   openConfirmationDialog(market: Market) {
     if(!this.accountService.isLoggedIn()) {
       this.showErrorMessage();
@@ -49,7 +57,8 @@ export class MarketCardComponent {
    this.messagingService.show(
       'global',
        CONSTANT.MESSAGING.ERROR,
-      'You have to be a vendor to send a message'
+      'You have to be a vendor to send a message',
+      true
     );
   }
 }

@@ -4,8 +4,10 @@ import { MarketService }         from './market.service';
 import { InboxService }          from '../services/inbox.service';
 import { AccountService }        from '../services/account.service';
 import { ConfirmDialogService }  from '../services/confirm-dialog.service';
+import { ModalService }          from '../services/modal.service';
 import { Market }                from '../shared/model/market';
 import { Vendor }                from '../shared/model/vendor';
+import { CONSTANT }              from '../core/constant';
 //TODO: handle till loaded, and no markets
 /**
  * This class represents the lazy loaded Markets component.
@@ -23,37 +25,51 @@ export class MarketsComponent implements OnInit {
   isVendor: boolean;
   SEND_MSG_ACTION = 'sendMessage';
 
-  private subscription: Subscription;
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private marketService: MarketService,
     private accountService: AccountService,
     private confirmDialogService: ConfirmDialogService,
-    private inboxService: InboxService
+    private inboxService: InboxService,
+    private modalService: ModalService
   ) {
-    this.subscription = this.confirmDialogService.dialogConfirmed.subscribe(
+    this.subscriptions.push(this.accountService.getMessage().subscribe(subMessage => {
+      if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN || subMessage.event === CONSTANT.EVENT.SESSION.USER_TYPE) {
+        if(this.accountService.isLoggedIn()) {
+           this.getUserVendors();
+        }
+      }
+    }));
+
+    this.subscriptions.push(this.confirmDialogService.dialogConfirmed.subscribe(
     confirmDialog => {
-      debugger
       if(confirmDialog.action && confirmDialog.action === this.SEND_MSG_ACTION) {
         this.sendMessageConfirmed(confirmDialog.message, confirmDialog.record);
       }
-    });
+    }));
   }
 
   ngOnInit(): void {
     this.getMarkets();
-    this.getUserVendors();
+    if(this.accountService.isLoggedIn()) {
+       this.getUserVendors();
+    }
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    for (let subscription of this.subscriptions) {
+      subscription.unsubscribe();
+    }
   }
 
   getMarkets(): void {
     this.marketService.getMarkets().then(markets => {
-      this.loaded = true;
-      this.markets = markets;
-    });//TODO: handle error
+      if(markets) {
+        this.loaded = true;
+        this.markets = markets;
+      }
+    });
   }
 
   getUserVendors() {
@@ -63,18 +79,16 @@ export class MarketsComponent implements OnInit {
   }
 
   sendMessageConfirmed(message: string, record: any) {
-    debugger
-    //TODO: handle send confirmation and adjust messaging
-     let params = {
-        sender_id: record.sender,
-        receiver_id: record.receiver,
-        market_id: record.market,
-        vendor_id: record.selectedVendor.id,
-        content: message
-      }
+    let params = {
+      sender_id: record.sender,
+      receiver_id: record.receiver,
+      market_id: record.market,
+      vendor_id: record.selectedVendor.id,
+      content: message
+    }
 
-    this.inboxService.createMessage(params, 'send-message').then( message => {
-      debugger
-    });//TODO: handle error and success
+    this.inboxService.createMessage(params, 'global').then( message => {
+      this.modalService.hide();
+    });
   }
 }
