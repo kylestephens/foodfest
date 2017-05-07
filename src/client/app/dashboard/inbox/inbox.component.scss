@@ -19,6 +19,7 @@
   background-color: $brand-secondary;
   color: $brand-body-bg;
   height: 100vh;
+  overflow-y: scroll;
 
   :hover {
     cursor: pointer;
