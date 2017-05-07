@@ -41,25 +41,10 @@ export class InboxThreadComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     if(changes.conversation.currentValue && (!changes.conversation.previousValue || changes.conversation.currentValue.id !== changes.conversation.previousValue.id)) {
+      window.document.getElementsByClassName('page-body')[0].scrollIntoView();
       this.messagingService.hideAll();
       this.messages = null;
       this.getMessagesInConversation();
-    }
-  }
-
-  ngAfterViewChecked() {
-    if(!this.isPhone) {
-      let inboxThread:HTMLElement = <HTMLElement> document.getElementsByClassName('inbox-thread')[0],
-          inboxOverview:HTMLElement = <HTMLElement> document.getElementsByClassName('inbox-container')[0],
-          height = inboxThread.offsetHeight;
-
-      if(height > inboxOverview.offsetHeight) {
-        inboxOverview.style.height = height + 'px';
-      }
-
-      if(height > this.sideMenu.offsetHeight) {
-        this.sideMenu.style.height = height + 'px';
-      }
     }
   }
 
@@ -94,7 +79,7 @@ export class InboxThreadComponent {
   }
 
   isUserVendorInConversation() {
-    return this.conversation.vendor.user_id === this.userId;
+    return this.conversation ? this.conversation.vendor.user_id === this.userId : null;
   }
 
 }

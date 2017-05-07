@@ -27,15 +27,13 @@ export class SendMessageComponent implements OnInit{
   private subscription: Subscription;
 
   constructor( private modalService: ModalService, private confirmDialogService: ConfirmDialogService) {
-    debugger
     this.subscription = this.modalService.getMessage().subscribe(subMessage => {
       if(subMessage.event && subMessage.event === CONSTANT.EVENT.MODAL.HIDE_MODAL) {
         this._onHideModal();
       }
 
-       if(subMessage.event && subMessage.event === CONSTANT.EVENT.MODAL.SHOW_MODAL) {
-         debugger
-         this._onShowModal(subMessage.data.record);
+      if(subMessage.event && subMessage.event === CONSTANT.EVENT.MODAL.SHOW_MODAL) {
+        this._onShowModal(subMessage.data.record);
       }
     });
   };

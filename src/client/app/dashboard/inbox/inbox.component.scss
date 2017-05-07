@@ -108,4 +108,12 @@
 
 .inbox-messages {
   padding-left: 0;  // override column padding
+  padding-right: 0;
+}
+
+@media (min-width: $screen-sm-min) {
+  .inbox-messages {
+    overflow-y: scroll;
+    height: 100vh;
+  }
 }
