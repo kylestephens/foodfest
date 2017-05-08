@@ -21,4 +21,10 @@ export class ListingsEditComponent {
   @Input()
   vendor: Vendor;
 
+  public activeItem: number = 1;
+
+  public toggleActive(event: any, selectedItem: number) {
+    this.activeItem = selectedItem;
+  };
+
 }

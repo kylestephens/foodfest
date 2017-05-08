@@ -29,9 +29,6 @@ export class CreateListingStepFourComponent {
   public itemTitleExample: string = 'Pizza Margherita';
   public itemDescriptionExample: string = 'Fresh Basil, Cubed Italian mozzarella, Grated parmesan';
 
-  // Chiavari Chair
-  // Our Chiavari chairs in lime wash have classic style and are our most popular chair for weddings and formal events.  These chairs are supplied with a seat pad and are stackable.
-
   constructor(
     private fb: FormBuilder,
     private createListingService: CreateListingService,

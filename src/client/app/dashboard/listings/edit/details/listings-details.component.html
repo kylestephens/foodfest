@@ -1,0 +1,246 @@
+<div class="listings-details">
+
+  <form [formGroup]="listingsDetailsForm" (ngSubmit)="submitForm(listingsDetailsForm.value)">
+
+    <!-- Business Name -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Business Name *</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-user"></div>
+          <input
+            type="text"
+            placeholder="e.g. Domhnaill's Donuts"
+            required
+            formControlName="businessName"
+            id="businessName">
+        </div>
+        <ak-form-messages [control]="listingsDetailsForm.controls.businessName">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- / Business Name -->
+
+    <!-- Business Type -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Business Type *</label>
+        <div class="form-select-wrapper">
+          <div class="form-select">
+            <ng-select
+              [multiple]="true"
+              [items]="businessTypes"
+              placeholder="No category selected"
+              formControlName="businessType"
+              id="businessType"></ng-select>
+            </div>
+        </div>
+        <ak-form-messages [control]="listingsDetailsForm.controls.businessType">
+        </ak-form-messages>
+      </div>
+      <div class="[ col-sm-4 col-xs-12 hidden-xs ]">
+        <div class="form-field-description">
+          You may choose more than one option if applicable
+        </div>
+      </div>
+    </div>
+    <!-- / Business Type -->
+
+    <!-- Business Setup -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Business Setup</label>
+        <div class="form-select-wrapper">
+          <div class="form-select">
+            <ng-select
+              [items]="businessSetups"
+              placeholder="No category selected"
+              formControlName="businessSetup"
+              id="businessSetup"></ng-select>
+            </div>
+        </div>
+        <ak-form-messages [control]="listingsDetailsForm.controls.businessSetup">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- / Business Setup -->
+
+    <!-- Event Types -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Event Types Supported *</label>
+        <div class="form-select-wrapper">
+          <div class="form-select">
+            <ng-select
+              [multiple]="true"
+              [items]="eventTypes"
+              placeholder="No category selected"
+              formControlName="eventType"></ng-select>
+            </div>
+        </div>
+        <ak-form-messages [control]="listingsDetailsForm.controls.eventType">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- / Event Types -->
+
+    <!-- Cooking Styles -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Cooking Styles</label>
+        <div class="form-select-wrapper">
+          <div class="form-select">
+            <ng-select
+              [multiple]="true"
+              [items]="styles"
+              placeholder="No category selected"
+              formControlName="styles"></ng-select>
+            </div>
+        </div>
+        <ak-form-messages [control]="listingsDetailsForm.controls.styles">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- / Cooking Styles -->
+
+    <!-- Dietary Requirements Supported -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Dietary Requirements Supported</label>
+        <div class="form-select-wrapper">
+          <div class="form-select">
+            <ng-select
+              [multiple]="true"
+              [items]="dietRequirements"
+              placeholder="No cuisine selected"
+              formControlName="dietRequirements"></ng-select>
+            </div>
+        </div>
+        <ak-form-messages [control]="listingsDetailsForm.controls.dietRequirements">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- / Dietary Requirements Supported -->
+
+
+    <!-- Phone Number -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Phone Number *</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-phone"></div>
+          <input type="tel"
+            placeholder="e.g. 085 1234567"
+            required
+            formControlName="phoneNumber"
+            id="phoneNumber">
+        </div>
+        <ak-form-messages [control]="listingsDetailsForm.controls.phoneNumber">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- / Phone Number -->
+
+    <!-- Business Address -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Business Address</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-location"></div>
+          <input
+            placeholder="e.g. Domhnaills Donuts, Navan Road, Dublin 7"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="off"
+            type="text"
+            formControlName="businessAddress"
+            #autocompleteSearch>
+        </div>
+      </div>
+    </div>
+    <!-- / Business Address -->
+
+    <!-- Business Website -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Business Website</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-earth"></div>
+          <input type="text"
+            placeholder="e.g. www.DomhnaillsDonuts.com"
+            formControlName="businessWebsite">
+        </div>
+      </div>
+    </div>
+    <!-- / Business Website -->
+
+    <!-- Facebook Address -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Facebook Address</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-facebook"></div>
+          <input type="text"
+            placeholder="e.g. www.facebook.com/DomhnaillsDonuts"
+            formControlName="facebookAddress"
+            id="facebookAddress">
+        </div>
+        <ak-form-messages [control]="listingsDetailsForm.controls.facebookAddress">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- / Facebook Address -->
+
+    <!-- Twitter Address -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Twitter Address</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-twitter"></div>
+          <input type="text"
+            placeholder="e.g. www.twitter.com/DomhnaillsDonuts"
+            formControlName="twitterAddress"
+            id="twitterAddress">
+        </div>
+        <ak-form-messages [control]="listingsDetailsForm.controls.twitterAddress">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- / Twitter Address -->
+
+    <!-- Instagram Address -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Instagram Address</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-instagram"></div>
+          <input type="text"
+            placeholder="e.g. www.instagram.com/DomhnaillsDonuts"
+            formControlName="instagramAddress"
+            id="instagramAddress">
+        </div>
+        <ak-form-messages [control]="listingsDetailsForm.controls.instagramAddress">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- / Instagram Address -->
+
+    <!-- Mandatory Fields -->
+    <div class="form-row [ row ]">
+      <div class="[ col-xs-12 ]">
+        <span class="form-mandatory">* denotes mandatory field</span>
+      </div>
+    </div>
+    <!-- / Mandatory Fields -->
+
+    <!-- Form Buttons -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 text-right ]">
+        <button type="submit" class="form-btn-cta">Save updates</button>
+      </div>
+    </div>
+    <!-- / Form Buttons -->
+
+  </form>
+
+</div>

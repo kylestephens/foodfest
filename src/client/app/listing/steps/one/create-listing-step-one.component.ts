@@ -1,4 +1,7 @@
-import { Component, OnInit }         from '@angular/core';
+import {
+  Component,
+  OnInit
+}                                    from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -41,7 +44,7 @@ export class CreateListingStepOneComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private settingsService: SettingsService
   ) {
-    this.stepOneForm = fb.group({
+    this.stepOneForm = this.fb.group({
       'businessName' : new FormControl('', [
           Validators.required,
           ValidationService.textInputValidator

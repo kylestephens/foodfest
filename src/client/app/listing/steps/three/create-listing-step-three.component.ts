@@ -39,7 +39,7 @@ export class CreateListingStepThreeComponent {
       ]),
       'instagramAddress': new FormControl('', [
         ValidationService.websiteValidator
-      ]),
+      ])
     });
   };
 

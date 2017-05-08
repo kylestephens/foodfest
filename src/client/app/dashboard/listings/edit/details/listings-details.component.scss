@@ -1,0 +1,8 @@
+@import '../../../../../scss/core/variables';
+@import '../../../../../scss/core/settings';
+@import '../../../../../scss/mixins/buttons';
+
+.listings-details {
+  width: 100%;
+  padding: $padding-large-vertical $padding-large-horizontal;
+}

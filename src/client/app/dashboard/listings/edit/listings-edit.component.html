@@ -1,20 +1,40 @@
 <div class="listings-edit">
 
-  <ak-messaging ref="inbox-thread">
+  <ak-messaging ref="listings-edit">
   </ak-messaging>
 
   <div class="listings-edit-menu">
-    <div class="listings-edit-menu__item">
+    <div class="listings-edit-menu__item menu-one"
+      [ngClass]="{'listings-edit-menu__item--active': activeItem == 1 }"
+      (click)="toggleActive($event, 1)">
       Details
     </div>
-    <div class="listings-edit-menu__item">
+    <div class="listings-edit-menu__item menu-two"
+      [ngClass]="{'listings-edit-menu__item--active': activeItem == 2 }"
+      (click)="toggleActive($event, 2)">
       Menu
     </div>
-    <div class="listings-edit-menu__item">
+    <div class="listings-edit-menu__item menu-three"
+      [ngClass]="{'listings-edit-menu__item--active': activeItem == 3 }"
+      (click)="toggleActive($event, 3)">
       Images
     </div>
+    <hr />
   </div>
 
-  {{ vendor.business_name }}
+  <ak-listings-details
+    *ngIf="activeItem == 1"
+    [vendor]="vendor">
+  </ak-listings-details>
+
+  <ak-listings-menu
+    *ngIf="activeItem == 2"
+    [vendor]="vendor">
+  </ak-listings-menu>
+
+  <ak-listings-images
+    *ngIf="activeItem == 3"
+    [vendor]="vendor">
+  </ak-listings-images>
 
 </div>
