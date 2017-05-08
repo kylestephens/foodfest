@@ -16,7 +16,6 @@ export class Message {
   message_title: string;
   image_path: string;
   last_msg_id: number;
-  message_from_name: string;
 
   constructor(message: any) {
     this.id = message.id ? message.id : null;
@@ -30,7 +29,6 @@ export class Message {
     this.message_title = message.message_title ? message.message_title : null;
     this.image_path = message.image_path ? message.image_path : null;
     this.last_msg_id = message.last_msg_id ? message.last_msg_id : null;
-    this.message_from_name = message.message_from_name ? message.message_from_name : null;
   }
 
   convertSqlToJsDateTime(sqlTimestamp: string) {

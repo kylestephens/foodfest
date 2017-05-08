@@ -2,20 +2,17 @@
   <ak-messaging ref="inbox-thread">
   </ak-messaging>
 
-  <div *ngIf="messages">
-    <div class="inbox-thread__sender">FROM: {{conversation.message_from_name}}</div>
-    <div class="inbox-thread__message left send-msg">
-      <div *ngIf="!isUserVendorInConversation()" class="inbox-thread__message-icon ak-icon-user"></div>
-      <img *ngIf="isUserVendorInConversation()" class="inbox-thread__message-icon" [src]="serverUrl + conversation.vendor.logo_path">
-      <div class="inbox-thread__message-content">
-        <div class="inbox-thread__message-content__body">
-          <textarea class="inbox-thread__message-content__body__text" rows="3" [(ngModel)] ="messageText"></textarea>
-        </div>
-        <div class="inbox-thread__message-content__send">
-          <button class="hero__browse-button slim" (click)="sendMessage()">
-            Send Message
-          </button>
-        </div>
+  <div *ngIf="messages" class="inbox-thread__message left send-msg">
+    <div *ngIf="!isUserVendorInConversation()" class="inbox-thread__message-icon ak-icon-user"></div>
+    <img *ngIf="isUserVendorInConversation()" class="inbox-thread__message-icon" [src]="serverUrl + conversation.vendor.logo_path">
+    <div class="inbox-thread__message-content">
+      <div class="inbox-thread__message-content__body">
+        <textarea class="inbox-thread__message-content__body__text" rows="3" [(ngModel)] ="messageText"></textarea>
+      </div>
+      <div class="inbox-thread__message-content__send">
+        <button class="hero__browse-button slim" (click)="sendMessage()">
+          Send Message
+        </button>
       </div>
     </div>
   </div>

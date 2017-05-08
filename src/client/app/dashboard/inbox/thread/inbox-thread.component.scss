@@ -31,11 +31,6 @@ $message-padding: 20px;
     padding: $brand-header-padding;
   }
 
-  &__sender {
-    font-size: $font-size-small;
-    padding-bottom: 10px;
-  }
-
   &__message {
     padding-bottom: 50px;
     display: flex;
