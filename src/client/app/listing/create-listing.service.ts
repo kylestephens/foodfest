@@ -114,7 +114,7 @@ export class CreateListingService {
         this.messagingService.show(
           'create-listing',
           CONSTANT.MESSAGING.ERROR,
-          reason.statusText ? reason.statusText : 'An unexpected error has occurred',
+          reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
           true
         );
       });
@@ -178,7 +178,7 @@ export class CreateListingService {
         me.messagingService.show(
           'create-listing',
           CONSTANT.MESSAGING.ERROR,
-          reason.statusText ? reason.statusText : 'An unexpected error has occurred',
+          reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
           true
         );
       });
@@ -210,7 +210,7 @@ export class CreateListingService {
         me.messagingService.show(
           'create-listing',
           CONSTANT.MESSAGING.ERROR,
-          reason.statusText ? reason.statusText : 'An unexpected error has occurred',
+          reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
           true
         );
       });

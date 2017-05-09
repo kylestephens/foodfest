@@ -58,7 +58,7 @@ export class SearchResultsCardComponent {
       this.messagingService.show(
         'global',
         CONSTANT.MESSAGING.ERROR,
-        reason.statusText ? reason.statusText : 'An unexpected error has occurred',
+        reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
         true
       );
     });

@@ -43,10 +43,14 @@ export class AccountService {
     ).then(
       (response: any) => {
         response = response.json();
+        this.user.email = response.email;
+        this.user.firstname = response.firstname;
+        this.user.lastname = response.lastname;
         this.user.id = response.id;
         this.user.akAccessToken = response.token;
         this.user.user_type = response.user_type;
         this.setLoggedIn(true);
+        return response;
       },
       (reason: any) => {
         this.setLoggedIn(false);
@@ -69,7 +73,8 @@ export class AccountService {
       (response: any) => {
         response = response.json();
         this.user.id = response.id;
-        this.user.name = response.firstname;
+        this.user.firstname = response.firstname;
+        this.user.lastname = response.lastname;
         this.user.akAccessToken = response.token;
         this.user.user_type = response.user_type;
         this.setLoggedIn(true);

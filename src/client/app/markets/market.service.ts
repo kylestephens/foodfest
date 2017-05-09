@@ -24,7 +24,7 @@ export class MarketService {
       this.messagingService.show(
         'global',
         CONSTANT.MESSAGING.ERROR,
-        reason.statusText ? reason.statusText : 'An unexpected error has occurred, try again later'
+        reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR
       );
     });;
   }

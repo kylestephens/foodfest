@@ -105,7 +105,7 @@ export class SignupComponent {
         this.messagingService.show(
           'signup',
           CONSTANT.MESSAGING.ERROR,
-          reason.statusText ? reason.statusText : 'An unexpected error has occurred'
+          reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR
         );
       }
     );
@@ -123,7 +123,7 @@ export class SignupComponent {
         this.messagingService.show(
           'signup',
           CONSTANT.MESSAGING.ERROR,
-          reason.statusText ? reason.statusText : 'An unexpected error has occurred',
+          reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
           true
         );
       }
@@ -163,12 +163,26 @@ export class SignupComponent {
   private _createAccount() {
     console.debug('SignupComponent::_createAccount');
     this.accountService.createAccount().then(
-      (response: any) => {},
+      (response: any) => {
+        if(response.msg && response.msg === CONSTANT.response_key.warning.user.sign_up.EXISTS) {
+          this.messagingService.show(
+            'global',
+            CONSTANT.MESSAGING.WARNING,
+            'This account already exists, next time log in',
+            true
+          );
+        }
+      },
       (reason: any) => {
+        let reasonMsg: string = reason.json().msg ? reason.json().msg : null,
+           messageText: string = reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR;
+
+        if(reasonMsg && reasonMsg === CONSTANT.response_key.error.user.login.INVALID_PASSWORD) messageText = 'Invalid password';
+
         this.messagingService.show(
           'signup',
           CONSTANT.MESSAGING.ERROR,
-          reason.statusText ? reason.statusText : 'An unexpected error has occurred'
+          messageText
         );
       }
     );

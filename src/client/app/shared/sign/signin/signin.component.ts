@@ -100,7 +100,12 @@ export class SigninComponent {
         this._setupSession();
       },
       (reason: any) => {
-        this.modalService.hide();
+        this.messagingService.show(
+          'signin',
+          CONSTANT.MESSAGING.ERROR,
+          reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
+          true
+        );
       }
     );
   };
@@ -112,8 +117,13 @@ export class SigninComponent {
         this.accountService.setGoogleDetails(response);
         this._setupSession();
       },
-      (reason: string) => {
-        this.modalService.hide();
+      (reason: any) => {
+        this.messagingService.show(
+          'signin',
+          CONSTANT.MESSAGING.ERROR,
+          reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
+          true
+        );
       }
     );
   };
@@ -151,10 +161,16 @@ export class SigninComponent {
     this.accountService.login().then(
       (response: any) => {},
       (reason: any) => {
+        let reasonMsg: string = reason.json().msg ? reason.json().msg : null,
+           messageText: string = reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR;
+
+        if(reasonMsg && reasonMsg === CONSTANT.response_key.error.user.login.NOT_EXIST) messageText = 'User with provided email does not exist';
+        else if(reasonMsg && reasonMsg === CONSTANT.response_key.error.user.login.INVALID_PASSWORD) messageText = 'Invalid password';
+
         this.messagingService.show(
           'signin',
           CONSTANT.MESSAGING.ERROR,
-          reason.statusText ? reason.statusText : 'An unexpected error has occurred'
+          messageText
         );
       }
     );

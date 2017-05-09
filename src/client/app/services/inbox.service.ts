@@ -39,7 +39,7 @@ export class InboxService {
       this.messagingService.show(
         'inbox',
         CONSTANT.MESSAGING.ERROR,
-        reason.statusText ? reason.statusText : 'An unexpected error has occurred, try again later'
+        reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR
       );
     });
   }
@@ -60,7 +60,7 @@ export class InboxService {
       this.messagingService.show(
         'inbox-thread',
         CONSTANT.MESSAGING.ERROR,
-        reason.statusText ? reason.statusText : 'An unexpected error has occurred, try again later',
+        reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
         true
       );
       return false;
@@ -77,7 +77,7 @@ export class InboxService {
        this.messagingService.show(
         'inbox-thread',
         CONSTANT.MESSAGING.ERROR,
-        reason.statusText ? reason.statusText : 'An unexpected error has occurred, try again later'
+        reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR
       );
     });
 
@@ -101,7 +101,7 @@ export class InboxService {
       this.messagingService.show(
         calledFrom,
         CONSTANT.MESSAGING.ERROR,
-        reason.statusText ? reason.statusText : 'An unexpected error has occurred, try again later',
+        reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
         true
       );
     });

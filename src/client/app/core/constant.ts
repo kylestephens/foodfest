@@ -101,6 +101,10 @@ export class CONSTANT extends CommonConstants {
 
   };
 
+  static readonly ERRORS = {
+    UNEXPECTED_ERROR:  'An unexpected error has occurred, try again later'
+  }
+
   /**
    * Search results order by options
    */
