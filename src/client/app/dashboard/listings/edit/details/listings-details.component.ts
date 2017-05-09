@@ -135,7 +135,7 @@ export class ListingsDetailsComponent implements OnInit, OnChanges {
       me.vendor['instagram_address'] = responseBody['instagram_address'];
       me.vendor['business_type'] = responseBody['business_type'];
       me.vendor['phone_number'] = responseBody['phone_number'];
-      me.vendor['event_type'] = responseBody['event_type'];
+      me.vendor['event_types'] = responseBody['event_types'];
       me.vendor['business_setup'] = responseBody['business_setup'];
       me.vendor['styles'] = responseBody['styles'];
       me.vendor['diet_requirements'] = responseBody['diet_requirements'];
