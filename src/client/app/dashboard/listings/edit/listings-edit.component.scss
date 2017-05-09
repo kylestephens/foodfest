@@ -1,18 +1,68 @@
 @import '../../../../scss/core/variables';
 @import '../../../../scss/core/settings';
 
+$active-menu-arrow: 10px;
+
 .listings-edit-menu {
 
   background: $gray-lightest;
   width: 100%;
   float: left;
+  margin-bottom: $padding-xlarge-vertical;
+  box-shadow: 2px 0 8px 0 rgba(0, 0, 0, 0.2);
 
   &__item {
     width: 33%;
     float: left;
-    text-align: center;
     padding: $padding-large-vertical 0;
-    border-right: 1px solid black;
+    text-align: center;
+    border-right: 1px solid $gray-light;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &--active {
+      position: relative;
+      background: #fff;
+      box-shadow: inset 0 0 10px $gray-lightest;
+      border-right: 1px solid $gray-light;
+
+      &.menu-two ~ hr {
+        margin-left: 33%;
+      }
+
+      &.menu-three ~ hr {
+        margin-left: 66%;
+      }
+    }
+  }
+
+  hr {
+    position: relative;
+    height: 2px;
+    width: 33%;
+    margin: 0;
+    background: $brand-primary;
+    border: none;
+    transition: .3s ease-in-out;
+
+    &:after, &:before {
+      top: 100%;
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+    &:after {
+      border-color: rgba(136, 183, 213, 0);
+      border-top-color: $brand-primary;
+      border-width: $active-menu-arrow;
+      margin-left: -$active-menu-arrow;
+    }
   }
 
 }

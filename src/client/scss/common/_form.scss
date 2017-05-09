@@ -239,8 +239,14 @@ $button-bg: rgba(0, 0, 0, 0.05);
     pointer-events: none;
     text-align: center;
   }
+}
 
-  // @media all and (min-width: $screen-sm-min) {
-  //   padding-top: 35px;
-  // }
+.form-row {
+  margin: $padding-large-vertical 0;
+}
+
+.form-btn-cta {
+  margin-top: 16px;
+  @include button(#fff, $brand-primary-cta);
+  font-weight: 400;
 }

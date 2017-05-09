@@ -10,6 +10,7 @@ $icon-width:       32px;
   background: $brand-secondary url('../assets/img/patterns/food-20.png');
   background-repeat: repeat-x repeat-y;
   color: #fff;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.6);
 
   // Offset the fixed header height
   position: relative;
