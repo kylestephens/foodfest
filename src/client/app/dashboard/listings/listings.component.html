@@ -1,7 +1,7 @@
 <div *ngIf="vendors?.length">
 
   <!-- SIDE BAR -->
-  <div *ngIf="!isPhone || (isPhone && !showThread)" class=" [ col-xs-12 col-sm-4 col-md-3 ] listings-container">
+  <div *ngIf="vendors?.length > 1 && !isPhone || (isPhone && !showThread)" class=" [ col-xs-12 col-sm-4 col-md-3 ] listings-container">
     <div *ngFor="let vendor of vendors; let i = index;"
         class="listings-overview"
         [ngClass]="{ 'active': vendor.id === selectedVendor?.id }"
@@ -19,7 +19,8 @@
   <!-- / SIDE BAR -->
 
   <!-- MAIN CONTENT -->
-  <div class="listings-edit [ col-xs-12 col-sm-8 col-md-9 ]">
+  <div class="listings-edit [ col-xs-12 ]"
+    [ngClass]="{ 'col-sm-8 col-md-9': vendors?.length > 1 }">
     <ak-listings-edit [hidden]="isPhone && !showThread" [vendor]="selectedVendor">
     </ak-listings-edit>
   </div>

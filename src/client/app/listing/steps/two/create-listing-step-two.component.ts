@@ -77,7 +77,7 @@ export class CreateListingStepTwoComponent implements AfterViewInit {
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(me.searchElementRef.nativeElement);
-      autocomplete.addListener("place_changed", () => {
+      autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
           // get the place result
           let place = google.maps.places.PlaceResult = autocomplete.getPlace();

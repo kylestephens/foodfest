@@ -1,8 +1,12 @@
 import {
   Component,
   Input,
+  AfterViewInit,
+  ElementRef,
+  NgZone,
   OnChanges,
   OnInit,
+  ViewChild,
   ViewEncapsulation
 }                                        from '@angular/core';
 import {
@@ -22,7 +26,10 @@ import { RestService }                   from '../../../../services/rest.service
 import { SettingsService }               from '../../../../services/settings.service';
 import { ValidationService }             from '../../../../services/validation.service';
 
+import { AgmCoreModule, MapsAPILoader }  from 'angular2-google-maps/core';
 import { SelectModule }                  from 'ng2-select';
+
+declare var google: any;
 
 /**
  * This class represents the lazy loaded listing edits component
@@ -35,14 +42,17 @@ import { SelectModule }                  from 'ng2-select';
   encapsulation: ViewEncapsulation.None
 })
 
-export class ListingsDetailsComponent implements OnInit, OnChanges {
+export class ListingsDetailsComponent implements AfterViewInit, OnInit, OnChanges {
 
   @Input()
   vendor: Vendor;
 
   public editingVendor: Vendor;
-
+  public addressDetails: any;
   public listingsDetailsForm: FormGroup;
+
+  @ViewChild('mapsAutocomplete')
+  public placesElementRef: ElementRef;
 
   // These objects consist of 'name' + 'id'
   private styles: Array<any> = [];
@@ -53,6 +63,8 @@ export class ListingsDetailsComponent implements OnInit, OnChanges {
 
   constructor(
     private fb: FormBuilder,
+    private mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone,
     private accountService: AccountService,
     private messagingService: MessagingService,
     private restService: RestService,
@@ -93,6 +105,25 @@ export class ListingsDetailsComponent implements OnInit, OnChanges {
     this._restoreFormValues(this.editingVendor);
   };
 
+  ngAfterViewInit() {
+    var me = this;
+
+    //load Places Autocomplete
+    this.mapsAPILoader.load().then(() => {
+      let autocomplete = new google.maps.places.Autocomplete(me.placesElementRef.nativeElement);
+      autocomplete.addListener('place_changed', () => {
+        this.ngZone.run(() => {
+          let place = google.maps.places.PlaceResult = autocomplete.getPlace();
+          if (place.geometry === undefined || place.geometry === null) {
+            return;
+          }
+          me.listingsDetailsForm.controls['businessAddress'].setValue(me.placesElementRef.nativeElement.value);
+          me.addressDetails = place;
+        });
+      });
+    });
+  };
+
   ngOnChanges(changes: any) {
     if(changes.vendor && changes.vendor.currentValue) {
       this.editingVendor = changes.vendor.currentValue;
@@ -106,40 +137,40 @@ export class ListingsDetailsComponent implements OnInit, OnChanges {
     this.restService.post(
       me.settingsService.getServerBaseUrl() + '/vendors/edit', {
         id: me.editingVendor.id,
-        business_name: me.listingsDetailsForm.controls['businessName'].value,
-        business_website: me.listingsDetailsForm.controls['businessWebsite'].value,
-        business_address: me.listingsDetailsForm.controls['businessAddress'].value,
-        business_latitude: me.listingsDetailsForm.controls['businessName'].value,
-        business_longitude: me.listingsDetailsForm.controls['businessName'].value,
-        facebook_address: me.listingsDetailsForm.controls['facebookAddress'].value,
-        twitter_address: me.listingsDetailsForm.controls['twitterAddress'].value,
-        instagram_address: me.listingsDetailsForm.controls['instagramAddress'].value,
-        business_type: me.listingsDetailsForm.controls['businessType'].value,
-        phone_number: me.listingsDetailsForm.controls['phoneNumber'].value,
-        event_type: me.listingsDetailsForm.controls['eventType'].value,
-        business_setup: me.listingsDetailsForm.controls['businessSetup'].value,
-        styles: me.listingsDetailsForm.controls['styles'].value,
-        diet_requirements: me.listingsDetailsForm.controls['dietRequirements'].value,
-        description: me.vendor.description,
-        listed_items: me.vendor.listed_items
+        business_name:       me.listingsDetailsForm.controls['businessName'].value,
+        business_website:    me.listingsDetailsForm.controls['businessWebsite'].value,
+        business_address:    me.listingsDetailsForm.controls['businessAddress'].value,
+        business_latitude:   me.listingsDetailsForm.controls['businessName'].value,
+        business_longitude:  me.listingsDetailsForm.controls['businessName'].value,
+        facebook_address:    me.listingsDetailsForm.controls['facebookAddress'].value,
+        twitter_address:     me.listingsDetailsForm.controls['twitterAddress'].value,
+        instagram_address:   me.listingsDetailsForm.controls['instagramAddress'].value,
+        business_type:       me.listingsDetailsForm.controls['businessType'].value,
+        phone_num:           me.listingsDetailsForm.controls['phoneNumber'].value,
+        event_types:         me.listingsDetailsForm.controls['eventType'].value,
+        business_setup:      me.listingsDetailsForm.controls['businessSetup'].value,
+        styles:              me.listingsDetailsForm.controls['styles'].value,
+        diet_requirements:   me.listingsDetailsForm.controls['dietRequirements'].value,
+        description:         me.vendor.description,
+        listed_items:        me.vendor.listed_items
       }, this.accountService.getUser().akAccessToken
     ).then(function(response: any) {
       let responseBody = response.json();
-      me.vendor['business_name'] = responseBody['business_name'];
-      me.vendor['business_website'] = responseBody['business_website'];
-      me.vendor['business_address'] = responseBody['business_address'];
-      me.vendor['business_latitude'] = responseBody['business_latitude'];
-      me.vendor['business_longitude'] = responseBody['business_longitude'];
-      me.vendor['facebook_address'] = responseBody['facebook_address'];
-      me.vendor['twitter_address'] = responseBody['twitter_address'];
-      me.vendor['instagram_address'] = responseBody['instagram_address'];
-      me.vendor['business_type'] = responseBody['business_type'];
-      me.vendor['phone_number'] = responseBody['phone_number'];
-      me.vendor['event_types'] = responseBody['event_types'];
-      me.vendor['business_setup'] = responseBody['business_setup'];
-      me.vendor['styles'] = responseBody['styles'];
-      me.vendor['diet_requirements'] = responseBody['diet_requirements'];
-      me.editingVendor = me.vendor;
+      me.vendor['business_name']       = responseBody['business_name'];
+      me.vendor['business_website']    = responseBody['business_website'];
+      me.vendor['business_address']    = responseBody['business_address'];
+      me.vendor['business_latitude']   = responseBody['business_latitude'];
+      me.vendor['business_longitude']  = responseBody['business_longitude'];
+      me.vendor['facebook_address']    = responseBody['facebook_address'];
+      me.vendor['twitter_address']     = responseBody['twitter_address'];
+      me.vendor['instagram_address']   = responseBody['instagram_address'];
+      me.vendor['business_type']       = responseBody['business_type'];
+      me.vendor['phone_num']           = responseBody['phone_num'];
+      me.vendor['event_types']         = responseBody['event_types'];
+      me.vendor['business_setup']      = responseBody['business_setup'];
+      me.vendor['styles']              = responseBody['styles'];
+      me.vendor['diet_requirements']   = responseBody['diet_requirements'];
+      me.editingVendor                 = me.vendor;
       me._restoreFormValues(me.editingVendor);
     }, (reason: any) => {
       me.messagingService.show(
@@ -152,10 +183,10 @@ export class ListingsDetailsComponent implements OnInit, OnChanges {
   };
 
   private _initDropdowns() {
-    this.styles = this.settingsService.getStyles();
-    this.businessSetups = this.settingsService.getBusinessSetups();
-    this.businessTypes = this.settingsService.getBusinessTypes();
-    this.eventTypes = this.settingsService.getEventTypes();
+    this.styles           = this.settingsService.getStyles();
+    this.businessSetups   = this.settingsService.getBusinessSetups();
+    this.businessTypes    = this.settingsService.getBusinessTypes();
+    this.eventTypes       = this.settingsService.getEventTypes();
     this.dietRequirements = this.settingsService.getDietRequirements();
   };
 
@@ -178,8 +209,8 @@ export class ListingsDetailsComponent implements OnInit, OnChanges {
     if(editingVendor.diet_requirements) {
       this.listingsDetailsForm.controls['dietRequirements'].setValue(editingVendor.diet_requirements);
     }
-    if(editingVendor.phone_number) {
-      this.listingsDetailsForm.controls['phoneNumber'].setValue(editingVendor.phone_number);
+    if(editingVendor.phone_num) {
+      this.listingsDetailsForm.controls['phoneNumber'].setValue(editingVendor.phone_num);
     }
     if(editingVendor.business_address) {
       this.listingsDetailsForm.controls['businessAddress'].setValue(editingVendor.business_address);

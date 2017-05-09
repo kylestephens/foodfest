@@ -88,23 +88,23 @@ export class CreateListingService {
 
       this.restService.post(
         me.settingsService.getServerBaseUrl() + '/vendors/create', {
-          id: null,
-          business_name: stepOne.businessName,
-          business_address: stepTwo.businessAddress,
-          business_latitude: lat,
+          id:                 null,
+          business_name:      stepOne.businessName,
+          business_address:   stepTwo.businessAddress,
+          business_latitude:  lat,
           business_longitude: lng,
-          business_website: stepTwo.businessWebsite,
-          facebook_address: stepThree.facebookAddress,
-          twitter_address: stepThree.twitterAddress,
-          instagram_address: stepThree.instagramAddress,
-          business_type: stepOne.businessType,
-          phone_number: stepTwo.phoneNumber,
-          description: stepFive.businessDescription,
-          event_type: stepOne.eventType,
-          business_setup: stepOne.businessSetup,
-          styles: stepOne.styles,
-          diet_requirements: stepOne.dietRequirements,
-          listed_items: stepFour
+          business_website:   stepTwo.businessWebsite,
+          facebook_address:   stepThree.facebookAddress,
+          twitter_address:    stepThree.twitterAddress,
+          instagram_address:  stepThree.instagramAddress,
+          business_type:      stepOne.businessType,
+          phone_num:          stepTwo.phoneNumber,
+          description:        stepFive.businessDescription,
+          event_types:        stepOne.eventType,
+          business_setup:     stepOne.businessSetup,
+          styles:             stepOne.styles,
+          diet_requirements:  stepOne.dietRequirements,
+          listed_items:       stepFour
         }, this.accountService.getUser().akAccessToken
       ).then(function(response: any) {
         let responseBody = response.json();
@@ -153,22 +153,22 @@ export class CreateListingService {
 
       this.restService.post(
         me.settingsService.getServerBaseUrl() + '/vendors/edit', {
-          id: vendorId,
-          business_name: stepOne.businessName,
-          business_address: stepTwo.businessAddress,
-          business_latitude: addressInfo.geometry.location.lat,
+          id:                 vendorId,
+          business_name:      stepOne.businessName,
+          business_address:   stepTwo.businessAddress,
+          business_latitude:  addressInfo.geometry.location.lat,
           business_longitude: addressInfo.geometry.location.lng,
-          facebook_address: stepThree.facebookAddress,
-          twitter_address: stepThree.twitterAddress,
-          instagram_address: stepThree.instagramAddress,
-          business_type: stepOne.businessType,
-          phone_number: stepTwo.phoneNumber,
-          description: stepFive.businessDescription,
-          event_type: stepOne.eventType,
-          business_setup: stepOne.businessSetup,
-          styles: stepOne.styles,
-          diet_requirements: stepOne.dietRequirements,
-          listed_items: stepFour
+          facebook_address:   stepThree.facebookAddress,
+          twitter_address:    stepThree.twitterAddress,
+          instagram_address:  stepThree.instagramAddress,
+          business_type:      stepOne.businessType,
+          phone_num:          stepTwo.phoneNumber,
+          description:        stepFive.businessDescription,
+          event_types:        stepOne.eventType,
+          business_setup:     stepOne.businessSetup,
+          styles:             stepOne.styles,
+          diet_requirements:  stepOne.dietRequirements,
+          listed_items:       stepFour
         }, this.accountService.getUser().akAccessToken
       ).then(function(response: any) {
         let responseBody = response.json();

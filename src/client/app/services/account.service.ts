@@ -266,14 +266,16 @@ export class AccountService {
   reset = function() {
     this.setLoggedIn(false);
     this.user = new User();
-    this.vendor = new Vendor();
+    this.vendors = [];
+    this.favourites = [];
   };
 
   toJson = function() {
     var json: any = {};
-    json['loggedIn'] = this.loggedIn;
-    json['user'] = this.user;
-    json['vendor'] = this.vendor;
+    json['loggedIn']   = this.loggedIn;
+    json['user']       = this.user;
+    json['vendors']    = this.vendors;
+    json['favourites'] = this.favourites;
     return json;
   };
 
