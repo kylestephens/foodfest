@@ -183,8 +183,8 @@ export class ListingsDetailsComponent implements AfterViewInit, OnInit, OnChange
       me.vendor['business_setup']      = responseBody['business_setup'][0];
       me.vendor['styles']              = responseBody['styles'];
       me.vendor['diet_requirements']   = responseBody['diet_requirements'];
-      me.editingVendor                 = me.vendor;
 
+      me.editingVendor = me.vendor;
       me._restoreFormValues(me.editingVendor);
       me.messagingService.show(
         'listings-details-edit',
