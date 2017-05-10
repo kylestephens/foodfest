@@ -186,17 +186,15 @@ export class ListingsDetailsComponent implements AfterViewInit, OnInit, OnChange
       me.editingVendor                 = me.vendor;
 
       me._restoreFormValues(me.editingVendor);
-      window.document.getElementsByClassName('page-body')[0].scrollIntoView();
       me.messagingService.show(
-        'listings-edit',
+        'listings-details-edit',
         CONSTANT.MESSAGING.SUCCESS,
         'Your listing has been successfully updated',
         true
       );
     }, (reason: any) => {
-      window.document.getElementsByClassName('page-body')[0].scrollIntoView();
       me.messagingService.show(
-        'listings-edit',
+        'listings-details-edit',
         CONSTANT.MESSAGING.ERROR,
         reason.statusText ? reason.statusText : 'An unexpected error has occurred',
         true
