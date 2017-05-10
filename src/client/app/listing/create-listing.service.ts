@@ -199,7 +199,6 @@ export class CreateListingService {
           id: vendorId,
           logo_photo: businessLogo,
           cover_photo: coverImage,
-          num_photos: additionalImages.length,
           images: additionalImages
         }, this.accountService.getUser().akAccessToken
       ).then(function(response: any) {

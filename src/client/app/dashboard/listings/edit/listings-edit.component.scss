@@ -12,11 +12,15 @@ $active-menu-arrow: 10px;
   box-shadow: 2px 0 8px 0 rgba(0, 0, 0, 0.2);
 
   &__item {
-    width: 33%;
+    width: 33.33%;
     float: left;
     padding: $padding-large-vertical 0;
     text-align: center;
     border-right: 1px solid $gray-light;
+
+    &:nth-of-type(3) {
+      border-right: 0;
+    }
 
     &:hover {
       cursor: pointer;
@@ -29,11 +33,11 @@ $active-menu-arrow: 10px;
       border-right: 1px solid $gray-light;
 
       &.menu-two ~ hr {
-        margin-left: 33%;
+        margin-left: 33.33%;
       }
 
       &.menu-three ~ hr {
-        margin-left: 66%;
+        margin-left: 66.66%;
       }
     }
   }
@@ -41,7 +45,7 @@ $active-menu-arrow: 10px;
   hr {
     position: relative;
     height: 2px;
-    width: 33%;
+    width: 33.33%;
     margin: 0;
     background: $brand-primary;
     border: none;

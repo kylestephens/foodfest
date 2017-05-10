@@ -35,8 +35,6 @@ declare var google: any;
 
 export class CreateListingStepTwoComponent implements AfterViewInit {
 
-  public latitude: number;
-  public longitude: number;
   public addressDetails: any;
 
   @ViewChild('autocompleteSearch')

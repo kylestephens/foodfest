@@ -48,8 +48,11 @@ export class ListingsDetailsComponent implements AfterViewInit, OnInit, OnChange
   vendor: Vendor;
 
   public editingVendor: Vendor;
-  public addressDetails: any;
   public listingsDetailsForm: FormGroup;
+
+  public addressInfo: any;
+  public latitude: number;
+  public longitude: number;
 
   @ViewChild('mapsAutocomplete')
   public placesElementRef: ElementRef;
@@ -118,7 +121,7 @@ export class ListingsDetailsComponent implements AfterViewInit, OnInit, OnChange
             return;
           }
           me.listingsDetailsForm.controls['businessAddress'].setValue(me.placesElementRef.nativeElement.value);
-          me.addressDetails = place;
+          me.addressInfo = place;
         });
       });
     });
@@ -133,15 +136,25 @@ export class ListingsDetailsComponent implements AfterViewInit, OnInit, OnChange
 
   public submitForm(value: any) {
     var me = this;
-    debugger;
+
+    if(this.addressInfo) {
+      if (typeof this.addressInfo.geometry.location.lat == 'function') {
+        this.editingVendor.business_latitude = this.addressInfo.geometry.location.lat();
+        this.editingVendor.business_longitude = this.addressInfo.geometry.location.lng();
+      } else {
+        this.editingVendor.business_latitude = this.addressInfo.geometry.location.lat;
+        this.editingVendor.business_longitude = this.addressInfo.geometry.location.lng;
+      }
+    }
+
     this.restService.post(
       me.settingsService.getServerBaseUrl() + '/vendors/edit', {
         id: me.editingVendor.id,
         business_name:       me.listingsDetailsForm.controls['businessName'].value,
         business_website:    me.listingsDetailsForm.controls['businessWebsite'].value,
         business_address:    me.listingsDetailsForm.controls['businessAddress'].value,
-        business_latitude:   me.listingsDetailsForm.controls['businessName'].value,
-        business_longitude:  me.listingsDetailsForm.controls['businessName'].value,
+        business_latitude:   me.editingVendor.business_latitude,
+        business_longitude:  me.editingVendor.business_longitude,
         facebook_address:    me.listingsDetailsForm.controls['facebookAddress'].value,
         twitter_address:     me.listingsDetailsForm.controls['twitterAddress'].value,
         instagram_address:   me.listingsDetailsForm.controls['instagramAddress'].value,
@@ -167,12 +180,21 @@ export class ListingsDetailsComponent implements AfterViewInit, OnInit, OnChange
       me.vendor['business_type']       = responseBody['business_type'];
       me.vendor['phone_num']           = responseBody['phone_num'];
       me.vendor['event_types']         = responseBody['event_types'];
-      me.vendor['business_setup']      = responseBody['business_setup'];
+      me.vendor['business_setup']      = responseBody['business_setup'][0];
       me.vendor['styles']              = responseBody['styles'];
       me.vendor['diet_requirements']   = responseBody['diet_requirements'];
       me.editingVendor                 = me.vendor;
+
       me._restoreFormValues(me.editingVendor);
+      window.document.getElementsByClassName('page-body')[0].scrollIntoView();
+      me.messagingService.show(
+        'listings-edit',
+        CONSTANT.MESSAGING.SUCCESS,
+        'Your listing has been successfully updated',
+        true
+      );
     }, (reason: any) => {
+      window.document.getElementsByClassName('page-body')[0].scrollIntoView();
       me.messagingService.show(
         'listings-edit',
         CONSTANT.MESSAGING.ERROR,
