@@ -3,6 +3,8 @@
 @import '../../../../../scss/mixins/buttons';
 
 .listings-description {
+  width: 100%;
+  padding: $padding-large-vertical $padding-large-horizontal;
   .form-row:first-of-type {
     margin-top: 0;
   }
