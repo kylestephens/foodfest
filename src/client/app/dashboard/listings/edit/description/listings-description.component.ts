@@ -10,13 +10,13 @@ import { Vendor }                        from '../../../../shared/model/vendor';
  */
 @Component({
   moduleId: module.id,
-  selector: 'ak-listings-menu',
-  templateUrl: 'listings-menu.component.html',
-  styleUrls: ['listings-menu.component.css'],
+  selector: 'ak-listings-description',
+  templateUrl: 'listings-description.component.html',
+  styleUrls: ['listings-description.component.css'],
   encapsulation: ViewEncapsulation.None
 })
 
-export class ListingsMenuComponent {
+export class ListingsDescriptionComponent {
 
   @Input()
   vendor: Vendor;
