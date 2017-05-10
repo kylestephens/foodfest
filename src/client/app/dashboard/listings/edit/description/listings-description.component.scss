@@ -1,2 +1,16 @@
 @import '../../../../../scss/core/variables';
 @import '../../../../../scss/core/settings';
+@import '../../../../../scss/mixins/buttons';
+
+.listings-description {
+  .form-row:first-of-type {
+    margin-top: 0;
+  }
+}
+
+.form-btn-add-item {
+  top: $padding-large-vertical;
+  right: $padding-large-horizontal;
+  @include button(#fff, $brand-secondary-cta);
+  padding: 6px 12px;                  // overriding default button padding
+}

@@ -55,8 +55,8 @@ export class CreateListingStepFiveComponent {
       'businessCoverImage': [null],
       'businessAdditionalImages': [null],
       'businessDescription': new FormControl('', [
-          Validators.required
-        ])
+        Validators.required
+      ])
     });
   };
 
