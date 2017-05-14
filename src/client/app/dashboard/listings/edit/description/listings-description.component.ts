@@ -1,7 +1,6 @@
 import {
   Component,
   Input,
-  OnChanges,
   OnInit,
   ViewChild,
   ViewEncapsulation
@@ -35,7 +34,7 @@ import { ValidationService }             from '../../../../services/validation.s
   encapsulation: ViewEncapsulation.None
 })
 
-export class ListingsDescriptionComponent implements OnChanges, OnInit {
+export class ListingsDescriptionComponent implements OnInit {
 
   @Input()
   vendor: Vendor;
@@ -70,13 +69,6 @@ export class ListingsDescriptionComponent implements OnChanges, OnInit {
     this._restoreFormValues(this.editingVendor);
   };
 
-  ngOnChanges(changes: any) {
-    if(changes.vendor && changes.vendor.currentValue) {
-      this.editingVendor = changes.vendor.currentValue;
-      this._restoreFormValues(this.editingVendor);
-    }
-  };
-
   public onClickAddItem() {
     let controls = (<FormArray>this.listingsDescriptionForm.controls['listingItems']).controls;
     let count = controls.length;
@@ -87,6 +79,56 @@ export class ListingsDescriptionComponent implements OnChanges, OnInit {
         this._initItem()
       );
     }
+  };
+
+  public onClickRemoveItem(index: number) {
+    debugger;
+    (<FormArray>this.listingsDescriptionForm.controls['listingItems']).removeAt(index);
+  };
+
+  public submitForm(value: any) {
+    var me = this;
+
+    this.restService.post(
+      me.settingsService.getServerBaseUrl() + '/vendors/edit', {
+        id: me.editingVendor.id,
+        business_name:       me.vendor.business_name,
+        business_website:    me.vendor.business_website,
+        business_address:    me.vendor.business_address,
+        business_latitude:   me.vendor.business_latitude,
+        business_longitude:  me.vendor.business_longitude,
+        facebook_address:    me.vendor.facebook_address,
+        twitter_address:     me.vendor.twitter_address,
+        instagram_address:   me.vendor.instagram_address,
+        business_type:       me.vendor.business_type,
+        phone_num:           me.vendor.phone_num,
+        event_types:         me.vendor.event_types,
+        business_setup:      me.vendor.business_setup,
+        styles:              me.vendor.styles,
+        diet_requirements:   me.vendor.diet_requirements,
+        description:         me.listingsDescriptionForm.controls['businessDescription'].value,
+        listed_items:        me.listingsDescriptionForm.controls['listingItems'].value
+      }, this.accountService.getUser().akAccessToken
+    ).then(function(response: any) {
+      let responseBody = response.json();
+      me.vendor['description']   = responseBody['description'] ? responseBody['description'] : '';
+      me.vendor['listed_items']  = responseBody['listed_items'] ? responseBody['listed_items'] : [];
+      me.editingVendor = me.vendor;
+
+      me.messagingService.show(
+        'listings-description-edit',
+        CONSTANT.MESSAGING.SUCCESS,
+        'Your listing has been successfully updated',
+        true
+      );
+    }, (reason: any) => {
+      me.messagingService.show(
+        'listings-description-edit',
+        CONSTANT.MESSAGING.ERROR,
+        reason.statusText ? reason.statusText : 'An unexpected error has occurred',
+        true
+      );
+    });
   };
 
   private _initItem(value?: any) {

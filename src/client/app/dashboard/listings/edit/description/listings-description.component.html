@@ -23,11 +23,20 @@
     <div class="form-row [ row ]"
       formArrayName="listingItems"
       *ngFor="let item of listingsDescriptionForm.controls.listingItems.controls; let i = index">
+
       <div class="[ col-xs-12 ]">
+
         <fieldset [formGroupName]="i">
+
+          <div class="listing-item__delete" (click)="onClickRemoveItem(i)">
+            <span class="ak-icon-cross"></span>
+            <span>Delete</span>
+          </div>
+
           <legend *ngIf="itemType == 'Menu'">Menu Item</legend>
           <legend *ngIf="itemType == 'Product'">Product</legend>
           <legend *ngIf="itemType == 'Item'">Item</legend>
+
           <label class="form-label">Title</label>
           <div class="form-input form-input--has-icon sign-up-field">
             <div class="form-icon ak-icon-clipboard"></div>
@@ -52,8 +61,11 @@
               formControlName="item_description"
               class="item_description"></textarea>
           </div>
+
         </fieldset>
+
       </div>
+
     </div>
     <!-- / Menu Item -->
 
@@ -70,7 +82,7 @@
     </div>
     <!-- / Add Menu Item -->
 
-    <ak-messaging ref="listings-details-edit">
+    <ak-messaging ref="listings-description-edit">
     </ak-messaging>
 
     <!-- Form Buttons -->
