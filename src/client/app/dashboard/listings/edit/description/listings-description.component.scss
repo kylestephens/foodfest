@@ -14,12 +14,13 @@
 
   &__delete {
     position: absolute;
-    top: 2px;
-    right: 10px;
+    top: 20px;
+    right: 34px;
     background: #fff;
     font-size: $font-size-small;
     &:hover {
       cursor: pointer;
+      color: $brand-links;
     }
   }
 
