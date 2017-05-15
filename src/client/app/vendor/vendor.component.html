@@ -24,11 +24,11 @@
   <section class="card [ container ]">
 
     <!-- ONLY IF EDITING -->
-    <a *ngIf="isEditing" [routerLink]="['/list-with-us/create-listing/step-5']" class="hero__return-editing">
+    <a *ngIf="isEditing && isOwnVendor" [routerLink]="['/list-with-us/create-listing/step-5']" class="hero__return-editing">
       <span class="ak-icon-chevron-thin-left">
       </span> Edit Details
     </a>
-    <button *ngIf="isEditing" class="hero__proceed-payment" [routerLink]="['/list-with-us/payment/']">
+    <button *ngIf="isEditing && isOwnVendor" class="hero__proceed-payment" [routerLink]="['/list-with-us/payment/']">
       Pay &amp; Publish
       <span class="ak-icon-chevron-thin-right">
       </span>

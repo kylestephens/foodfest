@@ -86,14 +86,6 @@ export class AccountService {
     );
   };
 
-  getUserVendors(): Promise<Array<Vendor>> {
-    return this.restService.get(
-      this.settingsService.getServerBaseUrl() + '/users/activevendors', null, this.getUser().akAccessToken,
-    ).then((response: Response) => {
-      return response.json() as Vendor[];
-    });
-  }
-
   isLoggedIn = function () {
     return this.loggedIn;
   };
@@ -110,6 +102,8 @@ export class AccountService {
    * Otherwise, lookup
    */
   getFavourites = function() {
+    if(!this.isLoggedIn()) return [];
+
     return new Promise((resolve, reject) => {
 
       let localStorageFavs = this.localStorageService.retrieve(
@@ -274,12 +268,27 @@ export class AccountService {
   };
 
   /**
-   * Returns all linked vendor
+   * Returns all linked, published vendors
+   */
+  getUserVendors(): Promise<Array<Vendor>> {
+    if(!this.isLoggedIn()) return [];
+
+    return this.restService.get(
+      this.settingsService.getServerBaseUrl() + '/users/activevendors', null, this.getUser().akAccessToken,
+    ).then((response: Response) => {
+      return response.json() as Vendor[];
+    });
+  };
+
+  /**
+   * Returns all linked vendor, published or unpublished
    *
    * If exist in session -> return those
    * Otherwise, lookup
    */
   getVendors = function() {
+    if(!this.isLoggedIn()) return [];
+
     return new Promise((resolve, reject) => {
       if(this.vendors && this.vendors.length > 0) {
         resolve(this.vendors);
@@ -302,9 +311,23 @@ export class AccountService {
    * Returns all linked vendor ids
    */
   getVendorIds = function() {
-    return this.vendors.map((vendor: Vendor) => {
-      return vendor.id;
-    });
+    if (this.vendors) {
+      return this.vendors.map((vendor: Vendor) => {
+        return vendor.id;
+      });
+    } else {
+      return [];
+    }
+  };
+
+  /**
+   * Check if supplied vendor belongs to user
+   *
+   * @param {number} vendorId
+   */
+  isOwnVendor(vendorId: number): boolean {
+    if(this.getVendorIds().indexOf(vendorId) > -1) return true;
+    return false;
   };
 
   reloadSession = function(sessionDetails: any, sessionToken: any) {
