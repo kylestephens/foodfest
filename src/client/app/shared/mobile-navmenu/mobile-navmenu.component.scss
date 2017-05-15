@@ -31,7 +31,7 @@
   position: absolute;
   width: 25px;
   height: 2px;
-  background: #fff;
+  background: $brand-body-bg;
   transform-origin: 100% 50%;
   transition: all 750ms ease-in-out;
 }

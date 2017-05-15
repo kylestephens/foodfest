@@ -101,7 +101,7 @@ $block-height: 400px;
   .plan-box {
     display: flex;
     width: 33.3333%;
-    background: #ffffff;
+    background: $brand-body-bg;
     margin: $padding-large-vertical 0;
     min-height: 280px;
     border-radius: $brand-border-radius;

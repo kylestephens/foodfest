@@ -168,8 +168,6 @@ article {
     }
 
     &:disabled {
-      background-color: $brand-body-bg;
-
       &::placeholder {
         color: $gray-lighter;
       }

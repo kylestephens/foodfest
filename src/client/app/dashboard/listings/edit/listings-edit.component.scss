@@ -28,7 +28,7 @@ $active-menu-arrow: 10px;
 
     &--active {
       position: relative;
-      background: #fff;
+      background: $brand-body-bg;
       box-shadow: inset 0 1px 10px 2px $gray-lightest;
       border-right: 1px solid $gray-light;
 

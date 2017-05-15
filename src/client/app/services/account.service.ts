@@ -323,7 +323,6 @@ export class AccountService {
    * @param {number} vendorId
    */
   isOwnVendor(vendorId: number): boolean {
-    debugger;
     if(this.getVendorIds().indexOf(vendorId) > -1) return true;
     return false;
   };

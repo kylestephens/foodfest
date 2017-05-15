@@ -1,5 +1,12 @@
-import { Injectable }                               from '@angular/core';
-import { Headers, Http, Response, URLSearchParams, RequestOptions } from '@angular/http';
+import { Injectable }         from '@angular/core';
+
+import {
+  Headers,
+  Http,
+  Response,
+  URLSearchParams,
+  RequestOptions
+}                             from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -51,7 +58,7 @@ export class RestService {
   /**
    * Use multipart/form-data when your form includes
    * any <input type="file"> elements
-   **/
+   */
   public postMultiPart = function (url: string, data: any, headers: any, options: any) {
     var headers = headers || {};
     headers['Content-Type'] = 'multipart/form-data';

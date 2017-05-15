@@ -22,6 +22,12 @@ export class CONSTANT extends CommonConstants {
       HIDE_MESSAGE_BY_REF:  'hideMessageByRef'
     },
 
+    // LoaderService event constants
+    LOADER: {
+      SHOW_LOADER:           'showLoader',
+      HIDE_LOADER:           'hideLoader'
+    },
+
     // ModalService event constants
     MODAL: {
       SHOW_MODAL:           'showModal',

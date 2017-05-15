@@ -10,6 +10,7 @@ import { ConfirmDialogComponent }         from './confirm-dialog/confirm-dialog.
 import { FormMessagesComponent }          from './form-messages/form-messages.component';
 import { HeartComponent }                 from './heart/heart.component';
 import { ImageScrollerComponent }         from './image-scroller/image-scroller.component';
+import { LoaderComponent }                from './loader/loader.component';
 import { MessagingComponent }             from './messaging/messaging.component';
 import { MobileNavmenuComponent }         from './mobile-navmenu/mobile-navmenu.component';
 import { NavbarComponent }                from './navbar/navbar.component';
@@ -35,6 +36,7 @@ import { SignupComponent }                from './sign/signup/signup.component';
     ConfirmDialogComponent,
     FormMessagesComponent,
     ImageScrollerComponent,
+    LoaderComponent,
     MessagingComponent,
     ModalComponent,
     TwitterFeedComponent,
@@ -51,6 +53,7 @@ import { SignupComponent }                from './sign/signup/signup.component';
     ConfirmDialogComponent,
     FormMessagesComponent,
     ImageScrollerComponent,
+    LoaderComponent,
     MessagingComponent,
     ModalComponent,
     TwitterFeedComponent,
