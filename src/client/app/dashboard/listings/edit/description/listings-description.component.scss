@@ -2,13 +2,18 @@
 @import '../../../../../scss/core/settings';
 @import '../../../../../scss/mixins/buttons';
 
+
+
 .listings-description {
   width: 100%;
   padding: $padding-large-vertical $padding-large-horizontal;
+
   .form-row:first-of-type {
     margin-top: 0;
   }
 }
+
+
 
 .listing-item {
 
@@ -18,6 +23,7 @@
     right: 34px;
     background: #fff;
     font-size: $font-size-small;
+
     &:hover {
       cursor: pointer;
       color: $brand-links;
@@ -25,6 +31,8 @@
   }
 
 }
+
+
 
 .form-btn-add-item {
   top: $padding-large-vertical;

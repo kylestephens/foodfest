@@ -1,0 +1,19 @@
+@import '../../../../scss/core/variables';
+@import '../../../../scss/core/settings';
+
+.listing-item {
+
+  &__delete {
+    position: absolute;
+    top: 20px;
+    right: 34px;
+    background: #fff;
+    font-size: $font-size-small;
+
+    &:hover {
+      cursor: pointer;
+      color: $brand-links;
+    }
+  }
+
+}

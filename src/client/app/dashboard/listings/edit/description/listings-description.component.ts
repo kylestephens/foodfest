@@ -82,8 +82,12 @@ export class ListingsDescriptionComponent implements OnInit {
   };
 
   public onClickRemoveItem(index: number) {
-    debugger;
     (<FormArray>this.listingsDescriptionForm.controls['listingItems']).removeAt(index);
+    if((<FormArray>this.listingsDescriptionForm.controls['listingItems']).length === 0) {
+      (<FormArray>this.listingsDescriptionForm.controls['listingItems']).push(
+        this._initItem()
+      );
+    }
   };
 
   public submitForm(value: any) {

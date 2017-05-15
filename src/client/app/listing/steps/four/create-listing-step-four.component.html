@@ -5,9 +5,16 @@
     <div class="[ col-sm-8 col-xs-12 ]">
 
       <fieldset [formGroupName]="i">
+
+        <div class="listing-item__delete" (click)="onClickRemoveItem(i)">
+          <span class="ak-icon-cross"></span>
+          <span>Delete</span>
+        </div>
+
         <legend *ngIf="itemType == 'Menu'">Menu Item</legend>
         <legend *ngIf="itemType == 'Product'">Product</legend>
         <legend *ngIf="itemType == 'Item'">Item</legend>
+
         <label class="form-label">Title</label>
         <div class="form-input form-input--has-icon sign-up-field">
           <div class="form-icon ak-icon-clipboard"></div>
@@ -17,6 +24,7 @@
             formControlName="item_title"
             class="item_title">
         </div>
+
         <ak-form-messages class="error-message" [control]="stepFourForm.controls[i].controls.item_title">
         </ak-form-messages>
 
