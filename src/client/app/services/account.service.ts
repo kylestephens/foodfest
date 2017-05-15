@@ -192,10 +192,7 @@ export class AccountService {
         this.user.akAccessToken
       );
     } else {
-      this.localStorageService.clear(
-        CONSTANT.LOCALSTORAGE.SESSION,
-        CONSTANT.LOCALSTORAGE.TOKEN
-      );
+      this.clearLocalStorage();
     }
   };
 
@@ -326,6 +323,7 @@ export class AccountService {
    * @param {number} vendorId
    */
   isOwnVendor(vendorId: number): boolean {
+    debugger;
     if(this.getVendorIds().indexOf(vendorId) > -1) return true;
     return false;
   };
@@ -377,6 +375,41 @@ export class AccountService {
   clearLocalStorage(userType: number) {
     this.localStorageService.clear(
       CONSTANT.LOCALSTORAGE.SESSION
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.TOKEN
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.FAVOURITES
+    );
+
+    // clear create listing stuff also
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_ONE
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_TWO
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_THREE
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_FIVE
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.VENDOR_ID
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.VENDOR_IMAGES
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_ADDRESS
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_EDIT
     );
   };
 
