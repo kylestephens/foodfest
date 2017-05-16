@@ -1,6 +1,7 @@
 import {
   Component,
   Input,
+  NgZone,
   OnInit,
   ViewEncapsulation
 }                                        from '@angular/core';
@@ -36,18 +37,38 @@ export class ListingsImagesComponent implements OnInit {
   public coverImage: Object = null;
   public additionalImages: Array<Object> = [];
 
+  private maxImagesExceeded: boolean = false;
+  private MAX_NUM_IMAGES: number = 8;
+
   private serverUrl: string = this.settingsService.getServerBaseUrl() + '/';
 
   constructor(
     private accountService: AccountService,
     private loaderService: LoaderService,
     private messagingService: MessagingService,
+    private ngZone: NgZone,
     private restService: RestService,
     private settingsService: SettingsService
   ) {};
 
   ngOnInit() {
     this.editingVendor = this.vendor;
+  };
+
+  /**
+   * Convert cover image file into base64 encoded file
+   */
+  public onChangeCover = function(fileInput: any) {
+    if (fileInput.target.files && fileInput.target.files[0]) {
+      var me = this,
+        reader = new FileReader();
+
+      reader.onload = function (e : any) {
+        me.coverImage = e.target.result;
+      }
+
+      reader.readAsDataURL(fileInput.target.files[0]);
+    }
   };
 
   /**
@@ -67,18 +88,25 @@ export class ListingsImagesComponent implements OnInit {
   };
 
   /**
-   * Convert cover image file into base64 encoded file
+   * Convert extra image files into array of
+   * base64 encoded files
    */
-  public onChangeCover = function(fileInput: any) {
-    if (fileInput.target.files && fileInput.target.files[0]) {
-      var me = this,
-        reader = new FileReader();
+  public onChangeImages = function(fileInput: any) {
+    this.maxImagesExceeded = false;
+    if(fileInput.target.files && fileInput.target.files.length < this.MAX_NUM_IMAGES) {
+      var me = this;
 
-      reader.onload = function (e : any) {
-        me.coverImage = e.target.result;
+      for(var image of fileInput.target.files) {
+        this.ngZone.run(() => {
+          var reader = new FileReader();
+          reader.onload = function (e : any) {
+            me.additionalImages.push(e.target.result);
+          }
+          reader.readAsDataURL(image);
+        });
       }
-
-      reader.readAsDataURL(fileInput.target.files[0]);
+    } else if (fileInput.target.files && fileInput.target.files.length > this.MAX_NUM_IMAGES) {
+      this.maxImagesExceeded = true;
     }
   };
 
@@ -127,6 +155,32 @@ export class ListingsImagesComponent implements OnInit {
       this.loaderService.hide();
       this.messagingService.show(
         'listings-details-logo',
+        CONSTANT.MESSAGING.ERROR,
+        reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
+        true
+      );
+    });
+  };
+
+  /**
+   * Upload additional images
+   */
+  public onClickUploadImages() {
+    this.loaderService.show();
+    this.restService.post(
+      this.settingsService.getServerBaseUrl() + '/vendors/images/additional', {
+        id: this.editingVendor.id,
+        images: this.additionalImages
+      }, this.accountService.getUser().akAccessToken
+    ).then((response: any) => {
+      this.loaderService.hide();
+      let responseBody = response.json();
+      this.editingVendor.images.push.apply(this.editingVendor.images, responseBody.images);
+      this.vendor = this.editingVendor;
+    }, (reason: any) => {
+      this.loaderService.hide();
+      this.messagingService.show(
+        'listings-details-images',
         CONSTANT.MESSAGING.ERROR,
         reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
         true

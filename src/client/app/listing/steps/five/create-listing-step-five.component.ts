@@ -40,7 +40,7 @@ export class CreateListingStepFiveComponent {
 
   private vendorId: number = 0;
   private maxImagesExceeded: boolean = false;
-  private MAX_NUM_IMAGES: number = 2;
+  private MAX_NUM_IMAGES: number = 8;
 
   constructor(
     private fb: FormBuilder,

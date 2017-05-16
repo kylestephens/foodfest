@@ -8,8 +8,8 @@
     </div>
 
     <div class="form-row [ row ]">
+      <ak-messaging ref="listings-details-cover"></ak-messaging>
       <div class="[ col-sm-6 col-xs-12 ]">
-        <ak-messaging ref="listings-details-cover"></ak-messaging>
         <div class="form-input form-input--has-icon sign-up-field">
           <div class="form-icon ak-icon-image"></div>
           <input type="file"
@@ -41,8 +41,8 @@
     </div>
 
     <div class="form-row [ row ]">
+      <ak-messaging ref="listings-details-logo"></ak-messaging>
       <div class="[ col-sm-6 col-xs-12 ]">
-        <ak-messaging ref="listings-details-logo"></ak-messaging>
         <div class="form-input form-input--has-icon sign-up-field">
           <div class="form-icon ak-icon-camera"></div>
           <input type="file"
@@ -60,6 +60,33 @@
     </div>
     <div class="form-row [ row ]">
       <button class="image-upload-btn" (click)="onClickUploadLogo()">
+        Upload
+      </button>
+    </div>
+  </section>
+
+  <hr />
+
+  <section>
+    <label class="form-label">Additional Images</label>
+    <div class="form-row additional-images [ row ]" *ngFor="let image of editingVendor.images">
+      <img class="additional-images__image"
+        [src]="serverUrl + image">
+    </div>
+    <div class="form-row [ row ]">
+      <ak-messaging ref="listings-details-images"></ak-messaging>
+      <div class="[ col-sm-6 col-xs-12 ]">
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-images"></div>
+          <input type="file"
+            accept="image/jpeg, image/png"
+            multiple
+            (change)="onChangeImages($event)">
+        </div>
+      </div>
+    </div>
+    <div class="form-row [ row ]">
+      <button class="image-upload-btn" (click)="onClickUploadImages()">
         Upload
       </button>
     </div>

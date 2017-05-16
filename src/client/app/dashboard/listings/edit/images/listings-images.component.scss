@@ -5,7 +5,8 @@
 $logo-size:         220px;
 $logo-size-phone:   140px;
 $hero-height:       300px;
-
+$max-image-height:  300px;
+$max-image-width:   450px;
 
 
 .listings-images {
@@ -80,6 +81,16 @@ $hero-height:       300px;
       top: 10px;
       left: 20px;
     }
+  }
+}
+
+
+
+.additional-images {
+
+  &__image {
+    max-height: $max-image-height;
+    max-width: $max-image-width;
   }
 }
 
