@@ -5,7 +5,13 @@ import {
   ViewEncapsulation
 }                                        from '@angular/core';
 
+import { CONSTANT }                      from '../../../../core/constant';
+
 import { Vendor }                        from '../../../../shared/model/vendor';
+import { AccountService }                from '../../../../services/account.service';
+import { LoaderService }                 from '../../../../services/loader.service';
+import { MessagingService }              from '../../../../services/messaging.service';
+import { RestService }                   from '../../../../services/rest.service';
 import { SettingsService }               from '../../../../services/settings.service';
 
 /**
@@ -33,11 +39,14 @@ export class ListingsImagesComponent implements OnInit {
   private serverUrl: string = this.settingsService.getServerBaseUrl() + '/';
 
   constructor(
+    private accountService: AccountService,
+    private loaderService: LoaderService,
+    private messagingService: MessagingService,
+    private restService: RestService,
     private settingsService: SettingsService
   ) {};
 
   ngOnInit() {
-    debugger;
     this.editingVendor = this.vendor;
   };
 
@@ -71,6 +80,58 @@ export class ListingsImagesComponent implements OnInit {
 
       reader.readAsDataURL(fileInput.target.files[0]);
     }
+  };
+
+  /**
+   * Upload the cover image only
+   */
+  public onClickUploadCover() {
+    this.loaderService.show();
+    this.restService.post(
+      this.settingsService.getServerBaseUrl() + '/vendors/images/cover', {
+        id: this.editingVendor.id,
+        cover_photo: this.coverImage
+      }, this.accountService.getUser().akAccessToken
+    ).then((response: any) => {
+      this.loaderService.hide();
+      let responseBody = response.json();
+      this.editingVendor.cover_photo_path = responseBody.cover_photo + '?t=' + Date.now();  // cache busting
+      this.vendor = this.editingVendor;
+    }, (reason: any) => {
+      this.loaderService.hide();
+      this.messagingService.show(
+        'listings-details-cover',
+        CONSTANT.MESSAGING.ERROR,
+        reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
+        true
+      );
+    });
+  };
+
+  /**
+   * Upload the logo image only
+   */
+  public onClickUploadLogo() {
+    this.loaderService.show();
+    this.restService.post(
+      this.settingsService.getServerBaseUrl() + '/vendors/images/logo', {
+        id: this.editingVendor.id,
+        logo_photo: this.businessLogo
+      }, this.accountService.getUser().akAccessToken
+    ).then((response: any) => {
+      this.loaderService.hide();
+      let responseBody = response.json();
+      this.editingVendor.logo_path = responseBody.business_logo + '?t=' + Date.now();  // cache busting
+      this.vendor = this.editingVendor;
+    }, (reason: any) => {
+      this.loaderService.hide();
+      this.messagingService.show(
+        'listings-details-logo',
+        CONSTANT.MESSAGING.ERROR,
+        reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
+        true
+      );
+    });
   };
 
 }

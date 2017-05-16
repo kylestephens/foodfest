@@ -8,12 +8,10 @@ export class LoaderService {
 
   private subject = new Subject<any>();
 
-  show(modalType: string, data?: any) {
+  show() {
     console.debug('LoaderService::show');
     this.subject.next({
-      event: CONSTANT.EVENT.LOADER.SHOW_LOADER,
-      modalType,
-      data
+      event: CONSTANT.EVENT.LOADER.SHOW_LOADER
     });
   };
 

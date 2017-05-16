@@ -1,7 +1,7 @@
 <div class="listings-images">
 
   <section>
-    <p>Cover Image:</p>
+    <label class="form-label">Cover Image</label>
     <div class="hero"
       [ngStyle]="{'background-image': 'url(' +  serverUrl + editingVendor.cover_photo_path + ')'}">
       <div class="hero__overlay">&nbsp;</div>
@@ -9,7 +9,7 @@
 
     <div class="form-row [ row ]">
       <div class="[ col-sm-6 col-xs-12 ]">
-        <label class="form-label">Cover Image</label>
+        <ak-messaging ref="listings-details-cover"></ak-messaging>
         <div class="form-input form-input--has-icon sign-up-field">
           <div class="form-icon ak-icon-image"></div>
           <input type="file"
@@ -19,26 +19,30 @@
         </div>
       </div>
     </div>
-    <div class="form-row [ row text-right ]">
-      <button class="image-upload-btn">
+    <div class="form-row [ row ]">
+      <button class="image-upload-btn" (click)="onClickUploadCover()">
         Upload
       </button>
     </div>
     <!-- / Cover Image -->
-
   </section>
 
   <hr />
 
   <section>
-    <p>Logo Image:</p>
-    <div class="logo-image">
-      <img class="business-logo" [src]="serverUrl + editingVendor.logo_path">
+    <label class="form-label">Business Logo</label>
+    <div class="business-logo">
+      <img class="business-logo__image"
+        *ngIf="editingVendor.logo_path"
+        [src]="serverUrl + editingVendor.logo_path">
+      <span class="business-logo__icon ak-icon-user"
+        *ngIf="!editingVendor.logo_path">
+      </span>
     </div>
 
     <div class="form-row [ row ]">
       <div class="[ col-sm-6 col-xs-12 ]">
-        <label class="form-label">Business Logo</label>
+        <ak-messaging ref="listings-details-logo"></ak-messaging>
         <div class="form-input form-input--has-icon sign-up-field">
           <div class="form-icon ak-icon-camera"></div>
           <input type="file"
@@ -54,8 +58,8 @@
         </div>
       </div>
     </div>
-    <div class="form-row [ row text-right ]">
-      <button class="image-upload-btn">
+    <div class="form-row [ row ]">
+      <button class="image-upload-btn" (click)="onClickUploadLogo()">
         Upload
       </button>
     </div>

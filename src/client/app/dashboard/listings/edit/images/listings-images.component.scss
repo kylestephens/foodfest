@@ -11,6 +11,17 @@ $hero-height:       300px;
 .listings-images {
   width: 100%;
   padding: $padding-large-vertical $padding-large-horizontal;
+
+  // override
+  .col-sm-6, .col-xs-12 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  // override
+  .form-field-description {
+    padding-left: 32px;
+  }
 }
 
 
@@ -37,15 +48,38 @@ $hero-height:       300px;
 .business-logo {
   width: $logo-size;
   height: $logo-size;
-
+  background: $gray;
   border-radius: 100%;
-  border: 10px solid #fff;
-  z-index: 2;
 
   @media (max-width: $screen-xs-max) {
     width: $logo-size-phone;
     height: $logo-size-phone;
     top: $logo-size-phone / 1.5;
+  }
+
+  &__image {
+    width: $logo-size;
+    height: $logo-size;
+    border-radius: 100%;
+
+    @media (max-width: $screen-xs-max) {
+      width: $logo-size-phone;
+      height: $logo-size-phone;
+      top: $logo-size-phone / 1.5;
+    }
+  }
+
+  &__icon {
+    color: #fff;
+    position: relative;
+    top: 50px;
+    left: 60px;
+    font-size: 100px;
+
+    @media (max-width: $screen-xs-max) {
+      top: 10px;
+      left: 20px;
+    }
   }
 }
 
@@ -55,5 +89,5 @@ $hero-height:       300px;
   top: $padding-large-vertical;
   right: $padding-large-horizontal;
   @include button(#fff, $brand-primary-cta);
-  padding: 6px 12px;                  // overriding default button padding
+  padding: 6px 12px;
 }

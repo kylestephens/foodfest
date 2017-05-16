@@ -113,7 +113,7 @@ export class ListingsDescriptionComponent implements OnInit {
         description:         me.listingsDescriptionForm.controls['businessDescription'].value,
         listed_items:        me.listingsDescriptionForm.controls['listingItems'].value
       }, this.accountService.getUser().akAccessToken
-    ).then(function(response: any) {
+    ).then((response: any) => {
       let responseBody = response.json();
       me.vendor['description']   = responseBody['description'] ? responseBody['description'] : '';
       me.vendor['listed_items']  = responseBody['listed_items'] ? responseBody['listed_items'] : [];
