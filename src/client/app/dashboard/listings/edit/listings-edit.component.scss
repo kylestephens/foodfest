@@ -17,6 +17,7 @@ $active-menu-arrow: 10px;
     padding: $padding-large-vertical 0;
     text-align: center;
     border-right: 1px solid $gray-light;
+    font-size: $font-size-medium;
 
     &:nth-of-type(3) {
       border-right: 0;

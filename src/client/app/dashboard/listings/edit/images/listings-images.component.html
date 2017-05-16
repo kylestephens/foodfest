@@ -1,1 +1,64 @@
-Images
+<div class="listings-images">
+
+  <section>
+    <p>Cover Image:</p>
+    <div class="hero"
+      [ngStyle]="{'background-image': 'url(' +  serverUrl + editingVendor.cover_photo_path + ')'}">
+      <div class="hero__overlay">&nbsp;</div>
+    </div>
+
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-6 col-xs-12 ]">
+        <label class="form-label">Cover Image</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-image"></div>
+          <input type="file"
+            accept="image/jpeg, image/png"
+            id="businessCoverImage"
+            (change)="onChangeCover($event)">
+        </div>
+      </div>
+    </div>
+    <div class="form-row [ row text-right ]">
+      <button class="image-upload-btn">
+        Upload
+      </button>
+    </div>
+    <!-- / Cover Image -->
+
+  </section>
+
+  <hr />
+
+  <section>
+    <p>Logo Image:</p>
+    <div class="logo-image">
+      <img class="business-logo" [src]="serverUrl + editingVendor.logo_path">
+    </div>
+
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-6 col-xs-12 ]">
+        <label class="form-label">Business Logo</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-camera"></div>
+          <input type="file"
+            accept="image/jpeg, image/png"
+            id="businessLogo"
+            (change)="onChangeLogo($event)">
+        </div>
+      </div>
+      <div class="[ col-sm-6 col-xs-12 hidden-xs ]">
+        <div class="form-field-description">
+          Square images work best. We recommend 250 x 250 pixels.
+          jpg, jpeg or png file formats accepted.
+        </div>
+      </div>
+    </div>
+    <div class="form-row [ row text-right ]">
+      <button class="image-upload-btn">
+        Upload
+      </button>
+    </div>
+  </section>
+
+</div>

@@ -1,2 +1,59 @@
 @import '../../../../../scss/core/variables';
 @import '../../../../../scss/core/settings';
+@import '../../../../../scss/mixins/buttons';
+
+$logo-size:         220px;
+$logo-size-phone:   140px;
+$hero-height:       300px;
+
+
+
+.listings-images {
+  width: 100%;
+  padding: $padding-large-vertical $padding-large-horizontal;
+}
+
+
+
+.hero {
+  background: #EAF7FC;
+  text-align: center;
+  background: $gray;
+  background-position: center center;
+  background-size: cover;
+  min-height: $hero-height;
+
+  &__overlay {
+    background: $brand-overlay-pattern;
+    padding: $padding-xlarge-vertical 0;
+    width: 100%;
+    height: 100%;
+    min-height: $hero-height;
+  }
+}
+
+
+
+.business-logo {
+  width: $logo-size;
+  height: $logo-size;
+
+  border-radius: 100%;
+  border: 10px solid #fff;
+  z-index: 2;
+
+  @media (max-width: $screen-xs-max) {
+    width: $logo-size-phone;
+    height: $logo-size-phone;
+    top: $logo-size-phone / 1.5;
+  }
+}
+
+
+
+.image-upload-btn {
+  top: $padding-large-vertical;
+  right: $padding-large-horizontal;
+  @include button(#fff, $brand-primary-cta);
+  padding: 6px 12px;                  // overriding default button padding
+}
