@@ -7,6 +7,7 @@ $logo-size-phone:   140px;
 $hero-height:       300px;
 $max-image-height:  300px;
 $max-image-width:   450px;
+$image-border:      2px solid #000;
 
 
 .listings-images {
@@ -34,6 +35,7 @@ $max-image-width:   450px;
   background-position: center center;
   background-size: cover;
   min-height: $hero-height;
+  border: $image-border;
 
   &__overlay {
     background: $brand-overlay-pattern;
@@ -62,6 +64,7 @@ $max-image-width:   450px;
     width: $logo-size;
     height: $logo-size;
     border-radius: 100%;
+    border: $image-border;
 
     @media (max-width: $screen-xs-max) {
       width: $logo-size-phone;
@@ -87,11 +90,32 @@ $max-image-width:   450px;
 
 
 .additional-images {
+  position: relative;
+  max-height: $max-image-height;
+  max-width: $max-image-width;
 
   &__image {
     max-height: $max-image-height;
     max-width: $max-image-width;
+    border: $image-border;
   }
+
+  &__delete {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    padding: $padding-large-vertical $padding-large-horizontal;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: $brand-border-radius;
+    font-size: $font-size-small;
+
+    &:hover {
+      cursor: pointer;
+      color: $brand-links;
+    }
+  }
+
 }
 
 

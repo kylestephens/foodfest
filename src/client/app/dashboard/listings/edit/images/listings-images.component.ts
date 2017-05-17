@@ -188,4 +188,32 @@ export class ListingsImagesComponent implements OnInit {
     });
   };
 
+  /**
+   * Remove a particular image from list
+   * of currently uploaded additional images
+   */
+  public onClickRemoveImage(index: number) {
+    this.loaderService.show();
+    this.restService.post(
+      this.settingsService.getServerBaseUrl() + '/vendors/image/remove', {
+        id: this.editingVendor.id,
+        image_index: index,
+        num_photos: this.editingVendor.images.length
+      }, this.accountService.getUser().akAccessToken
+    ).then((response: any) => {
+      this.loaderService.hide();
+      let responseBody = response.json();
+      this.editingVendor.images = responseBody.images;
+      this.vendor = this.editingVendor;
+    }, (reason: any) => {
+      this.loaderService.hide();
+      this.messagingService.show(
+        'listings-details-images',
+        CONSTANT.MESSAGING.ERROR,
+        reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
+        true
+      );
+    });
+  };
+
 }

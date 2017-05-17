@@ -19,6 +19,7 @@
         </div>
       </div>
     </div>
+
     <div class="form-row [ row ]">
       <button class="image-upload-btn" (click)="onClickUploadCover()">
         Upload
@@ -58,6 +59,7 @@
         </div>
       </div>
     </div>
+
     <div class="form-row [ row ]">
       <button class="image-upload-btn" (click)="onClickUploadLogo()">
         Upload
@@ -69,10 +71,15 @@
 
   <section>
     <label class="form-label">Additional Images</label>
-    <div class="form-row additional-images [ row ]" *ngFor="let image of editingVendor.images">
+    <div class="form-row additional-images [ row ]" *ngFor="let image of editingVendor.images; let i = index">
+      <div class="additional-images__delete" (click)="onClickRemoveImage(i)">
+        <span class="ak-icon-cross"></span>
+        <span>Delete</span>
+      </div>
       <img class="additional-images__image"
         [src]="serverUrl + image">
     </div>
+
     <div class="form-row [ row ]">
       <ak-messaging ref="listings-details-images"></ak-messaging>
       <div class="[ col-sm-6 col-xs-12 ]">
@@ -85,6 +92,7 @@
         </div>
       </div>
     </div>
+
     <div class="form-row [ row ]">
       <button class="image-upload-btn" (click)="onClickUploadImages()">
         Upload
