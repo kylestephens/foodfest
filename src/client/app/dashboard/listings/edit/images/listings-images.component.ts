@@ -173,7 +173,7 @@ export class ListingsImagesComponent implements OnInit {
     ).then((response: any) => {
       this.loaderService.hide();
       let responseBody = response.json();
-      this.editingVendor.images.push.apply(this.editingVendor.images, responseBody.images);
+      this.editingVendor.images = responseBody.images;
       this.vendor = this.editingVendor;
     }, (reason: any) => {
       this.loaderService.hide();
