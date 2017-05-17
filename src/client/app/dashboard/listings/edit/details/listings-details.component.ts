@@ -6,8 +6,7 @@ import {
   NgZone,
   OnChanges,
   OnInit,
-  ViewChild,
-  ViewEncapsulation
+  ViewChild
 }                                        from '@angular/core';
 import {
   FormControl,
@@ -38,8 +37,7 @@ declare var google: any;
   moduleId: module.id,
   selector: 'ak-listings-details',
   templateUrl: 'listings-details.component.html',
-  styleUrls: ['listings-details.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['listings-details.component.css']
 })
 
 export class ListingsDetailsComponent implements AfterViewInit, OnInit, OnChanges {

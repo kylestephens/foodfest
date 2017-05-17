@@ -2,8 +2,7 @@ import {
   Component,
   Input,
   OnInit,
-  ViewChild,
-  ViewEncapsulation
+  ViewChild
 }                                        from '@angular/core';
 import {
   FormArray,
@@ -30,8 +29,7 @@ import { ValidationService }             from '../../../../services/validation.s
   moduleId: module.id,
   selector: 'ak-listings-description',
   templateUrl: 'listings-description.component.html',
-  styleUrls: ['listings-description.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['listings-description.component.css']
 })
 
 export class ListingsDescriptionComponent implements OnInit {

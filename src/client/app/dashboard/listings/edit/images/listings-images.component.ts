@@ -2,8 +2,7 @@ import {
   Component,
   Input,
   NgZone,
-  OnInit,
-  ViewEncapsulation
+  OnInit
 }                                        from '@angular/core';
 
 import { CONSTANT }                      from '../../../../core/constant';
@@ -22,8 +21,7 @@ import { SettingsService }               from '../../../../services/settings.ser
   moduleId: module.id,
   selector: 'ak-listings-images',
   templateUrl: 'listings-images.component.html',
-  styleUrls: ['listings-images.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['listings-images.component.css']
 })
 
 export class ListingsImagesComponent implements OnInit {
