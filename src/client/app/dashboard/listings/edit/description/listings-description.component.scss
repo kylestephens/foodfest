@@ -1,0 +1,42 @@
+@import '../../../../../scss/core/variables';
+@import '../../../../../scss/core/settings';
+@import '../../../../../scss/mixins/buttons';
+
+
+
+.listings-description {
+  width: 100%;
+  padding: $padding-large-vertical $padding-large-horizontal;
+
+  .form-row:first-of-type {
+    margin-top: 0;
+  }
+}
+
+
+
+.listing-item {
+
+  &__delete {
+    position: absolute;
+    top: 20px;
+    right: 34px;
+    background: $brand-body-bg;
+    font-size: $font-size-small;
+
+    &:hover {
+      cursor: pointer;
+      color: $brand-links;
+    }
+  }
+
+}
+
+
+
+.form-btn-add-item {
+  top: $padding-large-vertical;
+  right: $padding-large-horizontal;
+  @include button(#fff, $brand-secondary-cta);
+  padding: 6px 12px;                  // overriding default button padding
+}

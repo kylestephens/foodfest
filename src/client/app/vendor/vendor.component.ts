@@ -36,10 +36,11 @@ import { CONSTANT }               from '../core/constant';
   styleUrls: ['vendor.component.css']
 })
 export class VendorComponent implements OnInit, OnDestroy {
-  messageText: string;
+  public messageText: string;
   public vendor = new Vendor();
   public zoomLevel: number = 15;        // google maps zoom level
   public isEditing: boolean = false;
+  public isOwnVendor: boolean = false;
   public formattedStyles: string;
   public formattedEventTypes: string;
   public formattedBusinessSetups: string;
@@ -281,6 +282,7 @@ export class VendorComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(this.route.params.subscribe(params => {
       this.vendorId = +params['id'];
+      this.isOwnVendor = this.accountService.isOwnVendor(this.vendorId);
     }));
 
     this.subscriptions.push(this.accountService.getMessage().subscribe(subMessage => {

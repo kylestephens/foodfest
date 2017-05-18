@@ -21,6 +21,43 @@
     </div>
     <!-- / Business Name -->
 
+    <!-- Phone Number -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Phone Number *</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-phone"></div>
+          <input type="tel"
+            placeholder="e.g. 085 1234567"
+            required
+            formControlName="phoneNumber"
+            id="phoneNumber">
+        </div>
+        <ak-form-messages [control]="listingsDetailsForm.controls.phoneNumber">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- / Phone Number -->
+
+    <!-- Business Address -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Business Address</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-location"></div>
+          <input
+            placeholder="e.g. Domhnaills Donuts, Navan Road, Dublin 7"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="off"
+            type="text"
+            formControlName="businessAddress"
+            #mapsAutocomplete>
+        </div>
+      </div>
+    </div>
+    <!-- / Business Address -->
+
     <!-- Business Type -->
     <div class="form-row [ row ]">
       <div class="[ col-sm-8 col-xs-12 ]">
@@ -122,44 +159,6 @@
     </div>
     <!-- / Dietary Requirements Supported -->
 
-
-    <!-- Phone Number -->
-    <div class="form-row [ row ]">
-      <div class="[ col-sm-8 col-xs-12 ]">
-        <label class="form-label">Phone Number *</label>
-        <div class="form-input form-input--has-icon sign-up-field">
-          <div class="form-icon ak-icon-phone"></div>
-          <input type="tel"
-            placeholder="e.g. 085 1234567"
-            required
-            formControlName="phoneNumber"
-            id="phoneNumber">
-        </div>
-        <ak-form-messages [control]="listingsDetailsForm.controls.phoneNumber">
-        </ak-form-messages>
-      </div>
-    </div>
-    <!-- / Phone Number -->
-
-    <!-- Business Address -->
-    <div class="form-row [ row ]">
-      <div class="[ col-sm-8 col-xs-12 ]">
-        <label class="form-label">Business Address</label>
-        <div class="form-input form-input--has-icon sign-up-field">
-          <div class="form-icon ak-icon-location"></div>
-          <input
-            placeholder="e.g. Domhnaills Donuts, Navan Road, Dublin 7"
-            autocorrect="off"
-            autocapitalize="off"
-            spellcheck="off"
-            type="text"
-            formControlName="businessAddress"
-            #autocompleteSearch>
-        </div>
-      </div>
-    </div>
-    <!-- / Business Address -->
-
     <!-- Business Website -->
     <div class="form-row [ row ]">
       <div class="[ col-sm-8 col-xs-12 ]">
@@ -171,6 +170,8 @@
             formControlName="businessWebsite">
         </div>
       </div>
+      <ak-form-messages [control]="listingsDetailsForm.controls.businessWebsite">
+      </ak-form-messages>
     </div>
     <!-- / Business Website -->
 
@@ -232,6 +233,9 @@
       </div>
     </div>
     <!-- / Mandatory Fields -->
+
+    <ak-messaging ref="listings-details-edit">
+    </ak-messaging>
 
     <!-- Form Buttons -->
     <div class="form-row [ row ]">

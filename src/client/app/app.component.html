@@ -2,7 +2,8 @@
 <ak-navbar></ak-navbar>
 <!-- / Header -->
 
-<modal></modal>
+<ak-loader></ak-loader>
+<ak-modal></ak-modal>
 
 <!-- Main Page Content -->
 <div class="page-body">
@@ -20,12 +21,12 @@
 
     <div class="[ row ]">
       <div class="footer__links [ col-xs-12 text-center ]">
-        <span class="footer__link" [routerLink]="['/privacy']">
+        <a class="footer__link" [routerLink]="['/privacy']">
           Privacy &amp; Cookies
-        </span>|
-        <span class="footer__link">
+        </a>|
+        <a class="footer__link" [routerLink]="['/privacy']">
           Terms of Use
-        </span>|
+        </a>|
         <a class="footer__link" [routerLink]="['/about']">
           About FoodFest
         </a>|

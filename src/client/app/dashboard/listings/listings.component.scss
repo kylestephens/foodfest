@@ -26,12 +26,12 @@
   }
 
   .listings-overview {
-    height: 110px;
     position: relative;
     border-bottom: 1px solid darken($brand-secondary, 20%);
     margin-left: -15px;
     margin-right: -15px;
-    padding-top: 15px;
+    padding-top: $padding-large-vertical;
+    padding-bottom: $padding-large-vertical;
     padding-right: 15px;
     padding-left: 15px;
 
@@ -71,10 +71,9 @@
         position: relative;
 
         &__name {
-          font-weight: 400;
           max-height: 38px;
           overflow: hidden;
-          font-size:$font-size-medium;
+          font-size: $font-size-medium;
         }
 
         &__date {
@@ -107,6 +106,8 @@
 }
 
 .listings-edit {
+  height: 100vh;
+  overflow-y: scroll;
   padding-left: 0;  // override column padding
 }
 

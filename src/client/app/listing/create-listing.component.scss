@@ -11,7 +11,7 @@ $progress-bar-height: 55px;
   height: $progress-bar-height;
   top: 80px;  // height of header
   border-bottom: 2px solid #efefef;
-  background: #fff;
+  background: $brand-body-bg;
 
   &__step {
     padding: 16px $padding-large-horizontal;

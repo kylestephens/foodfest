@@ -156,22 +156,18 @@ article {
   height: 300px;
 }
 
+
+
 .vendor-contact {
   padding: 0;
 
   &__text {
-    width: 100%;
-    border: 1px solid $gray-lightest;
-    border-radius: $brand-border-radius;
 
     &::placeholder {
       font-style: italic;
     }
 
-
     &:disabled {
-      background-color: $brand-body-bg;
-
       &::placeholder {
         color: $gray-lighter;
       }
@@ -189,5 +185,4 @@ article {
     text-align: right;
     background-color: $gray-lightest;
   }
-
 }

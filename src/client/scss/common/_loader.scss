@@ -1,74 +1,142 @@
 @import '../core/variables';
 
-$animationLength: 1.5s;
-$animationRadius: 12px;
-$dotSize: 8px;
+$left:  30px;
+$top:   30px;
 
-.loader-container { margin-top: 250px; }
-
-.loader {
+.loader-container {
+  width: 100%;
+  height: 100vh;
+  background: $brand-secondary;
+  padding-top: 250px;
   position: relative;
-  width: $animationRadius * 3 + $dotSize;
-  height: $dotSize;
-  margin: $animationRadius auto;
 }
 
-.dot {
+.loader-grid {
+  display: block;
+  margin: 0 auto;
+  width: 40px;
+  filter: url("#goo");
+}
+
+.loader-circle {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: white;
+  margin-bottom: 10px;
+  position: absolute;
+  animation-timing-function: cubic-bezier(.14, .75, .2, 1.01);
+}
+
+.loader-row {
   display: inline-block;
-  width: $dotSize;
-  height: $dotSize;
-  border-radius: $dotSize * 0.5;
-  background: #ccc;
   position: absolute;
 }
 
-.dot_1 {
-  animation: animateDot1 $animationLength linear infinite;
-  left: $animationRadius;
-  background: $brand-secondary;
+.loader-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
 }
 
-.dot_2 {
-  animation: animateDot2 $animationLength linear infinite;
-  animation-delay: $animationLength / 3;
-  left: $animationRadius * 2;
+@for $i from 1 through 9 {
+  .loader-circle-#{$i} {
+    @extend .loader-circle;
+    @if ($i - 1)%3 == 0 {
+      left: $left*-1;
+    }
+    @if $i%3 == 0 {
+      left: $left;
+    }
+    @if $i >=4 and $i <=6 {
+      top: $top;
+    }
+    @if $i >=7 {
+      top: $top*2;
+    }
+    $delay: 0.25 + ($i * 0.05);
+    animation: move#{$i} 3s infinite $delay + s;
+  }
 }
 
-.dot_3 {
-  animation: animateDot3 $animationLength linear infinite;
-  left: $animationRadius;
+@keyframes move1 {
+  0%,
+  100% {
+    transform: translate3d(0px, 0px, 0px);
+  }
+  50% {
+    transform: translate3d(30px, 30px, 0px);
+  }
 }
 
-.dot_4 {
-  animation: animateDot4 $animationLength linear infinite;
-  animation-delay: $animationLength / 3;
-  left: $animationRadius * 2;
+@keyframes move2 {
+  0%,
+  100% {
+    transform: translate3d(0px, 0px, 0px);
+  }
+  50% {
+    transform: translate3d(0px, 30px, 0px);
+  }
 }
 
-@keyframes animateDot1 {
-  0%{ transform: rotate(0deg) translateX(-$animationRadius); }
-  25% { transform: rotate(180deg) translateX(-$animationRadius); }
-  75% { transform: rotate(180deg) translateX(-$animationRadius); }
-  100% { transform: rotate(360deg) translateX(-$animationRadius); }
+@keyframes move3 {
+  0%,
+  100% {
+    transform: translate3d(0px, 0px, 0px);
+  }
+  50% {
+    transform: translate3d(-30px, 30px, 0px);
+  }
 }
 
-@keyframes animateDot2 {
-  0%{ transform: rotate(-0deg) translateX(-$animationRadius); }
-  25% { transform: rotate(-180deg) translateX(-$animationRadius); }
-  75% { transform: rotate(-180deg) translateX(-$animationRadius); }
-  100% { transform: rotate(-360deg) translateX(-$animationRadius); }
+@keyframes move4 {
+  0%,
+  100% {
+    transform: translate3d(0px, 0px, 0px);
+  }
+  50% {
+    transform: translate3d(30px, 0px, 0px);
+  }
 }
 
-@keyframes animateDot3 {
-  0%{ transform: rotate(0deg) translateX($animationRadius); }
-  25% { transform: rotate(180deg) translateX($animationRadius); }
-  75% { transform: rotate(180deg) translateX($animationRadius); }
-  100% { transform: rotate(360deg) translateX($animationRadius); }
+@keyframes move6 {
+  0%,
+  100% {
+    transform: translate3d(0px, 0px, 0px);
+  }
+  50% {
+    transform: translate3d(-30px, 0px, 0px);
+  }
 }
 
-@keyframes animateDot4 {
-  0%{ transform: rotate(-0deg) translateX($animationRadius); }
-  25% { transform: rotate(-180deg) translateX($animationRadius); }
-  75% { transform: rotate(-180deg) translateX($animationRadius); }
-  100% { transform: rotate(-360deg) translateX($animationRadius); }
+@keyframes move7 {
+  0%,
+  100% {
+    transform: translate3d(0px, 0px, 0px);
+  }
+  50% {
+    transform: translate3d(30px, -30px, 0px);
+  }
+}
+
+@keyframes move8 {
+  0%,
+  100% {
+    transform: translate3d(0px, 0px, 0px);
+  }
+  50% {
+    transform: translate3d(0px, -30px, 0px);
+  }
+}
+
+@keyframes move9 {
+  0%,
+  100% {
+    transform: translate3d(0px, 0px, 0px);
+  }
+  50% {
+    transform: translate3d(-30px, -30px, 0px);
+  }
 }

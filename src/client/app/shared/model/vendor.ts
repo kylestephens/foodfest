@@ -12,7 +12,6 @@ export class Vendor {
 	user_id:             number;
   active_vendor:       boolean; //bool, whether or not vendor paid
 	business_name:       string;
-  phone_number:        string;
   business_website:    string;
   business_address:    string;
   business_latitude:   number;

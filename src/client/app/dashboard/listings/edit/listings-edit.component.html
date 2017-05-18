@@ -7,12 +7,12 @@
     <div class="listings-edit-menu__item menu-one"
       [ngClass]="{'listings-edit-menu__item--active': activeItem == 1 }"
       (click)="toggleActive($event, 1)">
-      Details
+      Listing Details
     </div>
     <div class="listings-edit-menu__item menu-two"
       [ngClass]="{'listings-edit-menu__item--active': activeItem == 2 }"
       (click)="toggleActive($event, 2)">
-      Menu
+      Listing Description
     </div>
     <div class="listings-edit-menu__item menu-three"
       [ngClass]="{'listings-edit-menu__item--active': activeItem == 3 }"
@@ -27,10 +27,10 @@
     [vendor]="vendor">
   </ak-listings-details>
 
-  <ak-listings-menu
+  <ak-listings-description
     *ngIf="activeItem == 2"
     [vendor]="vendor">
-  </ak-listings-menu>
+  </ak-listings-description>
 
   <ak-listings-images
     *ngIf="activeItem == 3"

@@ -86,14 +86,6 @@ export class AccountService {
     );
   };
 
-  getUserVendors(): Promise<Array<Vendor>> {
-    return this.restService.get(
-      this.settingsService.getServerBaseUrl() + '/users/activevendors', null, this.getUser().akAccessToken,
-    ).then((response: Response) => {
-      return response.json() as Vendor[];
-    });
-  }
-
   isLoggedIn = function () {
     return this.loggedIn;
   };
@@ -105,8 +97,13 @@ export class AccountService {
   /**
    * Retrieve favourites belonging to a user
    * Must be already logged in before calling
+   *
+   * If exist in session -> return those
+   * Otherwise, lookup
    */
   getFavourites = function() {
+    if(!this.isLoggedIn()) return [];
+
     return new Promise((resolve, reject) => {
 
       let localStorageFavs = this.localStorageService.retrieve(
@@ -195,19 +192,26 @@ export class AccountService {
         this.user.akAccessToken
       );
     } else {
-      this.localStorageService.clear(
-        CONSTANT.LOCALSTORAGE.SESSION,
-        CONSTANT.LOCALSTORAGE.TOKEN
-      );
+      this.clearLocalStorage();
     }
   };
 
+  /**
+   * Strip first and last name from a full name
+   *
+   * @param {string} fullName - received from facebook/google login response
+   */
   setName = function (fullName: string) {
     this.user.name = fullName;
     this.user.firstname = this.user.name.split(' ')[0];
     this.user.lastname = this.user.name.split(' ').slice(-1).pop();
   };
 
+  /**
+   * Set account details after login through Facebook
+   *
+   * @param {object} response - facebook login response
+   */
   setFacebookDetails = function(response: any) {
     this.user.facebook_user_id = response.id;
     this.setName(response.name);
@@ -215,6 +219,11 @@ export class AccountService {
     this.user.facebookLogin = true;
   };
 
+  /**
+   * Set account details after login through Google
+   *
+   * @param {object} response - google login response
+   */
   setGoogleDetails = function(response: any) {
     this.user.google_user_id = response.id;
     this.setName(response.name);
@@ -222,17 +231,61 @@ export class AccountService {
     this.user.googleLogin = true;
   };
 
+  /**
+   * Set account details after login through Email
+   *
+   * @param {object} response - email form details
+   */
   setEmailDetails = function(data: any) {
     if(data.fullName) this.setName(data.fullName);
     this.user.password = data.password;
     this.user.email = data.email;
   };
 
+  /**
+   * Add a new linked vendor
+   *
+   * @param {Vendor} vendor
+   */
   addVendor = function(vendor: any) {
     this.vendors.push(vendor);
   };
 
+  /**
+   * Update a linked vendor
+   *
+   * @param {Vendor} vendor
+   */
+  updateVendor = function(vendor: any) {
+    for(let i = 0; i < this.vendors.length; i++) {
+      if(this.vendors[i].id === vendor.id) {
+        this.vendors[i] = vendor;
+      }
+    }
+  };
+
+  /**
+   * Returns all linked, published vendors
+   */
+  getUserVendors(): Promise<Array<Vendor>> {
+    if(!this.isLoggedIn()) return [];
+
+    return this.restService.get(
+      this.settingsService.getServerBaseUrl() + '/users/activevendors', null, this.getUser().akAccessToken,
+    ).then((response: Response) => {
+      return response.json() as Vendor[];
+    });
+  };
+
+  /**
+   * Returns all linked vendor, published or unpublished
+   *
+   * If exist in session -> return those
+   * Otherwise, lookup
+   */
   getVendors = function() {
+    if(!this.isLoggedIn()) return [];
+
     return new Promise((resolve, reject) => {
       if(this.vendors && this.vendors.length > 0) {
         resolve(this.vendors);
@@ -251,42 +304,116 @@ export class AccountService {
     });
   }
 
+  /**
+   * Returns all linked vendor ids
+   */
   getVendorIds = function() {
-    return this.vendors.map((vendor: Vendor) => {
-      return vendor.id;
-    });
+    if (this.vendors) {
+      return this.vendors.map((vendor: Vendor) => {
+        return vendor.id;
+      });
+    } else {
+      return [];
+    }
+  };
+
+  /**
+   * Check if supplied vendor belongs to user
+   *
+   * @param {number} vendorId
+   */
+  isOwnVendor(vendorId: number): boolean {
+    if(this.getVendorIds().indexOf(vendorId) > -1) return true;
+    return false;
   };
 
   reloadSession = function(sessionDetails: any, sessionToken: any) {
-    this.loggedIn = sessionDetails['loggedIn'];
-    this.user = sessionDetails['user'];
-    this.vendor = sessionDetails['vendor'];
+    this.loggedIn             = sessionDetails['loggedIn'];
+    this.user                 = sessionDetails['user'];
+    this.user.akAccessToken   = sessionToken;
+    this.vendors              = sessionDetails['vendors'];
+    this.favourites           = sessionDetails['favourites'];
   };
 
+  /**
+   * Resets all account details
+   *
+   * Important: Call on logout and clear everything
+   */
   reset = function() {
     this.setLoggedIn(false);
     this.user = new User();
-    this.vendor = new Vendor();
+    this.vendors = [];
+    this.favourites = [];
   };
 
   toJson = function() {
     var json: any = {};
-    json['loggedIn'] = this.loggedIn;
-    json['user'] = this.user;
-    json['vendor'] = this.vendor;
+    json['loggedIn']   = this.loggedIn;
+    json['user']       = this.user;
+    //json['vendors']    = this.vendors;
+    //json['favourites'] = this.favourites;
     return json;
   };
 
-  updateLocalStorage(userType: number) {
+  /**
+   * Store Account settings in local storage
+   * Remember details for repeat visits
+   */
+  updateLocalStorage() {
     this.localStorageService.store(
       CONSTANT.LOCALSTORAGE.SESSION,
       this.toJson()
     );
   };
 
-  clearLocalStorage(userType: number) {
+  /**
+   * Clear Account settings from local storage
+   * Logout ! :)
+   */
+  clearLocalStorage() {
     this.localStorageService.clear(
       CONSTANT.LOCALSTORAGE.SESSION
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.TOKEN
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.FAVOURITES
+    );
+    this.clearListingStorage();
+  };
+
+  /**
+   * Clear Create Listings cache from local storage
+   */
+  clearListingStorage() {
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_ONE
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_TWO
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_THREE
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_STEP_FIVE
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.VENDOR_ID
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.VENDOR_IMAGES
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_ADDRESS
+    );
+    this.localStorageService.clear(
+      CONSTANT.LOCALSTORAGE.LISTING_EDIT
     );
   };
 
@@ -305,8 +432,8 @@ export class AccountService {
   };
 
   /**
-  * Send message as observable
-  */
+   * Send message as observable
+   */
   getMessage(): Observable<any> {
     return this.subject.asObservable();
   };

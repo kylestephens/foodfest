@@ -1,4 +1,8 @@
-import { Component, OnInit }       from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit
+}                                  from '@angular/core';
 import { Router, NavigationEnd }   from '@angular/router';
 import { Config }                  from './shared/config/env.config';
 import { AccountService }          from './services/account.service';
@@ -19,7 +23,7 @@ import './operators';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
 
   public displayCookies: boolean = true;
 
@@ -59,5 +63,9 @@ export class AppComponent implements OnInit {
       this.displayCookies = false;
     }
   };
+
+  ngAfterViewInit() {
+    this.accountService.getVendors();
+  }
 
 }

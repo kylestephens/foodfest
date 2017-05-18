@@ -1,5 +1,11 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { EmitEvent } from './emitEvent';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit
+}                         from '@angular/core';
+import { EmitEvent }      from './emitEvent';
 
 @Component({
   moduleId: module.id,

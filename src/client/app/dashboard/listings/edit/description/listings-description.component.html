@@ -1,0 +1,98 @@
+<div class="listings-description">
+
+  <form [formGroup]="listingsDescriptionForm" (ngSubmit)="submitForm(listingsDescriptionForm.value)">
+
+    <!-- Description -->
+    <div class="form-row [ row ]">
+      <div class="[ col-xs-12 ]">
+        <label class="form-label">Listing Description *</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-pencil"></div>
+          <textarea rows="8"
+            required
+            formControlName="businessDescription"
+            id="businessDescription"></textarea>
+        </div>
+        <ak-form-messages [control]="listingsDescriptionForm.controls.businessDescription">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- / Description -->
+
+    <!-- Menu Item -->
+    <div class="form-row [ row ]"
+      formArrayName="listingItems"
+      *ngFor="let item of listingsDescriptionForm.controls.listingItems.controls; let i = index">
+
+      <div class="[ col-xs-12 ]">
+
+        <fieldset [formGroupName]="i">
+
+          <div class="listing-item__delete" (click)="onClickRemoveItem(i)">
+            <span class="ak-icon-cross"></span>
+            <span>Delete</span>
+          </div>
+
+          <legend *ngIf="itemType == 'Menu'">Menu Item</legend>
+          <legend *ngIf="itemType == 'Product'">Product</legend>
+          <legend *ngIf="itemType == 'Item'">Item</legend>
+
+          <label class="form-label">Title</label>
+          <div class="form-input form-input--has-icon sign-up-field">
+            <div class="form-icon ak-icon-clipboard"></div>
+            <input type="text"
+              maxlength="100"
+              placeholder="e.g. {{ itemTitleExample }}"
+              formControlName="item_title"
+              class="item_title">
+          </div>
+
+          <ak-form-messages class="error-message"
+            [control]="listingsDescriptionForm.controls.listingItems.controls[i].controls.item_title">
+          </ak-form-messages>
+
+          <label class="form-label">Description (max 300 characters)</label>
+          <div class="form-input form-input--has-icon sign-up-field">
+            <div class="form-icon ak-icon-pencil"></div>
+            <textarea
+              rows="2"
+              maxlength="200"
+              placeholder="e.g.  {{ itemDescriptionExample }}"
+              formControlName="item_description"
+              class="item_description"></textarea>
+          </div>
+
+        </fieldset>
+
+      </div>
+
+    </div>
+    <!-- / Menu Item -->
+
+    <!-- Add Menu Item -->
+    <div class="form-row [ row ]">
+      <div class="[ text-right col-xs-12 ]">
+
+        <a class="form-btn-add-item" (click)="onClickAddItem()">
+          <span class="ak-icon-plus"></span>
+          Add Menu Item
+        </a>
+
+      </div>
+    </div>
+    <!-- / Add Menu Item -->
+
+    <ak-messaging ref="listings-description-edit">
+    </ak-messaging>
+
+    <!-- Form Buttons -->
+    <div class="form-row [ row ]">
+      <div class="[ col-xs-12 text-right ]">
+        <button type="submit" class="form-btn-cta">Save updates</button>
+      </div>
+    </div>
+    <!-- / Form Buttons -->
+
+  </form>
+
+</div>

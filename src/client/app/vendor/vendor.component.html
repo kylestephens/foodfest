@@ -1,6 +1,6 @@
 <article>
 
-  <!-- HERO -->
+  <!-- COVER IMAGE -->
   <header class="hero"
     *ngIf = "vendorLoaded" [ngStyle]="{'background-image': 'url(' +  serverUrl + vendor.cover_photo_path + ')'}">
 
@@ -18,17 +18,17 @@
     </div>
 
   </header>
-  <!-- / HERO -->
+  <!-- / COVER IMAGE -->
 
   <!-- DESCRIPTION + DETAILS -->
   <section class="card [ container ]">
 
     <!-- ONLY IF EDITING -->
-    <a *ngIf="isEditing" [routerLink]="['/list-with-us/create-listing/step-5']" class="hero__return-editing">
+    <a *ngIf="isEditing && isOwnVendor" [routerLink]="['/list-with-us/create-listing/step-5']" class="hero__return-editing">
       <span class="ak-icon-chevron-thin-left">
       </span> Edit Details
     </a>
-    <button *ngIf="isEditing" class="hero__proceed-payment" [routerLink]="['/list-with-us/payment/']">
+    <button *ngIf="isEditing && isOwnVendor" class="hero__proceed-payment" [routerLink]="['/list-with-us/payment/']">
       Pay &amp; Publish
       <span class="ak-icon-chevron-thin-right">
       </span>
@@ -204,16 +204,19 @@
    <section class="[ container ]">
     <div class="vendor-contact card [ row ]">
       <div class="vendor-contact [ col-xs-12 ]">
-          <ak-messaging ref="vendor-messaging">
-          </ak-messaging>
-          <div class="vendor-contact__message">
-            <textarea class="vendor-contact__text" rows="5" [(ngModel)] ="messageText" [placeholder]="placeholder" [disabled]="!isLoggedIn"></textarea>
-          </div>
-          <div class="vendor-contact__button">
-            <button class="hero__browse-button slim" (click)="sendMessage()" [disabled]="!isLoggedIn">
-              Send Message
-            </button>
-          </div>
+        <ak-messaging ref="vendor-messaging">
+        </ak-messaging>
+        <div class="vendor-contact__message">
+          <div class="form-input form-input--has-icon sign-up-field">
+            <div class="form-icon ak-icon-pencil"></div>
+              <textarea class="vendor-contact__text" rows="5" [(ngModel)] ="messageText" [placeholder]="placeholder" [disabled]="!isLoggedIn"></textarea>
+            </div>
+        </div>
+        <div class="vendor-contact__button">
+          <button class="hero__browse-button slim" (click)="sendMessage()" [disabled]="!isLoggedIn">
+            Send Message
+          </button>
+        </div>
       </div>
     </div>
   </section>

@@ -1,5 +1,10 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation }  from '@angular/core';
-import { Subscription }                  from 'rxjs/Subscription';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewEncapsulation
+}                                 from '@angular/core';
+import { Subscription }           from 'rxjs/Subscription';
 
 import { MessagingService }       from '../../services/messaging.service';
 import { ModalService }           from '../../services/modal.service';
@@ -8,11 +13,11 @@ import { SettingsService }        from '../../services/settings.service';
 import { CONSTANT }               from '../../core/constant';
 
 /**
- * This class represents the navigation bar component.
+ * This class represents the modal pop-up component.
  */
 @Component({
   moduleId: module.id,
-  selector: 'modal',
+  selector: 'ak-modal',
   templateUrl: 'modal.component.html',
   styleUrls: ['modal.component.css'],
   encapsulation: ViewEncapsulation.None

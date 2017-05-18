@@ -4,23 +4,21 @@ import { Subject }    from 'rxjs/Subject';
 import { CONSTANT }   from '../core/constant';
 
 @Injectable()
-export class ModalService {
+export class LoaderService {
 
   private subject = new Subject<any>();
 
-  show(modalType: string, data?: any) {
-    console.debug('ModalService::show');
+  show() {
+    console.debug('LoaderService::show');
     this.subject.next({
-      event: CONSTANT.EVENT.MODAL.SHOW_MODAL,
-      modalType,
-      data
+      event: CONSTANT.EVENT.LOADER.SHOW_LOADER
     });
   };
 
   hide() {
-    console.debug('ModalService::hide');
+    console.debug('LoaderService::hide');
     this.subject.next({
-      event: CONSTANT.EVENT.MODAL.HIDE_MODAL
+      event: CONSTANT.EVENT.LOADER.HIDE_LOADER
     });
   };
 

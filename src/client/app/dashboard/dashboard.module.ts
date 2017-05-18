@@ -1,25 +1,25 @@
-import { NgModule } 					        from '@angular/core';
-import { CommonModule }               from '@angular/common';
-import { FormsModule }                from '@angular/forms';
-import { SharedModule }               from '../shared/shared.module';
-import { DashboardRoutingModule }     from './dashboard-routing.module';
-import { DashboardComponent }         from './dashboard.component';
-import { ProfileComponent }           from './profile/profile.component';
-import { ListingsComponent }          from './listings/listings.component';
-import { ListingsEditComponent }      from './listings/edit/listings-edit.component';
-import { ListingsDetailsComponent }   from './listings/edit/details/listings-details.component';
-import { ListingsImagesComponent }    from './listings/edit/images/listings-images.component';
-import { ListingsMenuComponent }      from './listings/edit/menu/listings-menu.component';
-import { InboxComponent }             from './inbox/inbox.component';
-import { InboxThreadComponent }       from './inbox/thread/inbox-thread.component';
+import { NgModule } 					            from '@angular/core';
+import { CommonModule }                   from '@angular/common';
+import { FormsModule }                    from '@angular/forms';
+import { SharedModule }                   from '../shared/shared.module';
+import { DashboardRoutingModule }         from './dashboard-routing.module';
+import { DashboardComponent }             from './dashboard.component';
+import { ProfileComponent }               from './profile/profile.component';
+import { ListingsComponent }              from './listings/listings.component';
+import { ListingsEditComponent }          from './listings/edit/listings-edit.component';
+import { ListingsDetailsComponent }       from './listings/edit/details/listings-details.component';
+import { ListingsImagesComponent }        from './listings/edit/images/listings-images.component';
+import { ListingsDescriptionComponent }   from './listings/edit/description/listings-description.component';
+import { InboxComponent }                 from './inbox/inbox.component';
+import { InboxThreadComponent }           from './inbox/thread/inbox-thread.component';
 import {
   SearchResultsCardModule
-}                                     from '../searchResults/cardList/card/search-results-card.module';
+}                                         from '../searchResults/cardList/card/search-results-card.module';
 
-import { FavouritesComponent }        from './favourites/favourites.component';
+import { FavouritesComponent }            from './favourites/favourites.component';
 
-import { Ng2PaginationModule }        from 'ng2-pagination';
-import { SelectModule }               from 'ng2-select';
+import { Ng2PaginationModule }            from 'ng2-pagination';
+import { SelectModule }                   from 'ng2-select';
 
 @NgModule({
   imports: [
@@ -38,7 +38,7 @@ import { SelectModule }               from 'ng2-select';
     ListingsEditComponent,
     ListingsDetailsComponent,
     ListingsImagesComponent,
-    ListingsMenuComponent,
+    ListingsDescriptionComponent,
     InboxComponent,
     InboxThreadComponent,
     FavouritesComponent

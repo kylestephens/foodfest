@@ -19,7 +19,8 @@ import { CONSTANT }                        from '../../../core/constant';
 @Component({
   moduleId: module.id,
   selector: 'ak-create-listing-step-four',
-  templateUrl: 'create-listing-step-four.component.html'
+  templateUrl: 'create-listing-step-four.component.html',
+  styleUrls: ['create-listing-step-four.component.css']
 })
 
 export class CreateListingStepFourComponent {
@@ -93,6 +94,15 @@ export class CreateListingStepFourComponent {
     if(this.stepFourForm.controls[count - 1].get('item_title').value == '') {
       this.stepFourForm.controls[count - 1].get('item_title').markAsTouched();
     } else {
+      this.stepFourForm.push(
+        this._initItem()
+      );
+    }
+  };
+
+  public onClickRemoveItem(index: number) {
+    this.stepFourForm.removeAt(index);
+    if(this.stepFourForm.length === 0) {
       this.stepFourForm.push(
         this._initItem()
       );
