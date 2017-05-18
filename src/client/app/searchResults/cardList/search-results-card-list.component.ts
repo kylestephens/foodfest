@@ -93,4 +93,8 @@ export class SearchResultsCardListComponent implements OnInit, OnDestroy {
     if(this.favourites && this.favourites.indexOf(vendor.id) > -1) return true;
     return false;
   }
+
+  pageChanged() {
+    window.document.getElementsByClassName('page-body')[0].scrollIntoView();
+  }
 }

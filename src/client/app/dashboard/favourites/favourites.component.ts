@@ -50,4 +50,8 @@ export class FavouritesComponent {
     });
   }
 
+  pageChanged() {
+    window.document.getElementsByClassName('page-body')[0].scrollIntoView();
+  }
+
 }

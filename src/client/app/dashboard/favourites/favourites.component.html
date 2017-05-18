@@ -28,7 +28,7 @@
 </div>
 
 <div class="pagination [ row ]">
-  <pagination-controls (pageChange)="p = $event"
+  <pagination-controls (pageChange)="p = $event; pageChanged()"
     autoHide="true"
     previousLabel="<"
     nextLabel=">">
