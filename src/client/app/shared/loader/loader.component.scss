@@ -3,6 +3,8 @@
 //
 // Loader Wrapper
 //
+// See : http://codepen.io/thesupersloth/pen/EmLpgO/
+//
 // loader itself has already been loaded as part
 // of global app scaffolding,
 // see:
@@ -18,7 +20,7 @@ $modal-padding: 50px;
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.4);
   z-index: 999;
 
   -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */

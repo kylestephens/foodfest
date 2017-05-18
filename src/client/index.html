@@ -21,14 +21,36 @@
 <body>
 
   <ak-app>
+    <!-- LOADER -->
     <div class="loader-container">
-        <div class="loader">
-            <span class="dot dot_1"></span>
-            <span class="dot dot_2"></span>
-            <span class="dot dot_3"></span>
-            <span class="dot dot_4"></span>
+      <div class="loader-grid">
+        <div class="loader-row">
+          <div class="loader-circle-1"></div>
+          <div class="loader-circle-2"></div>
+          <div class="loader-circle-3"></div>
         </div>
+        <div class="loader-row">
+          <div class="loader-circle-4"></div>
+          <div class="loader-circle-5"></div>
+          <div class="loader-circle-6"></div>
+        </div>
+        <div class="loader-row">
+          <div class="loader-circle-7"></div>
+          <div class="loader-circle-8"></div>
+          <div class="loader-circle-9"></div>
+        </div>
+      </div>
     </div>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+      <defs>
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+          <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+          <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+        </filter>
+      </defs>
+    </svg>
+    <!-- / LOADER -->
   </ak-app>
 
   <script>
