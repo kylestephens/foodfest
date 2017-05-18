@@ -4,7 +4,8 @@ import { Component,
          Renderer2,
          ViewChild }             from '@angular/core';
 import { ActivatedRoute,
-         Params }                from '@angular/router';
+         Params,
+         Router }                from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -17,10 +18,12 @@ export class ListingCompleteComponent implements OnInit {
   @ViewChild('tickAnimation')
   public tickAnimationElementRef: ElementRef;
 
+  private allowedParams = ['market'];
   private reference: string;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private renderer: Renderer2
     )
   {}
@@ -29,6 +32,10 @@ export class ListingCompleteComponent implements OnInit {
     this.route.params.subscribe(
       params => this.reference = params['ref']
     );
+
+    if(this.allowedParams.indexOf(this.reference) === -1) {
+       this.router.navigate(['/']);
+    }
 
     setTimeout(() => {
       this.renderer.addClass(this.tickAnimationElementRef.nativeElement, 'drawn');

@@ -8,7 +8,8 @@ import { AccountService }    from '../../services/account.service';
 import { MessagingService }  from '../../services/messaging.service';
 import { CONSTANT }          from '../../core/constant';
 import { County }            from '../../shared/model/county';
-//TODO: ADD HANDLING WHEN USER IS organisation
+import { Organisation }      from '../../shared/model/organisation';
+
 @Injectable()
 export class CreateMarketService {
   private subject = new Subject<any>();
@@ -92,6 +93,15 @@ export class CreateMarketService {
         reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
         true
       );
+    });
+  }
+
+  getUserOrganisation(): Promise<Organisation> {
+    return this.restService.get(
+      this.settingsService.getServerBaseUrl() + '/organisation', null, this.accountService.getUser().akAccessToken
+    ).then((response: Response) => {
+      if(response) return response.json() as Organisation;
+      else return null;
     });
   }
 

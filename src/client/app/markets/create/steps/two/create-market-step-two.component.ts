@@ -34,6 +34,7 @@ export class CreateMarketStepTwoComponent implements OnInit {
   private googleApiOptions = { componentRestrictions: {country: 'ie'} };
   private organisationAutoCompleteInit: boolean = false;
   private organisationAddress: string;
+  private organisationId: number;
 
   constructor (
     private fb: FormBuilder,
@@ -56,6 +57,7 @@ export class CreateMarketStepTwoComponent implements OnInit {
     if(this.createMarketService.getStoredMarket().secondStep) {
       this._restoreFormValues(this.createMarketService.getStoredMarket().secondStep);
     }
+    this._getUserOrganisation();
   }
 
   ngAfterViewInit() {
@@ -95,6 +97,13 @@ export class CreateMarketStepTwoComponent implements OnInit {
         }
       }
     }
+  }
+
+  private _getUserOrganisation() {
+    this.createMarketService.getUserOrganisation().then(organisation => {
+      if(organisation) this._setOrganisationValues(organisation);
+    });
+
   }
 
   private _initEmptyOrganisationForm() {
@@ -185,10 +194,25 @@ export class CreateMarketStepTwoComponent implements OnInit {
     }
   }
 
+  private _setOrganisationValues(organisation: any) {
+    this.organisationId = organisation.id;
+    this.createMarketForm.controls['isOrganisation'].setValue(true);
+    let orgValues = {
+      'organisationName': organisation.name,
+      'organisationPhoneNumber': organisation.phone_num,
+      'organisationAddress': organisation.address,
+      'organisationWebsite': organisation.business_website,
+      'organisationDescription': organisation.description
+
+    }
+    this.createMarketForm.controls['organisation'].setValue(orgValues);
+  }
+
   private _createMarket(value: any) {
+    value.organisationId = this.organisationId;
     this.createMarketService.setStoredMarket(value, 2);
     this.createMarketService.createMarket().then((marketId: number) => {
-      this.router.navigate(['/complete', 'market']);
+      this.router.navigate(['complete', 'market']);
     });
   }
 }
