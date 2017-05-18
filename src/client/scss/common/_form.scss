@@ -242,7 +242,13 @@ $button-bg: rgba(0, 0, 0, 0.05);
 }
 
 .form-row {
-  margin: $padding-large-vertical 0;
+  margin-top: $padding-large-vertical;
+  margin-bottom: $padding-large-vertical;
+
+  @media (min-width: $screen-sm-min) {
+    margin-left: $padding-large-vertical;
+    margin-right: $padding-large-vertical;
+  }
 }
 
 .form-btn-cta {
