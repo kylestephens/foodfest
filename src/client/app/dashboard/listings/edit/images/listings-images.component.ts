@@ -147,7 +147,7 @@ export class ListingsImagesComponent implements OnInit {
     ).then((response: any) => {
       this.loaderService.hide();
       let responseBody = response.json();
-      this.editingVendor.logo_path = responseBody.business_logo + '?t=' + Date.now();  // cache busting
+      this.editingVendor.logo_path = responseBody.logo_photo + '?t=' + Date.now();  // cache busting
       this.vendor = this.editingVendor;
     }, (reason: any) => {
       this.loaderService.hide();

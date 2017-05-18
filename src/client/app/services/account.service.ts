@@ -360,7 +360,7 @@ export class AccountService {
    * Store Account settings in local storage
    * Remember details for repeat visits
    */
-  updateLocalStorage(userType: number) {
+  updateLocalStorage() {
     this.localStorageService.store(
       CONSTANT.LOCALSTORAGE.SESSION,
       this.toJson()
@@ -371,7 +371,7 @@ export class AccountService {
    * Clear Account settings from local storage
    * Logout ! :)
    */
-  clearLocalStorage(userType: number) {
+  clearLocalStorage() {
     this.localStorageService.clear(
       CONSTANT.LOCALSTORAGE.SESSION
     );
@@ -381,8 +381,13 @@ export class AccountService {
     this.localStorageService.clear(
       CONSTANT.LOCALSTORAGE.FAVOURITES
     );
+    this.clearListingStorage();
+  };
 
-    // clear create listing stuff also
+  /**
+   * Clear Create Listings cache from local storage
+   */
+  clearListingStorage() {
     this.localStorageService.clear(
       CONSTANT.LOCALSTORAGE.LISTING_STEP_ONE
     );

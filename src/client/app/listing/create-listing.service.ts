@@ -194,13 +194,13 @@ export class CreateListingService {
 
       var me = this;
 
-      this.restService.postMultiPart(
+      this.restService.post(
         me.settingsService.getServerBaseUrl() + '/vendors/images', {
           id: vendorId,
           logo_photo: businessLogo,
           cover_photo: coverImage,
           images: additionalImages
-        }, this.accountService.getUser().akAccessToken
+        }, me.accountService.getUser().akAccessToken
       ).then(function(response: any) {
         let responseBody = response.json();
         resolve(responseBody);
