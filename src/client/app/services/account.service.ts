@@ -102,8 +102,6 @@ export class AccountService {
    * Otherwise, lookup
    */
   getFavourites = function() {
-    if(!this.isLoggedIn()) return [];
-
     return new Promise((resolve, reject) => {
 
       let localStorageFavs = this.localStorageService.retrieve(
@@ -268,8 +266,6 @@ export class AccountService {
    * Returns all linked, published vendors
    */
   getUserVendors(): Promise<Array<Vendor>> {
-    if(!this.isLoggedIn()) return [];
-
     return this.restService.get(
       this.settingsService.getServerBaseUrl() + '/users/activevendors', null, this.getUser().akAccessToken,
     ).then((response: Response) => {
@@ -284,8 +280,6 @@ export class AccountService {
    * Otherwise, lookup
    */
   getVendors = function() {
-    if(!this.isLoggedIn()) return [];
-
     return new Promise((resolve, reject) => {
       if(this.vendors && this.vendors.length > 0) {
         resolve(this.vendors);

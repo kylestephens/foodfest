@@ -4,6 +4,7 @@ import {
   AfterViewInit
 }                                  from '@angular/core';
 import { Router, NavigationEnd }   from '@angular/router';
+import { Subscription }            from 'rxjs/Subscription';
 import { Config }                  from './shared/config/env.config';
 import { AccountService }          from './services/account.service';
 import { MessagingService }        from './services/messaging.service';
@@ -26,6 +27,7 @@ import './operators';
 export class AppComponent implements OnInit, AfterViewInit {
 
   public displayCookies: boolean = true;
+  private subscription: Subscription;
 
   constructor(
     private router: Router,
@@ -43,6 +45,14 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.TOKEN)
       );
     }
+
+    this.subscription = this.accountService.getMessage().subscribe(subMessage => {
+      if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN) {
+        if(this.accountService.isLoggedIn()) {
+          this.getVendors();
+        }
+      }
+    });
   };
 
   ngOnInit() {
@@ -62,10 +72,20 @@ export class AppComponent implements OnInit, AfterViewInit {
     if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.COOKIES)) {
       this.displayCookies = false;
     }
-  };
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   ngAfterViewInit() {
-    this.accountService.getVendors();
+    this.getVendors();
+  }
+
+  getVendors() {
+    if(this.accountService.isLoggedIn()) {
+      this.accountService.getVendors();
+    }
   }
 
 }

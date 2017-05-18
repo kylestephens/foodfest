@@ -34,6 +34,8 @@ export class ListingsComponent {
   private browser: any = this.browserService.get();
   private isPhone: boolean = this.browser.deviceType === 'phone';
   private serverUrl: string = this.settingsService.getServerBaseUrl() + '/';
+  private subscription: Subscription;
+
 
   constructor(
     private inboxService: InboxService,
@@ -49,14 +51,28 @@ export class ListingsComponent {
     platformLocation.onPopState(() => {
       this.clearListingsParameters();
     });
+
+    this.subscription = this.accountService.getMessage().subscribe(subMessage => {
+      if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN) {
+        if(this.accountService.isLoggedIn()) {
+          this.getListings();
+        }
+      }
+    });
   }
 
   ngOnInit() {
-    this.getListings();
+    if(this.accountService.isLoggedIn()) {
+      this.getListings();
+    }
 
     this.route.params.subscribe(
       params => this.vendorId = params['id']
     );
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   public getListings() {
