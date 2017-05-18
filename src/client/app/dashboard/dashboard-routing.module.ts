@@ -14,7 +14,7 @@ import { FavouritesComponent } from './favourites/favourites.component';
       {
         path: '',
         component: DashboardComponent,
-        canActivate: [AuthGuard],
+        canActivate: [ AuthGuard ],
         children: [
           { path: '', redirectTo: 'profile', pathMatch: 'full'},
           { path: 'profile', component: ProfileComponent },
