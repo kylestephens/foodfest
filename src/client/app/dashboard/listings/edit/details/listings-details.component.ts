@@ -102,7 +102,6 @@ export class ListingsDetailsComponent implements OnInit, OnChanges {
 
   public submitForm(value: any) {
     var me = this;
-    debugger;
     this.restService.post(
       me.settingsService.getServerBaseUrl() + '/vendors/edit', {
         id: me.editingVendor.id,
