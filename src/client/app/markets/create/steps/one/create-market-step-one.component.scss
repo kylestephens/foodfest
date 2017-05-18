@@ -1,0 +1,82 @@
+@import '../../../../../scss/core/variables';
+@import '../../../../../scss/core/settings';
+
+.opening-times {
+  &__item {
+    padding: 10px 0;
+    margin-right: 10px;
+    width: 100%;
+
+    &__day {
+      margin-top: 10px;
+    }
+
+    &__time {
+      width: calc((100% - 10px)/2);
+      margin-bottom: 10px;
+      margin-right: 0;
+
+      &.time-to {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+.form-select-wrapper {
+  margin-top: 10px;
+}
+
+.checkbox-after:hover {
+  cursor: pointer;
+}
+
+.nohover:hover {
+  cursor: default;
+}
+
+@media (min-width: $screen-sm-min) {
+  .opening-times__item {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding: 0 !important;
+    margin-top: 0 !important;
+
+     &__day {
+        width: 125px;
+        flex: 0 0 125px;
+      }
+
+    &__time {
+      width: 135px !important;
+      margin-right: 10px !important;
+      margin-bottom: 0 !important;
+      flex: 0 0 135px;
+
+      &.time-to {
+        margin-left: 0 !important;
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  .opening-times {
+    display: flex;
+    flex-direction: row;
+
+    &__item {
+      display: initial;
+      height: auto;
+
+      &__time {
+        margin-bottom: 0px !important;
+
+        &.time-to {
+          float: left !important;
+        }
+      }
+    }
+  }
+}

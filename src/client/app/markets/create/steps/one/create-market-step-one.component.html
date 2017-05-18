@@ -1,0 +1,130 @@
+<form [formGroup]="createMarketForm" (ngSubmit)="submitForm(createMarketForm.value)">
+
+  <!-- market name -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-8 col-xs-12 ]">
+      <label class="form-label">Market Name *</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-user"></div>
+        <input type="text"
+          placeholder="e.g. People's Park Market"
+          formControlName="marketName"
+          id="marketName">
+      </div>
+      <ak-form-messages [control]="createMarketForm.controls.marketName">
+      </ak-form-messages>
+    </div>
+  </div>
+  <!-- / market name -->
+
+  <!-- market description -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-8 col-xs-12 ]">
+      <label class="form-label">Market Description</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-pencil"></div>
+         <textarea
+          rows="5"
+          maxlength="500"
+          placeholder="e.g. The People’s Park Co Co Market is located on the edge of Dún Laoghaire town centre in the historic People’s Park. The market is a very popular spot, attracting large crowds every weekend. Over 50 vendors trade each Sunday selling a wide range of products including hot food, baked goods, art and crafts, artisan food products and seasonal produce."
+          formControlName="marketDescription"></textarea>
+      </div>
+      <ak-form-messages [control]="createMarketForm.controls.marketDescription">
+      </ak-form-messages>
+    </div>
+  </div>
+  <!-- market description -->
+
+  <!-- market address -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-8 col-xs-12 ]">
+      <label class="form-label">Market Location *</label>
+      <div class="form-input form-input--has-icon sign-up-field">
+        <div class="form-icon ak-icon-location"></div>
+        <input
+          placeholder="e.g. The Peoples Park, Glasthule, Dublin"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="off"
+          type="text"
+          formControlName="marketLocation"
+          #autocompleteSearchMarket>
+      </div>
+      <ak-form-messages [control]="createMarketForm.controls.marketLocation">
+      </ak-form-messages>
+    </div>
+  </div>
+  <!-- / market address -->
+
+  <!-- opening days and times -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 ]">
+      <label class="form-label">Opening times *</label>
+
+      <div class="opening-times" formArrayName="marketOpeningDays">
+        <div *ngFor="let marketOpeningDay of createMarketForm.controls.marketOpeningDays.controls; let i=index" class="opening-times__item">
+          <div [formGroupName]="i">
+            <!--  <input formControlName="id"> -->
+            <!-- <input type="checkbox" formControlName="checked"> -->
+            <!-- day -->
+            <div class="form-radio-wrapper opening-times__item__day">
+              <input type="checkbox" id="{{marketOpeningDay.controls.id.value}}" formControlName="checked"
+               (change)="resetTimes(marketOpeningDay)"/>
+              <label for="{{marketOpeningDay.controls.id.value}}">
+                <span>{{marketOpeningDay.controls.name.value}}</span>
+              </label>
+            </div>
+            <!-- / day -->
+
+            <!-- opening time -->
+            <div class="form-select-wrapper opening-times__item__time" *ngIf="marketOpeningDay.controls.checked.value">
+              <div class="form-select">
+                <ng-select
+                  [items]="timeSlots"
+                  placeholder="From"
+                  formControlName="timeFrom">
+                </ng-select>
+              </div>
+            </div>
+            <!-- / opening time -->
+
+            <!-- closing time -->
+            <div class="form-select-wrapper opening-times__item__time time-to" *ngIf="marketOpeningDay.controls.checked.value">
+              <div class="form-select">
+                <ng-select formControlName="timeTo"
+                  [items]="timeSlots"
+                  placeholder="To">
+                </ng-select>
+              </div>
+            </div>
+            <!-- / closing time -->
+
+          </div>
+
+        </div>
+      </div>
+      <ak-form-messages [control]="createMarketForm.controls.marketOpeningDays">
+      </ak-form-messages>
+    </div>
+  </div>
+  <!-- / opening days and times -->
+
+   <!-- Mandatory Fields -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 ]">
+      <span class="form-mandatory">* denotes mandatory field</span>
+    </div>
+  </div>
+  <!-- / Mandatory Fields -->
+
+  <!-- Form Buttons -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 text-right ]">
+      <button type="submit" class="form-btn-cta">Next step</button>
+    </div>
+  </div>
+  <!-- / Form Buttons -->
+
+</form>
+
+

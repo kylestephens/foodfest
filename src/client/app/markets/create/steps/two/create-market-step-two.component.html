@@ -1,0 +1,145 @@
+<form [formGroup]="createMarketForm" (ngSubmit)="submitForm(createMarketForm.value)">
+
+  <!-- market contact -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-8 col-xs-12 ]">
+      <div class="form-radio-wrapper">
+        <label for="allowContact" class="checkbox-after">Allow vendors to contact me</label>
+        <input type="checkbox" id="allowContact"
+              [formControl]="createMarketForm.controls.allowContact"/>
+        <label for="allowContact">
+          <span class="nohover">&nbsp;</span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <!-- / market contact -->
+
+  <!-- organisation check -->
+  <div class="form-row [ row ]">
+    <div class="[ col-sm-8 col-xs-12 ]">
+      <div class="form-radio-wrapper">
+        <label for="isOrganisation" class="checkbox-after">I am an organisation</label>
+        <input type="checkbox" id="isOrganisation"
+              [formControl]="createMarketForm.controls.isOrganisation"/>
+        <label for="isOrganisation">
+          <span class="nohover">&nbsp;</span>
+        </label>
+      </div>
+    </div>
+  </div>
+  <!-- / organisation check -->
+
+  <!-- organisation details -->
+  <div *ngIf="createMarketForm.controls.isOrganisation.value" formGroupName="organisation">
+  <!-- <div *ngIf="isUserOrganisation" formGroupName="organisation"> -->
+
+    <!-- organisation name -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Organisation Name *</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-user"></div>
+          <input
+            type="text"
+            placeholder="e.g. Dun Laoghaire Rathdown County Council"
+            formControlName="organisationName"
+            id="organisationName">
+        </div>
+        <ak-form-messages [control]="createMarketForm.controls.organisation.controls.organisationName">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- / organisation name -->
+
+    <!-- organisation phone number -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Organisation Phone Number</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-phone"></div>
+          <input type="tel"
+            placeholder="e.g. 085 1234567"
+            formControlName="organisationPhoneNumber"
+            id="organisationPhoneNumber">
+        </div>
+        <ak-form-messages [control]="createMarketForm.controls.organisation.controls.organisationPhoneNumber">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- / organisation phone number -->
+
+    <!-- organisation address -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Organisation Address</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-location"></div>
+          <input class="test"
+            placeholder="e.g. County Hall, Marine Rd, Dublin"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="off"
+            type="text"
+            formControlName="organisationAddress"
+            #autocompleteSearchOrganisation>
+        </div>
+      </div>
+    </div>
+    <!-- / organisation address -->
+
+    <!-- organisation website -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Organisation Website</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-earth"></div>
+          <input type="text"
+            placeholder="e.g. www.dlrcoco.ie"
+            formControlName="organisationWebsite">
+        </div>
+        <ak-form-messages [control]="createMarketForm.controls.organisation.controls.organisationWebsite">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- / organisation website -->
+
+    <!-- organisation description -->
+    <div class="form-row [ row ]">
+      <div class="[ col-sm-8 col-xs-12 ]">
+        <label class="form-label">Organisation Description</label>
+        <div class="form-input form-input--has-icon sign-up-field">
+          <div class="form-icon ak-icon-pencil"></div>
+           <textarea
+            rows="5"
+            maxlength="500"
+            placeholder="e.g. Dún Laoghaire–Rathdown County Council is the authority responsible for local government in the county of Dún Laoghaire–Rathdown, Ireland. It is one of three local authorities that comprised the former Dublin County Council before its abolition and one of four councils in the Dublin Region."
+            formControlName="organisationDescription"></textarea>
+        </div>
+        <ak-form-messages [control]="createMarketForm.controls.organisation.controls.organisationDescription">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- /organisation description -->
+
+  </div>
+  <!-- / organisation details -->
+
+   <!-- Mandatory Fields -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 ]">
+      <span class="form-mandatory">* denotes mandatory field</span>
+    </div>
+  </div>
+  <!-- / Mandatory Fields -->
+
+  <!-- Form Buttons -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 text-right ]">
+      <button class="form-btn-cta" (click)="previousStep()">Previous step</button>
+      <button type="submit" class="form-btn-cta">Add market</button>
+    </div>
+  </div>
+  <!-- / Form Buttons -->
+
+</form>

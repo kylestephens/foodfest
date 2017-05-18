@@ -1,0 +1,61 @@
+@import '../../../scss/core/variables';
+@import '../../../scss/core/settings';
+
+$progress-bar-height: 55px;
+
+.progress-bar {
+  z-index: 2;
+  width: 100%;
+  position: fixed;
+  height: $progress-bar-height;
+  top: 80px;  // height of header
+  border-bottom: 2px solid #efefef;
+  background: #fff;
+
+  &__step {
+    padding: 16px $padding-large-horizontal;
+    font-weight: 400;
+    float: left;
+  }
+
+  &__description {
+    padding: 16px $padding-large-horizontal;
+    font-weight: 200;
+    float: left;
+  }
+
+  &:after {
+    content: '';
+    height: 2px;
+    position: relative;
+    top: -1px;
+    display: block;
+    background: black;
+
+    -webkit-transition: width 0.5s;
+    transition: width 0.5s;
+  }
+
+  &--step-1 {
+    &:after {
+      width: 50%;
+    }
+  }
+
+  &--step-2 {
+    &:after {
+      width: 100%;
+    }
+  }
+}
+
+.form-card {
+  margin-top: 79px;
+  margin-bottom: 79px;
+  padding: 12px 24px;
+}
+
+
+.create-market-msg {
+   margin-top: 79px;
+}

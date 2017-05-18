@@ -13,6 +13,7 @@ export class ValidationService {
       'invalidEmailAddress': 'Invalid email address',
       'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.',
       'minlength': `Minimum length ${validatorValue.requiredLength}`,
+      'maxlength': `Maximum length ${validatorValue.requiredLength}`,
       'textInputError': 'Invalid character. Please use letters and numbers only',
       'alphaNumericError': 'Invalid character. Please use letters and numbers only',
       'phoneNumberError': 'Invalid format. Please use numbers only',
@@ -53,7 +54,7 @@ export class ValidationService {
 
   static phoneNumberValidator(control: any) {
     // Letters, Numbers and Spaces
-    if ( control.value === '' || control.value.match(/^(?:[0-9(]+)(?:[0-9 ()_-]*)$/) ) {
+    if ( control.value === null || control.value === '' || control.value.match(/^(?:[0-9(]+)(?:[0-9 ()_-]*)$/) ) {
       return null;
     } else {
       return { 'phoneNumberError': true };
@@ -87,5 +88,15 @@ export class ValidationService {
       return { 'invalidPassword': true };
     }
   };
+
+  static checkRequiredArray(control: any) {
+    //At least one element in array
+    if(control.controls.length === 0) {
+      return { 'required': true };
+    }
+    else {
+      return null;
+    }
+  }
 
 }

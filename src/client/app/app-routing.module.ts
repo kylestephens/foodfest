@@ -14,7 +14,9 @@ export const routes: Routes = [
   { path: 'privacy', loadChildren: 'app/privacy/privacy.module#PrivacyModule' },
   { path: 'vendor', loadChildren: 'app/vendor/vendor.module#VendorModule' },
   { path: 'vendor/:id', loadChildren: 'app/vendor/vendor.module#VendorModule' },
-  { path: 'markets', loadChildren: 'app/markets/markets.module#MarketsModule' }
+  { path: 'markets', loadChildren: 'app/markets/markets.module#MarketsModule' },
+  { path: 'markets/create-market', loadChildren: 'app/markets/create/create-market.module#CreateMarketModule' },
+  { path: 'complete/:ref', loadChildren: 'app/listingComplete/listing-complete.module#ListingCompleteModule' }
 ];
 
 @NgModule({
