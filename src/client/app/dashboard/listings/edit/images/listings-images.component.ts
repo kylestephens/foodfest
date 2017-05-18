@@ -2,7 +2,8 @@ import {
   Component,
   Input,
   NgZone,
-  OnInit
+  OnInit,
+  OnChanges
 }                                        from '@angular/core';
 
 import { CONSTANT }                      from '../../../../core/constant';
@@ -24,7 +25,7 @@ import { SettingsService }               from '../../../../services/settings.ser
   styleUrls: ['listings-images.component.css']
 })
 
-export class ListingsImagesComponent implements OnInit {
+export class ListingsImagesComponent implements OnInit, OnChanges {
 
   @Input()
   vendor: Vendor;
@@ -51,6 +52,12 @@ export class ListingsImagesComponent implements OnInit {
 
   ngOnInit() {
     this.editingVendor = this.vendor;
+  };
+
+  ngOnChanges(changes: any) {
+    if(changes.vendor && changes.vendor.currentValue) {
+      this.editingVendor = changes.vendor.currentValue;
+    }
   };
 
   /**
@@ -123,6 +130,12 @@ export class ListingsImagesComponent implements OnInit {
       let responseBody = response.json();
       this.editingVendor.cover_photo_path = responseBody.cover_photo + '?t=' + Date.now();  // cache busting
       this.vendor = this.editingVendor;
+      this.messagingService.show(
+        'listings-description-images',
+        CONSTANT.MESSAGING.SUCCESS,
+        'Image successfully uploaded',
+        true
+      );
     }, (reason: any) => {
       this.loaderService.hide();
       this.messagingService.show(
@@ -175,6 +188,12 @@ export class ListingsImagesComponent implements OnInit {
       let responseBody = response.json();
       this.editingVendor.images = responseBody.images;
       this.vendor = this.editingVendor;
+      this.messagingService.show(
+        'listings-description-images',
+        CONSTANT.MESSAGING.SUCCESS,
+        'Image upload successful',
+        true
+      );
     }, (reason: any) => {
       this.loaderService.hide();
       this.messagingService.show(
@@ -203,6 +222,12 @@ export class ListingsImagesComponent implements OnInit {
       let responseBody = response.json();
       this.editingVendor.images = responseBody.images;
       this.vendor = this.editingVendor;
+      this.messagingService.show(
+        'listings-description-images',
+        CONSTANT.MESSAGING.SUCCESS,
+        'Image successfully removed',
+        true
+      );
     }, (reason: any) => {
       this.loaderService.hide();
       this.messagingService.show(

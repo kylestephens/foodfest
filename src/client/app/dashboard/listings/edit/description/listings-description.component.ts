@@ -2,6 +2,7 @@ import {
   Component,
   Input,
   OnInit,
+  OnChanges,
   ViewChild
 }                                        from '@angular/core';
 import {
@@ -32,7 +33,7 @@ import { ValidationService }             from '../../../../services/validation.s
   styleUrls: ['listings-description.component.css']
 })
 
-export class ListingsDescriptionComponent implements OnInit {
+export class ListingsDescriptionComponent implements OnInit, OnChanges {
 
   @Input()
   vendor: Vendor;
@@ -65,6 +66,13 @@ export class ListingsDescriptionComponent implements OnInit {
   ngOnInit() {
     this.editingVendor = this.vendor;
     this._restoreFormValues(this.editingVendor);
+  };
+
+  ngOnChanges(changes: any) {
+    if(changes.vendor && changes.vendor.currentValue) {
+      this.editingVendor = changes.vendor.currentValue;
+      this._restoreFormValues(this.editingVendor);
+    }
   };
 
   public onClickAddItem() {
@@ -152,6 +160,9 @@ export class ListingsDescriptionComponent implements OnInit {
   };
 
   private _restoreListItemsValues(values: any) {
+    this.listingsDescriptionForm.controls['listingItems'] = this.fb.array([
+      this._initItem()
+    ]);
     if(values.length > 0) {
       for(var i = 0; i < values.length; i++) {
         (<FormArray>this.listingsDescriptionForm.controls['listingItems']).push(
