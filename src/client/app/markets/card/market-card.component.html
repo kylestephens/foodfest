@@ -3,7 +3,7 @@
     <h4>{{market.name}}</h4>
   </div>
   <div *ngIf="market.allow_contact" class="title-item [ col-xs-4 col-sm-2 ]">
-    <button class="hero__browse-button slim" (click)="openConfirmationDialog(market)">Contact organizer</button>
+    <button class="hero__browse-button slim" (click)="openConfirmationDialog(market)">Contact organiser</button>
   </div>
 </div>
 <div class="market-card__location"><span class="ak-icon-location"></span>{{market.location}}</div>
@@ -11,7 +11,7 @@
   <span>Opening times:</span>
   <span class="market-card__opening day" *ngFor="let openDay of market.opening_days">
     <span>{{openDay.week_day}}</span>
-    <span *ngIf="openDay.opening_time && openDay.closing_time">{{openDay.opening_time | date : 'shortTime'}} - {{openDay.closing_time | date : 'shortTime'}}</span>
+    <span *ngIf="openDay.opening_time && openDay.closing_time">{{openDay.opening_time}} - {{openDay.closing_time}}</span>
   </span>
 </div>
 <div class="market-card__desc">{{market.description}}</div>

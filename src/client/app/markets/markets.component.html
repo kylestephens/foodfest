@@ -2,7 +2,14 @@
   <div class="[ row ] markets">
     <div class="[ col-xs-12 ]">
 
-<!-- TODO: ADD MARKET BUTTON -->
+      <!-- ADD MARKET BUTTON -->
+      <div *ngIf="isLoggedIn" class="markets-add">
+        <span>
+          If you are an organiser of the market, add your market <a [routerLink]="['/markets/create-market']">here</a>.
+        </span>
+      </div>
+      <!-- END ADD MARKET -->
+
       <!-- EMPTY -->
       <div *ngIf="loaded && !markets?.length">
         <div class="card-empty">
@@ -21,15 +28,15 @@
       <!-- / EMPTY -->
 
       <div *ngIf="markets?.length">
-        <div *ngFor="let market of markets | paginate: { itemsPerPage: 15, currentPage: p }" class="card market-card">
+        <div *ngFor="let market of markets | paginate: { itemsPerPage: 10, currentPage: p }" class="card market-card">
           <ak-market-card [action]="SEND_MSG_ACTION" [market]="market" [vendors]="vendors"></ak-market-card>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="[ row ] pagination">
-    <pagination-controls (pageChange)="p = $event"
+  <div class="[ row ] pagination"> <!--    (pageChange)="p = $event"-->
+    <pagination-controls  (pageChange)="p = $event; pageChanged()"
                           autoHide="true"
                           previousLabel="<"
                           nextLabel=">">

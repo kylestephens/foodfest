@@ -44,7 +44,7 @@ export class MarketCardComponent {
     }
 
     if(this.vendors.length > 0) {
-       let record = { receiver: market.organized_by, sender: this.accountService.getUser().id, market: market.id, vendors: this.vendors },
+       let record = { receiver: market.organised_by, sender: this.accountService.getUser().id, market: market.id, vendors: this.vendors },
            confirmDialog = new ConfirmDialog(null, this.action, record);
        this.modalService.show(CONSTANT.MODAL.SEND_MSG, confirmDialog);
     }

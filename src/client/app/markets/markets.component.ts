@@ -8,7 +8,7 @@ import { ModalService }          from '../services/modal.service';
 import { Market }                from '../shared/model/market';
 import { Vendor }                from '../shared/model/vendor';
 import { CONSTANT }              from '../core/constant';
-//TODO: handle till loaded, and no markets
+
 /**
  * This class represents the lazy loaded Markets component.
  */
@@ -22,6 +22,7 @@ export class MarketsComponent implements OnInit {
   markets: Market[];
   vendors: Vendor[];
   loaded: boolean = false;
+  isLoggedIn: boolean = this.accountService.isLoggedIn();
   isVendor: boolean;
   SEND_MSG_ACTION = 'sendMessage';
 
@@ -35,6 +36,10 @@ export class MarketsComponent implements OnInit {
     private modalService: ModalService
   ) {
     this.subscriptions.push(this.accountService.getMessage().subscribe(subMessage => {
+      if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN) {
+        this.isLoggedIn = this.accountService.isLoggedIn();
+      }
+
       if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN || subMessage.event === CONSTANT.EVENT.SESSION.USER_TYPE) {
         if(this.accountService.isLoggedIn()) {
            this.getUserVendors();
@@ -90,5 +95,9 @@ export class MarketsComponent implements OnInit {
     this.inboxService.createMessage(params, 'global').then( message => {
       this.modalService.hide();
     });
+  }
+
+  pageChanged() {
+    window.document.getElementsByClassName('page-body')[0].scrollIntoView();
   }
 }
