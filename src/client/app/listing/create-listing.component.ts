@@ -75,8 +75,10 @@ export class CreateListingComponent implements OnInit {
   ngOnInit() {
     this.currentStep = 1;
   }
+
   ngOnDestroy() {
     this.routeSubscription.unsubscribe();
+    this.navSubscription.unsubscribe();
   };
 
   private _previousStep = function() {
