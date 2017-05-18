@@ -1,6 +1,6 @@
-import { NgModule }             from '@angular/core';
-import { RouterModule }         from '@angular/router';
-import { MarketsComponent }     from './markets.component';
+import { NgModule }                     from '@angular/core';
+import { RouterModule }                 from '@angular/router';
+import { MarketsComponent }             from './markets.component';
 
 @NgModule({
   imports: [
