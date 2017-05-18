@@ -1,1 +1,81 @@
-profile
+<div class="profile [ row ]">
+
+  <div *ngIf="loaded">
+
+    <form [formGroup]="profileEditForm" (ngSubmit)="submitForm(profileEditForm.value)">
+
+      <!-- Email Address -->
+      <div class="form-row [ row ]">
+        <div class="[ col-sm-8 col-xs-12 ]">
+          <label class="form-label">Email Address *</label>
+          <div class="form-input form-input--has-icon sign-up-field">
+            <div class="form-icon ak-icon-mail"></div>
+            <input type="text"
+              placeholder="Email address"
+              formControlName="emailAddress"
+              id="emailAddress">
+          </div>
+          <ak-form-messages [control]="profileEditForm.controls.emailAddress">
+          </ak-form-messages>
+        </div>
+      </div>
+      <!-- / Email Address -->
+
+      <!-- First Name -->
+      <div class="form-row [ row ]">
+        <div class="[ col-sm-8 col-xs-12 ]">
+          <label class="form-label">First Name *</label>
+          <div class="form-input form-input--has-icon sign-up-field">
+            <div class="form-icon ak-icon-user"></div>
+            <input type="text"
+              placeholder="First name"
+              formControlName="firstName"
+              id="firstName">
+          </div>
+          <ak-form-messages [control]="profileEditForm.controls.firstName">
+          </ak-form-messages>
+        </div>
+      </div>
+      <!-- / First Name -->
+
+      <!-- Last Name -->
+      <div class="form-row [ row ]">
+        <div class="[ col-sm-8 col-xs-12 ]">
+          <label class="form-label">Last Name *</label>
+          <div class="form-input form-input--has-icon sign-up-field">
+            <div class="form-icon ak-icon-user"></div>
+            <input type="text"
+              placeholder="Surname"
+              formControlName="lastName"
+              id="lastName">
+          </div>
+          <ak-form-messages [control]="profileEditForm.controls.lastName">
+          </ak-form-messages>
+        </div>
+      </div>
+      <!-- / Last Name -->
+
+      <!-- Mandatory Fields -->
+      <div class="form-row [ row ]">
+        <div class="[ col-xs-12 ]">
+          <span class="form-mandatory">* denotes mandatory field</span>
+        </div>
+      </div>
+      <!-- / Mandatory Fields -->
+
+      <ak-messaging ref="profile-edit">
+      </ak-messaging>
+
+      <!-- Form Buttons -->
+      <div class="form-row [ row ]">
+        <div class="[ col-sm-8 col-xs-12 text-right ]">
+          <button type="submit" class="form-btn-cta">Save updates</button>
+        </div>
+      </div>
+      <!-- / Form Buttons -->
+
+    </form>
+
+  </div>
+
+</div>

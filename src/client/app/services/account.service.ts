@@ -321,6 +321,36 @@ export class AccountService {
     return false;
   };
 
+  /**
+   * Update user details
+   *
+   * Called from Dashboard screen
+   */
+  updateUser(user: User) {
+    this.user = user;
+    this.subject.next({
+      event: CONSTANT.EVENT.SESSION.LOGGED_IN
+    });
+    this.localStorageService.store(
+      CONSTANT.LOCALSTORAGE.SESSION,
+      this.toJson()
+    );
+  };
+
+  updateUserType(userType: number) {
+    this.user.user_type = userType;
+    let localStorageSession = this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.SESSION);
+    localStorageSession.user_type = this.user.user_type;
+    this.localStorageService.store(
+      CONSTANT.LOCALSTORAGE.SESSION,
+      localStorageSession
+    );
+
+    this.subject.next({
+      event: CONSTANT.EVENT.SESSION.USER_TYPE
+    });
+  };
+
   reloadSession = function(sessionDetails: any, sessionToken: any) {
     this.loggedIn             = sessionDetails['loggedIn'];
     this.user                 = sessionDetails['user'];
@@ -409,20 +439,6 @@ export class AccountService {
     this.localStorageService.clear(
       CONSTANT.LOCALSTORAGE.LISTING_EDIT
     );
-  };
-
-  updateUserType(userType: number) {
-    this.user.user_type = userType;
-    let localStorageSession = this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.SESSION);
-    localStorageSession.user_type = this.user.user_type;
-    this.localStorageService.store(
-      CONSTANT.LOCALSTORAGE.SESSION,
-      localStorageSession
-    );
-
-    this.subject.next({
-      event: CONSTANT.EVENT.SESSION.USER_TYPE
-    });
   };
 
   /**
