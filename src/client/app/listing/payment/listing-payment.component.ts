@@ -1,11 +1,13 @@
 import {
   Component,
   ElementRef,
+  OnInit,
   Renderer2,
   ViewChild
 }                             from '@angular/core';
 import { Router }             from '@angular/router';
 import { AccountService }     from '../../services/account.service';
+import { LoaderService }      from '../../services/loader.service';
 import { MessagingService }   from '../../services/messaging.service';
 import { RestService }        from '../../services/rest.service';
 import { SettingsService }    from '../../services/settings.service';
@@ -23,7 +25,7 @@ import {
   templateUrl: 'listing-payment.component.html',
   styleUrls: ['listing-payment.component.css']
 })
-export class ListingPaymentComponent {
+export class ListingPaymentComponent implements OnInit {
 
   @ViewChild('tickAnimation')
   public tickAnimationElementRef: ElementRef;
@@ -36,6 +38,7 @@ export class ListingPaymentComponent {
   constructor(
     private accountService: AccountService,
     private localStorageService: LocalStorageService,
+    private loaderService: LoaderService,
     private messagingService: MessagingService,
     private restService: RestService,
     private settingsService: SettingsService,
@@ -43,6 +46,13 @@ export class ListingPaymentComponent {
     private router: Router
   ) {
     this.vendorId = this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.VENDOR_ID);
+  };
+
+  ngOnInit() {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://checkout.stripe.com/checkout.js';
+    document.head.appendChild(script);
   };
 
   openCheckout(planNum: number) {
@@ -80,7 +90,7 @@ export class ListingPaymentComponent {
 
       token: (token: any) => {
 
-        let stepOne = this.localStorageService.retrieve(
+        let stepOne = me.localStorageService.retrieve(
           CONSTANT.LOCALSTORAGE.LISTING_STEP_ONE
         );
         let planDetails = {
@@ -89,28 +99,31 @@ export class ListingPaymentComponent {
           planName: _planName
         };
 
+        me.loaderService.show();
+
         me.restService.post(
           me.settingsService.getServerBaseUrl() + '/subscribe',
-          planDetails, this.accountService.getUser().akAccessToken
-        ).then(
-          (resp: any) => {
-            let _response = resp.json();
-            if(_response && _response.id) {
-              this.isPaid = true;
-              this._clearLocalStorage();
-              setTimeout(() => {
-                this.renderer.addClass(this.tickAnimationElementRef.nativeElement, 'drawn');
-              }, 300);
-            }
-          },
-          (reason: any) => {
-            this.messagingService.show(
-              'global',
-              CONSTANT.MESSAGING.ERROR,
-              reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR
-            );
+          planDetails, me.accountService.getUser().akAccessToken
+        ).then((resp: any) => {
+          me.loaderService.hide();
+
+          let _response = resp.json();
+          if(_response && _response.id) {
+            me.isPaid = true;
+            me.accountService.clearListingStorage();
+            setTimeout(() => {
+              me.renderer.addClass(me.tickAnimationElementRef.nativeElement, 'drawn');
+            }, 300);
           }
-        );
+        }, (reason: any) => {
+          me.loaderService.hide();
+
+          me.messagingService.show(
+            'global',
+            CONSTANT.MESSAGING.ERROR,
+            reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR
+          );
+        });
 
       }
 
@@ -121,40 +134,6 @@ export class ListingPaymentComponent {
       description: _description,
       amount: _amount
     });
-  };
-
-  /**
-   * Clear down the local storage objects that were used to
-   * persist state across the various listing screens
-   */
-  private _clearLocalStorage() {
-    this.localStorageService.clear(
-      CONSTANT.LOCALSTORAGE.LISTING_STEP_ONE
-    );
-    this.localStorageService.clear(
-      CONSTANT.LOCALSTORAGE.LISTING_STEP_TWO
-    );
-    this.localStorageService.clear(
-      CONSTANT.LOCALSTORAGE.LISTING_STEP_THREE
-    );
-    this.localStorageService.clear(
-      CONSTANT.LOCALSTORAGE.LISTING_STEP_FOUR
-    );
-    this.localStorageService.clear(
-      CONSTANT.LOCALSTORAGE.LISTING_STEP_FIVE
-    );
-    this.localStorageService.clear(
-      CONSTANT.LOCALSTORAGE.VENDOR_ID
-    );
-    this.localStorageService.clear(
-      CONSTANT.LOCALSTORAGE.VENDOR_IMAGES
-    );
-    this.localStorageService.clear(
-      CONSTANT.LOCALSTORAGE.LISTING_ADDRESS
-    );
-    this.localStorageService.clear(
-      CONSTANT.LOCALSTORAGE.LISTING_EDIT
-    );
   };
 
 }

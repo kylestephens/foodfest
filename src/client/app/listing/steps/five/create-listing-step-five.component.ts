@@ -20,6 +20,7 @@ import { CreateListingService }      from '../../create-listing.service';
 import { SettingsService }           from '../../../services/settings.service';
 import { ValidationService }         from '../../../services/validation.service';
 import { AccountService }            from '../../../services/account.service';
+import { LoaderService }             from '../../../services/loader.service';
 import { CONSTANT }                  from '../../../core/constant';
 
 /**
@@ -46,6 +47,7 @@ export class CreateListingStepFiveComponent {
     private fb: FormBuilder,
     private createListingService: CreateListingService,
     private localStorageService: LocalStorageService,
+    private loaderService: LoaderService,
     private ngZone: NgZone,
     private settingsService: SettingsService,
     private accountService: AccountService
@@ -109,12 +111,14 @@ export class CreateListingStepFiveComponent {
         me.accountService.updateUserType(CONSTANT.user.types.VENDOR.code);
 
         if(me.businessLogo || me.coverImage || me.additionalImages.length > 0) {
+          me.loaderService.show();
           me.createListingService.uploadVendorImages(
             me.vendorId,
             me.businessLogo,
             me.coverImage,
             me.additionalImages
           ).then((response: any) => {
+            me.loaderService.hide();
             let additionalImages: Array<string> = [];
             if(response.images && response.images.length > 0) {
               response.images.forEach((image: string) => {
@@ -132,12 +136,14 @@ export class CreateListingStepFiveComponent {
        this.createListingService.edit(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.VENDOR_ID))
        .then((response: any) => {
          if(me.businessLogo || me.coverImage || me.additionalImages.length > 0) {
+           me.loaderService.show();
            me.createListingService.uploadVendorImages(
              me.vendorId,
              me.businessLogo,
              me.coverImage,
              me.additionalImages
            ).then((response: any) => {
+             me.loaderService.hide();
              let additionalImages: Array<string> = [];
              if(response.images && response.images.length > 0) {
                response.images.forEach((image: string) => {

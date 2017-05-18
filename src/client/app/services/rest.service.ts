@@ -47,24 +47,10 @@ export class RestService {
     let headers: Headers = new Headers();
     if(token) {
        headers.append('Authorization', token);
-     }
-    //headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    }
 
     return this.http
       .post(url, data, { headers: headers })
-      .toPromise();
-  };
-
-  /**
-   * Use multipart/form-data when your form includes
-   * any <input type="file"> elements
-   */
-  public postMultiPart = function (url: string, data: any, headers: any, options: any) {
-    var headers = headers || {};
-    headers['Content-Type'] = 'multipart/form-data';
-
-    return this.http
-      .post(url, data, headers)
       .toPromise();
   };
 
