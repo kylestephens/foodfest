@@ -69,6 +69,12 @@ export class SignupComponent {
       console.debug('SignupComponent::modalSubscription');
       if(subMessage.event && this.location === 'modal' && subMessage.event === CONSTANT.EVENT.MODAL.HIDE_MODAL) {
         this.isEmailSignUp = false;
+        this.signUpForm.controls['userName'].setValue('');
+        this.signUpForm.controls['userEmail'].setValue('');
+        this.signUpForm.controls['userPassword'].setValue('');
+        for (let i in this.signUpForm.controls) {
+          this.signUpForm.controls[i].markAsUntouched();
+        }
       }
     });
 
@@ -165,12 +171,15 @@ export class SignupComponent {
     this.accountService.createAccount().then(
       (response: any) => {
         if(response.msg && response.msg === CONSTANT.response_key.warning.user.sign_up.EXISTS) {
-          this.messagingService.show(
-            'global',
-            CONSTANT.MESSAGING.WARNING,
-            'This account already exists, next time log in',
-            true
-          );
+          //timeout in case of redirecting, to give time for page to render first
+          setTimeout(() => {
+            this.messagingService.show(
+              'global',
+              CONSTANT.MESSAGING.WARNING,
+              'This account already exists, next time log in',
+              true
+            );
+          }, 300);
         }
       },
       (reason: any) => {

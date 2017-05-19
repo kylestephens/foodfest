@@ -69,6 +69,11 @@ export class SigninComponent {
       console.debug('SigninComponent::modalSubscription');
       if(subMessage.event && this.location === 'modal' && subMessage.event === CONSTANT.EVENT.MODAL.HIDE_MODAL) {
         this.isEmailSignIn = false;
+        this.signInForm.controls['userEmail'].setValue('');
+        this.signInForm.controls['userPassword'].setValue('');
+        for (let i in this.signInForm.controls) {
+          this.signInForm.controls[i].markAsUntouched();
+        }
       }
     });
 
@@ -154,6 +159,15 @@ export class SigninComponent {
     }
     else if(this.location === 'modal') {
       this.modalService.show(CONSTANT.MODAL.SIGN_UP);
+    }
+  }
+
+  public forgotPassword() {
+    if(this.location === 'page') {
+      this.router.navigate(['/forgot-password']);
+    }
+    else if(this.location === 'modal') {
+      this.modalService.show(CONSTANT.MODAL.FORGOT_PASSWORD);
     }
   }
 
