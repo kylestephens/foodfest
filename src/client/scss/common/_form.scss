@@ -19,6 +19,14 @@
     border: none;
     font-weight: $font-weight-light;
 
+    &:disabled {
+      background: $gray-lightest;
+
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
+
     &:focus{
       outline: none;
     }

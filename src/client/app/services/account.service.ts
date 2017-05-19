@@ -77,6 +77,7 @@ export class AccountService {
         this.user.lastname = response.lastname;
         this.user.akAccessToken = response.token;
         this.user.user_type = response.user_type;
+        this.user.date_joined = response.date_joined;
         this.setLoggedIn(true);
       },
       (reason: any) => {
