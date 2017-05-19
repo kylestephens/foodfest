@@ -43,14 +43,7 @@ export class AccountService {
     ).then(
       (response: any) => {
         response = response.json();
-        this.user.email = response.email;
-        this.user.firstname = response.firstname;
-        this.user.lastname = response.lastname;
-        this.user.id = response.id;
-        this.user.akAccessToken = response.token;
-        this.user.user_type = response.user_type;
-        this.setLoggedIn(true);
-        return response;
+        this._setUserDetails(response);
       },
       (reason: any) => {
         this.setLoggedIn(false);
@@ -72,12 +65,7 @@ export class AccountService {
     ).then(
       (response: any) => {
         response = response.json();
-        this.user.id = response.id;
-        this.user.firstname = response.firstname;
-        this.user.lastname = response.lastname;
-        this.user.akAccessToken = response.token;
-        this.user.user_type = response.user_type;
-        this.setLoggedIn(true);
+        this._setUserDetails(response);
       },
       (reason: any) => {
         this.setLoggedIn(false);
@@ -85,6 +73,16 @@ export class AccountService {
       }
     );
   };
+
+  _setUserDetails(data: any) {
+    this.user.id = data.id;
+    this.user.email = data.email;
+    this.user.firstname = data.firstname;
+    this.user.lastname = data.lastname;
+    this.user.akAccessToken = data.token;
+    this.user.user_type = data.user_type;
+    this.setLoggedIn(true);
+  }
 
   isLoggedIn = function () {
     return this.loggedIn;
@@ -239,6 +237,32 @@ export class AccountService {
     this.user.password = data.password;
     this.user.email = data.email;
   };
+
+  forgotPassword(params: any) {
+    return this.restService.post(
+      this.settingsService.getServerBaseUrl() + '/password/forgot', params
+    ).then((response: Response) => {
+      return response.json();
+    }).catch(
+    (reason:any) => {
+      return Promise.reject(reason);
+    });
+  }
+
+  resetPassword(params: any) {
+    return this.restService.post(
+      this.settingsService.getServerBaseUrl() + '/password/reset', params
+    ).then(
+      (response: any) => {
+        response = response.json();
+        this._setUserDetails(response);
+      },
+      (reason: any) => {
+        this.setLoggedIn(false);
+        return Promise.reject(reason);
+      }
+    );
+  }
 
   /**
    * Add a new linked vendor

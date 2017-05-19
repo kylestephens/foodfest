@@ -16,7 +16,9 @@ export const routes: Routes = [
   { path: 'vendor/:id', loadChildren: 'app/vendor/vendor.module#VendorModule' },
   { path: 'markets', loadChildren: 'app/markets/markets.module#MarketsModule' },
   { path: 'markets/create-market', loadChildren: 'app/markets/create/create-market.module#CreateMarketModule' },
-  { path: 'complete/:ref', loadChildren: 'app/listingComplete/listing-complete.module#ListingCompleteModule' }
+  { path: 'complete/:ref', loadChildren: 'app/listingComplete/listing-complete.module#ListingCompleteModule' },
+  { path: 'forgot-password', loadChildren: 'app/forgotPassword/forgot-password.module#ForgotPasswordModule' },
+  { path: 'reset-password', loadChildren: 'app/resetPassword/reset-password.module#ResetPasswordModule' }
 ];
 
 @NgModule({

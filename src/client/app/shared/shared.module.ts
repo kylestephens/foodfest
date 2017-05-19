@@ -20,6 +20,7 @@ import { TwitterFeedComponent }           from './twitter-feed/twitter-feed.comp
 import { ModalComponent }                 from './modal/modal.component';
 import { SigninComponent }                from './sign/signin/signin.component';
 import { SignupComponent }                from './sign/signup/signup.component';
+import { ForgotPasswordComponent }        from './forgot-password/forgot-password.component';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -34,6 +35,7 @@ import { SignupComponent }                from './sign/signup/signup.component';
     AccountMetaComponent,
     CookiesNotificationComponent,
     ConfirmDialogComponent,
+    ForgotPasswordComponent,
     FormMessagesComponent,
     ImageScrollerComponent,
     LoaderComponent,
@@ -51,6 +53,7 @@ import { SignupComponent }                from './sign/signup/signup.component';
     AccountMetaComponent,
     CookiesNotificationComponent,
     ConfirmDialogComponent,
+    ForgotPasswordComponent,
     FormMessagesComponent,
     ImageScrollerComponent,
     LoaderComponent,

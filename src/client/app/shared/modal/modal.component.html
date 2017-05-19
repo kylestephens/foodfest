@@ -26,6 +26,11 @@
           [ngClass]="{'hidden': selectedModal !== modalTypes.SIGN_IN}">
         </signin>
 
+        <forgot-password class="modal-content" [location]="'modal'"
+          *ngIf="selectedModal === modalTypes.FORGOT_PASSWORD"
+          [ngClass]="{'hidden': selectedModal !== modalTypes.FORGOT_PASSWORD}">
+        </forgot-password>
+
         <confirm-dialog class="modal-content" [message]="data.message" [action]="data.action"
           [record]="data.record"
           *ngIf="selectedModal === modalTypes.CONFIRM"

@@ -31,7 +31,7 @@ export class InboxService {
 
   getConversations(): Promise<Message[]> {
     return this.restService.get(
-      this.settingsService.getServerBaseUrl() + '/messages', null, this.accountService.getUser().akAccessToken,
+      this.settingsService.getServerBaseUrl() + '/messages', null, this.accountService.getUser().akAccessToken
     ).then((response: Response) => {
       return this.convertResponseToMessages(response);
     }).catch(

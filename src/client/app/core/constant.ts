@@ -58,6 +58,7 @@ export class CONSTANT extends CommonConstants {
     SIGN_UP:                'signUp',
     CONFIRM:                'confirm',
     SEND_MSG:               'sendMsg',
+    FORGOT_PASSWORD:        'forgotPassword',
     MIN_HEIGHT:             400
 
   };
