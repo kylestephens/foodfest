@@ -3,10 +3,10 @@
     <div class="[ col-xs-12 ]">
 
       <!-- ADD MARKET BUTTON -->
-      <div *ngIf="isLoggedIn" class="markets-add">
-        <span>
-          If you are an organiser of the market, add your market <a [routerLink]="['/markets/create-market']">here</a>.
-        </span>
+      <div *ngIf="isLoggedIn" class="markets-add [ text-right ]">
+        Organiser of a village food market, farmers market or local craft fair in Ireland?<br />
+        <span class="ak-icon-info"></span>
+        You can <a [routerLink]="['/markets/create-market']">list your market here free</a>.
       </div>
       <!-- END ADD MARKET -->
 
