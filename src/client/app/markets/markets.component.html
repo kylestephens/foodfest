@@ -1,7 +1,7 @@
 <div class= "[ container ]">
+
   <div class="[ row ] markets">
     <div class="[ col-xs-12 ]">
-
       <!-- ADD MARKET BUTTON -->
       <div *ngIf="isLoggedIn" class="markets-add [ text-right ]">
         Organiser of a village food market, farmers market or local craft fair in Ireland?<br />
@@ -35,11 +35,13 @@
     </div>
   </div>
 
-  <div class="[ row ] pagination"> <!--    (pageChange)="p = $event"-->
-    <pagination-controls  (pageChange)="p = $event; pageChanged()"
-                          autoHide="true"
-                          previousLabel="<"
-                          nextLabel=">">
+  <div class="[ row ] pagination">
+    <pagination-controls
+      (pageChange)="p = $event; pageChanged()"
+      autoHide="true"
+      previousLabel="<"
+      nextLabel=">">
     </pagination-controls>
   </div>
+
 </div>
