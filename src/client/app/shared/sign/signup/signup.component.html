@@ -91,6 +91,15 @@
 
   </div>
 
+  <div class="[ text-left ] terms-of-use">
+    <span>By clicking Sign up, I agree to Foodfest.ie
+      <a [routerLink]="['/privacy']" (click)="goToTermsOfUse()">
+        Terms of Use
+      </a>
+      .
+    </span>
+  </div>
+
   <div class="[ text-center ]">
     <a class="alternative-option" (click)="signIn()">Have an account? Log in.</a>
   </div>

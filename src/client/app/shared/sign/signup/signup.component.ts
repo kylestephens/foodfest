@@ -166,6 +166,10 @@ export class SignupComponent {
     }
   }
 
+  goToTermsOfUse() {
+    if(this.location === 'modal') this.modalService.hide();
+  }
+
   private _createAccount() {
     console.debug('SignupComponent::_createAccount');
     this.accountService.createAccount().then(
