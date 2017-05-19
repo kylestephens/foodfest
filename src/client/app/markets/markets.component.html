@@ -1,12 +1,12 @@
 <div class= "[ container ]">
+
   <div class="[ row ] markets">
     <div class="[ col-xs-12 ]">
-
       <!-- ADD MARKET BUTTON -->
-      <div *ngIf="isLoggedIn" class="markets-add">
-        <span>
-          If you are an organiser of the market, add your market <a [routerLink]="['/markets/create-market']">here</a>.
-        </span>
+      <div *ngIf="isLoggedIn" class="markets-add [ text-right ]">
+        Organiser of a village food market, farmers market or local craft fair in Ireland?<br />
+        <span class="ak-icon-info"></span>
+        You can <a [routerLink]="['/markets/create-market']">list your market for free here</a>.
       </div>
       <!-- END ADD MARKET -->
 
@@ -35,11 +35,13 @@
     </div>
   </div>
 
-  <div class="[ row ] pagination"> <!--    (pageChange)="p = $event"-->
-    <pagination-controls  (pageChange)="p = $event; pageChanged()"
-                          autoHide="true"
-                          previousLabel="<"
-                          nextLabel=">">
+  <div class="[ row ] pagination">
+    <pagination-controls
+      (pageChange)="p = $event; pageChanged()"
+      autoHide="true"
+      previousLabel="<"
+      nextLabel=">">
     </pagination-controls>
   </div>
+
 </div>

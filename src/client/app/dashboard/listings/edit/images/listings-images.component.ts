@@ -131,7 +131,7 @@ export class ListingsImagesComponent implements OnInit, OnChanges {
       this.editingVendor.cover_photo_path = responseBody.cover_photo + '?t=' + Date.now();  // cache busting
       this.vendor = this.editingVendor;
       this.messagingService.show(
-        'listings-description-images',
+        'listings-description-cover',
         CONSTANT.MESSAGING.SUCCESS,
         'Image successfully uploaded',
         true
@@ -162,6 +162,12 @@ export class ListingsImagesComponent implements OnInit, OnChanges {
       let responseBody = response.json();
       this.editingVendor.logo_path = responseBody.logo_photo + '?t=' + Date.now();  // cache busting
       this.vendor = this.editingVendor;
+      this.messagingService.show(
+        'listings-description-logo',
+        CONSTANT.MESSAGING.SUCCESS,
+        'Image successfully uploaded',
+        true
+      );
     }, (reason: any) => {
       this.loaderService.hide();
       this.messagingService.show(
