@@ -17,7 +17,8 @@ import { ValidationService }   from '../../services/validation.service';
 import { CONSTANT }          from '../../core/constant';
 
 /**
- * This class represents the lazy loaded Inbox.
+ * This class represents the lazy loaded Profile Component.
+ * This sits in the Dashboard.
  */
 @Component({
   moduleId: module.id,
@@ -65,7 +66,6 @@ export class ProfileComponent {
 
   public submitForm(value: any) {
     var me = this;
-    debugger;
 
     this.restService.post(
       me.settingsService.getServerBaseUrl() + '/users/edit', {
