@@ -3,8 +3,8 @@
   </ak-messaging>
 
   <div *ngIf="messages" class="inbox-thread__message left send-msg">
-    <div *ngIf="!isUserVendorInConversation()" class="inbox-thread__message-icon ak-icon-user"></div>
-    <img *ngIf="isUserVendorInConversation()" class="inbox-thread__message-icon" [src]="serverUrl + conversation.vendor.logo_path">
+    <div *ngIf="!isUserVendorInConversation() || (isUserVendorInConversation() && !conversation.vendor.logo_path)" class="inbox-thread__message-icon ak-icon-user"></div>
+    <img *ngIf="isUserVendorInConversation() && conversation.vendor.logo_path" class="inbox-thread__message-icon" [src]="serverUrl + conversation.vendor.logo_path">
     <div class="inbox-thread__message-content">
       <div class="inbox-thread__message-content__body">
         <textarea class="inbox-thread__message-content__body__text" rows="3" [(ngModel)] ="messageText"></textarea>
