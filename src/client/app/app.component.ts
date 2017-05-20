@@ -47,7 +47,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     this.subscription = this.accountService.getMessage().subscribe(subMessage => {
-      if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN) {
+      if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN || subMessage.event === CONSTANT.EVENT.SESSION.USER_TYPE ) {
         if(this.accountService.isLoggedIn()) {
           this.getVendors();
         }
@@ -79,7 +79,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.getVendors();
+    if(this.accountService.isLoggedIn() && this.accountService.getUser.user_type === CONSTANT.user.types.VENDOR.code) {
+      this.getVendors();
+    }
   }
 
   getVendors() {
