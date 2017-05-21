@@ -93,9 +93,13 @@ export class ListingPaymentComponent implements OnInit {
         let stepOne = me.localStorageService.retrieve(
           CONSTANT.LOCALSTORAGE.LISTING_STEP_ONE
         );
+        let vendorId = me.localStorageService.retrieve(
+          CONSTANT.LOCALSTORAGE.VENDOR_ID
+        );
         let planDetails = {
           stripeId: token.id,
           businessName: stepOne.businessName,
+          vendorId: vendorId,
           planName: _planName
         };
 
@@ -103,7 +107,8 @@ export class ListingPaymentComponent implements OnInit {
 
         me.restService.post(
           me.settingsService.getServerBaseUrl() + '/subscribe',
-          planDetails, me.accountService.getUser().akAccessToken
+          planDetails,
+          me.accountService.getUser().akAccessToken
         ).then((resp: any) => {
           me.loaderService.hide();
 
