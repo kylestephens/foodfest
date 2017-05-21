@@ -8,6 +8,10 @@
       <div class="[ container ]">
         <div class="[ row ]">
           <div class="[ col-xs-12 ]">
+            <a class="hero__back-btn" (click)="onClickBack()">
+              <span class="ak-icon-chevron-with-circle-left"></span>
+              Back
+            </a>
             <img *ngIf="vendor.logo_path" class="hero__business-logo" [src]="serverUrl + vendor.logo_path">
             <h2 class="hero__business-name">
               {{ vendor.business_name }}

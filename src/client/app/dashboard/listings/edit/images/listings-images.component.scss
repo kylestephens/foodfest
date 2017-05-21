@@ -110,9 +110,12 @@ $image-border:      2px solid #000;
     border-radius: $brand-border-radius;
     font-size: $font-size-small;
 
+    transition: background .2s ease-out;
+
     &:hover {
       cursor: pointer;
       color: $brand-links;
+      background: rgba(255, 255, 255, 0.9);
     }
   }
 

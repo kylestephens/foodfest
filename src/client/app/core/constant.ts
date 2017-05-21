@@ -103,6 +103,7 @@ export class CONSTANT extends CommonConstants {
     FAVOURITES:             'favourites',
     SESSION:                'session',
     TOKEN:                  'token',
+    REFERRING_ROUTE:        'referringRoute',
     SETTINGS:               'settings',
     LISTING_EDIT:           'listing.edit',
     LISTING_STEP_ONE:       'listing.step.1',

@@ -45,7 +45,7 @@ export class SearchResultsFiltersComponent {
 
   ngOnInit(): void {
     this.routeParams = this.route.snapshot.params;
-    if(this.settingsService.getIsSettingsCallDone()) {
+    if(this.settingsService.isSettingsCallDone()) {
       this.initComponent();
     }
     this.subscription = this.settingsService.settingsRetrived.subscribe(

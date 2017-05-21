@@ -6,6 +6,7 @@ import {
 }                                 from '@angular/core';
 import { Response }               from '@angular/http';
 import { ActivatedRoute }         from '@angular/router';
+import { Router }                 from '@angular/router';
 import {
   LocalStorageService
 }                                 from 'ng2-webstorage';
@@ -265,6 +266,7 @@ export class VendorComponent implements OnInit, OnDestroy {
     private mapsAPILoader: MapsAPILoader,
     private restService: RestService,
     private route: ActivatedRoute,
+    private router: Router,
     private settingsService: SettingsService,
     private inboxService: InboxService,
     private accountService: AccountService,
@@ -333,7 +335,26 @@ export class VendorComponent implements OnInit, OnDestroy {
 
   setPlaceholder() {
     this.placeholder = this.isLoggedIn ? 'Write your message here...' : 'You have to be logged in to send a message.';
-  }
+  };
+
+  public onClickBack() {
+    let prevPage: string = this.settingsService.getReferralRoute();
+    let params: any = {};
+    let prevPageRoute: string = '';
+    if(prevPage) {
+      let prevPageSplit = prevPage.split(';');
+      prevPageRoute = prevPageSplit[0];
+      if(prevPageSplit.length > 1) {
+        for(let i = 1; i < prevPageSplit.length; i++) {
+          let paramSplit = prevPageSplit[i].split('=');
+          params[paramSplit[0]] = paramSplit[1].replace('%2C', ',');
+        }
+      }
+      this.router.navigate([prevPageRoute, params]);
+    } else {
+      this.router.navigate(['/search-results']);
+    }
+  };
 
   /**
    * Double forward slash ('//') is necessary to avoid
@@ -366,7 +387,7 @@ export class VendorComponent implements OnInit, OnDestroy {
     return true;
   }
 
-  sendMessage() {
+  public sendMessage() {
     if(!this.messageText.trim()) return;
 
     let params = {

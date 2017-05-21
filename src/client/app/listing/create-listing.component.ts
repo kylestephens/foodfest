@@ -8,7 +8,7 @@ import {
 import {
   LocalStorageService
 }                                           from 'ng2-webstorage';
-import { Router, NavigationEnd }            from '@angular/router';
+import { Router }                           from '@angular/router';
 import { Subscription }                     from 'rxjs/Subscription';
 import { CreateListingService }             from './create-listing.service';
 

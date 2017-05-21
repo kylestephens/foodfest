@@ -28,6 +28,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   public displayCookies: boolean = true;
   private subscription: Subscription;
+  private currentRoute: string = '';
+  private referralRoute: string = '';
 
   constructor(
     private router: Router,
@@ -62,6 +64,16 @@ export class AppComponent implements OnInit, AfterViewInit {
       if (!(evt instanceof NavigationEnd)) {
         return;
       }
+
+      // browser history
+      this.referralRoute = this.currentRoute;
+      this.currentRoute = evt.urlAfterRedirects;
+      this.localStorageService.store(
+        CONSTANT.LOCALSTORAGE.REFERRING_ROUTE,
+        this.referralRoute
+      );
+
+      // scroll to top and screen messaging tidyup
       window.document.getElementsByClassName('page-body')[0].scrollIntoView();
       this.messagingService.hideAll();  // clear any messages that were left behind from previous page
     });

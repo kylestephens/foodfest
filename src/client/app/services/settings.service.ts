@@ -119,6 +119,18 @@ export class SettingsService {
   };
 
   /**
+   * Returns referring url route, if available
+   * i.e. the previous page
+   */
+  public getReferralRoute(): string {
+    if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.REFERRING_ROUTE)) {
+      return this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.REFERRING_ROUTE);
+    } else {
+      return null;
+    }
+  };
+
+  /**
    * Returns site id
    */
   public getSiteId(): string {
@@ -128,7 +140,7 @@ export class SettingsService {
   /**
    * Returns are settings available
    */
-  public getIsSettingsCallDone(): boolean {
+  public isSettingsCallDone(): boolean {
     if(this.settings) return true;
     else return false;
   }
