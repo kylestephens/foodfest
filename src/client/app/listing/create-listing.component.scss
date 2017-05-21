@@ -68,11 +68,37 @@ $progress-bar-height: 55px;
   }
 }
 
+
+
+.form-help {
+  color: $gray-lighter;
+  padding-left: $padding-base-horizontal;
+
+  &:hover {
+    cursor: pointer;
+    color: $brand-secondary;
+  }
+}
+
+
+
+.form-help-tooltip {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: $body-bg;
+  border-radius: $brand-border-radius;
+}
+
+
+
 .form-card {
   margin-top: $progress-bar-height + $padding-xlarge-vertical;
   margin-bottom: $progress-bar-height + $padding-xlarge-vertical;
   padding: $padding-large-vertical $padding-large-horizontal;
 }
+
+
 
 .form-btn-add-item {
   top: $padding-large-vertical;
@@ -80,6 +106,8 @@ $progress-bar-height: 55px;
   @include button(#fff, $brand-secondary-cta);
   padding: 6px 12px;                  // overriding default button padding
 }
+
+
 
 fieldset {
   padding: $padding-large-vertical $padding-large-horizontal;

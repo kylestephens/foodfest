@@ -21,6 +21,7 @@ import { SettingsService }           from '../../../services/settings.service';
 import { ValidationService }         from '../../../services/validation.service';
 import { AccountService }            from '../../../services/account.service';
 import { LoaderService }             from '../../../services/loader.service';
+import { ModalService }              from '../../../services/modal.service';
 import { CONSTANT }                  from '../../../core/constant';
 
 /**
@@ -48,6 +49,7 @@ export class CreateListingStepFiveComponent {
     private createListingService: CreateListingService,
     private localStorageService: LocalStorageService,
     private loaderService: LoaderService,
+    private modalService: ModalService,
     private ngZone: NgZone,
     private settingsService: SettingsService,
     private accountService: AccountService
@@ -157,6 +159,18 @@ export class CreateListingStepFiveComponent {
          }
        });
     }
+  };
+
+  public onClickLogoTooltip = function() {
+    this.modalService.show(CONSTANT.MODAL.ILLUSTRATION_LOGO);
+  };
+
+  public onClickCoverTooltip = function() {
+    this.modalService.show(CONSTANT.MODAL.ILLUSTRATION_COVER);
+  };
+
+  public onClickImageTooltip = function() {
+    this.modalService.show(CONSTANT.MODAL.ILLUSTRATION_IMG);
   };
 
   /**

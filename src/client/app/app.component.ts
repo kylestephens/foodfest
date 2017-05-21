@@ -79,7 +79,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if(this.accountService.isLoggedIn() && this.accountService.getUser.user_type === CONSTANT.user.types.VENDOR.code) {
+    if(this.accountService.isLoggedIn() && this.accountService.getUser().user_type === CONSTANT.user.types.VENDOR.code) {
       this.getVendors();
     }
   }
