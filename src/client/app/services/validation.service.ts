@@ -25,7 +25,7 @@ export class ValidationService {
 
   static textInputValidator(control: any) {
     // Letters, Numbers and Spaces and some accepted characters (, . ! @, etc.)
-    if ( control.value === '' || control.value.match(/^(?:[A-Za-z0-9 \_\-\'\@\!\#\.\,]*)$/) ) {
+    if ( !control.value || control.value === '' || control.value.match(/^(?:[A-Za-z0-9 \_\-\'\@\!\#\.\,]*)$/) ) {
       return null;
     } else {
       return { 'textInputError': true };
@@ -34,7 +34,7 @@ export class ValidationService {
 
   static alphaNumericValidator(control: any) {
     // Letters, Numbers and Spaces
-    if ( control.value === '' || control.value.match(/^(?:[A-Za-z0-9]+)(?:[A-Za-z0-9 _-]*)$/) ) {
+    if ( !control.value || control.value === '' || control.value.match(/^(?:[A-Za-z0-9]+)(?:[A-Za-z0-9 _-]*)$/) ) {
       return null;
     } else {
       return { 'alphaNumericError': true };
@@ -43,7 +43,7 @@ export class ValidationService {
 
   static websiteValidator(control: any) {
     // Website pattern
-    if ( control.value === '' || control.value.match(
+    if ( !control.value || control.value === '' || control.value.match(
       /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
     ) ) {
       return null;
@@ -54,7 +54,7 @@ export class ValidationService {
 
   static phoneNumberValidator(control: any) {
     // Letters, Numbers and Spaces
-    if ( control.value === null || control.value === '' || control.value.match(/^(?:[0-9(]+)(?:[0-9 ()_-]*)$/) ) {
+    if ( !control.value || control.value === null || control.value === '' || control.value.match(/^(?:[0-9(]+)(?:[0-9 ()_-]*)$/) ) {
       return null;
     } else {
       return { 'phoneNumberError': true };
@@ -63,7 +63,7 @@ export class ValidationService {
 
   static creditCardValidator(control: any) {
     // Visa, MasterCard, American Express, Diners Club, Discover, JCB
-    if ( control.value === '' || control.value.match(/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/) ) {
+    if ( !control.value || control.value === '' || control.value.match(/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/) ) {
       return null;
     } else {
       return { 'invalidCreditCard': true };
@@ -72,7 +72,7 @@ export class ValidationService {
 
   static emailValidator(control: any) {
     // RFC 2822 compliant regex
-    if ( control.value === '' || control.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/) ) {
+    if ( !control.value || control.value === '' || control.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/) ) {
       return null;
     } else {
       return { 'invalidEmailAddress': true };
@@ -82,7 +82,7 @@ export class ValidationService {
   static passwordValidator(control: any) {
     // {6,100}           - Assert password is between 6 and 100 characters
     // (?=.*[0-9])       - Assert a string has at least one number
-    if ( control.value === '' || control.value.match(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,100}$/) ) {
+    if ( !control.value || control.value === '' || control.value.match(/^(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{6,100}$/) ) {
       return null;
     } else {
       return { 'invalidPassword': true };

@@ -57,6 +57,7 @@ export class CONSTANT extends CommonConstants {
     SIGN_IN:                'signIn',
     SIGN_UP:                'signUp',
     CONFIRM:                'confirm',
+    CONTACT:                'contact',
     SEND_MSG:               'sendMsg',
     FORGOT_PASSWORD:        'forgotPassword',
     ILLUSTRATION_IMG:       'imageIllustration',

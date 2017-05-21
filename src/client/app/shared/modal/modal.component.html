@@ -37,6 +37,11 @@
           [ngClass]="{'hidden': selectedModal !== modalTypes.CONFIRM}">
         </confirm-dialog>
 
+        <ak-contact-us class="modal-content"
+          *ngIf="selectedModal === modalTypes.CONTACT"
+          [ngClass]="{'hidden': selectedModal !== modalTypes.CONTACT}">
+        </ak-contact-us>
+
         <send-message class="modal-content" [action]="data.action"
           [record]="data.record"
           *ngIf="selectedModal === modalTypes.SEND_MSG"
@@ -46,17 +51,20 @@
         <!-- Cover Image Illustration -->
         <img class="modal-content modal-content-image-only"
           src="assets/img/illustration/Image-Illustration-cover.jpg"
-          *ngIf="selectedModal === modalTypes.ILLUSTRATION_COVER" />
+          *ngIf="selectedModal === modalTypes.ILLUSTRATION_COVER"
+          [ngClass]="{'hidden': selectedModal !== modalTypes.ILLUSTRATION_COVER}" />
 
         <!-- Logo Illustration -->
         <img class="modal-content modal-content-image-only"
           src="assets/img/illustration/Image-Illustration-logo.jpg"
-          *ngIf="selectedModal === modalTypes.ILLUSTRATION_LOGO" />
+          *ngIf="selectedModal === modalTypes.ILLUSTRATION_LOGO"
+          [ngClass]="{'hidden': selectedModal !== modalTypes.ILLUSTRATION_LOGO}" />
 
         <!-- Images Illustration -->
         <img class="modal-content modal-content-image-only"
           src="assets/img/illustration/Image-Illustration-image.jpg"
-          *ngIf="selectedModal === modalTypes.ILLUSTRATION_IMG" />
+          *ngIf="selectedModal === modalTypes.ILLUSTRATION_IMG"
+          [ngClass]="{'hidden': selectedModal !== modalTypes.ILLUSTRATION_IMG}" />
 
       </div>
 

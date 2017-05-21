@@ -58,8 +58,7 @@ export class SendMessageComponent implements OnInit{
         return vendor.id === +this.selectedVendorId;
       })[0];
       this.record.selectedVendor = selectedVendor;
-    }
-    else {
+    } else {
       this.record.selectedVendor = this.record.vendors[0];
     }
 
@@ -67,7 +66,7 @@ export class SendMessageComponent implements OnInit{
     this.confirmDialogService.confirmDialog(confirmDialog);
   }
 
-    private _onHideModal() {
+  private _onHideModal() {
     this.record = null;
     this.message = null;
     this.multipleVendors = false;

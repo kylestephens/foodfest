@@ -7,6 +7,7 @@ import { RouterModule }                   from '@angular/router';
 import { AccountMetaComponent }           from './account-meta/account-meta.component';
 import { CookiesNotificationComponent }   from './cookies-notification/cookies-notification.component';
 import { ConfirmDialogComponent }         from './confirm-dialog/confirm-dialog.component';
+import { ContactUsComponent }             from './contact-us/contact-us.component';
 import { FormMessagesComponent }          from './form-messages/form-messages.component';
 import { HeartComponent }                 from './heart/heart.component';
 import { ImageScrollerComponent }         from './image-scroller/image-scroller.component';
@@ -35,6 +36,7 @@ import { ForgotPasswordComponent }        from './forgot-password/forgot-passwor
     AccountMetaComponent,
     CookiesNotificationComponent,
     ConfirmDialogComponent,
+    ContactUsComponent,
     ForgotPasswordComponent,
     FormMessagesComponent,
     ImageScrollerComponent,
@@ -53,6 +55,7 @@ import { ForgotPasswordComponent }        from './forgot-password/forgot-passwor
     AccountMetaComponent,
     CookiesNotificationComponent,
     ConfirmDialogComponent,
+    ContactUsComponent,
     ForgotPasswordComponent,
     FormMessagesComponent,
     ImageScrollerComponent,
