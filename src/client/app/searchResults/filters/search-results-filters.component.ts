@@ -4,6 +4,7 @@ import { Style }            from '../../shared/model/style';
 import { DietRequirement }  from '../../shared/model/dietRequirement';
 import { BusinessType }     from '../../shared/model/businessType';
 import { BusinessSetup }    from '../../shared/model/businessSetup';
+import { EventType }        from '../../shared/model/eventType';
 import { SettingsService }  from '../../services/settings.service';
 import { FilterService }    from '../filter.service';
 import { SearchFilter }     from '../searchFilter';
@@ -31,6 +32,7 @@ export class SearchResultsFiltersComponent {
   dietRequirements: DietRequirement[];
   businessTypes: BusinessType[];
   businessSetups: BusinessSetup[];
+  eventTypes: EventType[];
   rating: number = 0;
   routeParams: any;
 
@@ -59,7 +61,8 @@ export class SearchResultsFiltersComponent {
     this.getStyles();
     this.getDietRequirements();
     this.getBusinessTypes();
-    this.getBusinessSetup()
+    this.getBusinessSetup();
+    this.getEventTypes();
     this.deepLinked();
   }
 
@@ -79,12 +82,17 @@ export class SearchResultsFiltersComponent {
     this.businessSetups = this.settingsService.getBusinessSetups();
   }
 
+  getEventTypes(): void {
+    this.eventTypes = this.settingsService.getEventTypes();
+  }
+
   private deepLinked() {
     if(this.routeParams) {
       let selectedStyles = this.routeParams.styles,
           selectedDietRequirements = this.routeParams.dietreq,
           selectedBusinessTypes = this.routeParams.bustype,
           selectedBusinessSetups = this.routeParams.busset,
+          selectedEventTypes = this.routeParams.evetype,
           selectedRating = this.routeParams.rating;
 
       if(selectedStyles) {
@@ -98,6 +106,9 @@ export class SearchResultsFiltersComponent {
       }
       if(selectedBusinessSetups) {
         this.updateSelectedItems('busset', selectedBusinessSetups, this.businessSetups);
+      }
+      if(selectedEventTypes) {
+        this.updateSelectedItems('evetype', selectedEventTypes, this.eventTypes);
       }
       if(selectedRating) {
         this.rating = selectedRating;

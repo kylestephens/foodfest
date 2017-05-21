@@ -1,6 +1,6 @@
 <ak-search-results-filter-component
   [text] = "'bustype'"
-  [title] = "'Business type'"
+  [title] = "'Business types'"
   [records] = "businessTypes"
   [icon] = "'ak-icon-event-type'"
   (notify)="onNotify($event)">
@@ -8,7 +8,7 @@
 
 <ak-search-results-filter-component
   [text] = "'busset'"
-  [title] = "'Business setup'"
+  [title] = "'Business setups'"
   [records] = "businessSetups"
   [icon] = "'ak-icon-business-setup'"
   (notify)="onNotify($event)">
@@ -16,15 +16,23 @@
 
 <ak-search-results-filter-component
   [text] = "'dietreq'"
-  [title] = "'Dietary requirement'"
+  [title] = "'Dietary requirements'"
   [records] = "dietRequirements"
   [icon] = "'ak-icon-diet-requirements'"
   (notify)="onNotify($event)">
 </ak-search-results-filter-component>
 
 <ak-search-results-filter-component
+  [text] = "'evetype'"
+  [title] = "'Event types'"
+  [records] = "eventTypes"
+  [icon] = "'ak-icon-event-type'"
+  (notify)="onNotify($event)">
+</ak-search-results-filter-component>
+
+<ak-search-results-filter-component
   [text] = "'styles'"
-  [title] = "'Cuisine'"
+  [title] = "'Cuisines'"
   [records] = "styles"
   [icon] = "'ak-icon-style'"
   (notify)="onNotify($event)">

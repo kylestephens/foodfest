@@ -50,7 +50,6 @@ export class FilterComponent {
 
   constructor(private route: ActivatedRoute, private filterService: FilterService, private browserService: BrowserService) {
     this.setVisiabilityPerScreenSize();
-
     this.subscriptions.push(filterService.filterRemovedFromActive.subscribe(
       searchFilter => {
         if(searchFilter.name === 'rating' && searchFilter.name === this.text) {
@@ -75,6 +74,12 @@ export class FilterComponent {
   }
 
   ngOnDestroy() {
+    if(this.records) {
+      for(let record of this.records) {
+        if(record.isSelected) record.isSelected = false;
+      }
+    }
+
     for (let subscription of this.subscriptions) {
       subscription.unsubscribe();
     }

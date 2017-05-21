@@ -7,6 +7,7 @@ import { Style }                    from '../shared/model/style';
 import { DietRequirement }          from '../shared/model/dietRequirement';
 import { BusinessType }             from '../shared/model/businessType';
 import { BusinessSetup }            from '../shared/model/businessSetup';
+import { EventType }                from '../shared/model/eventType';
 
 import {
   LocalStorageService
@@ -156,7 +157,7 @@ export class SettingsService {
   /**
    * Returns event types available
    */
-  public getEventTypes(): Array<Object> {
+  public getEventTypes(): Array<EventType> {
     return this.settings.eventTypes;
   };
 
