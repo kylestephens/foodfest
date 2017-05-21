@@ -30,7 +30,7 @@ $modal-padding: 50px;
         background-color:transparent;
         animation: modalFadeIn .5s .8s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
         z-index: 2;
-        h2, p, .close-button, .modal-content > div {
+        h2, p, .close-button, .modal-content > div, img {
           opacity: 0;
           position: relative;
           animation: modalContentFadeIn .5s 1s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
@@ -58,7 +58,7 @@ $modal-padding: 50px;
         animation: fadeOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
         .modal {
           animation: modalFadeOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
-          h2, p, .close-button, .modal-content > div {
+          h2, p, .close-button, .modal-content > div, img {
             animation: modalContentFadeOut .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards;
           }
           .modal-svg {
@@ -131,6 +131,12 @@ $modal-padding: 50px;
         }
       }
     }
+  }
+
+  .modal-content-image-only {
+    width: $modal-width - $modal-padding;
+    margin-left: -($modal-padding/2);
+    min-height: 250px !important;
   }
 }
 

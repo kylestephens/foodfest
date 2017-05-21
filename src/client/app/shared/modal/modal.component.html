@@ -43,6 +43,21 @@
           [ngClass]="{'hidden': selectedModal !== modalTypes.SEND_MSG}">
         </send-message>
 
+        <!-- Cover Image Illustration -->
+        <img class="modal-content modal-content-image-only"
+          src="assets/img/illustration/Image-Illustration-cover.jpg"
+          *ngIf="selectedModal === modalTypes.ILLUSTRATION_COVER" />
+
+        <!-- Logo Illustration -->
+        <img class="modal-content modal-content-image-only"
+          src="assets/img/illustration/Image-Illustration-logo.jpg"
+          *ngIf="selectedModal === modalTypes.ILLUSTRATION_LOGO" />
+
+        <!-- Images Illustration -->
+        <img class="modal-content modal-content-image-only"
+          src="assets/img/illustration/Image-Illustration-image.jpg"
+          *ngIf="selectedModal === modalTypes.ILLUSTRATION_IMG" />
+
       </div>
 
       <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg"
