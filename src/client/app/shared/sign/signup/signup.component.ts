@@ -35,7 +35,7 @@ export class SignupComponent {
   private accountSubscription: Subscription;
 
   public isEmailSignUp: boolean = false;
-  public recaptchaResponse: string = null;
+  // public recaptchaResponse: string = null;
   public signUpForm: FormGroup;
 
   constructor(
