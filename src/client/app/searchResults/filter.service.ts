@@ -42,7 +42,7 @@ export class FilterService {
     this.filterShownSubject.next(name);
   }
 
-  //queryParams possible keys: styles, dietreq, bustype, busset
+  //queryParams possible keys: styles, dietreq, bustype, busset, evetype
   updateRouteParamsBySelected(currentParams: { [key: string]: string }, name: string, record: any) {
     let elementId = ''+record.id,
         isSelected = record.isSelected,

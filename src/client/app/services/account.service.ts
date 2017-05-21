@@ -44,6 +44,7 @@ export class AccountService {
       (response: any) => {
         response = response.json();
         this._setUserDetails(response);
+        return response;
       },
       (reason: any) => {
         this.setLoggedIn(false);
