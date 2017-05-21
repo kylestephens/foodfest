@@ -78,6 +78,17 @@ article {
       top: 0;
     }
   }
+
+  &__back-btn {
+    color: #fff;
+    position: absolute;
+    bottom: $padding-large-vertical - 12px;
+    left: $padding-large-horizontal;
+
+    &:hover {
+      color: $brand-links;
+    }
+  }
 }
 
 .card {
