@@ -20,7 +20,7 @@ export class CommercialComponent {
   ) {};
 
   public onClickContactUs() {
-    this.modalService.show(CONSTANT.MODAL.CONTACT;)
+    this.modalService.show(CONSTANT.MODAL.CONTACT);
   };
 
 }

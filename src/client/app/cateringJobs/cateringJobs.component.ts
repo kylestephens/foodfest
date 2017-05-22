@@ -20,7 +20,7 @@ export class CateringJobsComponent {
   ) {};
 
   public onClickContactUs() {
-    this.modalService.show(CONSTANT.MODAL.CONTACT;)
+    this.modalService.show(CONSTANT.MODAL.CONTACT);
   };
 
 }
