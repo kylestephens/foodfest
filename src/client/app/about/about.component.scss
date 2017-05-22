@@ -1,10 +1,32 @@
+@import '../../scss/core/variables';
+
 :host {
   display: block;
   padding: 0 16px;
 }
 
 h2 {
-  font-size: 50px;
   color: pink;
-  letter-spacing: 0.005em;
+  margin: $padding-xlarge-vertical 0;
+}
+
+h3, h4, h5 {
+  margin: $padding-large-vertical 0;
+}
+
+h3 {
+  margin-top: $padding-xlarge-vertical;
+  border-bottom: 1px solid $brand-border-color;
+}
+
+p {
+  font-size: $font-size-medium;
+}
+
+ul {
+  list-style-type: circle;
+  list-style-position: inside;
+  li {
+    font-size: $font-size-small;
+  }
 }
