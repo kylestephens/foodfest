@@ -144,7 +144,7 @@ export class SeedConfig {
    * `index.html`.
    * @type {string}
    */
-  APP_TITLE = 'Welcome to angular-seed!';
+  APP_TITLE = 'Welcome to FoodFest | The better way to find event catering';
 
   /**
    * Tracking ID.
