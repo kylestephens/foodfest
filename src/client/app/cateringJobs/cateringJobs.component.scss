@@ -1,6 +1,8 @@
 @import '../../scss/core/variables';
 @import '../../scss/mixins/buttons';
 
+$block-height: 400px;
+
 .hero {
   background-image: url('../assets/img/catering-jobs-hero.jpg');
   background-size: cover;
@@ -92,4 +94,36 @@
   .desriptive-section__steps p {
     margin-bottom: 1.1666666667em;
   }
+}
+
+.overlay {
+  background: $brand-overlay-pattern;
+  padding: $padding-xlarge-vertical 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.reasons-row {
+
+  &__text {
+    min-height: $block-height;
+    padding-top: 50px;
+  }
+
+  &__image {
+    min-height: $block-height;
+
+    &--events {
+      background: url('assets/img/list1.jpg');
+    }
+
+    &--connect {
+      background: url('assets/img/list2.jpg');
+    }
+  }
+
 }
