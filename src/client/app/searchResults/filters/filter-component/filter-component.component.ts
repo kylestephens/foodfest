@@ -108,9 +108,14 @@ export class FilterComponent {
     if(+this.rating === +rating) {
       this.rating = 0;
     }
+    else if (this.rating !== 0 && this.rating !== rating) {
+      this.filterService.removeFilter(new SearchFilter(this.text, null, this.rating));
+      this.rating = rating;
+    }
     else {
       this.rating = rating;
     }
+
     let searchFilter = new SearchFilter(this.text, null, this.rating);
     if(this.rating !== 0 ) this.filterService.addFilter(searchFilter);
     else this.filterService.removeFilter(searchFilter);

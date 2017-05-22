@@ -64,8 +64,7 @@
       <div class="opening-times" formArrayName="marketOpeningDays">
         <div *ngFor="let marketOpeningDay of createMarketForm.controls.marketOpeningDays.controls; let i=index" class="opening-times__item">
           <div [formGroupName]="i">
-            <!--  <input formControlName="id"> -->
-            <!-- <input type="checkbox" formControlName="checked"> -->
+
             <!-- day -->
             <div class="form-radio-wrapper opening-times__item__day">
               <input type="checkbox" id="{{marketOpeningDay.controls.id.value}}" formControlName="checked"

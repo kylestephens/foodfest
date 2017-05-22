@@ -10,7 +10,7 @@
         <span *ngFor="let i of ratings">
           <span class="ak-icon-star-full rating"></span>
         </span>
-        <span> & more</span>
+        <span *ngIf="ratings.length < 5"> & more</span>
 
       </span>
     </button>

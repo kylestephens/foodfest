@@ -11,28 +11,6 @@ $padding: 10px;
     &.button-list {
       margin-right: 5px;
     }
-
-    &.rating {
-      display: inline-block;
-      color: $brand-secondary;
-      border-radius: 0;
-      border-left: none;
-
-      &:nth-of-type(1) {
-        border-top-left-radius: 3px;
-        border-bottom-left-radius: 3px;
-        border-left: 1px solid $brand-secondary;
-      }
-
-      &:nth-of-type(5) {
-        border-top-right-radius: 3px;
-        border-bottom-right-radius: 3px;
-      }
-
-      &.selected {
-        color: $brand-body-bg;
-      }
-    }
   }
 
   &__title {
