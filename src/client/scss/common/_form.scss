@@ -30,6 +30,10 @@
     &:focus{
       outline: none;
     }
+
+    &::placeholder {
+      color: $gray-lighter;
+    }
   }
 
   textarea {
