@@ -1,0 +1,33 @@
+@import '../../scss/core/variables';
+
+.leave-review {
+  padding-bottom: 20px;
+  padding-top: 20px;
+
+  @media (min-width: $screen-sm-min) {
+    padding-top: $brand-header-padding;
+    padding-bottom: $brand-header-padding;
+  }
+}
+
+.form-leave-review {
+  padding-top: 20px;
+
+  &__radio {
+    margin: 10px 0;
+    min-height: 20px;
+  }
+
+  &__feedback {
+    padding-top: 30px;
+  }
+}
+
+.form-label.inline {
+   margin-right: 5px;
+}
+
+.sign-up-field {
+  margin: $padding-xlarge-vertical 0;
+}
+

@@ -1,0 +1,92 @@
+<div class="[ container ]" *ngIf="isLoaded && !invalidUser">
+  <div class="[ row ] leave-review">
+    <div class="[ col-sm-8 col-xs-12 ]">
+      <h4>Leave review for {{vendorName}}</h4>
+      <div>
+        <form [formGroup]="leaveReviewForm" (ngSubmit)="submitForm(leaveReviewForm.value)" class="form-leave-review">
+
+          <!-- options -->
+          <label for="selectOption">Select option which relates to you *</label>
+            <div class="form-radio-wrapper form-leave-review__radio">
+              <input type="radio" formControlName="option" id="1" [value]="1"
+                      [checked]="leaveReviewForm.controls.option.value === 1"/>
+              <label for="1">
+                <span>{{optionList.ONE}}</span>
+              </label>
+            </div>
+
+            <div class="form-radio-wrapper form-leave-review__radio">
+              <input type="radio" formControlName="option" id="2" [value]="2"
+                      [checked]="leaveReviewForm.controls.option.value === 2"/>
+              <label for="2">
+                <span>{{optionList.TWO}}</span>
+              </label>
+            </div>
+
+            <div class="form-radio-wrapper form-leave-review__radio">
+              <input type="radio" formControlName="option" id="3" [value]="3"
+                      [checked]="leaveReviewForm.controls.option.value === 3"/>
+              <label for="3">
+                <span>{{optionList.THREE}}</span>
+              </label>
+            </div>
+            <ak-form-messages [control]="leaveReviewForm.controls.option">
+            </ak-form-messages>
+              <!-- / options -->
+
+          <!-- review details -->
+          <div *ngIf="leaveReviewForm.controls.option.value === 1" formGroupName="review" class="form-leave-review__feedback">
+
+            <!-- review stars -->
+            <div class="filter-component__content rating">
+              <span class="form-label inline">Vedor deserves * </span>
+              <button  type="button" class= "filter-button rating" [ngClass]="{'selected': leaveReviewForm.controls.review.controls.stars.value > 0 }" (click)="onClickStars(1)">
+                <span [ngClass]="leaveReviewForm.controls.review.controls.stars.value > 0 ? 'ak-icon-star-full' : 'ak-icon-star-empty'"></span>
+              </button><!--
+               --><button  type="button" class= "filter-button rating" [ngClass]="{'selected': leaveReviewForm.controls.review.controls.stars.value > 1 }" (click)="onClickStars(2)">
+                <span [ngClass]="leaveReviewForm.controls.review.controls.stars.value > 1 ? 'ak-icon-star-full' : 'ak-icon-star-empty'"></span>
+              </button><!--
+               --><button  type="button" class= "filter-button rating" [ngClass]="{'selected': leaveReviewForm.controls.review.controls.stars.value > 2 }" (click)="onClickStars(3)">
+                <span [ngClass]="leaveReviewForm.controls.review.controls.stars.value > 2 ? 'ak-icon-star-full' : 'ak-icon-star-empty'"></span>
+              </button><!--
+               --><button  type="button" class= "filter-button rating" [ngClass]="{'selected': leaveReviewForm.controls.review.controls.stars.value > 3 }" (click)="onClickStars(4)">
+                <span [ngClass]="leaveReviewForm.controls.review.controls.stars.value > 3 ? 'ak-icon-star-full' : 'ak-icon-star-empty'"></span>
+              </button><!--
+               --><button  type="button" class= "filter-button rating" [ngClass]="{'selected': leaveReviewForm.controls.review.controls.stars.value > 4 }" (click)="onClickStars(5)">
+                <span [ngClass]="leaveReviewForm.controls.review.controls.stars.value > 4 ? 'ak-icon-star-full' : 'ak-icon-star-empty'"></span>
+              </button>
+            </div>
+            <ak-form-messages [control]="leaveReviewForm.controls.review.controls.stars">
+            </ak-form-messages>
+            <!-- / review start -->
+
+            <!-- review text -->
+            <label class="form-label">How was the vendor at your event? Tell us what you liked and disliked.</label>
+            <div class="form-input form-input--has-icon sign-up-field">
+              <div class="form-icon ak-icon-pencil"></div>
+               <textarea
+                rows="5"
+                maxlength="10000"
+                placeholder="e.g. I absolutely loved having Domhnaill's Donuts at my son's communion. The service was impeccable and donuts were so delicions. The staff has put so much effort into making this day great and I would highly recomment them for any kind of event."
+                formControlName="reviewText"></textarea>
+            </div>
+            <ak-form-messages [control]="leaveReviewForm.controls.review.controls.reviewText">
+            </ak-form-messages>
+            <!-- / review text -->
+
+           </div>
+          <!-- / review details -->
+
+            <!-- Mandatory Fields -->
+              <span class="form-mandatory">* denotes mandatory field</span>
+            <!-- / Mandatory Fields -->
+
+          <div class="[ text-right ]">
+            <button type="submit" class="form-btn-cta">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

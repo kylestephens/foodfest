@@ -11,7 +11,6 @@ import { ActivatedRoute,
          Router }                      from '@angular/router';
 
 import { AccountService }               from '../services/account.service';
-// import { SettingsService }              from '../services/settings.service';
 import { MessagingService }             from '../services/messaging.service';
 import { ValidationService }            from '../services/validation.service';
 
@@ -113,7 +112,7 @@ export class ResetPasswordComponent {
         CONSTANT.MESSAGING.ERROR,
         messageText
       );
-    }
-  );
+    });
   }
+
 }
