@@ -91,6 +91,11 @@ mark,
 .text-uppercase      { text-transform: uppercase; }
 .text-capitalize     { text-transform: capitalize; }
 
+//preserve new lines
+.pre-wrap {
+  white-space: pre-wrap;
+}
+
 
 // Page header
 // -------------------------

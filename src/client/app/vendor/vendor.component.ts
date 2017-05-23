@@ -272,6 +272,7 @@ export class VendorComponent implements OnInit, OnDestroy {
     private accountService: AccountService,
     private messagingService: MessagingService
   ) {
+    debugger;
     if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_EDIT)) {
       this.isEditing = true;
     }
@@ -284,6 +285,7 @@ export class VendorComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(this.route.params.subscribe(params => {
       this.vendorId = +params['id'];
+      debugger
       this.isOwnVendor = this.accountService.isOwnVendor(this.vendorId);
     }));
 

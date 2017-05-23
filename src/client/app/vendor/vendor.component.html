@@ -41,7 +41,7 @@
 
     <div class="[ row ]">
       <div class="business-description [ col-xs-12 ]">
-        {{ vendor.description }}
+        <span class="[ pre-wrap ]">{{ vendor.description }}</span>
       </div>
     </div>
 
@@ -111,7 +111,7 @@
       <div class="[ col-xs-12 col-sm-6 col-md-4 ]" *ngFor="let item of vendor.listed_items">
         <div class="menu__card card">
           <h5 class="menu__item-title">{{ item.item_title }}</h5>
-          <span class="menu__item-description">{{ item.item_description }}</span>
+          <span class="menu__item-description [ pre-wrap ]">{{ item.item_description }}</span>
         </div>
       </div>
     </div>
