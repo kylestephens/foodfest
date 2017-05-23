@@ -8,7 +8,7 @@
       <div class="[ container ]">
         <div class="[ row ]">
           <div class="[ col-xs-12 ]">
-            <a class="hero__back-btn" (click)="onClickBack()">
+            <a *ngIf="!isEditing" class="hero__back-btn" (click)="onClickBack()">
               <span class="ak-icon-chevron-with-circle-left"></span>
               Back
             </a>
