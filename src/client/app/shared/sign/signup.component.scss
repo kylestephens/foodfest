@@ -53,6 +53,10 @@ $modal-padding: 50px;
   &--disabled {
     opacity: 0.3;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .sign-up-icon {
