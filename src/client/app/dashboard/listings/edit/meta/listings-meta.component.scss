@@ -52,12 +52,3 @@
     color: maroon;
   }
 }
-
-
-
-.form-btn-add-item {
-  top: $padding-large-vertical;
-  right: $padding-large-horizontal;
-  @include button(#fff, $brand-secondary-cta);
-  padding: 6px 12px;                  // overriding default button padding
-}

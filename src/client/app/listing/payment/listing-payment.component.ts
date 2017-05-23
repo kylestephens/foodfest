@@ -30,6 +30,7 @@ export class ListingPaymentComponent implements OnInit {
   @ViewChild('tickAnimation')
   public tickAnimationElementRef: ElementRef;
 
+  public isEditing: boolean = false;
   public isPaid: boolean = false;
   public vendorId: number;
 
@@ -53,6 +54,9 @@ export class ListingPaymentComponent implements OnInit {
     script.type = 'text/javascript';
     script.src = 'https://checkout.stripe.com/checkout.js';
     document.head.appendChild(script);
+    if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_EDIT)) {
+      this.isEditing = true;
+    }
   };
 
   openCheckout(planNum: number) {
