@@ -65,6 +65,8 @@ export class ListingPaymentComponent implements OnInit {
       _amount = 0,
       _planName = '';
 
+    me.loaderService.show();
+
     if(planNum === 1) {
       _description = 'Monthly Rolling Subscription';
       _amount = 2500;
@@ -106,8 +108,6 @@ export class ListingPaymentComponent implements OnInit {
           vendorId: vendorId,
           planName: _planName
         };
-
-        me.loaderService.show();
 
         me.restService.post(
           me.settingsService.getServerBaseUrl() + '/subscribe',
