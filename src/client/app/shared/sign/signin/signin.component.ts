@@ -85,7 +85,21 @@ export class SigninComponent {
           this.modalService.hide();
         }
         else if(this.location === 'page') {
-          this.router.navigate([this.accountService.redirectUrl]);
+          if(this.accountService.redirectUrl.indexOf('?') > -1) {
+            let redirectUrlArray = this.accountService.redirectUrl.split('?');
+            let redirectParams = redirectUrlArray[1].split('&');
+
+            let queryParams: { [key: string]: string } = { };
+
+            for(let redirectParam of redirectParams) {
+              let paramArray: any[] = redirectParam.split('=');
+              queryParams[paramArray[0]] = paramArray [1];
+            }
+            this.router.navigate([redirectUrlArray[0]], { queryParams: queryParams });
+          }
+          else {
+            this.router.navigate([this.accountService.redirectUrl]);
+          }
           this.accountService.redirectUrl = '';
         }
       }
