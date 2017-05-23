@@ -13,6 +13,7 @@ import { InboxService }               from '../../services/inbox.service';
 import { SettingsService }            from '../../services/settings.service';
 import { User }                       from '../../shared/model/user';
 import { Vendor }                     from '../../shared/model/vendor';
+import { LoaderService }              from '../../services/loader.service';
 
 /**
  * This class represents the lazy loaded Inbox.
@@ -46,7 +47,8 @@ export class ListingsComponent {
     private location: Location,
     private route: ActivatedRoute,
     private platformLocation: PlatformLocation,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private loaderService: LoaderService
   ) {
     platformLocation.onPopState(() => {
       this.clearListingsParameters();
@@ -76,6 +78,7 @@ export class ListingsComponent {
   }
 
   public getListings() {
+    this.loaderService.show();
     this.accountService.getVendors().then((vendors: Array<Vendor>) => {
       this.loaded = true;
       this.vendors = vendors;
@@ -86,6 +89,7 @@ export class ListingsComponent {
       else if(this.vendors.length > 0) {
         this.setInbox();
       }
+      this.loaderService.hide();
     });
   }
 

@@ -8,6 +8,7 @@ import { ModalService }          from '../services/modal.service';
 import { Market }                from '../shared/model/market';
 import { Vendor }                from '../shared/model/vendor';
 import { CONSTANT }              from '../core/constant';
+import { LoaderService }         from '../services/loader.service';
 
 /**
  * This class represents the lazy loaded Markets component.
@@ -33,7 +34,8 @@ export class MarketsComponent implements OnInit {
     private accountService: AccountService,
     private confirmDialogService: ConfirmDialogService,
     private inboxService: InboxService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private loaderService: LoaderService
   ) {
     this.subscriptions.push(this.accountService.getMessage().subscribe(subMessage => {
       if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN) {
@@ -69,11 +71,13 @@ export class MarketsComponent implements OnInit {
   }
 
   getMarkets(): void {
+    this.loaderService.show();
     this.marketService.getMarkets().then(markets => {
       if(markets) {
         this.loaded = true;
         this.markets = markets;
       }
+      this.loaderService.hide();
     });
   }
 
@@ -84,6 +88,7 @@ export class MarketsComponent implements OnInit {
   }
 
   sendMessageConfirmed(message: string, record: any) {
+    this.loaderService.show();
     let params = {
       sender_id: record.sender,
       receiver_id: record.receiver,
@@ -94,6 +99,7 @@ export class MarketsComponent implements OnInit {
 
     this.inboxService.createMessage(params, 'global').then( message => {
       this.modalService.hide();
+      this.loaderService.hide();
     });
   }
 

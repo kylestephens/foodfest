@@ -15,15 +15,23 @@ export class SearchResultsService {
   getVendors(): Promise<Vendor[]> {
       return this.restService.get(
          this.settingsService.getServerBaseUrl() + '/vendors'
-      ).then((response: Response) => response.json() as Vendor[]);
+      )
+      .then((response: Response) => response.json() as Vendor[])
+      .catch((reason: any) => {
+        return Promise.reject(reason);
+      });
   }
 
   searchVendors(params: any): Promise<Vendor[]> {
-     return this.restService.get(
+    return this.restService.get(
        this.settingsService.getServerBaseUrl() + '/vendors/search', params
-    ).then((response: Response) => response.json() as Vendor[]);
+    )
+    .then((response: Response) => response.json() as Vendor[])
+    .catch((reason: any) => {
+      return Promise.reject(reason);
+    });
   }
 
-};
+}
 
 

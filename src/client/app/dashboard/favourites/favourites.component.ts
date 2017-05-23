@@ -4,6 +4,9 @@ import { Vendor }              from '../../shared/model/vendor';
 import { AccountService }      from '../../services/account.service';
 import { RestService }         from '../../services/rest.service';
 import { SettingsService }     from '../../services/settings.service';
+import { MessagingService }    from '../../services/messaging.service';
+import { CONSTANT }            from '../../core/constant';
+import { LoaderService }       from '../../services/loader.service';
 
 /**
  * This class represents the lazy loaded Favourites Dashboard.
@@ -25,7 +28,9 @@ export class FavouritesComponent {
   constructor(
     private accountService: AccountService,
     private restService: RestService,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private messagingService: MessagingService,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -35,19 +40,42 @@ export class FavouritesComponent {
   }
 
   setup(): void {
-    this.accountService.getFavourites().then((favourites: Array<number>) => {
+    this.loaderService.show();
+    this.accountService.getFavourites()
+    .then((favourites: Array<number>) => {
       this.favourites = favourites;
-      this.loaded = true;
       let filter = '';
       if(this.favourites && this.favourites.length > 0) {
         filter = this.favourites.join(',');
         this.restService.get(
           this.settingsService.getServerBaseUrl() + '/vendors?id=' + filter
         ).then((response: Response) => {
-          this.vendors = response.json() as Vendor[]
+          this.loaded = true;
+          this.vendors = response.json() as Vendor[];
+          this.loaderService.hide();
+        }).
+        catch((response: any) => {
+          this.messagingService.show(
+            'favourites',
+            CONSTANT.MESSAGING.ERROR,
+            response.statusText ? response.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR
+          );
+          this.loaderService.hide();
         });
       }
-    });
+      else {
+        this.loaded = true;
+        this.loaderService.hide();
+      }
+    })
+    .catch((reason: any) => {
+      this.messagingService.show(
+        'favourites',
+        CONSTANT.MESSAGING.ERROR,
+        reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR
+      );
+      this.loaderService.hide();
+    })
   }
 
   pageChanged() {

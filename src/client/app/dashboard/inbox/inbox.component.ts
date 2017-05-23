@@ -13,7 +13,7 @@ import { InboxService }               from '../../services/inbox.service';
 import { SettingsService }            from '../../services/settings.service';
 import { User }                       from '../../shared/model/user';
 import { Vendor }                     from '../../shared/model/vendor';
-
+import { LoaderService }              from '../../services/loader.service';
 
 /**
  * This class represents the lazy loaded Inbox.
@@ -46,7 +46,8 @@ export class InboxComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute,
     private platformLocation: PlatformLocation,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private loaderService: LoaderService
   ) {
     platformLocation.onPopState(() => {
       this.clearInboxParameters();
@@ -63,11 +64,13 @@ export class InboxComponent implements OnInit {
     this.subscription = this.confirmDialogService.dialogConfirmed.subscribe(
     confirmDialog => {
       if(confirmDialog.action && confirmDialog.action === this.DELETE_CONVERSATION_ACTION) {
+        this.loaderService.show();
         this.inboxService.deleteConversation(confirmDialog.record.id).then((success) => {
           this.modalService.hide();
           if(success) {
             this.removeConversation(confirmDialog.record.id);
           }
+          this.loaderService.hide();
         })
       }
     });
@@ -112,6 +115,7 @@ export class InboxComponent implements OnInit {
   }
 
   getConversations() {
+    this.loaderService.show();
     this.inboxService.getConversations().then(conversations => {
       if(conversations) {
         this.loaded = true;
@@ -124,7 +128,7 @@ export class InboxComponent implements OnInit {
           this.setInbox();
         }
       }
-
+      this.loaderService.hide();
     });
   }
 

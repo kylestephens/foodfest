@@ -9,6 +9,8 @@ import { Vendor }                  from '../../shared/model/vendor';
 import { SearchResultsService }    from '../search-results.service';
 import { CONSTANT }                from '../../core/constant';
 import { AccountService }          from '../../services/account.service';
+import { LoaderService }           from '../../services/loader.service';
+import { MessagingService }        from '../../services/messaging.service';
 
 /**
  * This class represents list of cards on search results page.
@@ -33,7 +35,9 @@ export class SearchResultsCardListComponent implements OnInit, OnDestroy {
     private accountService: AccountService,
     private route: ActivatedRoute,
     private router: Router,
-    private searchResultsService: SearchResultsService
+    private searchResultsService: SearchResultsService,
+    private loaderService: LoaderService,
+    private messagingService: MessagingService
   ) {
     this.loginSub = this.accountService.getMessage().subscribe(subMessage => {
       if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN || subMessage.event === CONSTANT.EVENT.SESSION.USER_TYPE) {
@@ -51,6 +55,7 @@ export class SearchResultsCardListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routeSub = this.route.params
       .subscribe(params => {
+        this.loaderService.show();
         this.loaded = false;
         if(Object.keys(params).length === 0) this.getVendors();
         else this.searchVendors(params);
@@ -66,16 +71,36 @@ export class SearchResultsCardListComponent implements OnInit, OnDestroy {
   }
 
   getVendors(): void {
-    this.searchResultsService.getVendors().then(vendors => {
+    this.searchResultsService.getVendors()
+    .then(vendors => {
       this.loaded = true;
       this.vendors = vendors;
+      this.loaderService.hide();
+    })
+    .catch((reason: any) => {
+      this.messagingService.show(
+        'global',
+        CONSTANT.MESSAGING.ERROR,
+        reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR
+      );
+      this.loaderService.hide();
     });
   }
 
   searchVendors(params: any): void {
-    this.searchResultsService.searchVendors(params).then(vendors => {
+    this.searchResultsService.searchVendors(params)
+    .then(vendors => {
       this.loaded = true;
       this.vendors = vendors;
+      this.loaderService.hide();
+    })
+    .catch((reason: any) => {
+      this.messagingService.show(
+        'global',
+        CONSTANT.MESSAGING.ERROR,
+        reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR
+      );
+      this.loaderService.hide();
     });
   }
 

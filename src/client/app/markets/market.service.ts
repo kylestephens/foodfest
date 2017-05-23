@@ -19,8 +19,8 @@ export class MarketService {
   getMarkets(): Promise<Market[]> {
     return this.restService.get(
       this.settingsService.getServerBaseUrl() + '/markets'
-    ).then((response: Response) => response.json() as Market[] ).catch(
-    (reason:any) => {
+    ).then((response: Response) => response.json() as Market[] )
+    .catch((reason:any) => {
       this.messagingService.show(
         'global',
         CONSTANT.MESSAGING.ERROR,

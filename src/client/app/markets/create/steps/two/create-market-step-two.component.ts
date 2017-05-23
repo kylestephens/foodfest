@@ -14,6 +14,8 @@ import { AgmCoreModule,
 import { CONSTANT }            from '../../../../core/constant';
 import { CreateMarketService } from '../../create-market.service';
 import { ValidationService }   from '../../../../services/validation.service';
+import { MessagingService }    from '../../../../services/messaging.service';
+import { LoaderService }       from '../../../../services/loader.service';
 
 declare var google: any;
 
@@ -41,7 +43,9 @@ export class CreateMarketStepTwoComponent implements OnInit {
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private createMarketService: CreateMarketService,
-    private router: Router
+    private router: Router,
+    private messagingService: MessagingService,
+    private loaderService: LoaderService
     )
   {
     this.createMarketForm = this.fb.group({
@@ -209,10 +213,22 @@ export class CreateMarketStepTwoComponent implements OnInit {
   }
 
   private _createMarket(value: any) {
+    this.loaderService.show();
     value.organisationId = this.organisationId;
     this.createMarketService.setStoredMarket(value, 2);
-    this.createMarketService.createMarket().then((marketId: number) => {
+    this.createMarketService.createMarket()
+    .then((marketId: number) => {
+      this.loaderService.hide();
       this.router.navigate(['complete', 'market']);
+    })
+    .catch((reason: any) => {
+      this.messagingService.show(
+        'create-market',
+        CONSTANT.MESSAGING.ERROR,
+        reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
+        true
+      );
+      this.loaderService.hide();
     });
   }
 }

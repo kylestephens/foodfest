@@ -5,6 +5,7 @@ import { InboxService }                      from '../../../services/inbox.servi
 import { SettingsService }                   from '../../../services/settings.service';
 import { MessagingService }                  from '../../../services/messaging.service';
 import { Message }                           from '../../../shared/model/message';
+import { LoaderService }                     from '../../../services/loader.service';
 
 /**
  * This class represents the lazy loaded inbox message thread.
@@ -36,7 +37,8 @@ export class InboxThreadComponent {
     private accountService: AccountService,
     private browserService: BrowserService,
     private settingsService: SettingsService,
-    private messagingService: MessagingService) {
+    private messagingService: MessagingService,
+    private loaderService: LoaderService) {
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -49,16 +51,19 @@ export class InboxThreadComponent {
   }
 
   private getMessagesInConversation() {
+    this.loaderService.show();
     this.inboxService.getMessagesInConversation(this.conversation.id).then(messages => {
       if(messages) {
          this.messages = messages;
       }
+      this.loaderService.hide();
     });
   }
 
   sendMessage() {
     if(!this.messageText.trim()) return;
 
+    this.loaderService.show();
     let params = {
         sender_id: this.accountService.getUser().id,
         receiver_id: this.conversation.sender.id === this.accountService.getUser().id ? this.conversation.receiver.id : this.conversation.sender.id,
@@ -75,6 +80,7 @@ export class InboxThreadComponent {
         this.conversation.sent_date = message.sent_date;
         this.conversation.last_msg_id = message.id;
       }
+      this.loaderService.hide();
     });
   }
 

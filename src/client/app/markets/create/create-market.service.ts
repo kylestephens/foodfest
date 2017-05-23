@@ -5,7 +5,6 @@ import { Subject }           from 'rxjs/Subject';
 import { RestService }       from '../../services/rest.service';
 import { SettingsService }   from '../../services/settings.service';
 import { AccountService }    from '../../services/account.service';
-import { MessagingService }  from '../../services/messaging.service';
 import { CONSTANT }          from '../../core/constant';
 import { County }            from '../../shared/model/county';
 import { Organisation }      from '../../shared/model/organisation';
@@ -18,8 +17,7 @@ export class CreateMarketService {
   constructor(
     private restService: RestService,
     private settingsService: SettingsService,
-    private accountService: AccountService,
-    private messagingService: MessagingService
+    private accountService: AccountService
   ) {};
 
   nextStep = function() {
@@ -87,12 +85,7 @@ export class CreateMarketService {
       return response.json();
     }).catch(
     (reason: any) => {
-      this.messagingService.show(
-        'create-market',
-        CONSTANT.MESSAGING.ERROR,
-        reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
-        true
-      );
+      return Promise.reject(reason);
     });
   }
 

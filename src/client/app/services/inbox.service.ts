@@ -80,7 +80,6 @@ export class InboxService {
         reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR
       );
     });
-
   }
 
   createMessage(params: any, calledFrom: string): Promise<Message> {
