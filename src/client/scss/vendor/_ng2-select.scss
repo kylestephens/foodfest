@@ -12,6 +12,7 @@
 
   .ui-select-placeholder {
     width: 100%;
+    color: $gray-lighter;
   }
 
   .ui-select-choices-row,
@@ -49,10 +50,11 @@
 
   .ui-select-multiple input.ui-select-search {
     width: 100%;
-  }
-
-  .ui-select-multiple input.ui-select-search {
     margin: 0 !important;
+
+    &::placeholder {
+      color: $gray-lighter !important;
+    }
   }
 
 }

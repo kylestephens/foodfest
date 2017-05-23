@@ -7,7 +7,7 @@ describe('App', () => {
   });
 
   it('should have a title', () => {
-    expect(browser.getTitle()).toEqual('Welcome to angular-seed!');
+    expect(browser.getTitle()).toEqual('elcome to FoodFest | The better way to find event catering');
   });
 
   it('should have <nav>', () => {

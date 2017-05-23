@@ -2,7 +2,7 @@
 @import '../../scss/mixins/buttons';
 
 .hero {
-  background-image: url('../assets/img/hero.jpg');
+  background-image: url('../assets/img/hero-new.jpg');
   background-size: cover;
   background-position: center bottom;
   position: relative;
@@ -34,13 +34,13 @@
   }
 
   h1 {
-    color: $brand-primary;
+    color: $brand-secondary;
   }
 
   h2 {
     color: #5d5c5c;
     font-size: 22px;
-    padding-top: 26px;
+    padding-top: $padding-large-vertical;
   }
 }
 

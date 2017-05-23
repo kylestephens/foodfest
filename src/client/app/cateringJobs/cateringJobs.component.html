@@ -4,8 +4,8 @@
     <div class="hero__title">
       <h1>Stress-free party and wedding planning</h1>
       <h2>
-        Create your own tenders and request applications from
-        our partner vendors
+        List your party or function requirements
+        and request applications from our partner vendors
       </h2>
       <button class="hero__browse-button" (click)="onClickContactUs()">
         Launching soon. Enquire here <span class="ak-icon-happy"></span>
@@ -13,14 +13,55 @@
     </div>
   </header>
 
-  <!-- TODO - decide on copy here -->
-  <section class="how-it-works">
-    <div class="overlay"></div>
-    Descriptive text here
+  <section>
+    <div class="reasons-row [ row ]">
+      <div class="reasons-row__text [ col-sm-6 col-xs-12 text-center ]">
+        <h2 class="heading heading--medium">
+          <div class="heading__icon-holder">
+            <object class="heading__icon" data="assets/icons/svg/calendar.svg" type="image/svg+xml">
+              <img src="assets/icons/img/calendar.png" />
+            </object>
+          </div>
+          <span title="Discover those organising corporate events, festivals, concerts, parties and weddings in Ireland and apply for contracts" class="header-link">
+            List your event for free
+          </span>
+        </h2>
+          <p class="how-it-works__description">
+            Organising a wedding, a charity race or a party? No problem.<br />
+            List your event's date, location and requirements right here.<br /><br />
+            <em>Coming soon!</em> <span class="ak-icon-happy"></span>
+          </p>
+      </div>
+
+      <div class="reasons-row__image reasons-row__image--events [ col-sm-6 hidden-xs ]">
+        <div class="overlay"></div>
+      </div>
+    </div>
   </section>
 
-  <section class="[ container ]">
-    Descriptive text here
+  <section>
+    <div class="reasons-row [ row ]">
+      <div class="reasons-row__image reasons-row__image--connect [ col-sm-6 hidden-xs ]">
+        <div class="overlay"></div>
+      </div>
+
+      <div class="reasons-row__text [ col-sm-6 col-xs-12 text-center ]">
+        <h2 class="heading heading--medium">
+          <div class="heading__icon-holder">
+            <object class="heading__icon" data="assets/icons/svg/chat.svg" type="image/svg+xml">
+              <img src="assets/icons/img/chat.png" />
+            </object>
+          </div>
+          <span title="Connect directly with Irish customers using our messaging system" class="header-link">
+            Eligible vendors apply for the contract
+          </span>
+        </h2>
+          <p class="how-it-works__description">
+            Sit back, relax and wait for eligible vendors to apply.<br />
+            Negotiate and arrange bookings direct via our enquiry manager software.
+          </p>
+      </div>
+    </div>
   </section>
 
 </article>

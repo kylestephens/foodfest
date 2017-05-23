@@ -5,7 +5,7 @@ import { HelpComponent }        from './help.component';
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'help', component: HelpComponent }
+      { path: '', component: HelpComponent }
     ])
   ],
   exports: [RouterModule]
