@@ -2,10 +2,11 @@
  * Class for vendors.
  * It corresponds to vendorsModel in service.
  */
-import { BusinessSetup }     from './businessSetup';
-import { BusinessType }      from './businessType';
-import { DietRequirement }   from './dietRequirement';
-import { Style }             from './style';
+import { BusinessSetup }       from './businessSetup';
+import { BusinessType }        from './businessType';
+import { DietRequirement }     from './dietRequirement';
+import { StripeSubscription }  from './stripeSubscription';
+import { Style }               from './style';
 
 export class Vendor {
 	id:                  number;
@@ -29,8 +30,9 @@ export class Vendor {
   cover_photo_path:    string;
   average_rating:      number;
   num_of_reviews:      number;
-	date_registered:     string;
+	date_registered:     any;
 	last_updated:        string;
+  subscription:        Subscription;
   business_type:       string;
   business_setup:      Array<BusinessSetup>;
   diet_requirements:   Array<DietRequirement>;

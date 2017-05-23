@@ -7,33 +7,43 @@
     <div class="listings-edit-menu__item menu-one"
       [ngClass]="{'listings-edit-menu__item--active': activeItem == 1 }"
       (click)="toggleActive($event, 1)">
-      Listing Details
+      <span class="[ hidden-xs ]">Listing</span> Summary
     </div>
     <div class="listings-edit-menu__item menu-two"
       [ngClass]="{'listings-edit-menu__item--active': activeItem == 2 }"
       (click)="toggleActive($event, 2)">
-      Listing Description
+      <span class="[ hidden-xs ]">Listing</span> Details
     </div>
     <div class="listings-edit-menu__item menu-three"
       [ngClass]="{'listings-edit-menu__item--active': activeItem == 3 }"
       (click)="toggleActive($event, 3)">
+      <span class="[ hidden-xs ]">Listing</span> Description
+    </div>
+    <div class="listings-edit-menu__item menu-four"
+      [ngClass]="{'listings-edit-menu__item--active': activeItem == 4 }"
+      (click)="toggleActive($event, 4)">
       Images
     </div>
     <hr />
   </div>
 
-  <ak-listings-details
+  <ak-listings-meta
     *ngIf="activeItem == 1"
+    [vendor]="vendor">
+  </ak-listings-meta>
+
+  <ak-listings-details
+    *ngIf="activeItem == 2"
     [vendor]="vendor">
   </ak-listings-details>
 
   <ak-listings-description
-    *ngIf="activeItem == 2"
+    *ngIf="activeItem == 3"
     [vendor]="vendor">
   </ak-listings-description>
 
   <ak-listings-images
-    *ngIf="activeItem == 3"
+    *ngIf="activeItem == 4"
     [vendor]="vendor">
   </ak-listings-images>
 

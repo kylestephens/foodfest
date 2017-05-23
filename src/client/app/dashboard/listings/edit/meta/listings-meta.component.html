@@ -1,0 +1,57 @@
+<div class="listings-description">
+
+  <form [formGroup]="listingsMetaForm" (ngSubmit)="submitForm(listingsMetaForm.value)">
+
+    <!-- Date Registered -->
+    <div class="form-row [ row ]">
+      <div class="[ col-xs-12 ]">
+        <label class="form-label">Date Registered</label>
+        <div class="sign-up-field sign-up-field--no-edit">
+          {{ editingVendor.date_registered | date: 'dd/MM/yyyy' }}
+        </div>
+        <ak-form-messages [control]="listingsMetaForm.controls.businessDescription">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- / Date Registered -->
+
+    <!-- Plan Name -->
+    <div class="form-row [ row ]">
+      <div class="[ col-xs-12 ]">
+        <label class="form-label">Plan Name</label>
+        <div class="sign-up-field sign-up-field--no-edit">
+          {{ editingVendor.subscription.plan_name }}
+        </div>
+        <ak-form-messages [control]="listingsMetaForm.controls.businessDescription">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- / Plan Name -->
+
+    <!-- Payment Amount -->
+    <div class="form-row [ row ]">
+      <div class="[ col-xs-12 ]">
+        <label class="form-label">Payment Amount</label>
+        <div class="sign-up-field sign-up-field--no-edit">
+          {{ editingVendor.subscription.monthly_amount }}
+        </div>
+        <ak-form-messages [control]="listingsMetaForm.controls.businessDescription">
+        </ak-form-messages>
+      </div>
+    </div>
+    <!-- / Payment Amount -->
+
+    <ak-messaging ref="listings-description-edit">
+    </ak-messaging>
+
+    <!-- Form Buttons -->
+    <div class="form-row [ row ]">
+      <div class="[ col-xs-12 text-right ]">
+        <button type="submit" class="form-btn-cta">Save updates</button>
+      </div>
+    </div>
+    <!-- / Form Buttons -->
+
+  </form>
+
+</div>

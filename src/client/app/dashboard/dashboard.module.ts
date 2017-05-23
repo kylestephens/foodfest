@@ -9,6 +9,7 @@ import { ListingsComponent }              from './listings/listings.component';
 import { ListingsEditComponent }          from './listings/edit/listings-edit.component';
 import { ListingsDetailsComponent }       from './listings/edit/details/listings-details.component';
 import { ListingsImagesComponent }        from './listings/edit/images/listings-images.component';
+import { ListingsMetaComponent }          from './listings/edit/meta/listings-meta.component';
 import { ListingsDescriptionComponent }   from './listings/edit/description/listings-description.component';
 import { InboxComponent }                 from './inbox/inbox.component';
 import { InboxThreadComponent }           from './inbox/thread/inbox-thread.component';
@@ -38,6 +39,7 @@ import { SelectModule }                   from 'ng2-select';
     ListingsEditComponent,
     ListingsDetailsComponent,
     ListingsImagesComponent,
+    ListingsMetaComponent,
     ListingsDescriptionComponent,
     InboxComponent,
     InboxThreadComponent,

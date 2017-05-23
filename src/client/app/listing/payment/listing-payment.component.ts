@@ -62,17 +62,17 @@ export class ListingPaymentComponent implements OnInit {
       _planName = '';
 
     if(planNum === 1) {
-      _description = 'Monthly Subscription';
+      _description = 'Monthly Rolling Subscription';
       _amount = 2500;
       _planName = 'monthly';
     } else if(planNum === 2) {
-      _description = 'Annual Subscription';
+      _description = 'Annual Rolling Subscription';
       _planName = 'annual';
       _amount = 20400;  // 17 x 12
     } else if(planNum === 3) {
-      _description = '6 Monthly Subscription';
-      _amount = 12000;
-      _planName = 'biannual';
+      _description = '3 Monthly Rolling Subscription';
+      _amount = 6000;  // 20 x 3
+      _planName = 'quarterly';
     }
 
     /**

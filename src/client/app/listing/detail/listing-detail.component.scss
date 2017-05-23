@@ -54,7 +54,8 @@ $block-height: 400px;
   h2 {
     color: darken($brand-primary, 20%);
     font-size: 22px;
-    padding-top: 26px;
+    padding: 26px 0;
+    background: rgba(255,255,255,0.4);
   }
 }
 
