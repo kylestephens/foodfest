@@ -50,7 +50,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     this.subscription = this.accountService.getMessage().subscribe(subMessage => {
       if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN || subMessage.event === CONSTANT.EVENT.SESSION.USER_TYPE ) {
-        if(this.accountService.isLoggedIn()) {
+        if(this.accountService.isLoggedIn() && this.accountService.getUser().user_type === CONSTANT.user.types.VENDOR.code) {
           this.getVendors();
         }
       }
