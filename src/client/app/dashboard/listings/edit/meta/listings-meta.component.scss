@@ -41,6 +41,12 @@
 
 
 
+.form-btn {
+  padding: 6px 12px; // overriding default button padding
+}
+
+
+
 .listing-status {
   font-weight: $font-weight-normal;
   &--active {
