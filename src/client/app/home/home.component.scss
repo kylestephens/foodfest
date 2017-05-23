@@ -64,6 +64,11 @@
   }
 }
 
+.heading {
+  margin-top: $padding-xlarge-vertical;
+  cursor: pointer;
+}
+
 .how-it-works__steps {
   margin-bottom: 3em;
 }

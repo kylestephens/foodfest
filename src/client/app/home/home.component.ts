@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component }     from '@angular/core';
+import { Router }        from '@angular/router';
 
 /**
  * This class represents the lazy loaded HomeComponent.
@@ -10,4 +11,15 @@ import { Component } from '@angular/core';
   styleUrls: ['home.component.css'],
 })
 export class HomeComponent {
+
+  constructor(
+    private router: Router
+  ) {};
+
+  public onClickHeading() {
+    this.router.navigate(
+      ['search-results']
+    );
+  }
+
 }
