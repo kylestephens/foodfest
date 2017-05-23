@@ -15,34 +15,37 @@
     </div>
     <!-- / Date Registered -->
 
-    <!-- Plan Name -->
-    <div class="form-row [ row ]">
-      <div class="[ col-xs-12 ]">
-        <label class="form-label">Plan Name</label>
-        <div class="sign-up-field sign-up-field--no-edit">
-          {{ editingVendor.subscription.plan_name }}
-        </div>
-        <ak-form-messages [control]="listingsMetaForm.controls.businessDescription">
-        </ak-form-messages>
-      </div>
-    </div>
-    <!-- / Plan Name -->
+    <!-- SUBSCRIPTION INFO -->
+    <div *ngIf="editingVendor.subscription">
 
-    <!-- Payment Amount -->
-    <div class="form-row [ row ]">
-      <div class="[ col-xs-12 ]">
-        <label class="form-label">Payment Amount</label>
-        <div class="sign-up-field sign-up-field--no-edit">
-          {{ editingVendor.subscription.monthly_amount }}
+      <!-- Plan Name -->
+      <div class="form-row [ row ]">
+        <div class="[ col-xs-12 ]">
+          <label class="form-label">Plan Name</label>
+          <div class="sign-up-field sign-up-field--no-edit">
+            {{ editingVendor.subscription.plan_name }}
+          </div>
+          <ak-form-messages [control]="listingsMetaForm.controls.businessDescription">
+          </ak-form-messages>
         </div>
-        <ak-form-messages [control]="listingsMetaForm.controls.businessDescription">
-        </ak-form-messages>
       </div>
-    </div>
-    <!-- / Payment Amount -->
+      <!-- / Plan Name -->
 
-    <ak-messaging ref="listings-description-edit">
-    </ak-messaging>
+      <!-- Payment Amount -->
+      <div class="form-row [ row ]">
+        <div class="[ col-xs-12 ]">
+          <label class="form-label">Payment Amount</label>
+          <div class="sign-up-field sign-up-field--no-edit">
+            {{ editingVendor.subscription.monthly_amount }}
+          </div>
+          <ak-form-messages [control]="listingsMetaForm.controls.businessDescription">
+          </ak-form-messages>
+        </div>
+      </div>
+      <!-- / Payment Amount -->
+
+    </div>
+    <!-- / SUBSCRIPTION INFO -->
 
     <!-- Form Buttons -->
     <div class="form-row [ row ]">
