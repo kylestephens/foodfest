@@ -43,6 +43,18 @@
 
 
 
+.listing-status {
+  font-weight: $font-weight-normal;
+  &--active {
+    color: $state-success-text;
+  }
+  &--inactive {
+    color: maroon;
+  }
+}
+
+
+
 .form-btn-add-item {
   top: $padding-large-vertical;
   right: $padding-large-horizontal;

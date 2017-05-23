@@ -1,60 +1,71 @@
 <div class="listings-description">
 
-  <form [formGroup]="listingsMetaForm" (ngSubmit)="submitForm(listingsMetaForm.value)">
+  <!-- Listing Status -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 ]">
+      <label class="form-label">Listing Status</label>
+      <div class="sign-up-field">
+        <span *ngIf="editingVendor.active_vendor == 1"
+          class="listing-status listing-status--active">
+            Published
+        </span>
+        <span *ngIf="editingVendor.active_vendor == 0"
+          class="listing-status listing-status--inactive">
+            Unpublished
+        </span>
+      </div>
+    </div>
+  </div>
+  <!-- / Listing Status -->
 
-    <!-- Date Registered -->
+  <!-- Date Registered -->
+  <div class="form-row [ row ]">
+    <div class="[ col-xs-12 ]">
+      <label class="form-label">Date Registered</label>
+      <div class="sign-up-field sign-up-field--no-edit">
+        {{ editingVendor.date_registered | date: 'dd/MM/yyyy' }}
+      </div>
+    </div>
+  </div>
+  <!-- / Date Registered -->
+
+  <!-- SUBSCRIPTION INFO -->
+  <div *ngIf="editingVendor.subscription">
+
+    <!-- Plan Name -->
     <div class="form-row [ row ]">
       <div class="[ col-xs-12 ]">
-        <label class="form-label">Date Registered</label>
+        <label class="form-label">Plan Type</label>
         <div class="sign-up-field sign-up-field--no-edit">
-          {{ editingVendor.date_registered | date: 'dd/MM/yyyy' }}
+          {{ editingVendor.subscription.plan_name }}
         </div>
-        <ak-form-messages [control]="listingsMetaForm.controls.businessDescription">
-        </ak-form-messages>
       </div>
     </div>
-    <!-- / Date Registered -->
+    <!-- / Plan Name -->
 
-    <!-- SUBSCRIPTION INFO -->
-    <div *ngIf="editingVendor.subscription">
-
-      <!-- Plan Name -->
-      <div class="form-row [ row ]">
-        <div class="[ col-xs-12 ]">
-          <label class="form-label">Plan Type</label>
-          <div class="sign-up-field sign-up-field--no-edit">
-            {{ editingVendor.subscription.plan_name }}
-          </div>
-          <ak-form-messages [control]="listingsMetaForm.controls.businessDescription">
-          </ak-form-messages>
-        </div>
-      </div>
-      <!-- / Plan Name -->
-
-      <!-- Payment Amount -->
-      <div class="form-row [ row ]">
-        <div class="[ col-xs-12 ]">
-          <label class="form-label">Payment Amount</label>
-          <div class="sign-up-field sign-up-field--no-edit">
-            &euro;{{ editingVendor.subscription.monthly_amount }}
-          </div>
-          <ak-form-messages [control]="listingsMetaForm.controls.businessDescription">
-          </ak-form-messages>
-        </div>
-      </div>
-      <!-- / Payment Amount -->
-
-    </div>
-    <!-- / SUBSCRIPTION INFO -->
-
-    <!-- Form Buttons -->
+    <!-- Payment Amount -->
     <div class="form-row [ row ]">
-      <div class="[ col-xs-12 text-right ]">
-        <button type="submit" class="form-btn-cta">Save updates</button>
+      <div class="[ col-xs-12 ]">
+        <label class="form-label">Subscription Fee</label>
+        <div class="sign-up-field sign-up-field--no-edit">
+          &euro;{{ totalAmount }}<br />
+          <span *ngIf="editingVendor.subscription.plan_name != 'monthly'">
+            (&euro;{{ editingVendor.subscription.monthly_amount }} per month)
+          </span>
+        </div>
       </div>
     </div>
-    <!-- / Form Buttons -->
+    <!-- / Payment Amount -->
 
-  </form>
+  </div>
+  <!-- / SUBSCRIPTION INFO -->
+
+  <!-- Form Buttons -->
+  <div class="form-row [ row ]" *ngIf="editingVendor.active_vendor == 0">
+    <div class="[ col-xs-12 text-right ]">
+      <button class="form-btn-cta" (click)="onClickPublishListing()">Publish Listing</button>
+    </div>
+  </div>
+  <!-- / Form Buttons -->
 
 </div>

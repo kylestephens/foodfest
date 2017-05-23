@@ -325,6 +325,17 @@ export class AccountService {
   }
 
   /**
+   * Retrieve a linked vendor by vendor id
+   */
+  getVendorById(vendorId: number): Promise<Array<Vendor>> {
+    for(let i = 0; i < this.vendors.length; i++) {
+      if(this.vendors[i].id === vendorId) {
+        return this.vendors[i];
+      }
+    }
+  };
+
+  /**
    * Returns all linked vendor ids
    */
   getVendorIds = function() {

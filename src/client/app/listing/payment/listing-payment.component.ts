@@ -111,10 +111,13 @@ export class ListingPaymentComponent implements OnInit {
           me.accountService.getUser().akAccessToken
         ).then((resp: any) => {
           me.loaderService.hide();
+          let updatedVendor = me.accountService.getVendorById(vendorId);
 
           let _response = resp.json();
           if(_response && _response.id) {
             me.isPaid = true;
+            updatedVendor.active_vendor = 1;
+            me.accountService.updateVendor(updatedVendor);
             me.accountService.clearListingStorage();
             setTimeout(() => {
               me.renderer.addClass(me.tickAnimationElementRef.nativeElement, 'drawn');
