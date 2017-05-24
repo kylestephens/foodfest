@@ -56,7 +56,6 @@ export class InboxComponent implements OnInit {
 
   ngOnInit() {
     this.getConversations();
-    this.accountService.resetNotifications('message');
 
     this.route.params.subscribe(
       params => this.conversationId = +params['id']

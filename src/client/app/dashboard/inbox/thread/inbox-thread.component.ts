@@ -54,7 +54,8 @@ export class InboxThreadComponent {
     this.loaderService.show();
     this.inboxService.getMessagesInConversation(this.conversation.id).then(messages => {
       if(messages) {
-         this.messages = messages;
+        this.messages = messages;
+        this.accountService.refreshNotifications();
       }
       this.loaderService.hide();
     });

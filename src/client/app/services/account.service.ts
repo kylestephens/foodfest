@@ -104,9 +104,16 @@ export class AccountService {
       });
   }
 
-  resetNotifications(name: string) {
-    this.notifications[name] = 0;
-    this.notificationsChange.next(this.notifications);
+  refreshNotifications() {
+    this.getNotifications()
+    .then((notifications: Notifications) => {
+      this.notifications = notifications;
+      this.notificationsChange.next(this.notifications);
+    })
+    .catch((reason: any) => {
+      this.notifications = {};
+      this.notificationsChange.next(this.notifications);
+    });
   }
 
   isLoggedIn = function () {
