@@ -30,6 +30,7 @@ export class ListingPaymentComponent implements OnInit {
   @ViewChild('tickAnimation')
   public tickAnimationElementRef: ElementRef;
 
+  public isEditing: boolean = false;
   public isPaid: boolean = false;
   public vendorId: number;
 
@@ -53,6 +54,9 @@ export class ListingPaymentComponent implements OnInit {
     script.type = 'text/javascript';
     script.src = 'https://checkout.stripe.com/checkout.js';
     document.head.appendChild(script);
+    if(this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_EDIT)) {
+      this.isEditing = true;
+    }
   };
 
   openCheckout(planNum: number) {
@@ -61,18 +65,20 @@ export class ListingPaymentComponent implements OnInit {
       _amount = 0,
       _planName = '';
 
+    me.loaderService.show();
+
     if(planNum === 1) {
-      _description = 'Monthly Subscription';
+      _description = 'Monthly Rolling Subscription';
       _amount = 2500;
       _planName = 'monthly';
     } else if(planNum === 2) {
-      _description = 'Annual Subscription';
+      _description = 'Annual Rolling Subscription';
       _planName = 'annual';
       _amount = 20400;  // 17 x 12
     } else if(planNum === 3) {
-      _description = '6 Monthly Subscription';
-      _amount = 12000;
-      _planName = 'biannual';
+      _description = '3 Monthly Rolling Subscription';
+      _amount = 6000;  // 20 x 3
+      _planName = 'quarterly';
     }
 
     /**
@@ -103,18 +109,19 @@ export class ListingPaymentComponent implements OnInit {
           planName: _planName
         };
 
-        me.loaderService.show();
-
         me.restService.post(
           me.settingsService.getServerBaseUrl() + '/subscribe',
           planDetails,
           me.accountService.getUser().akAccessToken
         ).then((resp: any) => {
           me.loaderService.hide();
+          let updatedVendor = me.accountService.getVendorById(vendorId);
 
           let _response = resp.json();
           if(_response && _response.id) {
             me.isPaid = true;
+            updatedVendor.active_vendor = 1;
+            me.accountService.updateVendor(updatedVendor);
             me.accountService.clearListingStorage();
             setTimeout(() => {
               me.renderer.addClass(me.tickAnimationElementRef.nativeElement, 'drawn');

@@ -266,5 +266,9 @@ $button-bg: rgba(0, 0, 0, 0.05);
 .form-btn-cta {
   margin-top: 16px;
   @include button(#fff, $brand-primary-cta);
-  font-weight: 400;
+  font-weight: $font-weight-normal;
+
+  &--secondary {
+    @include button(#fff, $brand-secondary-cta);
+  }
 }

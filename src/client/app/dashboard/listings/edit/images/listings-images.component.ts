@@ -119,6 +119,8 @@ export class ListingsImagesComponent implements OnInit, OnChanges {
    * Upload the cover image only
    */
   public onClickUploadCover() {
+    if(!this.coverImage) return;
+
     this.loaderService.show();
     this.restService.post(
       this.settingsService.getServerBaseUrl() + '/vendors/images/cover', {
@@ -151,6 +153,8 @@ export class ListingsImagesComponent implements OnInit, OnChanges {
    * Upload the logo image only
    */
   public onClickUploadLogo() {
+    if(!this.businessLogo) return;
+
     this.loaderService.show();
     this.restService.post(
       this.settingsService.getServerBaseUrl() + '/vendors/images/logo', {
@@ -183,6 +187,8 @@ export class ListingsImagesComponent implements OnInit, OnChanges {
    * Upload additional images
    */
   public onClickUploadImages() {
+    if(this.additionalImages.length == 0) return;
+
     this.loaderService.show();
     this.restService.post(
       this.settingsService.getServerBaseUrl() + '/vendors/images/additional', {

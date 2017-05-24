@@ -1,0 +1,58 @@
+@import '../../../../../scss/core/variables';
+@import '../../../../../scss/core/settings';
+@import '../../../../../scss/mixins/buttons';
+
+
+
+.listings-description {
+  width: 100%;
+  padding: $padding-large-vertical $padding-large-horizontal;
+
+  .form-row:first-of-type {
+    margin-top: 0;
+  }
+}
+
+
+
+.listing-item {
+  &__delete {
+    position: absolute;
+    top: 20px;
+    right: 34px;
+    background: $brand-body-bg;
+    font-size: $font-size-small;
+
+    &:hover {
+      cursor: pointer;
+      color: $brand-links;
+    }
+  }
+}
+
+
+
+.sign-up-field {
+  &--no-edit {
+    color: $gray-lighter;
+    text-transform: capitalize;
+  }
+}
+
+
+
+.form-btn {
+  padding: 6px 12px; // overriding default button padding
+}
+
+
+
+.listing-status {
+  font-weight: $font-weight-normal;
+  &--active {
+    color: $state-success-text;
+  }
+  &--inactive {
+    color: maroon;
+  }
+}
