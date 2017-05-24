@@ -97,9 +97,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   getVendors() {
-    if(this.accountService.isLoggedIn()) {
-      this.accountService.getVendors();
-    }
+    this.accountService.getVendors();
   }
 
 }
