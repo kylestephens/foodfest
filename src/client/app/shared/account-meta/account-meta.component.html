@@ -47,12 +47,13 @@
       <li class="js-admin-link" [ngClass]="!isVendor ? 'hidden' : ''">
         <a [routerLink]="['/dashboard/listings']">
           My Listings
+          <div *ngIf="notifications?.listing > 0" class="notification link">{{notifications.listing}}</div>
         </a>
       </li>
       <li class="js-admin-link">
         <a [routerLink]="['/dashboard/inbox']">
           Messages
-        <div *ngIf="notifications?.message > 0" class="notification link">{{notifications.message}}</div>
+          <div *ngIf="notifications?.message > 0" class="notification link">{{notifications.message}}</div>
         </a>
       </li>
       <li class="js-admin-link">

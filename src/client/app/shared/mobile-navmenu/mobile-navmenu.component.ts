@@ -10,6 +10,7 @@ import { Notifications }         from '../model/notification';
 import { AccountService }       from '../../services/account.service';
 import { ModalService }         from '../../services/modal.service';
 import { SettingsService }      from '../../services/settings.service';
+import { BrowserService }       from '../../services/browser.service';
 import { CONSTANT }             from '../../core/constant';
 
 /**
@@ -27,6 +28,10 @@ export class MobileNavmenuComponent implements OnInit {
   private subscriptions: Subscription[] = [];
   private subMessage: any;
 
+  private browser: any = this.browserService.get();
+  private isPhone: boolean = this.browser.deviceType === 'phone';
+  private isTablet: boolean = this.browser.deviceType === 'tablet';
+
   private menuButton: HTMLElement = null;
   private menuContent: HTMLElement = null;
 
@@ -39,30 +44,40 @@ export class MobileNavmenuComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private modalService: ModalService,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private browserService: BrowserService
   ) {
-    this.setUserDetails();
+    if(this.isPhone || this.isTablet) {
+      this.setUserDetails();
+      if(this.isPhone) this.setUserNotifications();
 
-    // subscribe to account service messages
-    this.subscriptions.push(this.accountService.getMessage().subscribe(subMessage => {
-      console.debug('MobileNavmenuComponent::subscription');
-      if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN || subMessage.event === CONSTANT.EVENT.SESSION.USER_TYPE) {
+      // subscribe to account service messages
+      this.subscriptions.push(this.accountService.getMessage().subscribe(subMessage => {
+        console.debug('MobileNavmenuComponent::subscription');
         if(this.accountService.isLoggedIn()) {
-          this.setUserDetails();
+          if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN) {
+            this.setUserDetails();
+            this.setUserNotifications();
+          }
+          else if(subMessage.event === CONSTANT.EVENT.SESSION.USER_TYPE) {
+            this.setUserDetails();
+          }
         }
-      }
-    }));
+      }));
 
-    this.subscriptions.push(this.accountService.notificationsChange.subscribe((notifications: Notifications) => {
-      this.setNotifications(notifications);
-    }));
+      this.subscriptions.push(this.accountService.notificationsChange.subscribe((notifications: Notifications) => {
+        this.setNotifications(notifications);
+      }));
+    }
   }
 
-  setUserDetails() {
+  private setUserDetails() {
     this.userType = this.accountService.getUser().user_type;
     this.isVendor = (this.accountService.getUser().user_type === CONSTANT.user.types.VENDOR.code) ? true : false;
     this.loggedIn = this.accountService.isLoggedIn();
+  }
 
+  private setUserNotifications() {
     this.accountService.getNotifications()
     .then((notifications) => {
       this.setNotifications(notifications);

@@ -34,29 +34,31 @@
       </li>
       <hr />
       <li [routerLink]="['/dashboard/profile']" (click)="toggleMenu()"
-        *ngIf="loggedIn">
+        *ngIf="loggedIn && isPhone">
         My Profile
       </li>
       <li [ngClass]="!isVendor ? 'hidden' : ''" [routerLink]="['/dashboard/listings']"
         (click)="toggleMenu()"
-        *ngIf="loggedIn">
+        *ngIf="loggedIn && isPhone">
         My Listings
+        <div *ngIf="notifications?.listing > 0" class="hamburger__notification link">{{notifications.listing}}</div>
       </li>
       <li [routerLink]="['/dashboard/inbox']" (click)="toggleMenu()"
-        *ngIf="loggedIn">
+        *ngIf="loggedIn && isPhone">
         Messages
         <div *ngIf="notifications?.message > 0" class="hamburger__notification link">{{notifications.message}}</div>
       </li>
       <li [routerLink]="['/dashboard/favourites']" (click)="toggleMenu()"
-        *ngIf="loggedIn">
+        *ngIf="loggedIn && isPhone">
         Favourites
       </li>
       <li (click)="logout()" (click)="toggleMenu()"
-        *ngIf="loggedIn">
+        *ngIf="loggedIn && isPhone">
         Logout
       </li>
       <hr />
-      <li [routerLink]="['/help']" (click)="toggleMenu()">
+      <li [routerLink]="['/help']" (click)="toggleMenu()"
+        *ngIf="isPhone">
         Help
       </li>
     </ul>

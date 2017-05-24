@@ -5,6 +5,7 @@ import { Notifications }         from '../model/notification';
 
 import { AccountService }        from '../../services/account.service';
 import { ModalService }          from '../../services/modal.service';
+import { BrowserService }        from '../../services/browser.service';
 
 import { CONSTANT }              from '../../core/constant';
 
@@ -23,6 +24,9 @@ export class AccountMetaComponent {
   private subscriptions: Subscription[] = [];
   private subMessage: any;
 
+  private browser: any = this.browserService.get();
+  private isPhone: boolean = this.browser.deviceType === 'phone';
+
   public firstname: string;
   public userType: number;
   public isVendor: boolean = false;
@@ -32,30 +36,42 @@ export class AccountMetaComponent {
   public adminDropdownActive: boolean = false;
   public firstClick: boolean = false;
 
-  constructor(private accountService: AccountService, private modalService: ModalService) {
-    this.setUserDetails();
+  constructor(
+    private accountService: AccountService,
+    private modalService: ModalService,
+    private browserService: BrowserService) {
+    if(!this.isPhone) {
+      this.setUserDetails();
+      this.setUserNotifications();
 
-    // subscribe to account service messages
-    this.subscriptions.push(this.accountService.getMessage().subscribe(subMessage => {
-      console.debug('AccountMetaComponent::subscription');
-      if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN || subMessage.event === CONSTANT.EVENT.SESSION.USER_TYPE) {
+      // subscribe to account service messages
+      this.subscriptions.push(this.accountService.getMessage().subscribe(subMessage => {
+        console.debug('AccountMetaComponent::subscription');
         if(this.accountService.isLoggedIn()) {
-          this.setUserDetails();
-        }
-      }
-    }));
+          if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN) {
+            this.setUserDetails();
+            this.setUserNotifications();
+           }
+           else if(subMessage.event === CONSTANT.EVENT.SESSION.USER_TYPE) {
+             this.setUserDetails();
+           }
+         }
+      }));
 
-    this.subscriptions.push(this.accountService.notificationsChange.subscribe((notifications: Notifications) => {
-      this.setNotifications(notifications);
-    }));
+      this.subscriptions.push(this.accountService.notificationsChange.subscribe((notifications: Notifications) => {
+        this.setNotifications(notifications);
+      }));
+    }
   }
 
-  setUserDetails() {
+  private setUserDetails() {
     this.firstname = this.accountService.getUser().firstname;
     this.userType = this.accountService.getUser().user_type;
     this.isVendor = (this.accountService.getUser().user_type === CONSTANT.user.types.VENDOR.code) ? true : false;
     this.loggedIn = this.accountService.isLoggedIn();
+  }
 
+  private setUserNotifications() {
     this.accountService.getNotifications()
     .then((notifications: Notifications) => {
       this.setNotifications(notifications);
