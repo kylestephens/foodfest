@@ -20,6 +20,7 @@
   <!-- Logged IN -->
   <a (click)="toggleDropdown()" class="header__action js-admin-link [ hidden-xs ]"
     *ngIf="loggedIn">
+    <div *ngIf="notificationsNum > 0" class="notification">{{notificationsNum}}</div>
     <span class="account-meta__icon ak-icon-user-circle"></span>
     <span class="account-meta__dropdown-link">
       <span class="account-meta__name js-admin-link">
@@ -51,6 +52,7 @@
       <li class="js-admin-link">
         <a [routerLink]="['/dashboard/inbox']">
           Messages
+        <div *ngIf="notifications?.message > 0" class="notification link">{{notifications.message}}</div>
         </a>
       </li>
       <li class="js-admin-link">

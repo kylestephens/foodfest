@@ -1,6 +1,7 @@
 <!-- Nav Menu : TODO - separate out -->
 <div>
   <div id="menu-button" role="button" title="sweet hamburger" (click)="toggleMenu()">
+    <div *ngIf="notificationsNum > 0" class="hamburger__notification">{{notificationsNum}}</div>
     <div class="hamburger"><div class="inner"></div></div>
   </div>
   <div id="menu-content">
@@ -44,6 +45,7 @@
       <li [routerLink]="['/dashboard/inbox']" (click)="toggleMenu()"
         *ngIf="loggedIn">
         Messages
+        <div *ngIf="notifications?.message > 0" class="hamburger__notification link">{{notifications.message}}</div>
       </li>
       <li [routerLink]="['/dashboard/favourites']" (click)="toggleMenu()"
         *ngIf="loggedIn">

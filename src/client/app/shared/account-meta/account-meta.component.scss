@@ -50,6 +50,25 @@
   }
 }
 
+.notification {
+  width: 17px;
+  height: 17px;
+  text-align: center;
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 10px;
+  position: absolute;
+  background-color: $brand-primary-cta;
+  color: $brand-body-bg;
+  font-weight: $font-weight-bold;
+  z-index: 1;
+
+  &.link {
+    margin-left: 5px;
+    top: 9px;
+  }
+}
+
 .admin-dropdown {
   color: #fff;
   position: absolute;
@@ -69,9 +88,16 @@
     width: 155px;
     margin: 6px 0;
     li {
+      position: relative;
       &:hover {
         background: $brand-links;
         color: #fff;
+
+        .notification {
+          background-color: $brand-body-bg;
+          color: $brand-primary-cta;
+        }
+
       }
       a {
         padding: 6px 12px;

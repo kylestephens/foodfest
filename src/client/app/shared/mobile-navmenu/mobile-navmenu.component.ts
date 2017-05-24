@@ -5,6 +5,8 @@ import {
 }                               from '@angular/core';
 import { Subscription }         from 'rxjs/Subscription';
 
+import { Notifications }         from '../model/notification';
+
 import { AccountService }       from '../../services/account.service';
 import { ModalService }         from '../../services/modal.service';
 import { SettingsService }      from '../../services/settings.service';
@@ -22,7 +24,7 @@ import { CONSTANT }             from '../../core/constant';
 
 export class MobileNavmenuComponent implements OnInit {
 
-  private subscription: Subscription;
+  private subscriptions: Subscription[] = [];
   private subMessage: any;
 
   private menuButton: HTMLElement = null;
@@ -31,6 +33,8 @@ export class MobileNavmenuComponent implements OnInit {
   public loggedIn: boolean = false;
   public userType: number;
   public isVendor: boolean = false;
+  public notifications: Notifications;
+  public notificationsNum: number = 0;
 
   constructor(
     private accountService: AccountService,
@@ -40,25 +44,48 @@ export class MobileNavmenuComponent implements OnInit {
     this.setUserDetails();
 
     // subscribe to account service messages
-    this.subscription = this.accountService.getMessage().subscribe(subMessage => {
+    this.subscriptions.push(this.accountService.getMessage().subscribe(subMessage => {
       console.debug('MobileNavmenuComponent::subscription');
       if(subMessage.event === CONSTANT.EVENT.SESSION.LOGGED_IN || subMessage.event === CONSTANT.EVENT.SESSION.USER_TYPE) {
         if(this.accountService.isLoggedIn()) {
           this.setUserDetails();
         }
       }
-    });
-  };
+    }));
+
+    this.subscriptions.push(this.accountService.notificationsChange.subscribe((notifications: Notifications) => {
+      this.setNotifications(notifications);
+    }));
+  }
 
   setUserDetails() {
     this.userType = this.accountService.getUser().user_type;
     this.isVendor = (this.accountService.getUser().user_type === CONSTANT.user.types.VENDOR.code) ? true : false;
     this.loggedIn = this.accountService.isLoggedIn();
+
+    this.accountService.getNotifications()
+    .then((notifications) => {
+      this.setNotifications(notifications);
+    })
+    .catch((reason: any) => {
+      this.notifications = {};
+      this.notificationsNum = 0;
+    });
+  }
+
+  private setNotifications(notifications: Notifications) {
+    this.notifications = notifications;
+    this.notificationsNum = 0;
+    for (let key in this.notifications) {
+      this.notificationsNum += this.notifications[key];
+    }
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
-  };
+    for (let subscription of this.subscriptions) {
+      subscription.unsubscribe();
+    }
+  }
 
   /**
    * Resize the menu to fit screen OnInit

@@ -19,6 +19,28 @@
   width: 25px;
   height: 20px;
   transition: transform 750ms ease-in-out;
+
+  &__notification {
+    width: 17px;
+    height: 17px;
+    text-align: center;
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 10px;
+    position: absolute;
+    background-color: $brand-primary-cta;
+    color: $brand-body-bg;
+    font-weight: $font-weight-bold;
+    z-index: 1;
+    left: -8px;
+    top: 3px;
+
+    &.link {
+      left: initial;
+      margin-left: 8px;
+      top: 5px;
+    }
+  }
 }
 
 #menu-button:active .hamburger {
@@ -128,6 +150,7 @@ nav::before {
       list-style: none;
       font-size: $font-size-large;
       margin: $padding-large-vertical 0;
+      position: relative;
     }
   }
   hr {

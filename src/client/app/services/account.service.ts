@@ -11,6 +11,7 @@ import {
 import { SettingsService }   from './settings.service';
 import { User }              from '../shared/model/user';
 import { Vendor }            from '../shared/model/vendor';
+import { Notifications }     from '../shared/model/notification';
 import { CONSTANT }          from '../core/constant';
 
 @Injectable()
@@ -22,6 +23,9 @@ export class AccountService {
   private favourites: Array<any> = [];
   private loggedIn = false;
   redirectUrl: string = '';
+
+  public notificationsChange: Subject<any> = new Subject<any>();
+  public notifications: Notifications;
 
   constructor(
     private restService: RestService,
@@ -84,6 +88,25 @@ export class AccountService {
     this.user.user_type = data.user_type;
     this.user.date_joined = data.date_joined;
     this.setLoggedIn(true);
+  }
+
+  getNotifications(): Promise<Notifications> {
+    return this.restService.get(
+      this.settingsService.getServerBaseUrl() + '/users/notifications',
+      null, this.getUser().akAccessToken)
+      .then((response: Response) => {
+        this.notifications = response.json();
+        return this.notifications;
+      })
+      .catch((reason: any) => {
+        this.notifications = {};
+        return Promise.reject(reason);
+      });
+  }
+
+  resetNotifications(name: string) {
+    this.notifications[name] = 0;
+    this.notificationsChange.next(this.notifications);
   }
 
   isLoggedIn = function () {
@@ -401,8 +424,6 @@ export class AccountService {
     var json: any = {};
     json['loggedIn']   = this.loggedIn;
     json['user']       = this.user;
-    //json['vendors']    = this.vendors;
-    //json['favourites'] = this.favourites;
     return json;
   };
 
