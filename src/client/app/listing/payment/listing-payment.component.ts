@@ -110,7 +110,7 @@ export class ListingPaymentComponent implements OnInit {
         me.loaderService.show();
 
         me.restService.post(
-          me.settingsService.getServerBaseUrl() + '/subscribe',
+          me.settingsService.getServerBaseUrl() + '/account/subscribe',
           planDetails,
           me.accountService.getUser().akAccessToken
         ).then((resp: any) => {

@@ -61,9 +61,18 @@
   <!-- / SUBSCRIPTION INFO -->
 
   <!-- Form Buttons -->
-  <div class="form-row [ row ]" *ngIf="editingVendor.active_vendor == 0">
+  <div class="form-row [ row ]">
     <div class="[ col-xs-12 text-right ]">
-      <button class="form-btn-cta" (click)="onClickPublishListing()">Publish Listing</button>
+      <button class="form-btn form-btn-cta"
+        *ngIf="editingVendor.active_vendor == 0"
+        (click)="onClickPublishListing()">
+        Publish Listing
+      </button>
+      <button class="form-btn form-btn-cta--secondary"
+        *ngIf="editingVendor.active_vendor == 1"
+        (click)="onClickUnpublishListing()">
+        Unsubscribe &amp; Unpublish Listing
+      </button>
     </div>
   </div>
   <!-- / Form Buttons -->

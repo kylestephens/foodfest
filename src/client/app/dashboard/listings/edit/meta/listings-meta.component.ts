@@ -1,6 +1,7 @@
 import {
   Component,
   Input,
+  OnDestroy,
   OnInit,
   OnChanges,
   ViewChild
@@ -11,14 +12,20 @@ import {
 import {
   LocalStorageService
 }                                        from 'ng2-webstorage';
+import { Subscription }                  from 'rxjs/Subscription';
 
 import { CONSTANT }                      from '../../../../core/constant';
 
+import { ConfirmDialog }                 from '../../../../shared/model/confirmDialog';
 import { Vendor }                        from '../../../../shared/model/vendor';
 
 import { AccountService }                from '../../../../services/account.service';
+import { ConfirmDialogService }          from '../../../../services/confirm-dialog.service';
+import { LoaderService }                 from '../../../../services/loader.service';
 import { MessagingService }              from '../../../../services/messaging.service';
+import { ModalService }                  from '../../../../services/modal.service';
 import { RestService }                   from '../../../../services/rest.service';
+import { SettingsService }               from '../../../../services/settings.service';
 
 /**
  * This class represents the lazy loaded listing edits component
@@ -30,7 +37,7 @@ import { RestService }                   from '../../../../services/rest.service
   styleUrls: ['listings-meta.component.css']
 })
 
-export class ListingsMetaComponent implements OnInit, OnChanges {
+export class ListingsMetaComponent implements OnDestroy, OnInit, OnChanges {
 
   @Input()
   vendor: Vendor;
@@ -38,11 +45,18 @@ export class ListingsMetaComponent implements OnInit, OnChanges {
   public editingVendor: Vendor;
   public totalAmount: number;
 
+  private UNSUBSCRIBE_PAYMENT_ACTION = 'unsubscribePayment';
+  private subscription: Subscription;
+
   constructor(
     private accountService: AccountService,
+    private confirmDialogService: ConfirmDialogService,
+    private loaderService: LoaderService,
     private localStorageService: LocalStorageService,
     private messagingService: MessagingService,
+    private modalService: ModalService,
     private restService: RestService,
+    private settingsService: SettingsService,
     public router: Router
   ) {};
 
@@ -62,7 +76,38 @@ export class ListingsMetaComponent implements OnInit, OnChanges {
         this.totalAmount = this.editingVendor.subscription.monthly_amount * 12;
         break;
     }
+
+    this.subscription = this.confirmDialogService.dialogConfirmed.subscribe((confirmDialog) => {
+      if(confirmDialog.action && confirmDialog.action === this.UNSUBSCRIBE_PAYMENT_ACTION) {
+        this.loaderService.show();
+
+        this.restService.post(
+          this.settingsService.getServerBaseUrl() + '/account/unsubscribe', {
+            vendorId: this.editingVendor.id
+          },
+          this.accountService.getUser().akAccessToken
+        ).then((resp: any) => {
+          this.loaderService.hide();
+          this.modalService.hide();
+          this.editingVendor.active_vendor = false;
+          this.vendor = this.editingVendor;
+          this.accountService.updateVendor(this.vendor);
+        }, (reason: any) => {
+          this.loaderService.hide();
+          this.modalService.hide();
+          this.messagingService.show(
+            'listings-edit',
+            CONSTANT.MESSAGING.ERROR,
+            reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR
+          );
+        });
+      }
+    });
   };
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   ngOnChanges(changes: any) {
     if(changes.vendor && changes.vendor.currentValue) {
@@ -70,11 +115,26 @@ export class ListingsMetaComponent implements OnInit, OnChanges {
     }
   };
 
+  /**
+   * This is coupled with the structure of the setup listing form. Sorry.
+   * TODO: fix this post-launch
+   */
   public onClickPublishListing() {
     if(!this.localStorageService.retrieve(CONSTANT.LOCALSTORAGE.LISTING_STEP_FIVE)) {
       this._setupStorage();
     }
     this.router.navigate(['/list-with-us/payment/']);
+  };
+
+  public onClickUnpublishListing() {
+    event.stopPropagation();
+    let confirmDialog = new ConfirmDialog(`
+      Are you sure you want to unsubscribe?
+
+      Your payment subscription will be cancelled and your listing will be removed immediately.`,
+      this.UNSUBSCRIBE_PAYMENT_ACTION, this.editingVendor.id
+    );
+    this.modalService.show(CONSTANT.MODAL.CONFIRM, confirmDialog);
   };
 
   /**
