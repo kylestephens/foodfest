@@ -37,7 +37,7 @@ export class ListingsImagesComponent implements OnInit, OnChanges {
   public additionalImages: Array<Object> = [];
 
   private maxImagesExceeded: boolean = false;
-  private MAX_NUM_IMAGES: number = 8;
+  private MAX_NUM_IMAGES: number = 10;
 
   private serverUrl: string = this.settingsService.getServerBaseUrl() + '/';
 
