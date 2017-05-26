@@ -3,6 +3,8 @@ import { Routes, RouterModule }   from '@angular/router';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: '404', loadChildren: 'app/404/404.module#FourOhFourModule' },
+  { path: 'home', loadChildren: 'app/home/home.module#HomeModule' },
   { path: 'about', loadChildren: 'app/about/about.module#AboutModule' },
   { path: 'catering-jobs', loadChildren: 'app/cateringJobs/cateringJobs.module#CateringJobsModule' },
   { path: 'commercial', loadChildren: 'app/commercial/commercial.module#CommercialModule' },
@@ -20,7 +22,8 @@ export const routes: Routes = [
   { path: 'complete/:ref', loadChildren: 'app/listingComplete/listing-complete.module#ListingCompleteModule' },
   { path: 'forgot-password', loadChildren: 'app/forgotPassword/forgot-password.module#ForgotPasswordModule' },
   { path: 'reset-password', loadChildren: 'app/resetPassword/reset-password.module#ResetPasswordModule' },
-  { path: 'leave-review', loadChildren: 'app/leaveReview/leave-review.module#LeaveReviewModule' }
+  { path: 'leave-review', loadChildren: 'app/leaveReview/leave-review.module#LeaveReviewModule' },
+  { path: '**', redirectTo: '404' }
 ];
 
 @NgModule({
