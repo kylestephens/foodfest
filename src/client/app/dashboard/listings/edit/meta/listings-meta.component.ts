@@ -106,8 +106,10 @@ export class ListingsMetaComponent implements OnDestroy, OnInit, OnChanges {
   };
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+    if(this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  };
 
   ngOnChanges(changes: any) {
     if(changes.vendor && changes.vendor.currentValue) {

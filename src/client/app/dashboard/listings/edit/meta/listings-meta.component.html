@@ -33,7 +33,7 @@
   <div *ngIf="editingVendor.subscription">
 
     <!-- Plan Name -->
-    <div class="form-row [ row ]">
+    <div class="form-row [ row ]" *ngIf="editingVendor.active_vendor == 1">
       <div class="[ col-xs-12 ]">
         <label class="form-label">Plan Type</label>
         <div class="sign-up-field sign-up-field--no-edit">
@@ -44,7 +44,7 @@
     <!-- / Plan Name -->
 
     <!-- Payment Amount -->
-    <div class="form-row [ row ]">
+    <div class="form-row [ row ]" *ngIf="editingVendor.active_vendor == 1">
       <div class="[ col-xs-12 ]">
         <label class="form-label">Subscription Fee</label>
         <div class="sign-up-field sign-up-field--no-edit">

@@ -43,7 +43,7 @@ export class ProfileComponent {
   ) {
     this.user = this.accountService.getUser();
     this.profileEditForm = this.fb.group({
-      'emailAddress': new FormControl(this.user.email, [
+      'emailAddress': new FormControl({ value: this.user.email, disabled: true }, [
         Validators.required,
         ValidationService.textInputValidator
       ]),

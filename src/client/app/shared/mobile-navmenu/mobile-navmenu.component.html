@@ -1,6 +1,6 @@
 <!-- Nav Menu : TODO - separate out -->
 <div>
-  <div id="menu-button" role="button" title="sweet hamburger" (click)="toggleMenu()">
+  <div id="menu-button" role="button" (click)="toggleMenu()">
     <div *ngIf="notificationsNum > 0" class="hamburger__notification">{{notificationsNum}}</div>
     <div class="hamburger"><div class="inner"></div></div>
   </div>
