@@ -56,7 +56,8 @@ article {
     @media (max-width: $screen-xs-max) {
       width: $logo-size-phone;
       height: $logo-size-phone;
-      top: $logo-size-phone / 1.5;
+      border: 6px solid #fff;
+      top: 200px;
     }
   }
 
@@ -87,6 +88,12 @@ article {
 
     &:hover {
       color: $brand-links;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      top: 240px;
+      font-size: $font-size-base;
+      font-weight: $font-weight-normal;
     }
   }
 }
