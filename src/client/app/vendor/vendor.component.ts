@@ -295,30 +295,9 @@ export class VendorComponent implements OnInit, OnDestroy {
     }));
 
     this.restService.get(
-       this.settingsService.getServerBaseUrl() + '/vendors/' + this.vendorId
+      this.settingsService.getServerBaseUrl() + '/vendors/' + this.vendorId
     ).then((response: Response) => {
-      this.vendorLoaded = true;
-      this.vendor = response.json()[0] as Vendor;
-
-      // ensure active - if not active, only owner can view it!
-      if(this.vendor.active_vendor == 0 && !this.isOwnVendor) {
-        this.router.navigate(['/404']);
-      }
-
-      this.formattedStyles= this._formatFilterString(this.vendor.styles);
-      this.formattedBusinessSetups = this._formatFilterString(this.vendor.business_setup);
-      this.formattedEventTypes = this._formatFilterString(this.vendor.event_types);
-      this.formattedDietRequirements = this._formatFilterString(this.vendor.diet_requirements);
-      this.vendor.images.forEach((imageUrl: any) => {
-        this.additionalImages.push(this.serverUrl + imageUrl);
-      });
-      this.additionalImagesLoaded = true;
-      this.imagesLoaded = true;
-      if(this.vendor.business_type === 'artisan food') {
-        this.itemType = 'Product';
-      } else if(this.vendor.business_type === 'equipment hire') {
-        this.itemType = 'Item';
-      }
+      this._onVendorResponse(response: Response);
     }, (reason: any) => {
       this.router.navigate(['/404']);
     });
@@ -386,7 +365,7 @@ export class VendorComponent implements OnInit, OnDestroy {
       return false;
     }
     return true;
-  }
+  };
 
   public sendMessage() {
     if(!this.messageText.trim()) return;
@@ -403,7 +382,38 @@ export class VendorComponent implements OnInit, OnDestroy {
         this.messageText = null;
       }
     });
-  }
+  };
+
+  private _onVendorResponse(response: Response) {
+    if(response.json() == null) {
+      this.router.navigate(['/404']);
+      return;
+    }
+
+    this.vendorLoaded = true;
+    this.vendor = response.json()[0] as Vendor;
+
+    // ensure exists. ensure active - if not active, only owner can view it!
+    if(this.vendor.active_vendor == 0 && !this.isOwnVendor) {
+      this.router.navigate(['/404']);
+      return;
+    }
+
+    this.formattedStyles= this._formatFilterString(this.vendor.styles);
+    this.formattedBusinessSetups = this._formatFilterString(this.vendor.business_setup);
+    this.formattedEventTypes = this._formatFilterString(this.vendor.event_types);
+    this.formattedDietRequirements = this._formatFilterString(this.vendor.diet_requirements);
+    this.vendor.images.forEach((imageUrl: any) => {
+      this.additionalImages.push(this.serverUrl + imageUrl);
+    });
+    this.additionalImagesLoaded = true;
+    this.imagesLoaded = true;
+    if(this.vendor.business_type === 'artisan food') {
+      this.itemType = 'Product';
+    } else if(this.vendor.business_type === 'equipment hire') {
+      this.itemType = 'Item';
+    }
+  };
 
   private _formatFilterString(filterObject: any): string {
     if (!filterObject) return '';
@@ -414,6 +424,6 @@ export class VendorComponent implements OnInit, OnDestroy {
       formattedStr += filter.text;
     });
     return formattedStr;
-  }
+  };
 
 }
