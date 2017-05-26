@@ -297,7 +297,7 @@ export class VendorComponent implements OnInit, OnDestroy {
     this.restService.get(
       this.settingsService.getServerBaseUrl() + '/vendors/' + this.vendorId
     ).then((response: Response) => {
-      this._onVendorResponse(response: Response);
+      this._onVendorResponse(response);
     }, (reason: any) => {
       this.router.navigate(['/404']);
     });
@@ -394,7 +394,7 @@ export class VendorComponent implements OnInit, OnDestroy {
     this.vendor = response.json()[0] as Vendor;
 
     // ensure exists. ensure active - if not active, only owner can view it!
-    if(this.vendor.active_vendor == 0 && !this.isOwnVendor) {
+    if(this.vendor.active_vendor === 0 && !this.isOwnVendor) {
       this.router.navigate(['/404']);
       return;
     }

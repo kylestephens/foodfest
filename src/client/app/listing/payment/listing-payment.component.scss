@@ -55,7 +55,7 @@ article {
       z-index: 2;
     }
 
-    &--biannual {
+    &--quarterly {
       color: $biannual;
 
       @media all and (min-width: $screen-sm-min) {
@@ -65,6 +65,11 @@ article {
           position: relative;
           right: 5%;
       }
+    }
+
+    &--free {
+      color: $annual;
+      margin: 0 auto;
     }
 
     .plan-options-heading {
@@ -223,6 +228,27 @@ article {
   }
 }
 
+.coupon-code {
+  margin-top: $padding-xlarge-vertical;
+}
+
+.apply-coupon-btn {
+  @include button(#fff, $brand-primary-cta);
+  padding: 6px 12px;
+  margin-top: 26px;
+}
+
+.apply-coupon-success {
+  display: block;
+  padding-top: 36px;
+  color: $state-success-text;
+}
+
+.apply-coupon-fail {
+  padding-left: 12px;
+  color: $state-danger-text;
+}
+
 .payment-details {
   margin-top: $padding-xlarge-vertical;
   font-size: $font-size-small;
@@ -230,4 +256,8 @@ article {
 
 .congrats {
   margin: $padding-large-vertical 0;
+}
+
+.hidden {
+  display: none;
 }

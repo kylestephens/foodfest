@@ -30,9 +30,28 @@ export class ListingPaymentComponent implements OnInit {
   @ViewChild('tickAnimation')
   public tickAnimationElementRef: ElementRef;
 
+  @ViewChild('applyCouponInput')
+  public couponCodeInputRef: ElementRef;
+
+  @ViewChild('pricingDisplay')
+  public pricingDisplayDivRef: ElementRef;
+
+  @ViewChild('applyCouponBtn')
+  public applyCouponBtnRef: ElementRef;
+
+  @ViewChild('applyCouponSuccess')
+  public applyCouponSuccessRef: ElementRef;
+
+  @ViewChild('applyCouponFail')
+  public applyCouponFailRef: ElementRef;
+
+  @ViewChild('freeDisplay')
+  public freeDisplayRef: ElementRef;
+
   public isEditing: boolean = false;
   public isPaid: boolean = false;
   public vendorId: number;
+  public couponCode: string = '';
 
   // Monthly rate equivalents for the different plans
   public MONTHLY_PLAN = 2500;
@@ -64,7 +83,7 @@ export class ListingPaymentComponent implements OnInit {
     }
   };
 
-  openCheckout(planNum: number) {
+  public openCheckout(planNum: number) {
     var me = this,
       _description = '',
       _amount = 0,
@@ -135,13 +154,7 @@ export class ListingPaymentComponent implements OnInit {
             this.accountService.refreshNotifications();
           }
         }, (reason: any) => {
-          me.loaderService.hide();
-
-          me.messagingService.show(
-            'global',
-            CONSTANT.MESSAGING.ERROR,
-            reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR
-          );
+          this._onServerError(reason);
         });
 
       }
@@ -153,6 +166,72 @@ export class ListingPaymentComponent implements OnInit {
       description: _description,
       amount: _amount
     });
+  };
+
+  public onClickApplyCoupon() {
+    this.couponCode = this.couponCodeInputRef.nativeElement.value;
+    this.restService.post(
+      this.settingsService.getServerBaseUrl() + '/account/checkcoupon',
+      { couponCode: this.couponCode },
+      this.accountService.getUser().akAccessToken
+    ).then((resp: any) => {
+      this.loaderService.hide();
+      let _response = resp.json();
+      if(_response == true) {
+        this._applyCoupon();
+      } else {
+        this._invalidCoupon();
+      }
+    }, (reason: any) => {
+      this._onServerError(reason);
+    });
+  };
+
+  public onPublishFree() {
+    this.restService.post(
+      this.settingsService.getServerBaseUrl() + '/account/publishfree', {
+        couponCode: this.couponCode,
+        vendorId: this.vendorId
+      }, this.accountService.getUser().akAccessToken
+    ).then((resp: any) => {
+      let updatedVendor = this.accountService.getVendorById(this.vendorId);
+
+      let _response = resp.json();
+      if(_response == true) {
+        this.isPaid = true;
+        updatedVendor.active_vendor = 1;
+        this.accountService.updateVendor(updatedVendor);
+        this.accountService.clearListingStorage();
+        setTimeout(() => {
+          this.renderer.addClass(this.tickAnimationElementRef.nativeElement, 'drawn');
+        }, 300);
+        this.accountService.refreshNotifications();
+      }
+    }, (reason: any) => {
+      this._onServerError(reason);
+    });
+  };
+
+  private _onServerError(reason: any) {
+    this.loaderService.hide();
+    this.messagingService.show(
+      'global',
+      CONSTANT.MESSAGING.ERROR,
+      reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR
+    );
+  };
+
+  private _applyCoupon() {
+    this.renderer.addClass(this.pricingDisplayDivRef.nativeElement, 'hidden');
+    this.renderer.setAttribute(this.couponCodeInputRef.nativeElement, 'disabled', 'true');
+    this.renderer.addClass(this.applyCouponBtnRef.nativeElement, 'hidden');
+    this.renderer.addClass(this.applyCouponFailRef.nativeElement, 'hidden');
+    this.renderer.removeClass(this.applyCouponSuccessRef.nativeElement, 'hidden');
+    this.renderer.removeClass(this.freeDisplayRef.nativeElement, 'hidden');
+  };
+
+  private _invalidCoupon() {
+    this.renderer.removeClass(this.applyCouponFailRef.nativeElement, 'hidden');
   };
 
 }

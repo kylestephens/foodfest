@@ -15,7 +15,7 @@
         </div>
       </div>
 
-      <div class="[ row ]">
+      <div class="[ row ]" #pricingDisplay>
         <div class="[ col-md-2 col-sm-1 hidden-xs ]"></div>
         <div class="[ col-md-8 col-sm-10 col-xs-12 ]">
           <!-- Price Plans -->
@@ -36,7 +36,7 @@
                   <span class="plan-price--currency">
                     &euro;
                   </span>
-                  25
+                  {{ MONTHLY_PLAN / 100 }}
                 </div>
                 <div class="plan-term">
                   per month
@@ -68,7 +68,7 @@
                   <span class="plan-price--currency">
                     &euro;
                   </span>
-                  17
+                  {{ ANNUAL_PLAN / 100 }}
                 </div>
                 <div class="plan-term">
                   per month
@@ -82,7 +82,7 @@
             <!-- / 1 year plan -->
 
             <!-- 6 month plan -->
-            <div class="plan-box plan-box--biannual">
+            <div class="plan-box plan-box--quarterly">
               <div class="plan-options">
                 <div class="plan-options-heading">
                   <div class="plan-options-heading--title">
@@ -96,7 +96,7 @@
                   <span class="plan-price--currency">
                     &euro;
                   </span>
-                  20
+                  {{ QUARTERLY_PLAN / 100 }}
                 </div>
                 <div class="plan-term">
                   per month
@@ -118,6 +118,66 @@
       </div>
       <!-- / Row -->
 
+      <div class="[ row hidden ]" #freeDisplay>
+        <div class="[ col-md-2 col-sm-1 hidden-xs ]"></div>
+        <div class="[ col-md-8 col-sm-10 col-xs-12 text-center ]">
+          <!-- FREE Plan -->
+          <div class="price-plans">
+
+            <div class="plan-box plan-box--free">
+              <div class="plan-options">
+                <div class="plan-options-heading">
+                  <div class="plan-options-heading--title">
+                    Complimentary Listing
+                  </div>
+                  <div class="plan-options-heading--term">
+                    Free
+                  </div>
+                </div>
+                <div class="plan-price">
+                  <span class="plan-price--currency">
+                    &euro;
+                  </span>
+                  0
+                </div>
+                <div class="plan-term">
+                  Indefinitely
+                </div>
+                <a class="button" (click)="onPublishFree()">Publish</a>
+              </div>
+            </div>
+
+          </div>
+          <!-- / Free Plan -->
+        </div>
+
+        <div class="[ col-md-2 col-sm-1 hidden-xs ]"></div>
+
+      </div>
+
+      <div class="coupon-code [ row ]">
+        <div class="[ col-sm-4 hidden-xs]"></div>
+        <div class="[ col-sm-3 col-xs-6 ]">
+          <label class="form-label">Coupon Code</label>
+          <div class="form-input form-input--has-icon sign-up-field">
+            <div class="form-icon ak-icon-star-empty"></div>
+            <input type="text"
+              id="couponCode"
+              maxlength="10"
+              #applyCouponInput />
+          </div>
+        </div>
+        <div class="[ col-sm-3 col-xs-6 text-left ]">
+          <button class="apply-coupon-btn"
+            (click)="onClickApplyCoupon()"
+             #applyCouponBtn>Apply Coupon</button>
+          <span class="apply-coupon-success ak-icon-checkmark [ hidden ]"
+            #applyCouponSuccess></span>
+          <span class="apply-coupon-fail ak-icon-cross [ hidden ]"
+            #applyCouponFail></span>
+        </div>
+      </div>
+
       <div class="[ row text-center ]">
         <div class="[ col-xs-12 ]">
           <p class="payment-details">
@@ -134,7 +194,6 @@
   </section>
 
   <section *ngIf="isPaid" class="[ container ]">
-
     <div class="[ row ]">
       <div class="[ col-md-2 col-sm-1 hidden-xs ]"></div>
       <div class="[ col-md-8 col-sm-10 col-xs-12 ]">
@@ -163,7 +222,6 @@
         </p>
       </div>
     </div>
-
   </section>
 
 </article>
