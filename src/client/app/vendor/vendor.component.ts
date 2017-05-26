@@ -314,12 +314,7 @@ export class VendorComponent implements OnInit, OnDestroy {
         this.itemType = 'Item';
       }
     }, (reason: any) => {
-      this.messagingService.show(
-        'global',
-        CONSTANT.MESSAGING.ERROR,
-        reason.statusText ? reason.statusText : CONSTANT.ERRORS.UNEXPECTED_ERROR,
-        true
-      );
+      this.router.navigate(['/404']);
     });
   }
 
