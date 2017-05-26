@@ -89,7 +89,7 @@ export class ListingsMetaComponent implements OnDestroy, OnInit, OnChanges {
         ).then((resp: any) => {
           this.loaderService.hide();
           this.modalService.hide();
-          this.editingVendor.active_vendor = false;
+          this.editingVendor.active_vendor = 0;
           this.vendor = this.editingVendor;
           this.accountService.updateVendor(this.vendor);
         }, (reason: any) => {
