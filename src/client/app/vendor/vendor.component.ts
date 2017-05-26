@@ -299,6 +299,12 @@ export class VendorComponent implements OnInit, OnDestroy {
     ).then((response: Response) => {
       this.vendorLoaded = true;
       this.vendor = response.json()[0] as Vendor;
+
+      // ensure active - if not active, only owner can view it!
+      if(this.vendor.active_vendor == 0 && !this.isOwnVendor) {
+        this.router.navigate(['/404']);
+      }
+
       this.formattedStyles= this._formatFilterString(this.vendor.styles);
       this.formattedBusinessSetups = this._formatFilterString(this.vendor.business_setup);
       this.formattedEventTypes = this._formatFilterString(this.vendor.event_types);
