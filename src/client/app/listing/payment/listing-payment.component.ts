@@ -34,6 +34,11 @@ export class ListingPaymentComponent implements OnInit {
   public isPaid: boolean = false;
   public vendorId: number;
 
+  // Monthly rate equivalents for the different plans
+  public MONTHLY_PLAN = 2500;
+  public QUARTERLY_PLAN = 2000;
+  public ANNUAL_PLAN = 1700;
+
   private planType: number;
 
   constructor(
@@ -67,15 +72,15 @@ export class ListingPaymentComponent implements OnInit {
 
     if(planNum === 1) {
       _description = 'Monthly Rolling Subscription';
-      _amount = 2500;
+      _amount = this.MONTHLY_PLAN;
       _planName = 'monthly';
     } else if(planNum === 2) {
       _description = 'Annual Rolling Subscription';
       _planName = 'annual';
-      _amount = 20400;  // 17 x 12
+      _amount = this.ANNUAL_PLAN * 12;
     } else if(planNum === 3) {
       _description = '3 Monthly Rolling Subscription';
-      _amount = 6000;  // 20 x 3
+      _amount = this.QUARTERLY_PLAN * 3;
       _planName = 'quarterly';
     }
 
@@ -91,6 +96,7 @@ export class ListingPaymentComponent implements OnInit {
       locale: 'auto',
       currency: 'eur',
       panelLabel: 'Subscribe',
+      allowRememberMe: false,
 
       token: (token: any) => {
 
