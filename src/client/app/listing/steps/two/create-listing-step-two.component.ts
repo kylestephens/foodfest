@@ -18,7 +18,8 @@ import {
   LocalStorageService
 }                                         from 'ng2-webstorage';
 import { CreateListingService }           from '../../create-listing.service';
-import { AgmCoreModule, MapsAPILoader }   from 'angular2-google-maps/core';
+import { AgmCoreModule }                  from 'angular2-google-maps/core/core-module';
+import { MapsAPILoader }                  from 'angular2-google-maps/core/services';
 import { ValidationService }              from '../../../services/validation.service';
 import { CONSTANT }                       from '../../../core/constant';
 

@@ -25,7 +25,8 @@ import { RestService }                   from '../../../../services/rest.service
 import { SettingsService }               from '../../../../services/settings.service';
 import { ValidationService }             from '../../../../services/validation.service';
 
-import { AgmCoreModule, MapsAPILoader }  from 'angular2-google-maps/core';
+import { AgmCoreModule }                 from 'angular2-google-maps/core/core-module';
+import { MapsAPILoader }                 from 'angular2-google-maps/core/services';
 import { SelectModule }                  from 'ng2-select';
 
 declare var google: any;

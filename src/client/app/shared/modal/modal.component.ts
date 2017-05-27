@@ -31,10 +31,10 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   private body: HTMLElement = null;
   private modalContainer: HTMLElement = null;
-
-  private modalActive: boolean = false;
   private modalTypes = CONSTANT.MODAL;
   private selectedModal = CONSTANT.MODAL.SIGN_UP;
+
+  public modalActive: boolean = false;
 
   constructor(
     private modalService: ModalService,

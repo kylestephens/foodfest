@@ -28,12 +28,12 @@ export class MobileNavmenuComponent implements OnInit {
   private subscriptions: Subscription[] = [];
   private subMessage: any;
 
-  private browser: any = this.browserService.get();
-  private isPhone: boolean = this.browser.deviceType === 'phone';
-  private isTablet: boolean = this.browser.deviceType === 'tablet';
-
   private menuButton: HTMLElement = null;
   private menuContent: HTMLElement = null;
+
+  public browser: any = this.browserService.get();
+  public isPhone: boolean = this.browser.deviceType === 'phone';
+  public isTablet: boolean = this.browser.deviceType === 'tablet';
 
   public loggedIn: boolean = false;
   public userType: number;

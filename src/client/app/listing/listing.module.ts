@@ -15,7 +15,7 @@ import { ListingRoutingModule }            from './listing-routing.module';
 
 import { SharedModule }                    from '../shared/shared.module';
 import { SelectModule }                    from 'ng2-select';
-import { AgmCoreModule }                   from 'angular2-google-maps/core';
+import { AgmCoreModule }                   from 'angular2-google-maps/core/core-module';
 
 @NgModule({
   imports: [

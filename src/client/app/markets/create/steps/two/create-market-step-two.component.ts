@@ -9,8 +9,8 @@ import { FormArray,
          FormGroup,
          Validators }          from '@angular/forms';
 import { Router }              from '@angular/router';
-import { AgmCoreModule,
-         MapsAPILoader }       from 'angular2-google-maps/core';
+import { AgmCoreModule }       from 'angular2-google-maps/core/core-module';
+import { MapsAPILoader }       from 'angular2-google-maps/core/services';
 import { CONSTANT }            from '../../../../core/constant';
 import { CreateMarketService } from '../../create-market.service';
 import { ValidationService }   from '../../../../services/validation.service';

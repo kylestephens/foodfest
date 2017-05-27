@@ -7,7 +7,7 @@ import { AppRoutingModule }     from './app-routing.module';
 
 // 3rd party
 import { Ng2Webstorage }        from 'ng2-webstorage';
-import { AgmCoreModule }        from 'angular2-google-maps/core';
+import { AgmCoreModule }        from 'angular2-google-maps/core/core-module';
 // 3rd party
 
 import { HomeModule }           from './home/home.module';

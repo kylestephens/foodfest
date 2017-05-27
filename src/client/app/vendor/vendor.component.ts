@@ -11,11 +11,13 @@ import {
   LocalStorageService
 }                                 from 'ng2-webstorage';
 import { Subscription }           from 'rxjs/Subscription';
-import {
-  AgmCoreModule,
-  MapTypeStyle,
-  MapsAPILoader
-}                                 from 'angular2-google-maps/core';
+
+import { AgmCoreModule }          from 'angular2-google-maps/core/core-module';
+
+import { MapTypeStyle }           from 'angular2-google-maps/core/services/google-maps-types';
+
+import { MapsAPILoader }          from 'angular2-google-maps/core/services';
+
 import { RestService }            from '../services/rest.service';
 import { MessagingService }       from '../services/messaging.service';
 import { SettingsService }        from '../services/settings.service';
