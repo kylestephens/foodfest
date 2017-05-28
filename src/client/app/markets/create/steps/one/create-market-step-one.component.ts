@@ -42,8 +42,7 @@ export class CreateMarketStepOneComponent implements OnInit {
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private createMarketService: CreateMarketService
-    )
-  {
+  ) {
     this.createMarketForm = this.fb.group({
       'marketName': new FormControl(null, Validators.compose([Validators.required, Validators.maxLength(100)])),
       'marketDescription': new FormControl(null, [ Validators.maxLength(500) ]),
@@ -51,7 +50,10 @@ export class CreateMarketStepOneComponent implements OnInit {
       'marketOpeningDays': new FormArray( [], ValidationService.checkRequiredArray)
     });
     this._initMarketOpeningDays();
-   }
+  };
+
+  // Needed to resolve issue documented here - https://github.com/angular/angular-cli/issues/6099
+  get marketOpeningDays() { return <FormArray>this.createMarketForm.get('marketOpeningDays'); }
 
   _initMarketOpeningDays() {
     for(let weekDay of this.weekDays) {

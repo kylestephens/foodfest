@@ -75,6 +75,9 @@ export class ListingsDescriptionComponent implements OnInit, OnChanges {
     }
   };
 
+  // Needed to resolve issue documented here - https://github.com/angular/angular-cli/issues/6099
+  get listingItems() { return <FormArray>this.listingsDescriptionForm.get('listingItems'); }
+
   public onClickAddItem() {
     let controls = (<FormArray>this.listingsDescriptionForm.controls['listingItems']).controls;
     let count = controls.length;

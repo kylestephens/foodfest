@@ -62,7 +62,7 @@
       <label class="form-label">Opening times *</label>
 
       <div class="opening-times" formArrayName="marketOpeningDays">
-        <div *ngFor="let marketOpeningDay of createMarketForm.controls.marketOpeningDays.controls; let i=index" class="opening-times__item">
+        <div *ngFor="let marketOpeningDay of marketOpeningDays.controls; let i=index" class="opening-times__item">
           <div [formGroupName]="i">
 
             <!-- day -->

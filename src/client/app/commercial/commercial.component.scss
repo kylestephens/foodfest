@@ -52,23 +52,6 @@ $block-height: 400px;
   }
 }
 
-.desriptive-section {
-  height: 400px;
-  width: 100%;
-  background-image: url('../assets/img/event-planning.jpeg');
-  background-size: cover;
-  background-position: center bottom;
-  position: relative;
-  overflow: hidden;
-
-  .overlay {
-    background: $brand-overlay-pattern;
-    padding: $padding-xlarge-vertical 0;
-    width: 100%;
-    height: 100%;
-  }
-}
-
 @media(max-width: $screen-sm) {
   .desriptive-section {
     padding-top:2em;
